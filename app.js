@@ -141,9 +141,9 @@ function handleMessage(sender_psid, received_message) {
     // Create the payload for a basic text message, which
     // will be added to the body of our request to the Send API
     response = {
-      "text": `Why so rude!`
+      "text": `bla ba blaa!`
     }
-  }else if (received_message.text == "hyu") {    
+  }else if (received_message.text == "How are you") {    
     // Create the payload for a basic text message, which
     // will be added to the body of our request to the Send API
     response = {
