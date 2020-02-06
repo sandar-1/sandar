@@ -62,7 +62,10 @@ app.post('/webhook', (req, res) => {
         handleMessage(sender_psid, webhook_event.message);        
       } else if (webhook_event.postback) {
         
-        handlePostback(sender_psid, webhook_event.postback);
+        handlePostback(sender_psid, webhook_event.postback, webhook_event.messaging_postback);
+      } else if (webhook_event.messaging_postback) {
+        
+        handleMessagingPostback(sender_psid, webhook_event.messaging_postback);
       }
       
     });
@@ -227,10 +230,6 @@ function handlePostback(sender_psid, received_postback) {
                     "payload":"IWC"
                   }]
                 }
-  } else if (payload === 'D') {
-    response = { "text": "Pls send me address." }
-  }else if (payload === 'IWC') {
-    response = { "text": "OK! See ya!" }
   }else if (payload === 'get_started') {
     response = { "attachment": {
                   "type": "template",
@@ -265,6 +264,18 @@ function handlePostback(sender_psid, received_postback) {
   callSendAPI(sender_psid, response);
 }
 
+function handleMessagingPostback(sender_psid, received_messaging_postback) {
+  console.log('ok')
+   let response;
+  // Get the payload for the postback
+  let payload = received_messaging_postback.payload;
+   if (payload === 'D') {
+    response = { "text": "Pls send me address." }
+  }else if (payload === 'IWC') {
+    response = { "text": "OK! See ya!." }
+  }
+  callSendAPI(sender_psid, response);
+}
 
 function callSendAPI(sender_psid, response) {
   // Construct the message body
