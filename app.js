@@ -122,7 +122,6 @@ app.get('/webhook', (req, res) => {
 
 function handleMessage(sender_psid, received_message) {
   let response;
-  "sender_action":"typing_on"
   if (received_message.text == "Delivery!") {
     response = {
       "text": `Pls send me address.`
