@@ -218,11 +218,11 @@ function handlePostback(sender_psid, received_postback) {
     response = { "text": "Finish!",
                   "quick_replies":[
                   {
-                    "content_type":"postback",
+                    "content_type":"text",
                     "title":"Delivery!",
                     "payload":"D",
                   },{
-                    "content_type":"postback",
+                    "content_type":"text",
                     "title":"I will come!",
                     "payload":"IWC",
                   }]
