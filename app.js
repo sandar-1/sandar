@@ -208,7 +208,7 @@ function handlePostback(sender_psid, received_postback) {
    let response;
   // Get the payload for the postback
   let payload = received_postback.payload;
-
+  let payloadq = webhook_event.message.quick_replies.payload;
   // Set the response based on the postback payload
   if (payload === 'STC') {
     response = { "text": "Give your body measure!" }
@@ -220,16 +220,16 @@ function handlePostback(sender_psid, received_postback) {
                   {
                     "content_type":"text",
                     "title":"Delivery!",
-                    "payload":"D"
+                    "payloadq":"D"
                   },{
                     "content_type":"text",
                     "title":"I will come!",
-                    "payload":"IWC"
+                    "payloadq":"IWC"
                   }]
                 }
-  } else if (quick_replies.payload === 'D') {
+  } else if (payloadq === 'D') {
     response = { "text": "Pls send me address." }
-  }else if (quick_replies.payload === 'IWC') {
+  }else if (payloadq === 'IWC') {
     response = { "text": "OK! See ya!" }
   }else if (payload === 'get_started') {
     response = { "attachment": {
