@@ -220,14 +220,14 @@ function handlePostback(sender_psid, received_postback) {
                   {
                     "content_type":"postback",
                     "title":"Delivery!",
-                    "payload":"<POSTBACK_PAYLOAD>",
+                    "payload":"D",
                   },{
                     "content_type":"postback",
                     "title":"I will come!",
-                    "payload":"<POSTBACK_PAYLOAD>",
+                    "payload":"IWC",
                   }]
                 }
-  } else if (payload === '<POSTBACK_PAYLOAD>') {
+  } else if (payload === 'D') {
     response = { "text": "Pls send me address." }
   }else if (payload === 'IWC') {
     response = { "text": "OK! See ya!" }
