@@ -143,10 +143,12 @@ function handlePostback(sender_psid, received_postback) {
                   "quick_replies":[
                   {
                     "content_type":"text",
-                    "title":"OK!"
+                    "title":"OK!",
+                    "payload":"D"
                   },{
                     "content_type":"text",
-                    "title":"NO!"
+                    "title":"NO!",
+                    "payload":"IWC"
                   }]
    }
   } else if (payload === 'GF') {
