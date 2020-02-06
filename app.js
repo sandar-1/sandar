@@ -182,12 +182,10 @@ function handlePostback(sender_psid, received_postback) {
                   "quick_replies":[
                   {
                     "content_type":"text",
-                    "title":"Delivery!",
-                    "payload":"D"
+                    "title":"Delivery!"
                   },{
                     "content_type":"text",
-                    "title":"I will come!",
-                    "payload":"IWC"
+                    "title":"I will come!"
                   }]
                 }
   }else if (payload === 'get_started') {
