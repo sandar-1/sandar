@@ -227,9 +227,9 @@ function handlePostback(sender_psid, received_postback) {
                     "payload":"IWC"
                   }]
                 }
-  } else if (payload === 'D') {
+  } else if (webhook_event.message.quick_replies.payload === 'D') {
     response = { "text": "Pls send me address." }
-  }else if (payload === 'IWC') {
+  }else if (webhook_event.message.quick_replies.payload === 'IWC') {
     response = { "text": "OK! See ya!" }
   }else if (payload === 'get_started') {
     response = { "attachment": {
