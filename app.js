@@ -139,8 +139,15 @@ function handleMessage(sender_psid, received_message) {
                   "is_reusable":true
                 }
               }
+                "message":{
+                "text":"Pls..give all the measure in one conservation."
+              }
     }
   }else if (received_message.text == "Not now!") {    
+    response = {
+      "text": `OK!`
+    }
+  }else if (received_message.text == "12") {    
     response = {
       "text": `OK!`
     }
