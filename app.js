@@ -287,14 +287,9 @@ function setupPersistentMenu(res){
                               "payload":"HELP_PAYLOAD"
                             },
                             {
-                              "title":"Contact Me",
-                              "type":"postback",
-                              "payload":"CONTACT_INFO_PAYLOAD"
-                            },
-                            {
-                              "type":"postback",
                               "title":"ni hao",
-                              "payload":"ni_hao"
+                              "type":"postback",
+                              "payload":"NI_HAO_PAYLOAD"
                             }
                         ]
                       },
