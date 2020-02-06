@@ -215,8 +215,23 @@ function handlePostback(sender_psid, received_postback) {
   } else if (payload === 'GF') {
     response = { "text": "You can say freely." }
   }else if (payload === 'VO') {
-    response = { "text": "Oops, try sending another image." }
-  } else if (payload === 'get_started') {
+    response = { "text": "Finish!",
+                  "quick_replies":[
+                  {
+                    "content_type":"text",
+                    "title":"Delivery!",
+                    "payload":"D"
+                  },{
+                    "content_type":"text",
+                    "title":"I will come!",
+                    "payload":"IWC"
+                  }]
+                }
+  } else if (payload === 'D') {
+    response = { "text": "Pls send me address." }
+  }else if (payload === 'IWC') {
+    response = { "text": "OK! See ya!" }
+  }else if (payload === 'get_started') {
     response = { "attachment": {
                   "type": "template",
                   "payload": {
