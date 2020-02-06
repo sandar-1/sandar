@@ -215,7 +215,35 @@ function handlePostback(sender_psid, received_postback) {
   } else if (payload === 'no') {
     response = { "text": "Oops, try sending another image." }
   } else if (payload === 'get_started') {
-    response = { "text": "Hello Wecome"}
+    response = { "text": "Hello Wecome",
+                  "attachment": {
+                  "type": "template",
+                  "payload": {
+                    "template_type": "generic",
+                    "elements": [{
+                      "title": "Hello Wecome",
+                      "subtitle": "What do you want?",
+                      "buttons": [
+                        {
+                          "type": "postback",
+                          "title": "Sewing the clothe",
+                          "payload": "yes",
+                        },
+                        {
+                          "type": "postback",
+                          "title": "Give feedback!",
+                          "payload": "no",
+                        },
+                        {
+                          "type": "postback",
+                          "title": "View order",
+                          "payload": "no",
+                        }
+                      ],
+                    }]
+                  }
+                }
+    }
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
