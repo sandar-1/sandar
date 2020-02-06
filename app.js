@@ -138,9 +138,6 @@ function handleMessage(sender_psid, received_message) {
                   "url":"https://www.dummies.com/wp-content/uploads/how-to-get-your-body-measurements.jpg", 
                   "is_reusable":true
                 }
-              },
-                "message":{
-                "text":"Pls..give all the measure in one conservation."
               }
     }
   }else if (received_message.text == "Not now!") {    
