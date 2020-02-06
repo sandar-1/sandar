@@ -290,6 +290,11 @@ function setupPersistentMenu(res){
                               "title":"Contact Me",
                               "type":"postback",
                               "payload":"CONTACT_INFO_PAYLOAD"
+                            },
+                            {
+                              "type":"postback",
+                              "title":"ni hao",
+                              "payload":"ni_hao"
                             }
                         ]
                       },
@@ -298,10 +303,6 @@ function setupPersistentMenu(res){
                         "title":"Visit website ",
                         "url":"http://www.google.com",
                         "webview_height_ratio":"full"
-                    }
-                    {
-                        "type":"text",
-                        "title":"ni hao"
                     }
                 ]
             },
