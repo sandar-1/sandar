@@ -210,9 +210,11 @@ function handlePostback(sender_psid, received_postback) {
   let payload = received_postback.payload;
 
   // Set the response based on the postback payload
-  if (payload === 'yes') {
-    response = { "text": "Thanks!" }
-  } else if (payload === 'no') {
+  if (payload === 'STC') {
+    response = { "text": "Give your body measure!" }
+  } else if (payload === 'GF') {
+    response = { "text": "You can say freely." }
+  }else if (payload === 'VO') {
     response = { "text": "Oops, try sending another image." }
   } else if (payload === 'get_started') {
     response = { "attachment": {
@@ -226,17 +228,17 @@ function handlePostback(sender_psid, received_postback) {
                         {
                           "type": "postback",
                           "title": "Sewing the clothe",
-                          "payload": "yes",
+                          "payload": "STC",
                         },
                         {
                           "type": "postback",
                           "title": "Give feedback!",
-                          "payload": "no",
+                          "payload": "GF",
                         },
                         {
                           "type": "postback",
                           "title": "View order",
-                          "payload": "no",
+                          "payload": "VO",
                         }
                       ],
                     }]
