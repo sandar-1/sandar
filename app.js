@@ -278,7 +278,7 @@ function setupPersistentMenu(res){
                   "composer_input_disabled":false,
                   "call_to_actions":[
                       {
-                        "title":"Info",
+                        "title":"Hi",
                         "type":"nested",
                         "call_to_actions":[
                             {
