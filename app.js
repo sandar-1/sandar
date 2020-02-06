@@ -215,8 +215,7 @@ function handlePostback(sender_psid, received_postback) {
   } else if (payload === 'no') {
     response = { "text": "Oops, try sending another image." }
   } else if (payload === 'get_started') {
-    response = { "text": "Hello Wecome",
-                  "attachment": {
+    response = { "attachment": {
                   "type": "template",
                   "payload": {
                     "template_type": "generic",
