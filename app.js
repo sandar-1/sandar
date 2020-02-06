@@ -218,16 +218,16 @@ function handlePostback(sender_psid, received_postback) {
     response = { "text": "Finish!",
                   "quick_replies":[
                   {
-                    "type":"postback",
+                    "content_type":"postback",
                     "title":"Delivery!",
-                    "payload":"D",
+                    "payload":"<POSTBACK_PAYLOAD>",
                   },{
-                    "type":"postback",
+                    "content_type":"postback",
                     "title":"I will come!",
-                    "payload":"IWC",
+                    "payload":"<POSTBACK_PAYLOAD>",
                   }]
                 }
-  } else if (payload === 'D') {
+  } else if (payload === '<POSTBACK_PAYLOAD>') {
     response = { "text": "Pls send me address." }
   }else if (payload === 'IWC') {
     response = { "text": "OK! See ya!" }
