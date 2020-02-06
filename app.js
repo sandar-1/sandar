@@ -139,13 +139,7 @@ function handlePostback(sender_psid, received_postback) {
    let response;
   let payload = received_postback.payload;
   if (payload === 'STC') {
-    response = { "attachment":{
-      "type":"image", 
-      "payload":{
-        "url":"https://www.dummies.com/wp-content/uploads/how-to-get-your-body-measurements.jpg", 
-        "is_reusable":true
-      }
-    } }
+    response = { "text": "Give your body measure!" }
   } else if (payload === 'GF') {
     response = { "text": "You can say freely." }
   }else if (payload === 'VO') {
