@@ -229,7 +229,7 @@ function handlePostback(sender_psid, received_postback) {
                   "image_url":"http://example.com/img/green.png"
                   },{
                   "content_type":"text",
-                  "title":"Viez order",
+                  "title":"View order",
                   "payload":"<POSTBACK_PAYLOAD>",
                   "image_url":"http://example.com/img/green.png"
                   }
