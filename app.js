@@ -139,7 +139,13 @@ function handlePostback(sender_psid, received_postback) {
    let response;
   let payload = received_postback.payload;
   if (payload === 'STC') {
-    response = { "text": "Give your body measure!" }
+    response = { "attachment":{
+      "type":"image", 
+      "payload":{
+        "url":"https://web.facebook.com/104392491116237/photos/a.119445596277593/119444479611038/?type=3&theater", 
+        "is_reusable":true
+      }
+    } }
   } else if (payload === 'GF') {
     response = { "text": "You can say freely." }
   }else if (payload === 'VO') {
