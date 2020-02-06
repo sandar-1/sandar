@@ -122,73 +122,24 @@ app.get('/webhook', (req, res) => {
 
 function handleMessage(sender_psid, received_message) {
   let response;
-  
-  // Checks if the message contains text
-  if (received_message.text == "Delivery!") {    
-    // Create the payload for a basic text message, which
-    // will be added to the body of our request to the Send API
+  "sender_action":"typing_on"
+  if (received_message.text == "Delivery!") {
     response = {
       "text": `Pls send me address.`
     }
-  }else if (received_message.text == "I will come!") {    
-    // Create the payload for a basic text message, which
-    // will be added to the body of our request to the Send API
+  }else if (received_message.text == "I will come!") {
     response = {
       "text": `OK! See ya!`
     }
-  }else if (received_message.text == "blah") {    
-    // Create the payload for a basic text message, which
-    // will be added to the body of our request to the Send API
-    response = {
-      "text": `bla ba blaa!`
-    }
-  }else if (received_message.text == "How are you") {    
-    // Create the payload for a basic text message, which
-    // will be added to the body of our request to the Send API
-    response = {
-      "text": `Good!`,
-      "quick_replies":[
-      {
-        "content_type":"text",
-        "title":"Red",
-        "payload":"<POSTBACK_PAYLOAD>",
-        "image_url":"http://example.com/img/red.png"
-      },{
-        "content_type":"text",
-        "title":"Green",
-        "payload":"<POSTBACK_PAYLOAD>",
-        "image_url":"http://example.com/img/green.png"
-      }
-    ]
-    }
   }
-  // Send the response message
   callSendAPI(sender_psid, response);    
 }
 
 function handlePostback(sender_psid, received_postback) {
   console.log('ok')
    let response;
-  // Get the payload for the postback
   let payload = received_postback.payload;
-
-  // Set the response based on the postback payload
-  if (payload === 'STC') {
-    response = { "text": "Give your body measure!" }
-  } else if (payload === 'GF') {
-    response = { "text": "You can say freely." }
-  }else if (payload === 'VO') {
-    response = { "text": "Finish!",
-                  "quick_replies":[
-                  {
-                    "content_type":"text",
-                    "title":"Delivery!"
-                  },{
-                    "content_type":"text",
-                    "title":"I will come!"
-                  }]
-                }
-  }else if (payload === 'get_started') {
+  if (payload === 'get_started') {
     response = { "attachment": {
                   "type": "template",
                   "payload": {
@@ -217,8 +168,22 @@ function handlePostback(sender_psid, received_postback) {
                   }
                 }
     }
+  }else if (payload === 'STC') {
+    response = { "text": "Pls give me your body measure in order to chest, upper arm, sleeve length, waist, hips, thigh, inseam." }
+  } else if (payload === 'GF') {
+    response = { "text": "You can say freely." }
+  }else if (payload === 'VO') {
+    response = { "text": "Finish!",
+                  "quick_replies":[
+                  {
+                    "content_type":"text",
+                    "title":"Delivery!"
+                  },{
+                    "content_type":"text",
+                    "title":"I will come!"
+                  }]
+                }
   }
-  // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
 }
 
