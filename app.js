@@ -142,7 +142,7 @@ function handlePostback(sender_psid, received_postback) {
     response = { "attachment":{
       "type":"image", 
       "payload":{
-        "url":"https://web.facebook.com/104392491116237/photos/a.119445596277593/119444479611038/?type=3&theater", 
+        "url":"https://www.dummies.com/wp-content/uploads/how-to-get-your-body-measurements.jpg", 
         "is_reusable":true
       }
     } }
