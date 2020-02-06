@@ -208,7 +208,7 @@ function handlePostback(sender_psid, received_postback) {
    let response;
   // Get the payload for the postback
   let payload = received_postback.payload;
-  let payloadq = webhook_event.message.quick_replies.payload;
+  let payloadq = received_quick_replies.payloadq;
   // Set the response based on the postback payload
   if (payload === 'STC') {
     response = { "text": "Give your body measure!" }
