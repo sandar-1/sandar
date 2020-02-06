@@ -61,7 +61,7 @@ app.post('/webhook', (req, res) => {
       if (webhook_event.message) {
         handleMessage(sender_psid, webhook_event.message);        
       } else if (webhook_event.postback) {
-        handlePostback(sender_psid, webhook_event.postback, webhook_event.message);
+        handlePostback(sender_psid, webhook_event.postback);
       }
       
     });
@@ -124,17 +124,17 @@ function handleMessage(sender_psid, received_message) {
   let response;
   
   // Checks if the message contains text
-  if (received_message.text == "hi") {    
+  if (received_message.text == "Delivery!") {    
     // Create the payload for a basic text message, which
     // will be added to the body of our request to the Send API
     response = {
-      "text": `Min Ga Lar Par khinbya!`
+      "text": `Pls send me address.`
     }
-  }else if (received_message.text == "ni hao") {    
+  }else if (received_message.text == "I will come!") {    
     // Create the payload for a basic text message, which
     // will be added to the body of our request to the Send API
     response = {
-      "text": `Hao Xie Xie. Ni Hao Mah!`
+      "text": `OK! See ya!`
     }
   }else if (received_message.text == "blah") {    
     // Create the payload for a basic text message, which
@@ -162,51 +162,15 @@ function handleMessage(sender_psid, received_message) {
     ]
     }
   }
-   //else if (received_message.text) {    
-    // Create the payload for a basic text message, which
-    // will be added to the body of our request to the Send API
-   // response = {
-    //  "text": `You sent the message: "${received_message.text}". Now send me an attachment!`
-   // }} 
-   else if (received_message.attachments) {
-    // Get the URL of the message attachment
-    let attachment_url = received_message.attachments[0].payload.url;
-    response = {
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "generic",
-          "elements": [{
-            "title": "Is this the right picture?",
-            "subtitle": "Tap a button to answer.",
-            "image_url": attachment_url,
-            "buttons": [
-              {
-                "type": "postback",
-                "title": "Yes!",
-                "payload": "yes",
-              },
-              {
-                "type": "postback",
-                "title": "No!",
-                "payload": "no",
-              }
-            ],
-          }]
-        }
-      }
-    }
-  } 
-  
   // Send the response message
   callSendAPI(sender_psid, response);    
 }
 
-function handlePostback(sender_psid, received_postback, received_message) {
+function handlePostback(sender_psid, received_postback) {
   console.log('ok')
    let response;
   // Get the payload for the postback
-  let payload = received_postback.payload, received_message.text;
+  let payload = received_postback.payload;
 
   // Set the response based on the postback payload
   if (payload === 'STC') {
@@ -226,10 +190,6 @@ function handlePostback(sender_psid, received_postback, received_message) {
                     "payload":"IWC"
                   }]
                 }
-  } if (payload === 'D') {
-    response = { "text": "Pls send me address." }
-  }else if (payload === 'IWC') {
-    response = { "text": "OK! See ya!." }
   }else if (payload === 'get_started') {
     response = { "attachment": {
                   "type": "template",
