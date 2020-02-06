@@ -62,7 +62,7 @@ app.post('/webhook', (req, res) => {
         handleMessage(sender_psid, webhook_event.message);        
       } else if (webhook_event.postback) {
         
-        handlePostback(sender_psid, webhook_event.postback);
+        handlePostback(sender_psid, webhook_event.postback, webhook_event.message);
       }
       
     });
@@ -203,12 +203,12 @@ function handleMessage(sender_psid, received_message) {
   callSendAPI(sender_psid, response);    
 }
 
-function handlePostback(sender_psid, received_postback,webhook_event_message_quick_replies) {
+function handlePostback(sender_psid, received_postback, received_message) {
   console.log('ok')
    let response;
   // Get the payload for the postback
   let payload = received_postback.payload;
-  let payloadq = webhook_event_message_quick_replies.payloadq;
+  let payloadq = received_message.payloadq;
   // Set the response based on the postback payload
   if (payload === 'STC') {
     response = { "text": "Give your body measure!" }
