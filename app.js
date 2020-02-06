@@ -137,10 +137,7 @@ function handleMessage(sender_psid, received_message) {
 function handlePostback(sender_psid, received_postback) {
   console.log('ok')
    let response;
-  // Get the payload for the postback
   let payload = received_postback.payload;
-
-  // Set the response based on the postback payload
   if (payload === 'STC') {
     response = { "text": "Give your body measure!" }
   } else if (payload === 'GF') {
@@ -188,7 +185,6 @@ function handlePostback(sender_psid, received_postback) {
                 }
     }
   }
-  // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
 }
 
