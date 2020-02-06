@@ -220,11 +220,11 @@ function handlePostback(sender_psid, received_postback) {
                   {
                     "content_type":"text",
                     "title":"Delivery!",
-                    "payload":"D"
+                    "payload":"D",
                   },{
                     "content_type":"text",
                     "title":"I will come!",
-                    "payload":"IWC"
+                    "payload":"IWC",
                   }]
                 }
   } else if (payload === 'D') {
