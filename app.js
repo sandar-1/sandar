@@ -129,15 +129,6 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text == "I will come!") {    
     response = {
       "text": `OK! See ya!`
-    }else if (received_message.text == "I don't kow how?!") {    
-    response = {
-      "attachment":{
-      "type":"image", 
-      "payload":{
-        "url":"https://www.dummies.com/wp-content/uploads/how-to-get-your-body-measurements.jpg", 
-        "is_reusable":true
-      }
-    }
     }
   }
   callSendAPI(sender_psid, response);    
@@ -152,8 +143,12 @@ function handlePostback(sender_psid, received_postback) {
                   "quick_replies":[
                   {
                     "content_type":"text",
-                    "title":"I don't kow how?!",
+                    "title":"I don't know how!",
                     "payload":"D"
+                  },{
+                    "content_type":"text",
+                    "title":"May be next time!",
+                    "payload":"IWC"
                   }]
    }
   } else if (payload === 'GF') {
