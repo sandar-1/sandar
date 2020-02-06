@@ -147,10 +147,6 @@ function handleMessage(sender_psid, received_message) {
     response = {
       "text": `OK!`
     }
-  }else if (received_message.text == "12") {    
-    response = {
-      "text": `OK!`
-    }
   }
   callSendAPI(sender_psid, response);    
 }
