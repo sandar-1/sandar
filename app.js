@@ -203,7 +203,7 @@ function handleMessage(sender_psid, received_message) {
   callSendAPI(sender_psid, response);    
 }
 
-function handlePostback(sender_psid, received_postback) {
+function handlePostback(sender_psid, received_postback,received_quick_replies) {
   console.log('ok')
    let response;
   // Get the payload for the postback
