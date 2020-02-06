@@ -130,6 +130,20 @@ function handleMessage(sender_psid, received_message) {
     response = {
       "text": `OK! See ya!`
     }
+  }else if (received_message.text == "How!") {    
+    response = {
+                "attachment":{
+                "type":"image", 
+                "payload":{
+                  "url":"https://www.dummies.com/wp-content/uploads/how-to-get-your-body-measurements.jpg", 
+                  "is_reusable":true
+                }
+              }
+    }
+  }else if (received_message.text == "Not now!") {    
+    response = {
+      "text": `OK!`
+    }
   }
   callSendAPI(sender_psid, response);    
 }
