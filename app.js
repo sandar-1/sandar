@@ -214,6 +214,8 @@ function handlePostback(sender_psid, received_postback) {
     response = { "text": "Thanks!" }
   } else if (payload === 'no') {
     response = { "text": "Oops, try sending another image." }
+  } else if (payload === 'get_started') {
+    response = { "text": "Hello Wecome" }
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
@@ -247,7 +249,7 @@ function callSendAPI(sender_psid, response) {
 
 function setupGetStartedButton(res){
         var messageData = {
-                "get_started":{"payload":"USER_DEFINED_PAYLOAD"}                
+                "get_started":{"payload":"get_started"}                
         };
         // Start the request
         request({
