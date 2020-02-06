@@ -299,6 +299,10 @@ function setupPersistentMenu(res){
                         "url":"http://www.google.com",
                         "webview_height_ratio":"full"
                     }
+                    {
+                        "type":"text",
+                        "title":"ni hao"
+                    }
                 ]
             },
             {
