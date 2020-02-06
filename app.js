@@ -132,13 +132,13 @@ function handleMessage(sender_psid, received_message) {
     }
   }else if (received_message.text == "How!") {    
     response = {
-                "attachment":{
-                "type":"image", 
-                "payload":{
-                  "url":"https://www.dummies.com/wp-content/uploads/how-to-get-your-body-measurements.jpg", 
-                  "is_reusable":true
-                }
-              }
+            "attachment":{
+            "type":"image", 
+            "payload":{
+              "url":"https://www.dummies.com/wp-content/uploads/how-to-get-your-body-measurements.jpg", 
+              "is_reusable":true
+            }
+          }
     }
   }else if (received_message.text == "Not now!") {    
     response = {
