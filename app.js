@@ -61,11 +61,7 @@ app.post('/webhook', (req, res) => {
       if (webhook_event.message) {
         handleMessage(sender_psid, webhook_event.message);        
       } else if (webhook_event.postback) {
-        
-        handlePostback(sender_psid, webhook_event.postback, webhook_event.messaging_postback);
-      } else if (webhook_event.messaging_postback) {
-        
-        handleMessagingPostback(sender_psid, webhook_event.messaging_postback);
+        handlePostback(sender_psid, webhook_event.postback, webhook_event.message);
       }
       
     });
@@ -206,11 +202,11 @@ function handleMessage(sender_psid, received_message) {
   callSendAPI(sender_psid, response);    
 }
 
-function handlePostback(sender_psid, received_postback) {
+function handlePostback(sender_psid, received_postback, received_message) {
   console.log('ok')
    let response;
   // Get the payload for the postback
-  let payload = received_postback.payload;
+  let payload = received_postback.payload, received_message.text;
 
   // Set the response based on the postback payload
   if (payload === 'STC') {
@@ -230,6 +226,10 @@ function handlePostback(sender_psid, received_postback) {
                     "payload":"IWC"
                   }]
                 }
+  } if (payload === 'D') {
+    response = { "text": "Pls send me address." }
+  }else if (payload === 'IWC') {
+    response = { "text": "OK! See ya!." }
   }else if (payload === 'get_started') {
     response = { "attachment": {
                   "type": "template",
@@ -261,19 +261,6 @@ function handlePostback(sender_psid, received_postback) {
     }
   }
   // Send the message to acknowledge the postback
-  callSendAPI(sender_psid, response);
-}
-
-function handleMessagingPostback(sender_psid, received_messaging_postback) {
-  console.log('ok')
-   let response;
-  // Get the payload for the postback
-  let payload = received_messaging_postback.payload;
-   if (payload === 'D') {
-    response = { "text": "Pls send me address." }
-  }else if (payload === 'IWC') {
-    response = { "text": "OK! See ya!." }
-  }
   callSendAPI(sender_psid, response);
 }
 
