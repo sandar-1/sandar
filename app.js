@@ -122,47 +122,15 @@ app.get('/webhook', (req, res) => {
 
 function handleMessage(sender_psid, received_message) {
   let response;
-  
-  // Checks if the message contains text
   if (received_message.text == "Delivery!") {    
-    // Create the payload for a basic text message, which
-    // will be added to the body of our request to the Send API
     response = {
       "text": `Pls send me address.`
     }
   }else if (received_message.text == "I will come!") {    
-    // Create the payload for a basic text message, which
-    // will be added to the body of our request to the Send API
     response = {
       "text": `OK! See ya!`
     }
-  }else if (received_message.text == "blah") {    
-    // Create the payload for a basic text message, which
-    // will be added to the body of our request to the Send API
-    response = {
-      "text": `bla ba blaa!`
-    }
-  }else if (received_message.text == "How are you") {    
-    // Create the payload for a basic text message, which
-    // will be added to the body of our request to the Send API
-    response = {
-      "text": `Good!`,
-      "quick_replies":[
-      {
-        "content_type":"text",
-        "title":"Red",
-        "payload":"<POSTBACK_PAYLOAD>",
-        "image_url":"http://example.com/img/red.png"
-      },{
-        "content_type":"text",
-        "title":"Green",
-        "payload":"<POSTBACK_PAYLOAD>",
-        "image_url":"http://example.com/img/green.png"
-      }
-    ]
-    }
   }
-  // Send the response message
   callSendAPI(sender_psid, response);    
 }
 
