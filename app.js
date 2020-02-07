@@ -126,10 +126,12 @@ function handleMessage(sender_psid, received_message) {
     response = {
       "text": `Pls send me address.`
     }
+    callSendAPI(sender_psid, response);
   }else if (received_message.text == "I will come!") {    
     response = {
       "text": `OK! See ya!`
     }
+    callSendAPI(sender_psid, response);
   }else if (received_message.text == "How!") {    
     response = {
             "attachment":{
@@ -140,12 +142,17 @@ function handleMessage(sender_psid, received_message) {
             }
           }
     }
+    callSendAPI(sender_psid, response);
+    response2 = {
+      "text": `OK!`
+    }
+    callSendAPI(sender_psid, response2);
   }else if (received_message.text == "Not now!") {    
     response = {
       "text": `OK!`
     }
   }
-  callSendAPI(sender_psid, response);    
+   callSendAPI(sender_psid, response);   
 }
 
 function handlePostback(sender_psid, received_postback) {
@@ -235,6 +242,7 @@ function callSendAPI(sender_psid, response) {
       console.error("Unable to send message:" + err);
     }
   }); 
+  return true;
 }
 
 
