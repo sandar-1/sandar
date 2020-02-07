@@ -143,14 +143,14 @@ function handleMessage(sender_psid, received_message) {
               "is_reusable":true
             }
           }
-    }
+    };
     response2 = {
       "text": `OK!`
-    }
+    };
     
-    callSend(sender_psid, response1).then((){
-     return callSend(sender_psid, response2) ;
-    });
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2)
+  });  
     
   }else if (received_message.text == "Not now!") {    
     response = {
