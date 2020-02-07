@@ -144,6 +144,9 @@ function handleMessage(sender_psid, received_message) {
             }
           }
     };
+    response1 = {
+      "text": `OK!`
+    };
     response2 = {
       "text": `OK!`
     };
