@@ -29,8 +29,6 @@ const
   body_parser = require('body-parser'),
   app = express().use(body_parser.json()); // creates express http server
 
-let chest = false;
-
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
@@ -124,17 +122,14 @@ app.get('/webhook', (req, res) => {
 
 function handleMessage(sender_psid, received_message) {
   let response;
-
   if (received_message.text == "Delivery!") {    
     response = {
       "text": `Pls send me address.`
     }
-    callSendAPI(sender_psid, response);
   }else if (received_message.text == "I will come!") {    
     response = {
       "text": `OK! See ya!`
     }
-    callSendAPI(sender_psid, response);
   }else if (received_message.text == "How!") {    
     response = {
             "attachment":{
@@ -145,17 +140,12 @@ function handleMessage(sender_psid, received_message) {
             }
           }
     }
-
-    
-    
-    callSendAPI(sender_psid, response1); 
-    
   }else if (received_message.text == "Not now!") {    
     response = {
       "text": `OK!`
     }
   }
-   callSendAPI(sender_psid, response);   
+  callSendAPI(sender_psid, response);    
 }
 
 function handlePostback(sender_psid, received_postback) {
@@ -223,32 +213,29 @@ function handlePostback(sender_psid, received_postback) {
   callSendAPI(sender_psid, response);
 }
 
-function callSendAPI(sender_psid, response) {  
+function callSendAPI(sender_psid, response) {
+  // Construct the message body
   let request_body = {
     "recipient": {
       "id": sender_psid
     },
     "message": response
   }
-  
 
-    request({
-      "uri": "https://graph.facebook.com/v2.6/me/messages",
-      "qs": { "access_token": PAGE_ACCESS_TOKEN },
-      "method": "POST",
-      "json": request_body
-    }, (err, res, body) => {
-      if (!err) {
-        //resolve('message sent!');
-        console.log('ok');
-      } else {
-        console.error("Unable to send message:" + err);
-      }
-    }); 
-  
+  // Send the HTTP request to the Messenger Platform
+  request({
+    "uri": "https://graph.facebook.com/v2.6/me/messages",
+    "qs": { "access_token": PAGE_ACCESS_TOKEN },
+    "method": "POST",
+    "json": request_body
+  }, (err, res, body) => {
+    if (!err) {
+      console.log('message sent!')
+    } else {
+      console.error("Unable to send message:" + err);
+    }
+  }); 
 }
-
-
 
 
 function setupGetStartedButton(res){
