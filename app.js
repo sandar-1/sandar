@@ -29,6 +29,8 @@ const
   body_parser = require('body-parser'),
   app = express().use(body_parser.json()); // creates express http server
 
+let chest = false;
+
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
@@ -126,14 +128,14 @@ function handleMessage(sender_psid, received_message) {
     response = {
       "text": `Pls send me address.`
     }
-    callSendAPI(sender_psid, response);
+    callSend(sender_psid, response);
   }else if (received_message.text == "I will come!") {    
     response = {
       "text": `OK! See ya!`
     }
-    callSendAPI(sender_psid, response);
+    callSend(sender_psid, response);
   }else if (received_message.text == "How!") {    
-    response = {
+    response1 = {
             "attachment":{
             "type":"image", 
             "payload":{
@@ -142,17 +144,20 @@ function handleMessage(sender_psid, received_message) {
             }
           }
     }
-    callSendAPI(sender_psid, response);
     response2 = {
       "text": `OK!`
     }
-    callSendAPI(sender_psid, response2);
+    
+    callSend(sender_psid, response1).then((){
+     return callSend(sender_psid, response2) ;
+    });
+    
   }else if (received_message.text == "Not now!") {    
     response = {
       "text": `OK!`
     }
   }
-   callSendAPI(sender_psid, response);   
+   callSend(sender_psid, response);   
 }
 
 function handlePostback(sender_psid, received_postback) {
@@ -217,32 +222,36 @@ function handlePostback(sender_psid, received_postback) {
                 }
     }
   }
-  callSendAPI(sender_psid, response);
+  callSend(sender_psid, response);
 }
 
-function callSendAPI(sender_psid, response) {
-  // Construct the message body
+function callSendAPI(sender_psid, response) {  
   let request_body = {
     "recipient": {
       "id": sender_psid
     },
     "message": response
   }
+  
+  return new Promise(resolve => {
+    request({
+      "uri": "https://graph.facebook.com/v2.6/me/messages",
+      "qs": { "access_token": PAGE_ACCESS_TOKEN },
+      "method": "POST",
+      "json": request_body
+    }, (err, res, body) => {
+      if (!err) {
+        resolve('message sent!')
+      } else {
+        console.error("Unable to send message:" + err);
+      }
+    }); 
+  });
+}
 
-  // Send the HTTP request to the Messenger Platform
-  request({
-    "uri": "https://graph.facebook.com/v2.6/me/messages",
-    "qs": { "access_token": PAGE_ACCESS_TOKEN },
-    "method": "POST",
-    "json": request_body
-  }, (err, res, body) => {
-    if (!err) {
-      console.log('message sent!')
-    } else {
-      console.error("Unable to send message:" + err);
-    }
-  }); 
-  return true;
+async function callSend(sender_psid, response){
+  let send = await callSendAPI(sender_psid, response);
+  return 1;
 }
 
 
