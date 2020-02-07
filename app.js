@@ -136,7 +136,7 @@ function handleMessage(sender_psid, received_message) {
     }
     callSendAPI(sender_psid, response);
   }else if (received_message.text == "How!") {    
-    response1 = {
+    response = {
             "attachment":{
             "type":"image", 
             "payload":{
