@@ -124,16 +124,17 @@ app.get('/webhook', (req, res) => {
 
 function handleMessage(sender_psid, received_message) {
   let response;
+
   if (received_message.text == "Delivery!") {    
     response = {
       "text": `Pls send me address.`
     }
-    callSend(sender_psid, response);
+    callSendAPI(sender_psid, response);
   }else if (received_message.text == "I will come!") {    
     response = {
       "text": `OK! See ya!`
     }
-    callSend(sender_psid, response);
+    callSendAPI(sender_psid, response);
   }else if (received_message.text == "How!") {    
     response1 = {
             "attachment":{
@@ -144,23 +145,17 @@ function handleMessage(sender_psid, received_message) {
             }
           }
     };
-    response1 = {
-      "text": `OK!`
-    };
-    response2 = {
-      "text": `OK!`
-    };
+
     
-    callSend(sender_psid, response1).then(()=>{
-      return callSend(sender_psid, response2)
-  });  
+    
+    callSendAPI(sender_psid, response1); 
     
   }else if (received_message.text == "Not now!") {    
     response = {
       "text": `OK!`
     }
   }
-   callSend(sender_psid, response);   
+   callSendAPI(sender_psid, response);   
 }
 
 function handlePostback(sender_psid, received_postback) {
@@ -225,7 +220,7 @@ function handlePostback(sender_psid, received_postback) {
                 }
     }
   }
-  callSend(sender_psid, response);
+  callSendAPI(sender_psid, response);
 }
 
 function callSendAPI(sender_psid, response) {  
@@ -236,7 +231,7 @@ function callSendAPI(sender_psid, response) {
     "message": response
   }
   
-  return new Promise(resolve => {
+
     request({
       "uri": "https://graph.facebook.com/v2.6/me/messages",
       "qs": { "access_token": PAGE_ACCESS_TOKEN },
@@ -244,18 +239,16 @@ function callSendAPI(sender_psid, response) {
       "json": request_body
     }, (err, res, body) => {
       if (!err) {
-        resolve('message sent!')
+        //resolve('message sent!');
+        console.log('ok');
       } else {
         console.error("Unable to send message:" + err);
       }
     }); 
-  });
+  
 }
 
-async function callSend(sender_psid, response){
-  let send = await callSendAPI(sender_psid, response);
-  return 1;
-}
+
 
 
 function setupGetStartedButton(res){
