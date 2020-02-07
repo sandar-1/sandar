@@ -144,7 +144,7 @@ function handleMessage(sender_psid, received_message) {
               "is_reusable":true
             }
           }
-    };
+    }
 
     
     
