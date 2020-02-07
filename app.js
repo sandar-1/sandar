@@ -144,6 +144,10 @@ function handleMessage(sender_psid, received_message) {
     response = {
       "text": `OK!`
     }
+  }else if (received_message.text == "HI") {    
+    response = {
+      "text": `Hello`
+    }
   }
   callSendAPI(sender_psid, response);    
 }
