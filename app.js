@@ -144,9 +144,9 @@ function handleMessage(sender_psid, received_message) {
     response = {
       "text": `OK!`
     }
-  }else if (received_message.text == "HI") {    
+  }else if (received_message.text == "How!") {    
     response = {
-      "text": `Hello`
+      "text": `Chest`
     }
   }
   callSendAPI(sender_psid, response);    
