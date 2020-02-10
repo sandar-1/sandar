@@ -131,15 +131,25 @@ function handleMessage(sender_psid, received_message) {
       "text": `OK! See ya!`
     }
   }else if (received_message.text == "How!") {    
-    response = {"text"= 'Here!',
+    response = {
             "attachment":{
             "type":"image", 
             "payload":{
               "url":"https://www.dummies.com/wp-content/uploads/how-to-get-your-body-measurements.jpg", 
               "is_reusable":true
             }
-          }
-        }
+          },
+          "quick_replies":[
+                  {
+                    "content_type":"text",
+                    "title":"Start measuring!",
+                    "payload":"D"
+                  },{
+                    "content_type":"text",
+                    "title":"Not now!",
+                    "payload":"IWC"
+                  }]
+    }
   }else if (received_message.text == "Not now!") {    
     response = {
       "text": `OK!`
