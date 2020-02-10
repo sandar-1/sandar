@@ -409,12 +409,6 @@ function setupPersistentMenu(res){
                             }
                         ]
                       },
-                      {
-                        "type":"web_url",
-                        "title":"Visit website ",
-                        "url":"http://www.google.com",
-                        "webview_height_ratio":"full"
-                    }
                 ]
             },
             {
