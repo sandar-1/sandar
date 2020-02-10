@@ -182,6 +182,36 @@ function handleMessage(sender_psid, received_message) {
     response = {
       "text": `Finally! your Inseam.`
     }
+  }else if (received_message.text == "7") {    
+    response = {
+      "attachment": {
+                  "type": "template",
+                  "payload": {
+                    "template_type": "generic",
+                    "elements": [{
+                      "title": "Now I get your body measurement!",
+                      "subtitle": "Let's chooes cloth type",
+                      "buttons": [
+                        {
+                          "type": "postback",
+                          "title": "Wedding",
+                          "payload": "W",
+                        },
+                        {
+                          "type": "postback",
+                          "title": "Graduation",
+                          "payload": "G",
+                        },
+                        {
+                          "type": "postback",
+                          "title": "Donation",
+                          "payload": "D",
+                        }
+                      ],
+                    }]
+                  }
+                }
+    }
   }
   callSendAPI(sender_psid, response);    
 }
