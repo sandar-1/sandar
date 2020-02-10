@@ -194,18 +194,8 @@ function handleMessage(sender_psid, received_message) {
                       "buttons": [
                         {
                           "type": "postback",
-                          "title": "Wedding",
-                          "payload": "W",
-                        },
-                        {
-                          "type": "postback",
-                          "title": "Graduation",
-                          "payload": "G",
-                        },
-                        {
-                          "type": "postback",
-                          "title": "Donation",
-                          "payload": "D",
+                          "title": "Ceromonies",
+                          "payload": "ceremony",
                         },
                         {
                           "type": "postback",
@@ -257,7 +247,7 @@ function handlePostback(sender_psid, received_postback) {
     response = { "attachment": {
                   "type": "template",
                   "payload": {
-                    "template_type": "generic",
+                   "template_type": "generic",
                     "elements": [{
                       "title": "Hello Wecome",
                       "subtitle": "What do you want?",
@@ -282,7 +272,60 @@ function handlePostback(sender_psid, received_postback) {
                   }
                 }
     }
-  }
+  }else if (payload === 'ceremony') {
+    response = { "attachment": {
+                  "type": "template",
+                  "payload": {
+                   "template_type": "generic",
+                    "elements": [{
+                      "title": "OK!",
+                      "subtitle": "Which type of ceremony?",
+                      "buttons": [
+                        {
+                          "type": "postback",
+                          "title": "Wedding",
+                          "payload": "W",
+                        },
+                        {
+                          "type": "postback",
+                          "title": "Graduation",
+                          "payload": "G",
+                        },
+                        {
+                          "type": "postback",
+                          "title": "Donation",
+                          "payload": "D",
+                        }
+                      ],
+                    }]
+                  }
+                }
+    }
+  }else if (payload === 'S') {
+    response = { "attachment": {
+                  "type": "template",
+                  "payload": {
+                   "template_type": "generic",
+                    "elements": [{
+                      "title": "Oh! tell me",
+                      "subtitle": "Which type of cloth?",
+                      "buttons": [
+                        {
+                          "type": "postback",
+                          "title": "For university",
+                          "payload": "FU",
+                        },
+                        {
+                          "type": "postback",
+                          "title": "Just Sewing",
+                          "payload": "JS",
+                        }
+                      ],
+                    }]
+                  }
+                }
+    }
+  }  
   callSendAPI(sender_psid, response);
 }
 
