@@ -207,6 +207,36 @@ function handleMessage(sender_psid, received_message) {
                   }
                 }
     }
+  }else if (received_message.text == "No,Thanks.") {    
+    response = {
+      "text": `Well, send me cloth design.`
+    }
+  }else if (received_message.text == "Yes,Pls..") {    
+    response = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "Is this the right picture?",
+            "subtitle": "Tap a button to answer.",
+            "image_url": "https://i.pinimg.com/236x/a0/08/5b/a0085b4dcf33dde2ff958d19f83bf21d.jpg",
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "Yes!",
+                "payload": "yes-attachment",
+              },
+              {
+                "type": "postback",
+                "title": "No!",
+                "payload": "no-attachment",
+              }
+            ],
+          }]
+        }
+      }
+    }
   }
   callSendAPI(sender_psid, response);    
 }
@@ -326,7 +356,18 @@ function handlePostback(sender_psid, received_postback) {
                 }
     }
   }else if (payload === 'W') {
-    response = { "text": "Pls...send me the cloth design." }
+    response = { "text": "Do you want any suggestions?"
+                  "quick_replies":[
+                  {
+                    "content_type":"text",
+                    "title":"Yes,Pls..",
+                    "payload":"D"
+                  },{
+                    "content_type":"text",
+                    "title":"No,Thanks.",
+                    "payload":"IWC"
+                  }]
+     }
   }  
   callSendAPI(sender_psid, response);
 }
