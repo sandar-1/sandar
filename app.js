@@ -206,6 +206,11 @@ function handleMessage(sender_psid, received_message) {
                           "type": "postback",
                           "title": "Donation",
                           "payload": "D",
+                        },
+                        {
+                          "type": "postback",
+                          "title": "Simple",
+                          "payload": "S",
                         }
                       ],
                     }]
