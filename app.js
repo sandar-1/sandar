@@ -139,24 +139,14 @@ function handleMessage(sender_psid, received_message) {
               "is_reusable":true
             }
           }
-            "quick_replies":[
-                  {
-                    "content_type":"text",
-                    "title":"Start measuring!",
-                    "payload":"D"
-                  },{
-                    "content_type":"text",
-                    "title":"Not now!",
-                    "payload":"D"
-                  }]
     }
   }else if (received_message.text == "Not now!") {    
     response = {
       "text": `OK!`
     }
-  }else if (received_message.text == "Start measuring!") {    
+  }else if (received_message.text == "HI") {    
     response = {
-      "text": `Chest`
+      "text": `Hello`
     }
   }
   callSendAPI(sender_psid, response);    
