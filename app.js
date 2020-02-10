@@ -207,11 +207,11 @@ function handleMessage(sender_psid, received_message) {
                   }
                 }
     }
-  }else if (received_message.text == "No,Thanks.") {    
+  }else if (received_message.text == "No!") {    
     response = {
       "text": `Well, send me cloth design.`
     }
-  }else if (received_message.text == "Yes,Pls..") {    
+  }else if (received_message.text == "Yes,Pls") {    
     response = {
       "text": `Finally! your Inseam.`
     }
@@ -338,11 +338,11 @@ function handlePostback(sender_psid, received_postback) {
                   "quick_replies":[
                   {
                     "content_type":"text",
-                    "title":"Yes,Pls..",
+                    "title":"Yes,Pls",
                     "payload":"D"
                   },{
                     "content_type":"text",
-                    "title":"No,Thanks.",
+                    "title":"No!",
                     "payload":"IWC"
                   }]
      }
