@@ -219,22 +219,14 @@ function handleMessage(sender_psid, received_message) {
         "template_type":"generic",
         "elements":[
            {
-            "title":"Welcome!",
-            "image_url":"https://petersfancybrownhats.com/company_image.png",
-            "subtitle":"We have the right hat for everyone.",
-            "default_action": {
-              "type": "web_url",
-              "url": "https://petersfancybrownhats.com/view?item=103",
-              "webview_height_ratio": "tall",
+            "title":"Here!",
+            "image_url":"https://i.pinimg.com/236x/a0/08/5b/a0085b4dcf33dde2ff958d19f83bf21d.jpg",
+            "subtitle":"update design!",
             },
             "buttons":[
               {
-                "type":"web_url",
-                "url":"https://petersfancybrownhats.com",
-                "title":"View Website"
-              },{
                 "type":"postback",
-                "title":"Start Chatting",
+                "title":"This one!",
                 "payload":"DEVELOPER_DEFINED_PAYLOAD"
               }              
             ]      
