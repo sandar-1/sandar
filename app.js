@@ -289,12 +289,12 @@ function handlePostback(sender_psid, received_postback) {
                         {
                           "type": "postback",
                           "title": "Graduation",
-                          "payload": "G",
+                          "payload": "W",
                         },
                         {
                           "type": "postback",
                           "title": "Donation",
-                          "payload": "D",
+                          "payload": "W",
                         }
                       ],
                     }]
@@ -313,18 +313,20 @@ function handlePostback(sender_psid, received_postback) {
                         {
                           "type": "postback",
                           "title": "For university",
-                          "payload": "FU",
+                          "payload": "W",
                         },
                         {
                           "type": "postback",
                           "title": "Just Sewing",
-                          "payload": "JS",
+                          "payload": "W",
                         }
                       ],
                     }]
                   }
                 }
     }
+  }else if (payload === 'W') {
+    response = { "text": "Pls...send me the cloth design." }
   }  
   callSendAPI(sender_psid, response);
 }
@@ -387,18 +389,23 @@ function setupPersistentMenu(res){
                   "composer_input_disabled":false,
                   "call_to_actions":[
                       {
-                        "title":"Hi",
+                        "title":"Reslected!?",
                         "type":"nested",
                         "call_to_actions":[
                             {
-                              "title":"Help",
+                              "title":"Sewing the cloth",
                               "type":"postback",
-                              "payload":"HELP_PAYLOAD"
+                              "payload":"STC"
                             },
                             {
-                              "title":"ni hao",
+                              "title":"Give feedback!",
                               "type":"postback",
-                              "payload":"NI_HAO_PAYLOAD"
+                              "payload":"GF"
+                            },
+                            {
+                              "title":"View order",
+                              "type":"postback",
+                              "payload":"VO"
                             }
                         ]
                       },
