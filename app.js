@@ -220,7 +220,7 @@ function handleMessage(sender_psid, received_message) {
           "elements": [{
             "title": "Is this the right picture?",
             "subtitle": "Tap a button to answer.",
-            "image_url": "https://i.pinimg.com/236x/a0/08/5b/a0085b4dcf33dde2ff958d19f83bf21d.jpg",
+            "url": "https://i.pinimg.com/236x/a0/08/5b/a0085b4dcf33dde2ff958d19f83bf21d.jpg",
             "buttons": [
               {
                 "type": "postback",
