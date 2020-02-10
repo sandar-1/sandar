@@ -143,11 +143,11 @@ function handleMessage(sender_psid, received_message) {
                   {
                     "content_type":"text",
                     "title":"Start!",
-                    "payload":"D"
+                    "payload":"S"
                   },{
                     "content_type":"text",
                     "title":"Not now!",
-                    "payload":"IWC"
+                    "payload":"nn"
                   }]
     }
   }else if (received_message.text == "Not now!") {    
