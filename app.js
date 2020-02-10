@@ -334,7 +334,7 @@ function handlePostback(sender_psid, received_postback) {
                 }
     }
   }else if (payload === 'W') {
-    response = { "text": "Do you want any suggestions?"
+    response = { "text": "Do you want any suggestions?",
                   "quick_replies":[
                   {
                     "content_type":"text",
