@@ -131,7 +131,7 @@ function handleMessage(sender_psid, received_message) {
       "text": `OK! See ya!`
     }
   }else if (received_message.text == "How!") {    
-    response = {
+    response = {"text"= 'Here!',
             "attachment":{
             "type":"image", 
             "payload":{
@@ -140,9 +140,6 @@ function handleMessage(sender_psid, received_message) {
             }
           }
         }
-    response2 = {
-                "text":'charts'
-    }
   }else if (received_message.text == "Not now!") {    
     response = {
       "text": `OK!`
