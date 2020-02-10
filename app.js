@@ -154,9 +154,33 @@ function handleMessage(sender_psid, received_message) {
     response = {
       "text": `OK!`
     }
-  }else if (received_message.text == "HI") {    
+  }else if (received_message.text == "Start!") {    
     response = {
-      "text": `Hello`
+      "text": `First let's measure Chest.`
+    }
+  }else if (received_message.text == "1") {    
+    response = {
+      "text": `Now Upper arm.`
+    }
+  }else if (received_message.text == "2") {    
+    response = {
+      "text": `Let's measure Sleeve length.`
+    }
+  }else if (received_message.text == "3") {    
+    response = {
+      "text": `And measure your Waist.`
+    }
+  }else if (received_message.text == "4") {    
+    response = {
+      "text": `Now your Hips.`
+    }
+  }else if (received_message.text == "5") {    
+    response = {
+      "text": `Measure your Thigh.`
+    }
+  }else if (received_message.text == "6") {    
+    response = {
+      "text": `Finally! your Inseam.`
     }
   }
   callSendAPI(sender_psid, response);    
