@@ -142,7 +142,7 @@ function handleMessage(sender_psid, received_message) {
           "quick_replies":[
                   {
                     "content_type":"text",
-                    "title":"Start measuring!",
+                    "title":"Start!",
                     "payload":"D"
                   },{
                     "content_type":"text",
