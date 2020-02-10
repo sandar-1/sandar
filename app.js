@@ -139,6 +139,9 @@ function handleMessage(sender_psid, received_message) {
               "is_reusable":true
             }
           }
+        }
+    response2 = {
+                "text":'charts'
     }
   }else if (received_message.text == "Not now!") {    
     response = {
