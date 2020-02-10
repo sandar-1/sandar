@@ -213,29 +213,7 @@ function handleMessage(sender_psid, received_message) {
     }
   }else if (received_message.text == "Yes,Pls..") {    
     response = {
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "generic",
-          "elements": [{
-            "title": "Is this the right picture?",
-            "subtitle": "Tap a button to answer.",
-            "url": "https://i.pinimg.com/236x/a0/08/5b/a0085b4dcf33dde2ff958d19f83bf21d.jpg",
-            "buttons": [
-              {
-                "type": "postback",
-                "title": "Yes!",
-                "payload": "yes-attachment",
-              },
-              {
-                "type": "postback",
-                "title": "No!",
-                "payload": "no-attachment",
-              }
-            ],
-          }]
-        }
-      }
+      "text": `Finally! your Inseam.`
     }
   }
   callSendAPI(sender_psid, response);    
