@@ -476,16 +476,15 @@ function handleMessage(sender_psid, received_message) {
                  }
     }
   }else if (received_message.text == "I do!") {    
-    response = {
-      "text": "Exactly look like the beaded embroidery design that include in your cloth design?", 
+     response = { "text": "The estimated price and date is 15000ks and 14feb.2020.", 
                   "quick_replies":[
                   {
                     "content_type":"text",
-                    "title":"yes!",
+                    "title":"Order",
                     "payload":"D"
                   },{
                     "content_type":"text",
-                    "title":"no!",
+                    "title":"Cancle",
                     "payload":"IWC"
                   }]
     }
