@@ -447,7 +447,7 @@ function handlePostback(sender_psid, received_postback) {
               "is_reusable":true
             }
           }
-    }
+    };
     let response2 = {
                     "text":'This One!'
     }
