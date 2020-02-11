@@ -430,6 +430,38 @@ function handleMessage(sender_psid, received_message) {
       }
     }
     }
+  }else if (received_message.text == "Ok👍") {    
+    response = {
+       "attachment":{
+                  "type":"template",
+                  "payload":{
+                    "template_type":"generic",
+                    "elements":[
+                       {
+                        "title":"Do you wanna Beaded embroidery on the cloth?",
+                        "image_url":"https://www.thespruce.com/thmb/_c5BH6NNTJquNWFbOMPXfOvghmg=/960x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/close-up-of-women-dress-811369932-5aab408e04d1cf003636355f.jpg",
+                        "subtitle":"Like this?",
+                        "default_action": {
+                          "type": "web_url",
+                          "url": "https://www.thespruce.com/thmb/_c5BH6NNTJquNWFbOMPXfOvghmg=/960x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/close-up-of-women-dress-811369932-5aab408e04d1cf003636355f.jpg",
+                          "webview_height_ratio": "tall",
+                        },
+                        "buttons":[
+                         {
+                            "type":"postback",
+                            "title":"Sure.",
+                            "payload":"sure"
+                          },{
+                            "type":"postback",
+                            "title":"Don't do it.",
+                            "payload":"ddt"
+                          }              
+                        ]      
+                      }
+                     ]
+                   }
+     }
+    }
   }
   callSendAPI(sender_psid, response);    
 }
@@ -652,9 +684,9 @@ function handlePostback(sender_psid, received_postback) {
           },
           "quick_replies":[
                   {
-                    "content_type":"postback",
+                    "content_type":"text",
                     "title":"Ok👍",
-                    "payload":"yes"
+                    "payload":"ok"
                   },{
                     "content_type":"text",
                     "title":"👎Nope",
@@ -662,17 +694,35 @@ function handlePostback(sender_psid, received_postback) {
                   }]
     }
   }else if (payload === 'yes') {
-    response = { "text": "Do you wanna Beaded embroidery on the cloth?",
-                  "quick_replies":[
-                  {
-                    "content_type":"text",
-                    "title":"Sure",
-                    "payload":"D"
-                  },{
-                    "content_type":"text",
-                    "title":"Don't",
-                    "payload":"IWC"
-                  }]
+    response = { 
+                  "attachment":{
+                  "type":"template",
+                  "payload":{
+                    "template_type":"generic",
+                    "elements":[
+                       {
+                        "title":"Do you wanna Beaded embroidery on the cloth?",
+                        "image_url":"https://www.thespruce.com/thmb/_c5BH6NNTJquNWFbOMPXfOvghmg=/960x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/close-up-of-women-dress-811369932-5aab408e04d1cf003636355f.jpg",
+                        "subtitle":"Like this?",
+                        "default_action": {
+                          "type": "web_url",
+                          "url": "https://www.thespruce.com/thmb/_c5BH6NNTJquNWFbOMPXfOvghmg=/960x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/close-up-of-women-dress-811369932-5aab408e04d1cf003636355f.jpg",
+                          "webview_height_ratio": "tall",
+                        },
+                        "buttons":[
+                         {
+                            "type":"postback",
+                            "title":"Sure.",
+                            "payload":"sure"
+                          },{
+                            "type":"postback",
+                            "title":"Don't do it.",
+                            "payload":"ddt"
+                          }              
+                        ]      
+                      }
+                     ]
+                   }
      }
   }else if (payload === 'no') {
     response = { "text": "Oh! ok, send me again." }
