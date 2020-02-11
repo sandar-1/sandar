@@ -514,7 +514,7 @@ function handleMessage(sender_psid, received_message) {
                   "payload": {
                    "template_type": "generic",
                     "elements": [{
-                      "title": "Which date you want to finish.",
+                      "title": "Which date do you want to finish.",
                       "subtitle": "😉",
                       "buttons": [
                         {
@@ -535,7 +535,13 @@ function handleMessage(sender_psid, received_message) {
                       ],
                     }]
                   }
-                }
+                },
+                "quick_replies":[
+                  {
+                    "content_type":"text",
+                    "title":"No,Thz.",
+                    "payload":"IWC"
+                  }]
     }
   }else if (received_message.text == "No,Thz.") {    
     response = {
@@ -813,6 +819,8 @@ function handlePostback(sender_psid, received_postback) {
                     "payload":"IWC"
                   }]
     }
+  }else if (payload === 'ep') {
+    response = { "text": "You got this. Don't forget to check the order." }
   }
   callSendAPI(sender_psid, response);
 }
