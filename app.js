@@ -209,7 +209,7 @@ function handleMessage(sender_psid, received_message) {
     }
   }else if (received_message.text == "No!") {    
     response = {
-      "text": `Well, send me cloth design.`
+      "text": `Well, send me design.`
     }
   }else if (received_message.attachments) {
     let attachment_url = received_message.attachments[0].payload.url;
@@ -462,6 +462,20 @@ function handleMessage(sender_psid, received_message) {
                    }
                  }
      }
+  }else if (received_message.text == "yes!") {    
+    response = {
+      "text": `The estimated price of your order is 15000ks.`,
+      "quick_replies":[
+                  {
+                    "content_type":"text",
+                    "title":"Order",
+                    "payload":"D"
+                  },{
+                    "content_type":"text",
+                    "title":"Cancle",
+                    "payload":"IWC"
+                  }]
+    }
   }
   callSendAPI(sender_psid, response);    
 }
@@ -727,6 +741,32 @@ function handlePostback(sender_psid, received_postback) {
      }
   }else if (payload === 'no') {
     response = { "text": "Oh! ok, send me again." }
+  }else if (payload === 'sure') {
+    response = { "text": "Exactly look like the beaded embroidery design that include in your cloth design?", 
+                  "quick_replies":[
+                  {
+                    "content_type":"text",
+                    "title":"yes!",
+                    "payload":"D"
+                  },{
+                    "content_type":"text",
+                    "title":"No!",
+                    "payload":"IWC"
+                  }]
+  }
+  }else if (payload === 'ddt') {
+    response = { "text": "Oh! ok, your order will cost 10000ks.",
+                "quick_replies":[
+                  {
+                    "content_type":"text",
+                    "title":"Order",
+                    "payload":"D"
+                  },{
+                    "content_type":"text",
+                    "title":"Cancle",
+                    "payload":"IWC"
+                  }]
+  }
   }
   callSendAPI(sender_psid, response);
 }
