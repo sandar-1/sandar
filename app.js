@@ -222,11 +222,6 @@ function handleMessage(sender_psid, received_message) {
             "title": "Is this the right design?",
             "subtitle": "Tap a button to answer.",
             "image_url": attachment_url,
-            "default_action": {
-              "type": "web_url",
-              "url": "attachment_url",
-              "webview_height_ratio": "tall",
-            }
             "buttons": [
               {
                 "type": "postback",
