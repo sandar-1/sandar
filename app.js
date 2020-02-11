@@ -450,10 +450,10 @@ function handlePostback(sender_psid, received_postback) {
       let response2 = {"text": "This one!"};
       let response3 = {"text": "To add new task, type 'new'"};   
       let response4 = {"text": "If you forget who you are, type 'who am i'"};
-        callSend(sender_psid, response1).then(()=>{
-          return callSend(sender_psid, response2).then(()=>{
-            return callSend(sender_psid, response3).then(()=>{
-              return callSend(sender_psid, response4);
+        callSendAPI(sender_psid, response1).then(()=>{
+          return callSendAPI(sender_psid, response2).then(()=>{
+            return callSendAPI(sender_psid, response3).then(()=>{
+              return callSendAPI(sender_psid, response4);
             });
           });
       });
