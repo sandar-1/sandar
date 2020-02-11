@@ -652,15 +652,30 @@ function handlePostback(sender_psid, received_postback) {
           },
           "quick_replies":[
                   {
-                    "content_type":"text",
+                    "content_type":"postback",
                     "title":"Ok👍",
-                    "payload":"ok"
+                    "payload":"yes"
                   },{
                     "content_type":"text",
                     "title":"👎Nope",
                     "payload":"nope"
                   }]
     }
+  }else if (payload === 'yes') {
+    response = { "text": "Do you wanna Beaded embroidery on the cloth?",
+                  "quick_replies":[
+                  {
+                    "content_type":"text",
+                    "title":"Sure",
+                    "payload":"D"
+                  },{
+                    "content_type":"text",
+                    "title":"Don't",
+                    "payload":"IWC"
+                  }]
+     }
+  }else if (payload === 'no') {
+    response = { "text": "Oh! ok, send me again." }
   }
   callSendAPI(sender_psid, response);
 }
