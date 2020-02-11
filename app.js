@@ -219,9 +219,9 @@ function handleMessage(sender_psid, received_message) {
         "template_type":"generic",
         "elements":[
            {
-            "title":"Welcome!",
+            "title":"This is up-to-date design!",
             "image_url":"https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
-            "subtitle":"We have the right hat for everyone.",
+            "subtitle":"Do you like it?",
             "default_action": {
               "type": "web_url",
               "url": "https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
