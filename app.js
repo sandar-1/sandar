@@ -451,9 +451,9 @@ function handleMessage(sender_psid, received_message) {
                     "template_type":"generic",
                     "elements":[
                        {
-                        "title":"Beaded embroidery on the cloth?",
+                        "title":"Beaded embroidery on the cloth",
                         "image_url":"https://i.pinimg.com/236x/fc/aa/15/fcaa15d588bb3c3cd0cefcb671d3674f--unik-baju.jpg",
-                        "subtitle":"Like this?",
+                        "subtitle":"Like this.....",
                         "default_action": {
                           "type": "web_url",
                           "url": "https://i.pinimg.com/236x/fc/aa/15/fcaa15d588bb3c3cd0cefcb671d3674f--unik-baju.jpg",
@@ -489,23 +489,57 @@ function handleMessage(sender_psid, received_message) {
                     "payload":"IWC"
                   }]
     }
-  }else if (received_message.text == "yes!") {    
+  }else if (received_message.text == "Order") {    
     response = {
-      "text": `The estimated price of your order is 15000ks.`,
+      "text": `Thanks! Your order will finish at 14feb.2020. Don't forget to check the order.`
+    }
+  }else if (received_message.text == "Cancle") {    
+    response = {
+      "text": `Opps! Do you want to adjust the appointment date?`,
       "quick_replies":[
                   {
                     "content_type":"text",
-                    "title":"Order",
+                    "title":"Yes,pls.",
                     "payload":"D"
                   },{
                     "content_type":"text",
-                    "title":"Cancle",
+                    "title":"No,Thz.",
                     "payload":"IWC"
                   }]
     }
-  }else if (received_message.text == "no!") {    
+  }else if (received_message.text == "Yes,pls.") {    
     response = {
-      "text": `Well, send me beaded design.`
+      "attachment": {
+                  "type": "template",
+                  "payload": {
+                   "template_type": "generic",
+                    "elements": [{
+                      "title": "Which date you want to finish.",
+                      "subtitle": "😉",
+                      "buttons": [
+                        {
+                          "type": "postback",
+                          "title": "3feb.2020",
+                          "payload": "ep",
+                        },
+                        {
+                          "type": "postback",
+                          "title": "10feb.2020",
+                          "payload": "ep",
+                        },
+                        {
+                          "type": "postback",
+                          "title": "12feb.2020",
+                          "payload": "ep",
+                        }
+                      ],
+                    }]
+                  }
+                }
+    }
+  }else if (received_message.text == "No,Thz.") {    
+    response = {
+      "text": `Oh! Ok, Thanks for visiting our page.`
     }
   }
   callSendAPI(sender_psid, response);    
@@ -754,20 +788,20 @@ function handlePostback(sender_psid, received_postback) {
   }else if (payload === 'no') {
     response = { "text": "Oh! ok, send me again." }
   }else if (payload === 'sure') {
-    response = { "text": "Exactly look like the beaded embroidery design that include in your cloth design?", 
+    response = { "text": "The estimated price and date is 15000ks and 14feb.2020.", 
                   "quick_replies":[
                   {
                     "content_type":"text",
-                    "title":"yes!",
+                    "title":"Order",
                     "payload":"D"
                   },{
                     "content_type":"text",
-                    "title":"no!",
+                    "title":"Cancle",
                     "payload":"IWC"
                   }]
-  }
+    }
   }else if (payload === 'ddt') {
-    response = { "text": "Oh! ok, your estimated price will cost 10000ks.",
+    response = { "text": "Oh! ok, your estimated price and date is 10000ks and 14feb.2020.",
                 "quick_replies":[
                   {
                     "content_type":"text",
@@ -778,7 +812,7 @@ function handlePostback(sender_psid, received_postback) {
                     "title":"Cancle",
                     "payload":"IWC"
                   }]
-  }
+    }
   }
   callSendAPI(sender_psid, response);
 }
