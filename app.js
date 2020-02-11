@@ -224,7 +224,7 @@ function handleMessage(sender_psid, received_message) {
             "subtitle":"We have the right hat for everyone.",
             "default_action": {
               "type": "web_url",
-              "url": "https://petersfancybrownhats.com/view?item=103",
+              "url": "https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
               "webview_height_ratio": "tall",
             },
             "buttons":[
