@@ -431,14 +431,27 @@ function handleMessage(sender_psid, received_message) {
     }
     }
   }else if (received_message.text == "Ok👍") {    
-    response = { 
-                  "attachment":{
+    response = { "text" : "Do you wanna put some beaded embroidery on the cloth?",
+                  "quick_replies":[
+                  {
+                    "content_type":"text",
+                    "title":"What?",
+                    "payload":"D"
+                  },{
+                    "content_type":"text",
+                    "title":"I do!",
+                    "payload":"IWC"
+                  }]
+     }
+  }else if (received_message.text == "What?") {    
+    response = {
+       "attachment":{
                   "type":"template",
                   "payload":{
                     "template_type":"generic",
                     "elements":[
                        {
-                        "title":"Do you wanna Beaded embroidery on the cloth?",
+                        "title":"Beaded embroidery on the cloth?",
                         "image_url":"https://i.pinimg.com/236x/fc/aa/15/fcaa15d588bb3c3cd0cefcb671d3674f--unik-baju.jpg",
                         "subtitle":"Like this?",
                         "default_action": {
@@ -461,7 +474,21 @@ function handleMessage(sender_psid, received_message) {
                       ]
                    }
                  }
-     }
+    }
+  }else if (received_message.text == "I do!") {    
+    response = {
+      "text": "Exactly look like the beaded embroidery design that include in your cloth design?", 
+                  "quick_replies":[
+                  {
+                    "content_type":"text",
+                    "title":"yes!",
+                    "payload":"D"
+                  },{
+                    "content_type":"text",
+                    "title":"no!",
+                    "payload":"IWC"
+                  }]
+    }
   }else if (received_message.text == "yes!") {    
     response = {
       "text": `The estimated price of your order is 15000ks.`,
@@ -475,6 +502,10 @@ function handleMessage(sender_psid, received_message) {
                     "title":"Cancle",
                     "payload":"IWC"
                   }]
+    }
+  }else if (received_message.text == "no!") {    
+    response = {
+      "text": `Well, send me beaded design.`
     }
   }
   callSendAPI(sender_psid, response);    
@@ -708,36 +739,17 @@ function handlePostback(sender_psid, received_postback) {
                   }]
     }
   }else if (payload === 'yes') {
-    response = { 
-                  "attachment":{
-                  "type":"template",
-                  "payload":{
-                    "template_type":"generic",
-                    "elements":[
-                       {
-                        "title":"Do you wanna Beaded embroidery on the cloth?",
-                        "image_url":"https://i.pinimg.com/236x/fc/aa/15/fcaa15d588bb3c3cd0cefcb671d3674f--unik-baju.jpg",
-                        "subtitle":"Like this?",
-                        "default_action": {
-                          "type": "web_url",
-                          "url": "https://i.pinimg.com/236x/fc/aa/15/fcaa15d588bb3c3cd0cefcb671d3674f--unik-baju.jpg",
-                          "webview_height_ratio": "tall",
-                        },
-                        "buttons":[
-                         {
-                            "type":"postback",
-                            "title":"Sure.",
-                            "payload":"sure"
-                          },{
-                            "type":"postback",
-                            "title":"Don't do it.",
-                            "payload":"ddt"
-                          }              
-                        ]      
-                      }
-                      ]
-                   }
-                 }
+    response = {  "text" : "Do you wanna put some beaded embroidery on the cloth?",
+                  "quick_replies":[
+                  {
+                    "content_type":"text",
+                    "title":"What?",
+                    "payload":"D"
+                  },{
+                    "content_type":"text",
+                    "title":"Ok",
+                    "payload":"IWC"
+                  }]
      }
   }else if (payload === 'no') {
     response = { "text": "Oh! ok, send me again." }
@@ -750,12 +762,12 @@ function handlePostback(sender_psid, received_postback) {
                     "payload":"D"
                   },{
                     "content_type":"text",
-                    "title":"No!",
+                    "title":"no!",
                     "payload":"IWC"
                   }]
   }
   }else if (payload === 'ddt') {
-    response = { "text": "Oh! ok, your order will cost 10000ks.",
+    response = { "text": "Oh! ok, your estimated price will cost 10000ks.",
                 "quick_replies":[
                   {
                     "content_type":"text",
