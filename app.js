@@ -439,15 +439,9 @@ function handlePostback(sender_psid, received_postback) {
                   }]
      }
   }else if (payload === 'likethis') {
-    response = {  
-                "attachment":{
-                "type":"image", 
-                "payload":{
-                  "url":"https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg", 
-                  "is_reusable":true
-                }
-              }
-        }
+    response = { "text": "You can say freely." 
+
+    }
   } 
   callSendAPI(sender_psid, response);
 }
