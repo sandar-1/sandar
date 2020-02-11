@@ -443,19 +443,19 @@ function handlePostback(sender_psid, received_postback) {
               "attachment":{
             "type":"image", 
             "payload":{
-              "url":"https://www.dummies.com/wp-content/uploads/how-to-get-your-body-measurements.jpg", 
+              "url":"https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg", 
               "is_reusable":true
             }
           },
           "quick_replies":[
                   {
                     "content_type":"text",
-                    "title":"👍",
-                    "payload":"S"
+                    "title":"Ok👍",
+                    "payload":"ok"
                   },{
                     "content_type":"text",
-                    "title":"👎",
-                    "payload":"nn"
+                    "title":"👎Nope",
+                    "payload":"nope"
                   }]
     }
   } 
