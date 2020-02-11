@@ -439,7 +439,7 @@ function handlePostback(sender_psid, received_postback) {
                   }]
      }
   }else if (payload === 'likethis') {
-    response = {  
+    let response1 = {  
                 "attachment":{
             "type":"image", 
             "payload":{
@@ -447,6 +447,9 @@ function handlePostback(sender_psid, received_postback) {
               "is_reusable":true
             }
           }
+    }
+    let response2 = {
+                    "text":'This One!'
     }
   } 
   callSendAPI(sender_psid, response);
