@@ -438,10 +438,6 @@ function handlePostback(sender_psid, received_postback) {
                     "payload":"IWC"
                   }]
      }
-  }else if (payload === 'likethis') {
-    response = { "text": "You can say freely." 
-
-    }
   } 
   callSendAPI(sender_psid, response);
 }
