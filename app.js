@@ -438,20 +438,25 @@ function handlePostback(sender_psid, received_postback) {
                     "payload":"IWC"
                   }]
      }
-  }else if (payload === 'likethis') {
-    let response1 = {  
-                "attachment":{
-            "type":"image", 
-            "payload":{
-              "url":"https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg", 
-              "is_reusable":true
-            }
-          }
-    };
-    let response2 = {
-                    "text":'This One!'
-    }
-  } 
+  }else if (payload === 'likethis') {    
+     let response1 = {"attachment":{
+                      "type":"image", 
+                      "payload":{
+                        "url":"https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg", 
+                        "is_reusable":true
+                      }
+                    }
+                  };
+      let response2 = {"text": "This one!"};
+      let response3 = {"text": "To add new task, type 'new'"};   
+      let response4 = {"text": "If you forget who you are, type 'who am i'"};
+        callSend(sender_psid, response1).then(()=>{
+          return callSend(sender_psid, response2).then(()=>{
+            return callSend(sender_psid, response3).then(()=>{
+              return callSend(sender_psid, response4);
+            });
+          });
+      });
   callSendAPI(sender_psid, response);
 }
 
