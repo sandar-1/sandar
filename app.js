@@ -220,19 +220,14 @@ function handleMessage(sender_psid, received_message) {
         "elements":[
            {
             "title":"Welcome!",
-            "image_url":"https://petersfancybrownhats.com/company_image.png",
+            "image_url":"https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
             "subtitle":"We have the right hat for everyone.",
             "default_action": {
-              "type": "web_url",
-              "url": "https://petersfancybrownhats.com/view?item=103",
-              "webview_height_ratio": "tall",
+              "type": "image_url",
+              "image_url": "https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
             },
             "buttons":[
               {
-                "type":"web_url",
-                "url":"https://petersfancybrownhats.com",
-                "title":"View Website"
-              },{
                 "type":"postback",
                 "title":"Start Chatting",
                 "payload":"DEVELOPER_DEFINED_PAYLOAD"
