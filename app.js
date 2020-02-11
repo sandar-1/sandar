@@ -438,6 +438,26 @@ function handlePostback(sender_psid, received_postback) {
                     "payload":"IWC"
                   }]
      }
+  }else if (payload === 'likethis') {
+    response = { 
+              "attachment":{
+            "type":"image", 
+            "payload":{
+              "url":"https://www.dummies.com/wp-content/uploads/how-to-get-your-body-measurements.jpg", 
+              "is_reusable":true
+            }
+          },
+          "quick_replies":[
+                  {
+                    "content_type":"text",
+                    "title":"👍",
+                    "payload":"S"
+                  },{
+                    "content_type":"text",
+                    "title":"👎",
+                    "payload":"nn"
+                  }]
+    }
   } 
   callSendAPI(sender_psid, response);
 }
