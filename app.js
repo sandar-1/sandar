@@ -231,7 +231,7 @@ function handleMessage(sender_psid, received_message) {
              {
                 "type":"postback",
                 "title":"I like this one.",
-                "payload":"likethis"
+                "payload":"likethis1"
               }              
             ]      
           },
@@ -248,7 +248,7 @@ function handleMessage(sender_psid, received_message) {
              {
                 "type":"postback",
                 "title":"I like this one.",
-                "payload":"likethis"
+                "payload":"likethis2"
               }              
             ]      
           },
@@ -265,7 +265,7 @@ function handleMessage(sender_psid, received_message) {
              {
                 "type":"postback",
                 "title":"I like this one.",
-                "payload":"likethis"
+                "payload":"likethis3"
               }              
             ]      
           },
@@ -282,7 +282,7 @@ function handleMessage(sender_psid, received_message) {
              {
                 "type":"postback",
                 "title":"I like this one.",
-                "payload":"likethis"
+                "payload":"likethis4"
               }              
             ]      
           },
@@ -299,7 +299,7 @@ function handleMessage(sender_psid, received_message) {
              {
                 "type":"postback",
                 "title":"I like this one.",
-                "payload":"likethis"
+                "payload":"likethis5"
               }              
             ]      
           }
@@ -438,7 +438,7 @@ function handlePostback(sender_psid, received_postback) {
                     "payload":"IWC"
                   }]
      }
-  }else if (payload === 'likethis') {
+  }else if (payload === 'likethis1') {
     response = { 
               "attachment":{
             "type":"image", 
@@ -458,7 +458,87 @@ function handlePostback(sender_psid, received_postback) {
                     "payload":"nope"
                   }]
     }
-  } 
+  }else if (payload === 'likethis2') {
+    response = { 
+              "attachment":{
+            "type":"image", 
+            "payload":{
+              "url":"https://i.pinimg.com/236x/19/86/a9/1986a99c86fd95f55a4da544ca51b4fa.jpg",
+              "is_reusable":true
+            }
+          },
+          "quick_replies":[
+                  {
+                    "content_type":"text",
+                    "title":"Ok👍",
+                    "payload":"ok"
+                  },{
+                    "content_type":"text",
+                    "title":"👎Nope",
+                    "payload":"nope"
+                  }]
+    }
+  }else if (payload === 'likethis3') {
+    response = { 
+              "attachment":{
+            "type":"image", 
+            "payload":{
+              "url":"https://i.pinimg.com/236x/47/9d/80/479d803ae3ab903776130660918e58d1.jpg",
+              "is_reusable":true
+            }
+          },
+          "quick_replies":[
+                  {
+                    "content_type":"text",
+                    "title":"Ok👍",
+                    "payload":"ok"
+                  },{
+                    "content_type":"text",
+                    "title":"👎Nope",
+                    "payload":"nope"
+                  }]
+    }
+  }else if (payload === 'likethis4') {
+    response = { 
+              "attachment":{
+            "type":"image", 
+            "payload":{
+              "url":"https://i.pinimg.com/236x/c9/63/7b/c9637bf64bba26e5da12852822f4779f.jpg",
+              "is_reusable":true
+            }
+          },
+          "quick_replies":[
+                  {
+                    "content_type":"text",
+                    "title":"Ok👍",
+                    "payload":"ok"
+                  },{
+                    "content_type":"text",
+                    "title":"👎Nope",
+                    "payload":"nope"
+                  }]
+    }
+  }else if (payload === 'likethis5') {
+    response = { 
+              "attachment":{
+            "type":"image", 
+            "payload":{
+              "url":"https://i.pinimg.com/236x/b4/57/dd/b457dd49dba5e06dd0f8862c11dfb184.jpg",
+              "is_reusable":true
+            }
+          },
+          "quick_replies":[
+                  {
+                    "content_type":"text",
+                    "title":"Ok👍",
+                    "payload":"ok"
+                  },{
+                    "content_type":"text",
+                    "title":"👎Nope",
+                    "payload":"nope"
+                  }]
+    }
+  }
   callSendAPI(sender_psid, response);
 }
 
