@@ -248,7 +248,7 @@ function handleMessage(sender_psid, received_message) {
            {
             "title":"This is up-to-date design!",
             "image_url":"https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
-            "subtitle":"Do you like it?",
+            "subtitle":"If you don't like, upload design.",
             "default_action": {
               "type": "web_url",
               "url": "https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
