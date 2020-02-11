@@ -747,7 +747,7 @@ function handlePostback(sender_psid, received_postback) {
                     "payload":"D"
                   },{
                     "content_type":"text",
-                    "title":"Ok",
+                    "title":"I do!",
                     "payload":"IWC"
                   }]
      }
