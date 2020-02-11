@@ -674,11 +674,11 @@ function handlePostback(sender_psid, received_postback) {
                     "elements":[
                        {
                         "title":"Do you wanna Beaded embroidery on the cloth?",
-                        "image_url":"https://www.thespruce.com/thmb/_c5BH6NNTJquNWFbOMPXfOvghmg=/960x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/close-up-of-women-dress-811369932-5aab408e04d1cf003636355f.jpg",
+                        "image_url":"https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
                         "subtitle":"Like this?",
                         "default_action": {
                           "type": "web_url",
-                          "url": "https://www.thespruce.com/thmb/_c5BH6NNTJquNWFbOMPXfOvghmg=/960x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/close-up-of-women-dress-811369932-5aab408e04d1cf003636355f.jpg",
+                          "url": "https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
                           "webview_height_ratio": "tall",
                         },
                         "buttons":[
@@ -693,8 +693,9 @@ function handlePostback(sender_psid, received_postback) {
                           }              
                         ]      
                       }
-                     ]
+                      ]
                    }
+                 }
      }
   }else if (payload === 'no') {
     response = { "text": "Oh! ok, send me again." }
