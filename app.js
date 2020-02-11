@@ -431,9 +431,37 @@ function handleMessage(sender_psid, received_message) {
     }
     }
   }else if (received_message.text == "Ok👍") {    
-    response = {
-      "text": `OK! See ya!`
-    }
+    response = { 
+                  "attachment":{
+                  "type":"template",
+                  "payload":{
+                    "template_type":"generic",
+                    "elements":[
+                       {
+                        "title":"Do you wanna Beaded embroidery on the cloth?",
+                        "image_url":"https://i.pinimg.com/236x/fc/aa/15/fcaa15d588bb3c3cd0cefcb671d3674f--unik-baju.jpg",
+                        "subtitle":"Like this?",
+                        "default_action": {
+                          "type": "web_url",
+                          "url": "https://i.pinimg.com/236x/fc/aa/15/fcaa15d588bb3c3cd0cefcb671d3674f--unik-baju.jpg",
+                          "webview_height_ratio": "tall",
+                        },
+                        "buttons":[
+                         {
+                            "type":"postback",
+                            "title":"Sure.",
+                            "payload":"sure"
+                          },{
+                            "type":"postback",
+                            "title":"Don't do it.",
+                            "payload":"ddt"
+                          }              
+                        ]      
+                      }
+                      ]
+                   }
+                 }
+     }
   }
   callSendAPI(sender_psid, response);    
 }
@@ -674,11 +702,11 @@ function handlePostback(sender_psid, received_postback) {
                     "elements":[
                        {
                         "title":"Do you wanna Beaded embroidery on the cloth?",
-                        "image_url":"https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
+                        "image_url":"https://i.pinimg.com/236x/fc/aa/15/fcaa15d588bb3c3cd0cefcb671d3674f--unik-baju.jpg",
                         "subtitle":"Like this?",
                         "default_action": {
                           "type": "web_url",
-                          "url": "https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
+                          "url": "https://i.pinimg.com/236x/fc/aa/15/fcaa15d588bb3c3cd0cefcb671d3674f--unik-baju.jpg",
                           "webview_height_ratio": "tall",
                         },
                         "buttons":[
