@@ -678,7 +678,7 @@ function handlePostback(sender_psid, received_postback) {
                   }]
      }
   }else if (payload === 'likethis1') {
-    response = { 
+    let response1 = { 
               "attachment":{
             "type":"image", 
             "payload":{
@@ -696,6 +696,9 @@ function handlePostback(sender_psid, received_postback) {
                     "title":"👎Nope",
                     "payload":"nope"
                   }]
+    }
+    let response2 = {
+      "text" = "This design?"
     }
   }else if (payload === 'likethis2') {
     response = { 
