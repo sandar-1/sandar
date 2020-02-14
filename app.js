@@ -684,16 +684,19 @@ function handlePostback(sender_psid, received_postback) {
                   }]
      }
   }else if (payload === 'likethis1') {
-    response = { 
+    let response1 = { 
             "attachment":{
             "type":"image", 
             "payload":{
               "url":"https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg", 
               "is_reusable":true
             }
-          },
-          //"text": "Do you like this one?",
-          "quick_replies":[
+          }
+          
+    }
+    let response2 = {
+        "text": "Do you like this one?",
+        "quick_replies":[
                   {
                     "content_type":"text",
                     "title":"Ok👍",
@@ -703,7 +706,11 @@ function handlePostback(sender_psid, received_postback) {
                     "title":"👎Nope",
                     "payload":"nope"
                   }]
+
     }
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
   }else if (payload === 'likethis2') {
     response = { 
               "attachment":{
