@@ -136,7 +136,7 @@ function handleMessage(sender_psid, received_message) {
     let response2 = {
       "text": `Please send me address.`
     }
-
+    
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });
@@ -203,11 +203,6 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text == "6") {    
     response = {
       "text": `Finally! your Inseam.`
-    }
-  }
-  else if (received_message.text == "test") {    
-    response = {
-    "text": `chest: ${userEnteredMeasurement.chest}`
     }
   }else if (received_message.text == "7") {    
     response = {
