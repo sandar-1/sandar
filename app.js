@@ -686,7 +686,7 @@ function handlePostback(sender_psid, received_postback) {
               "is_reusable":true
             }
           },
-          "text": "Do you like this one?",
+          //"text": "Do you like this one?",
           "quick_replies":[
                   {
                     "content_type":"text",
