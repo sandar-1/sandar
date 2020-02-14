@@ -136,6 +136,7 @@ function handleMessage(sender_psid, received_message) {
     let response2 = {
       "text": `Please send me address.`
     }
+
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });
@@ -171,13 +172,18 @@ function handleMessage(sender_psid, received_message) {
     response = {
       "text": `First let's measure Chest.`
     }
+    for(let i in measurement){
+        measurement[i] = false;
+    }
     measurement.chest = true;
   }else if (received_message.text && measurement.chest == true) {   
     userEnteredMeasurement.chest =  received_message.text;
     response = {
       "text": `Now Upper arm.`
     }
-    measurement.chest = false;
+    for(let i in measurement){
+        measurement[i] = false;
+    }
     measurement.upperArm = true;
   }else if (received_message.text && measurement.upperArm == true) { 
     userEnteredMeasurement.upperArm = received_message.text; 
@@ -185,8 +191,9 @@ function handleMessage(sender_psid, received_message) {
     response = {
       "text": `Let's measure Sleeve length.`
     }
-    measurement.chest = false;
-    measurement.upperArm = false;
+    for(let i in measurement){
+        measurement[i] = false;
+    }
   }else if (received_message.text == "3") {    
     response = {
       "text": `And measure your Waist.`
@@ -202,7 +209,12 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text == "6") {    
     response = {
       "text": `Finally! your Inseam.`
+    }else if (received_message.text == "test") {    
+    response = {
+      "text": `is this right chest :${userEnteredMeasurement.chest}`
     }
+
+
   }else if (received_message.text == "7") {    
     response = {
       "attachment": {
