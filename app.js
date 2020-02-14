@@ -32,11 +32,6 @@ const
 let measurement = {
   chest:false,
   upperArm:false,
-  sleevelenght:false,
-  waist:false,
-  hips:false,
-  thigh:false,
-  inseam:false,
 }
 
 let userEnteredMeasurement = {};
@@ -183,9 +178,9 @@ function handleMessage(sender_psid, received_message) {
     response = {
       "text": `Now Upper arm.`
     }
-    for(let i in measurement){
-      measurement[i] = false;
-    }
+    for(let i in questions){
+  questions[i] = false;
+}
     measurement.upperArm = true;
   }else if (received_message.text && measurement.upperArm == true) { 
     userEnteredMeasurement.upperArm = received_message.text; 
@@ -193,21 +188,13 @@ function handleMessage(sender_psid, received_message) {
     response = {
       "text": `Let's measure Sleeve length.`
     }
-    for(let i in measurement){
-      measurement[i] = false;
-    }
-    measurement.sleevelenght =true;
-  }else if (received_message.text && measurement.sleevelenght == true) {  
-    userEnteredMeasurement.sleevelenght = received_message.text;  
+    measurement.chest = false;
+    measurement.upperArm = false;
+  }else if (received_message.text == "3") {    
     response = {
       "text": `And measure your Waist.`
     }
-      for(let i in measurement){
-      measurement[i] = false;
-    }
-    measurement.waist = true;
-  }else if (received_message.text && measurement.waist == true) {    
-    userEnteredMeasurement.waist = received_message.text;
+  }else if (received_message.text == "4") {    
     response = {
       "text": `Now your Hips.`
     }
