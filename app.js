@@ -29,6 +29,13 @@ const
   body_parser = require('body-parser'),
   app = express().use(body_parser.json()); // creates express http server
 
+let measurement = {
+  chest:false,
+  upperArm:false,
+}
+
+let userEnteredMeasurement = {};
+
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
@@ -164,14 +171,22 @@ function handleMessage(sender_psid, received_message) {
     response = {
       "text": `First let's measure Chest.`
     }
-  }else if (received_message.text == "1") {    
+    measurement.chest = true;
+  }else if (received_message.text && measurement.chest == true) {   
+    userEnteredMeasurement.chest =  received_message.text;
     response = {
       "text": `Now Upper arm.`
     }
-  }else if (received_message.text == "2") {    
+    measurement.chest = false;
+    measurement.upperArm = true;
+  }else if (received_message.text && measurement.upperArm == true) { 
+    userEnteredMeasurement.upperArm = received_message.text; 
+    console.log(userEnteredMeasurement);  
     response = {
       "text": `Let's measure Sleeve length.`
     }
+    measurement.chest = false;
+    measurement.upperArm = false;
   }else if (received_message.text == "3") {    
     response = {
       "text": `And measure your Waist.`
