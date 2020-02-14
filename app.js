@@ -205,7 +205,7 @@ function handleMessage(sender_psid, received_message) {
       "text": `Finally! your Inseam.`
     }else if (received_message.text == "test") {    
     response = {
-    "text": `chest ${userEnteredMeasurement.chest}`
+    "text": `chest: ${userEnteredMeasurement.chest}`
     }
   }else if (received_message.text == "7") {    
     response = {
