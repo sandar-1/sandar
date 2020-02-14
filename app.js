@@ -123,9 +123,15 @@ app.get('/webhook', (req, res) => {
 function handleMessage(sender_psid, received_message) {
   let response;
   if (received_message.text == "Delivery!") {    
-    response = {
+    response1 = {
       "text": `Pls send me address.`
+    };
+    response2 = {
+      "text": `Please send me address.`
     }
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
   }else if (received_message.text == "I will come!") {    
     response = {
       "text": `OK! See ya!`
@@ -679,7 +685,7 @@ function handlePostback(sender_psid, received_postback) {
      }
   }else if (payload === 'likethis1') {
     response = { 
-              "attachment":{
+            "attachment":{
             "type":"image", 
             "payload":{
               "url":"https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg", 
@@ -847,6 +853,36 @@ function callSendAPI(sender_psid, response) {
       console.error("Unable to send message:" + err);
     }
   }); 
+}
+
+
+function callSendAPINew(sender_psid, response) {  
+  let request_body = {
+    "recipient": {
+      "id": sender_psid
+    },
+    "message": response
+  }
+  
+  return new Promise(resolve => {
+    request({
+      "uri": "https://graph.facebook.com/v2.6/me/messages",
+      "qs": { "access_token": PAGE_ACCESS_TOKEN },
+      "method": "POST",
+      "json": request_body
+    }, (err, res, body) => {
+      if (!err) {
+        resolve('message sent!')
+      } else {
+        console.error("Unable to send message:" + err);
+      }
+    }); 
+  });
+}
+
+async function callSend(sender_psid, response){
+  let send = await callSendAPINew(sender_psid, response);
+  return 1;
 }
 
 
