@@ -177,10 +177,8 @@ function handleMessage(sender_psid, received_message) {
     userEnteredMeasurement.chest =  received_message.text;
     response = {
       "text": `Now Upper arm.`
-    },
-    for(let i in questions){
-  questions[i] = false;
-},
+    }
+    measurement.chest = false;
     measurement.upperArm = true;
   }else if (received_message.text && measurement.upperArm == true) { 
     userEnteredMeasurement.upperArm = received_message.text; 
