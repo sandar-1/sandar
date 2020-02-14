@@ -203,7 +203,9 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text == "6") {    
     response = {
       "text": `Finally! your Inseam.`
-    }else if (received_message.text == "test") {    
+    }
+  }
+  else if (received_message.text == "test") {    
     response = {
     "text": `chest: ${userEnteredMeasurement.chest}`
     }
