@@ -123,10 +123,10 @@ app.get('/webhook', (req, res) => {
 function handleMessage(sender_psid, received_message) {
   let response;
   if (received_message.text == "Delivery!") {    
-    response1 = {
+    let response1 = {
       "text": `Pls send me address.`
     };
-    response2 = {
+    let response2 = {
       "text": `Please send me address.`
     }
     callSend(sender_psid, response1).then(()=>{
