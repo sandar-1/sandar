@@ -273,7 +273,7 @@ function handleMessage(sender_psid, received_message) {
     designAttachment = true;
   }else if (received_message.attachments && designAttachment == true) {
     console.log('meta data',received_message);
-    esignAttachment == false;
+    designAttachment == false;
     let attachment_url = received_message.attachments[0].payload.url;
     response = {
       "attachment": {
