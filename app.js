@@ -239,7 +239,7 @@ function handleMessage(sender_psid, received_message) {
                     "template_type": "generic",
                     "elements": [{
                       "title": "Now I get your body measurement!",
-                      "subtitle": "Let's chooes cloth type",
+                      "subtitle": "chest:" + userEnteredMeasurement.chest,
                       "buttons": [
                         {
                           "type": "postback",
