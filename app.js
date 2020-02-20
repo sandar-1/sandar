@@ -32,6 +32,11 @@ const
 let measurement = {
   chest:false,
   upperArm:false,
+  sleevelength:false,
+  waist:false,
+  hips:false,
+  thigh:false,
+  inseam:false,
 }
 
 let userEnteredMeasurement = {};
