@@ -195,7 +195,8 @@ function handleMessage(sender_psid, received_message) {
     measurement.chest = false;
     measurement.upperArm = false;
     measurement.sleevelength = true;
-  }else if (received_message.text && measurement.sleevelength == true) {    
+  }else if (received_message.text && measurement.sleevelength == true) { 
+    userEnteredMeasurement.sleevelength = received_message.text;   
     response = {
       "text": `And measure your Waist.`
     }
@@ -203,7 +204,8 @@ function handleMessage(sender_psid, received_message) {
     measurement.upperArm = false;
     measurement.sleevelength = false;
     measurement.waist = true;
-  }else if (received_message.text && measurement.waist == true) {    
+  }else if (received_message.text && measurement.waist == true) {
+    userEnteredMeasurement.waist = received_message.text;    
     response = {
       "text": `Now your Hips.`
     }
@@ -212,7 +214,8 @@ function handleMessage(sender_psid, received_message) {
     measurement.sleevelength = false;
     measurement.waist = false;
     measurement.hips = true;
-  }else if (received_message.text && measurement.hips == true) {    
+  }else if (received_message.text && measurement.hips == true) { 
+    userEnteredMeasurement.hips = received_message.text;   
     response = {
       "text": `Measure your Thigh.`
     }
@@ -222,7 +225,8 @@ function handleMessage(sender_psid, received_message) {
     measurement.waist = false;
     measurement.hips = false;
     measurement.thigh = true;
-  }else if (received_message.text && measurement.thigh == true) {    
+  }else if (received_message.text && measurement.thigh == true) {   
+    userEnteredMeasurement.thigh = received_message.text; 
     response = {
       "text": `Finally! your Inseam.`
     }
@@ -233,7 +237,8 @@ function handleMessage(sender_psid, received_message) {
     measurement.hips = false;
     measurement.thigh = false;
     measurement.inseam = true;
-  }else if (received_message.text && measurement.inseam == true) {    
+  }else if (received_message.text && measurement.inseam == true) {   
+    userEnteredMeasurement.inseam = received_message.text; 
     response = {
       "attachment": {
                   "type": "template",
