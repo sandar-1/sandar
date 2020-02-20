@@ -187,29 +187,51 @@ function handleMessage(sender_psid, received_message) {
     measurement.upperArm = true;
   }else if (received_message.text && measurement.upperArm == true) { 
     userEnteredMeasurement.upperArm = received_message.text; 
-    console.log(userEnteredMeasurement);  
     response = {
       "text": `Let's measure Sleeve length.`
     }
     measurement.chest = false;
     measurement.upperArm = false;
-  }else if (received_message.text == "3") {    
+    measurement.sleevelength = true;
+  }else if (received_message.text && measurement.sleevelength == true) {    
     response = {
       "text": `And measure your Waist.`
     }
-  }else if (received_message.text == "4") {    
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = true;
+  }else if (received_message.text && measurement.waist == true) {    
     response = {
       "text": `Now your Hips.`
     }
-  }else if (received_message.text == "5") {    
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = false;
+    measurement.hips = true;
+  }else if (received_message.text && measurement.hips == true) {    
     response = {
       "text": `Measure your Thigh.`
     }
-  }else if (received_message.text == "6") {    
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = false;
+    measurement.hips = false;
+    measurement.thigh = true;
+  }else if (received_message.text && measurement.thigh == true) {    
     response = {
       "text": `Finally! your Inseam.`
     }
-  }else if (received_message.text == "7") {    
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = false;
+    measurement.hips = false;
+    measurement.thigh = false;
+    measurement.inseam = true;
+  }else if (received_message.text && measurement.inseam == true) {    
     response = {
       "attachment": {
                   "type": "template",
