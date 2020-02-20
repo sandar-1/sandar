@@ -39,6 +39,8 @@ let measurement = {
   inseam:false,
 }
 
+
+
 let userEnteredMeasurement = {};
 
 // Sets server port and logs message on success
@@ -256,11 +258,20 @@ function handleMessage(sender_psid, received_message) {
                   }
                 }
     }
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = false;
+    measurement.hips = false;
+    measurement.thigh = false;
+    measurement.inseam = false;
   }else if (received_message.text == "No!") {    
     response = {
-      "text": `Well, send me design.`
+      "text": `Well, send me design.`,
+      "metadata": "attachment1",
     }
   }else if (received_message.attachments) {
+    console.log('meta data',received_message);
     let attachment_url = received_message.attachments[0].payload.url;
     response = {
       "attachment": {
