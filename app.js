@@ -39,7 +39,7 @@ let measurement = {
   inseam:false,
 }
 
-
+let designAttachment = false;
 
 let userEnteredMeasurement = {};
 
@@ -269,6 +269,36 @@ function handleMessage(sender_psid, received_message) {
     response = {
       "text": `Well, send me design.`,
       "metadata": "attachment1",
+    }
+    designAttachment = true;
+  }else if (received_message.attachments && designAttachment == true) {
+    console.log('meta data',received_message);
+    esignAttachment == false;
+    let attachment_url = received_message.attachments[0].payload.url;
+    response = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "Your Design?",
+            "subtitle": "Tap a button to answer.",
+            "image_url": attachment_url,
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "Yes!",
+                "payload": "yes",
+              },
+              {
+                "type": "postback",
+                "title": "No!",
+                "payload": "no",
+              }
+            ],
+          }]
+        }
+      }
     }
   }else if (received_message.attachments) {
     console.log('meta data',received_message);
