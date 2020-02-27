@@ -364,40 +364,6 @@ function handleMessage(sender_psid, received_message) {
                 "payload":"likethis3"
               }              
             ]      
-          },
-          {
-            "title":"This is up-to-date design!",
-            "image_url":"https://i.pinimg.com/236x/c9/63/7b/c9637bf64bba26e5da12852822f4779f.jpg",
-            "subtitle":"If you don't like, upload cloth design.",
-            "default_action": {
-              "type": "web_url",
-              "url": "https://i.pinimg.com/236x/c9/63/7b/c9637bf64bba26e5da12852822f4779f.jpg",
-              "webview_height_ratio": "tall",
-            },
-            "buttons":[
-             {
-                "type":"postback",
-                "title":"I like this one.",
-                "payload":"likethis4"
-              }              
-            ]      
-          },
-          {
-            "title":"This is up-to-date design!",
-            "image_url":"https://i.pinimg.com/236x/b4/57/dd/b457dd49dba5e06dd0f8862c11dfb184.jpg",
-            "subtitle":"If you don't like, upload cloth design.",
-            "default_action": {
-              "type": "web_url",
-              "url": "https://i.pinimg.com/236x/b4/57/dd/b457dd49dba5e06dd0f8862c11dfb184.jpg",
-              "webview_height_ratio": "tall",
-            },
-            "buttons":[
-             {
-                "type":"postback",
-                "title":"I like this one.",
-                "payload":"likethis5"
-              }              
-            ]      
           }
         ]
       }
@@ -824,14 +790,17 @@ function handlePostback(sender_psid, received_postback) {
       return callSend(sender_psid, response2);
     });
   }else if (payload === 'likethis2') {
-    response = { 
+    let response1 = { 
               "attachment":{
             "type":"image", 
             "payload":{
               "url":"https://i.pinimg.com/236x/19/86/a9/1986a99c86fd95f55a4da544ca51b4fa.jpg",
               "is_reusable":true
             }
-          },
+          }
+        }
+    let response2 ={
+          "text": "Do you like this one?"
           "quick_replies":[
                   {
                     "content_type":"text",
@@ -843,16 +812,20 @@ function handlePostback(sender_psid, received_postback) {
                     "payload":"nope"
                   }]
     }
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
   }else if (payload === 'likethis3') {
-    response = { 
+    let response1 = { 
               "attachment":{
             "type":"image", 
             "payload":{
               "url":"https://i.pinimg.com/236x/47/9d/80/479d803ae3ab903776130660918e58d1.jpg",
               "is_reusable":true
             }
-          },
-          "quick_replies":[
+          }
+        }
+    let response2 ={ "quick_replies":[
                   {
                     "content_type":"text",
                     "title":"Ok👍",
@@ -863,46 +836,9 @@ function handlePostback(sender_psid, received_postback) {
                     "payload":"nope"
                   }]
     }
-  }else if (payload === 'likethis4') {
-    response = { 
-              "attachment":{
-            "type":"image", 
-            "payload":{
-              "url":"https://i.pinimg.com/236x/c9/63/7b/c9637bf64bba26e5da12852822f4779f.jpg",
-              "is_reusable":true
-            }
-          },
-          "quick_replies":[
-                  {
-                    "content_type":"text",
-                    "title":"Ok👍",
-                    "payload":"ok"
-                  },{
-                    "content_type":"text",
-                    "title":"👎Nope",
-                    "payload":"nope"
-                  }]
-    }
-  }else if (payload === 'likethis5') {
-    response = { 
-              "attachment":{
-            "type":"image", 
-            "payload":{
-              "url":"https://i.pinimg.com/236x/b4/57/dd/b457dd49dba5e06dd0f8862c11dfb184.jpg",
-              "is_reusable":true
-            }
-          },
-          "quick_replies":[
-                  {
-                    "content_type":"text",
-                    "title":"Ok👍",
-                    "payload":"ok"
-                  },{
-                    "content_type":"text",
-                    "title":"👎Nope",
-                    "payload":"nope"
-                  }]
-    }
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid,response2);
+    });
   }else if (payload === 'yes') {
     response = {  "text" : "Do you wanna put some beaded embroidery on the cloth?",
                   "quick_replies":[
