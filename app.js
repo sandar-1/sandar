@@ -262,7 +262,7 @@ function handleMessage(sender_psid, received_message) {
                     }]
                   }
                 }
-    }
+    };
     bodymeasure(sender_psid);
     measurement.chest = false;
     measurement.upperArm = false;
