@@ -631,10 +631,20 @@ function handleMessage(sender_psid, received_message) {
       "text": `Oh! Ok, Thanks for visiting our page.`
     }
   }else if (received_message.text == "tt") {    
-    response = {
-      "text": `chest:`+ userEnteredMeasurement.chest,
-      "text": 'upper arm' + userEnteredMeasurement.upperArm,
-    }
+    let response1 = {"text": `Chest: `+ userEnteredMeasurement.chest};
+    let response2 = {"text": 'Upper arm: ' + userEnteredMeasurement.upperArm};
+    let response3 = {"text": 'Sleeve length: ' + userEnteredMeasurement.sleevelength};
+    let response4 = {"text": 'Waist: '+ userEnteredMeasurement.waist};
+    let response5 = {"text": 'Hips: '+ userEnteredMeasurement.hips}
+      callSend(sender_psid,response1).then(()=>{
+        return callSend(sender_psid,response2).then(()=>{
+          return callSend(sender_psid,response3).then(()=>{
+            return callSend(sender_psid,response4).then(()=>{
+              return callSend(sender_psid,response5);
+            });
+          });
+        });
+      });
   }
   callSendAPI(sender_psid, response);    
 }
