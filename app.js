@@ -177,101 +177,8 @@ function handleMessage(sender_psid, received_message) {
       "text": `OK!`
     }
   }else if (received_message.text == "Start!") {    
-    response = {
-      "text": `First let's measure Chest.`
-    }
-    measurement.chest = true;
-  }else if (received_message.text && measurement.chest == true) {   
-    userEnteredMeasurement.chest =  received_message.text;
-    response = {
-      "text": `Now Upper arm.`
-    }
-    measurement.chest = false;
-    measurement.upperArm = true;
-  }else if (received_message.text && measurement.upperArm == true) { 
-    userEnteredMeasurement.upperArm = received_message.text; 
-    response = {
-      "text": `Let's measure Sleeve length.`
-    }
-    measurement.chest = false;
-    measurement.upperArm = false;
-    measurement.sleevelength = true;
-  }else if (received_message.text && measurement.sleevelength == true) { 
-    userEnteredMeasurement.sleevelength = received_message.text;   
-    response = {
-      "text": `And measure your Waist.`
-    }
-    measurement.chest = false;
-    measurement.upperArm = false;
-    measurement.sleevelength = false;
-    measurement.waist = true;
-  }else if (received_message.text && measurement.waist == true) {
-    userEnteredMeasurement.waist = received_message.text;    
-    response = {
-      "text": `Now your Hips.`
-    }
-    measurement.chest = false;
-    measurement.upperArm = false;
-    measurement.sleevelength = false;
-    measurement.waist = false;
-    measurement.hips = true;
-  }else if (received_message.text && measurement.hips == true) { 
-    userEnteredMeasurement.hips = received_message.text;   
-    response = {
-      "text": `Measure your Thigh.`
-    }
-    measurement.chest = false;
-    measurement.upperArm = false;
-    measurement.sleevelength = false;
-    measurement.waist = false;
-    measurement.hips = false;
-    measurement.thigh = true;
-  }else if (received_message.text && measurement.thigh == true) {   
-    userEnteredMeasurement.thigh = received_message.text; 
-    response = {
-      "text": `Finally! your Inseam.`
-    }
-    measurement.chest = false;
-    measurement.upperArm = false;
-    measurement.sleevelength = false;
-    measurement.waist = false;
-    measurement.hips = false;
-    measurement.thigh = false;
-    measurement.inseam = true;
-  }else if (received_message.text && measurement.inseam == true) {   
-    userEnteredMeasurement.inseam = received_message.text; 
-         response = {
-      "attachment": {
-                  "type": "template",
-                  "payload": {
-                    "template_type": "generic",
-                    "elements": [{
-                      "title": "Pls. chooes the type",
-                      "buttons": [
-                        {
-                          "type": "postback",
-                          "title": "Ceromonies",
-                          "payload": "ceremony",
-                        },
-                        {
-                          "type": "postback",
-                          "title": "Simple",
-                          "payload": "S",
-                        }
-                      ],
-                    }]
-                  }
-                }
-    };
-    bodymeasure(sender_psid);
-    measurement.chest = false;
-    measurement.upperArm = false;
-    measurement.sleevelength = false;
-    measurement.waist = false;
-    measurement.hips = false;
-    measurement.thigh = false;
-    measurement.inseam = false;
-  }else if (received_message.text == "No!") {    
+    measuring(sender_psid)
+    }else if (received_message.text == "No!") {    
     response = {
       "text": `Well, send me design.`,
       "metadata": "attachment1",
@@ -1075,3 +982,106 @@ function removePersistentMenu(res){
             }
         });
     } 
+
+function measuring(sender_psid) {
+  response = {
+      "text": `First let's measure Chest.`
+    }
+    measurement.chest = true;
+  }else if (received_message.text && measurement.chest == true) {   
+    userEnteredMeasurement.chest =  received_message.text;
+    response = {
+      "text": `Now Upper arm.`
+    }
+    measurement.chest = false;
+    measurement.upperArm = true;
+  }else if (received_message.text && measurement.upperArm == true) { 
+    userEnteredMeasurement.upperArm = received_message.text; 
+    response = {
+      "text": `Let's measure Sleeve length.`
+    }
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = true;
+  }else if (received_message.text && measurement.sleevelength == true) { 
+    userEnteredMeasurement.sleevelength = received_message.text;   
+    response = {
+      "text": `And measure your Waist.`
+    }
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = true;
+  }else if (received_message.text && measurement.waist == true) {
+    userEnteredMeasurement.waist = received_message.text;    
+    response = {
+      "text": `Now your Hips.`
+    }
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = false;
+    measurement.hips = true;
+  }else if (received_message.text && measurement.hips == true) { 
+    userEnteredMeasurement.hips = received_message.text;   
+    response = {
+      "text": `Measure your Thigh.`
+    }
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = false;
+    measurement.hips = false;
+    measurement.thigh = true;
+  }else if (received_message.text && measurement.thigh == true) {   
+    userEnteredMeasurement.thigh = received_message.text; 
+    response = {
+      "text": `Finally! your Inseam.`
+    }
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = false;
+    measurement.hips = false;
+    measurement.thigh = false;
+    measurement.inseam = true;
+  }else if (received_message.text && measurement.inseam == true) {   
+    userEnteredMeasurement.inseam = received_message.text; 
+         response = {
+      "attachment": {
+                  "type": "template",
+                  "payload": {
+                    "template_type": "generic",
+                    "elements": [{
+                      "title": "Pls. chooes the type",
+                      "buttons": [
+                        {
+                          "type": "postback",
+                          "title": "Ceromonies",
+                          "payload": "ceremony",
+                        },
+                        {
+                          "type": "postback",
+                          "title": "Simple",
+                          "payload": "S",
+                        },
+                        {
+                          "type": "postback",
+                          "title": "Measurement again",
+                          "payload": "S",
+                        }
+                      ],
+                    }]
+                  }
+                }
+    };
+    bodymeasure(sender_psid);
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = false;
+    measurement.hips = false;
+    measurement.thigh = false;
+    measurement.inseam = false;
+  
+}
