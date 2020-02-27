@@ -241,29 +241,29 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text && measurement.inseam == true) {   
     userEnteredMeasurement.inseam = received_message.text; 
     bodymeasure(sender_psid);
-    //     response = {
-    //   "attachment": {
-    //               "type": "template",
-    //               "payload": {
-    //                 "template_type": "generic",
-    //                 "elements": [{
-    //                   "title": "Pls. chooes the type",
-    //                   "buttons": [
-    //                     {
-    //                       "type": "postback",
-    //                       "title": "Ceromonies",
-    //                       "payload": "ceremony",
-    //                     },
-    //                     {
-    //                       "type": "postback",
-    //                       "title": "Simple",
-    //                       "payload": "S",
-    //                     }
-    //                   ],
-    //                 }]
-    //               }
-    //             }
-    // }
+        response = {
+      "attachment": {
+                  "type": "template",
+                  "payload": {
+                    "template_type": "generic",
+                    "elements": [{
+                      "title": "Pls. chooes the type",
+                      "buttons": [
+                        {
+                          "type": "postback",
+                          "title": "Ceromonies",
+                          "payload": "ceremony",
+                        },
+                        {
+                          "type": "postback",
+                          "title": "Simple",
+                          "payload": "S",
+                        }
+                      ],
+                    }]
+                  }
+                }
+    }
     measurement.chest = false;
     measurement.upperArm = false;
     measurement.sleevelength = false;
