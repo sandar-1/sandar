@@ -545,7 +545,7 @@ function handleMessage(sender_psid, received_message) {
                  }
     }
   }else if (received_message.text == "I do!") {    
-     response = { "text": "The same as the beaded emboroidery design that you have been send me?", 
+     response = { "text": "The same as the beaded emboroidery design that you have been chonsen?", 
                   "quick_replies":[
                   {
                     "content_type":"text",
@@ -919,15 +919,15 @@ function handlePostback(sender_psid, received_postback) {
   }else if (payload === 'no') {
     response = { "text": "Oh! ok, send me again." }
   }else if (payload === 'sure') {
-    response = { "text": "The estimated price and date is 15000ks and 14feb.2020.", 
+    response = { "text": "The same as the beaded emboroidery design that you have been chonsen?", 
                   "quick_replies":[
                   {
                     "content_type":"text",
-                    "title":"Order",
+                    "title":"YES",
                     "payload":"D"
                   },{
                     "content_type":"text",
-                    "title":"Cancle",
+                    "title":"NO",
                     "payload":"IWC"
                   }]
     }
