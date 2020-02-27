@@ -313,9 +313,163 @@ function handleMessage(sender_psid, received_message) {
       }
     }
   }else if (received_message.text == "Yes!") {    
-    suggestions(sender_psid);
+    response = {
+      "attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"generic",
+        "elements":[
+           {
+            "title":"This is up-to-date design!",
+            "image_url":"https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
+            "subtitle":"If you don't like, upload cloth design.",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"I like this one.",
+                "payload":"likethis1"
+              }              
+            ]      
+          },
+          {
+            "title":"This is up-to-date design!",
+            "image_url":"https://i.pinimg.com/236x/19/86/a9/1986a99c86fd95f55a4da544ca51b4fa.jpg",
+            "subtitle":"If you don't like, upload cloth design.",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.pinimg.com/236x/19/86/a9/1986a99c86fd95f55a4da544ca51b4fa.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"I like this one.",
+                "payload":"likethis2"
+              }              
+            ]      
+          },
+          {
+            "title":"This is up-to-date design!",
+            "image_url":"https://i.pinimg.com/236x/47/9d/80/479d803ae3ab903776130660918e58d1.jpg",
+            "subtitle":"If you don't like, upload cloth design.",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.pinimg.com/236x/47/9d/80/479d803ae3ab903776130660918e58d1.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"I like this one.",
+                "payload":"likethis3"
+              }              
+            ]      
+          }
+        ]
+      }
+    }
+    }
   }else if (received_message.text == "👎Nope") {    
-   suggestions(sender_psid);
+    response = {
+      "attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"generic",
+        "elements":[
+           {
+            "title":"This is up-to-date design!",
+            "image_url":"https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
+            "subtitle":"If you don't like, upload cloth design.",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"I like this one.",
+                "payload":"likethis1"
+              }              
+            ]      
+          },
+          {
+            "title":"This is up-to-date design!",
+            "image_url":"https://i.pinimg.com/236x/19/86/a9/1986a99c86fd95f55a4da544ca51b4fa.jpg",
+            "subtitle":"If you don't like, upload cloth design.",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.pinimg.com/236x/19/86/a9/1986a99c86fd95f55a4da544ca51b4fa.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"I like this one.",
+                "payload":"likethis2"
+              }              
+            ]      
+          },
+          {
+            "title":"This is up-to-date design!",
+            "image_url":"https://i.pinimg.com/236x/47/9d/80/479d803ae3ab903776130660918e58d1.jpg",
+            "subtitle":"If you don't like, upload cloth design.",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.pinimg.com/236x/47/9d/80/479d803ae3ab903776130660918e58d1.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"I like this one.",
+                "payload":"likethis3"
+              }              
+            ]      
+          },
+          {
+            "title":"This is up-to-date design!",
+            "image_url":"https://i.pinimg.com/236x/c9/63/7b/c9637bf64bba26e5da12852822f4779f.jpg",
+            "subtitle":"If you don't like, upload cloth design.",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.pinimg.com/236x/c9/63/7b/c9637bf64bba26e5da12852822f4779f.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"I like this one.",
+                "payload":"likethis4"
+              }              
+            ]      
+          },
+          {
+            "title":"This is up-to-date design!",
+            "image_url":"https://i.pinimg.com/236x/b4/57/dd/b457dd49dba5e06dd0f8862c11dfb184.jpg",
+            "subtitle":"If you don't like, upload cloth design.",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.pinimg.com/236x/b4/57/dd/b457dd49dba5e06dd0f8862c11dfb184.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"I like this one.",
+                "payload":"likethis5"
+              }              
+            ]      
+          }
+        ]
+      }
+    }
+    }
   }else if (received_message.text == "Ok👍") {    
     response = { "text" : "Do you wanna put some beaded embroidery on the cloth?",
                   "quick_replies":[
@@ -928,67 +1082,3 @@ function removePersistentMenu(res){
             }
         });
     } 
-
-function suggession(sender_psid){
-  response = {
-      "attachment":{
-      "type":"template",
-      "payload":{
-        "template_type":"generic",
-        "elements":[
-           {
-            "title":"This is up-to-date design!",
-            "image_url":"https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
-            "subtitle":"If you don't like, upload cloth design.",
-            "default_action": {
-              "type": "web_url",
-              "url": "https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
-              "webview_height_ratio": "tall",
-            },
-            "buttons":[
-             {
-                "type":"postback",
-                "title":"I like this one.",
-                "payload":"likethis1"
-              }              
-            ]      
-          },
-          {
-            "title":"This is up-to-date design!",
-            "image_url":"https://i.pinimg.com/236x/19/86/a9/1986a99c86fd95f55a4da544ca51b4fa.jpg",
-            "subtitle":"If you don't like, upload cloth design.",
-            "default_action": {
-              "type": "web_url",
-              "url": "https://i.pinimg.com/236x/19/86/a9/1986a99c86fd95f55a4da544ca51b4fa.jpg",
-              "webview_height_ratio": "tall",
-            },
-            "buttons":[
-             {
-                "type":"postback",
-                "title":"I like this one.",
-                "payload":"likethis2"
-              }              
-            ]      
-          },
-          {
-            "title":"This is up-to-date design!",
-            "image_url":"https://i.pinimg.com/236x/47/9d/80/479d803ae3ab903776130660918e58d1.jpg",
-            "subtitle":"If you don't like, upload cloth design.",
-            "default_action": {
-              "type": "web_url",
-              "url": "https://i.pinimg.com/236x/47/9d/80/479d803ae3ab903776130660918e58d1.jpg",
-              "webview_height_ratio": "tall",
-            },
-            "buttons":[
-             {
-                "type":"postback",
-                "title":"I like this one.",
-                "payload":"likethis3"
-              }              
-            ]      
-          }
-        ]
-      }
-    }
-    }
-}
