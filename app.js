@@ -559,7 +559,17 @@ function handleMessage(sender_psid, received_message) {
     }
   }else if (received_message.text == "YES") {    
     response = {
-      "text": `The estimated price and date is 15000 and 14 feb 2020.`
+      "text": `The estimated price and date is 15000 and 14 feb 2020.`,
+      "quick_replies":[
+                  {
+                    "content_type":"text",
+                    "title":"Order",
+                    "payload":"D"
+                  },{
+                    "content_type":"text",
+                    "title":"Cancle",
+                    "payload":"IWC"
+                  }]
     }
   }else if (received_message.text == "NO") {    
     response = {
@@ -584,7 +594,7 @@ function handleMessage(sender_psid, received_message) {
               {
                 "type": "postback",
                 "title": "Yes!",
-                "payload": "yes",
+                "payload": "YES",
               },
               {
                 "type": "postback",
@@ -921,6 +931,19 @@ function handlePostback(sender_psid, received_postback) {
                     "payload":"IWC"
                   }]
     }
+  }else if (payload === 'YES') {
+    response = { "text": `The estimated price and date is 15000 and 14 feb 2020.`,
+                 "quick_replies":[
+                  {
+                    "content_type":"text",
+                    "title":"Order",
+                    "payload":"D"
+                  },{
+                    "content_type":"text",
+                    "title":"Cancle",
+                    "payload":"IWC"
+                  }]
+     }
   }else if (payload === 'ddt') {
     response = { "text": "Oh! ok, your estimated price and date is 10000ks and 14feb.2020.",
                 "quick_replies":[
