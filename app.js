@@ -240,7 +240,7 @@ function handleMessage(sender_psid, received_message) {
     measurement.inseam = true;
   }else if (received_message.text && measurement.inseam == true) {   
     userEnteredMeasurement.inseam = received_message.text; 
-        response = { bodymeasure(sender_psid);
+        response =  bodymeasure(sender_psid);
       // "attachment": {
       //             "type": "template",
       //             "payload": {
@@ -261,7 +261,7 @@ function handleMessage(sender_psid, received_message) {
       //                 ],
       //               }]
       //             }
-                }
+                
     }
     measurement.chest = false;
     measurement.upperArm = false;
