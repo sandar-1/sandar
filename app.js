@@ -240,27 +240,27 @@ function handleMessage(sender_psid, received_message) {
     measurement.inseam = true;
   }else if (received_message.text && measurement.inseam == true) {   
     userEnteredMeasurement.inseam = received_message.text; 
-    response = {
-      "attachment": {
-                  "type": "template",
-                  "payload": {
-                    "template_type": "generic",
-                    "elements": [{
-                      "title": "Pls. chooes the type",
-                      "buttons": [
-                        {
-                          "type": "postback",
-                          "title": "Ceromonies",
-                          "payload": "ceremony",
-                        },
-                        {
-                          "type": "postback",
-                          "title": "Simple",
-                          "payload": "S",
-                        }
-                      ],
-                    }]
-                  }
+        response = { bodymeasure(sender_psid);
+      // "attachment": {
+      //             "type": "template",
+      //             "payload": {
+      //               "template_type": "generic",
+      //               "elements": [{
+      //                 "title": "Pls. chooes the type",
+      //                 "buttons": [
+      //                   {
+      //                     "type": "postback",
+      //                     "title": "Ceromonies",
+      //                     "payload": "ceremony",
+      //                   },
+      //                   {
+      //                     "type": "postback",
+      //                     "title": "Simple",
+      //                     "payload": "S",
+      //                   }
+      //                 ],
+      //               }]
+      //             }
                 }
     }
     measurement.chest = false;
@@ -629,30 +629,6 @@ function handleMessage(sender_psid, received_message) {
     response = {
       "text": `Oh! Ok, Thanks for visiting our page.`
     }
-  }else if (received_message.text == "tt") {    
-    let response1 = {"text": `Chest: `+ userEnteredMeasurement.chest};
-    let response2 = {"text": 'Upper arm: ' + userEnteredMeasurement.upperArm};
-    let response3 = {"text": 'Sleeve length: ' + userEnteredMeasurement.sleevelength};
-    let response4 = {"text": 'Waist: '+ userEnteredMeasurement.waist};
-    let response5 = {"text": 'Hips: '+ userEnteredMeasurement.hips};
-    let response6 = {"text": 'Thigh: ' + userEnteredMeasurement.thigh};
-    let response7 = {"text": 'Inseam: '+ userEnteredMeasurement.inseam};
-    let response8 = {"text": 'Is this the right measurment?'};
-      callSend(sender_psid,response1).then(()=>{
-        return callSend(sender_psid,response2).then(()=>{
-          return callSend(sender_psid,response3).then(()=>{
-            return callSend(sender_psid,response4).then(()=>{
-              return callSend(sender_psid,response5).then(()=>{
-                return callSend(sender_psid,response6).then(()=>{
-                  return callSend(sender_psid,response7).then(()=>{
-                    return callSend(sender_psid,response8);
-                  });
-                });
-              });
-            });
-          });
-        });
-      });
   }
   callSendAPI(sender_psid, response);    
 }
@@ -990,7 +966,31 @@ function setupGetStartedButton(res){
         });
     } 
 
-
+function bodymeasure(sender_psid){
+    let response1 = {"text": `Chest: `+ userEnteredMeasurement.chest};
+    let response2 = {"text": 'Upper arm: ' + userEnteredMeasurement.upperArm};
+    let response3 = {"text": 'Sleeve length: ' + userEnteredMeasurement.sleevelength};
+    let response4 = {"text": 'Waist: '+ userEnteredMeasurement.waist};
+    let response5 = {"text": 'Hips: '+ userEnteredMeasurement.hips};
+    let response6 = {"text": 'Thigh: ' + userEnteredMeasurement.thigh};
+    let response7 = {"text": 'Inseam: '+ userEnteredMeasurement.inseam};
+    let response8 = {"text": 'Is this the right measurment?'};
+      callSend(sender_psid,response1).then(()=>{
+        return callSend(sender_psid,response2).then(()=>{
+          return callSend(sender_psid,response3).then(()=>{
+            return callSend(sender_psid,response4).then(()=>{
+              return callSend(sender_psid,response5).then(()=>{
+                return callSend(sender_psid,response6).then(()=>{
+                  return callSend(sender_psid,response7).then(()=>{
+                    return callSend(sender_psid,response8);
+                  });
+                });
+              });
+            });
+          });
+        });
+      });
+}
 
 function setupPersistentMenu(res){
         var messageData = { 
