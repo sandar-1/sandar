@@ -790,17 +790,14 @@ function handlePostback(sender_psid, received_postback) {
       return callSend(sender_psid, response2);
     });
   }else if (payload === 'likethis2') {
-    let response1 = { 
+    response = { 
               "attachment":{
             "type":"image", 
             "payload":{
               "url":"https://i.pinimg.com/236x/19/86/a9/1986a99c86fd95f55a4da544ca51b4fa.jpg",
               "is_reusable":true
             }
-          }
-        }
-    let response2 ={
-          "text": "Do you like this one?"
+          },
           "quick_replies":[
                   {
                     "content_type":"text",
@@ -812,20 +809,16 @@ function handlePostback(sender_psid, received_postback) {
                     "payload":"nope"
                   }]
     }
-    callSend(sender_psid, response1).then(()=>{
-      return callSend(sender_psid, response2);
-    });
   }else if (payload === 'likethis3') {
-    let response1 = { 
+    response = { 
               "attachment":{
             "type":"image", 
             "payload":{
               "url":"https://i.pinimg.com/236x/47/9d/80/479d803ae3ab903776130660918e58d1.jpg",
               "is_reusable":true
             }
-          }
-        }
-    let response2 ={ "quick_replies":[
+          },
+          "quick_replies":[
                   {
                     "content_type":"text",
                     "title":"Ok👍",
@@ -836,9 +829,6 @@ function handlePostback(sender_psid, received_postback) {
                     "payload":"nope"
                   }]
     }
-    callSend(sender_psid, response1).then(()=>{
-      return callSend(sender_psid,response2);
-    });
   }else if (payload === 'yes') {
     response = {  "text" : "Do you wanna put some beaded embroidery on the cloth?",
                   "quick_replies":[
