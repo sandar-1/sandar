@@ -630,6 +630,11 @@ function handleMessage(sender_psid, received_message) {
     response = {
       "text": `Oh! Ok, Thanks for visiting our page.`
     }
+  }else if (received_message.text == "tt") {    
+    response = {
+      "text": `chest:`+ userEnteredMeasurement.chest,
+      "text": 'upper arm' + userEnteredMeasurement.upperArm,
+    }
   }
   callSendAPI(sender_psid, response);    
 }
