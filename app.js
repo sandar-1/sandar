@@ -277,6 +277,7 @@ function handleMessage(sender_psid, received_message) {
       "metadata": "attachment1",
     }
     designAttachment = true;
+    bdesignAttachment = false;
   }else if (received_message.attachments && designAttachment == true) {
     console.log('meta data',received_message);
     designAttachment == false;
@@ -565,6 +566,7 @@ function handleMessage(sender_psid, received_message) {
       "text": `Ok! send me design.`
     }
     bdesignAttachment = true;
+    designAttachment = false;
   }else if (received_message.attachments && bdesignAttachment == true) {
     console.log('meta data',received_message);
     bdesignAttachment == false;
