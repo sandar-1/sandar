@@ -240,41 +240,30 @@ function handleMessage(sender_psid, received_message) {
     measurement.inseam = true;
   }else if (received_message.text && measurement.inseam == true) {   
     userEnteredMeasurement.inseam = received_message.text; 
-    bodymeasure(sender_psid);
-      response = {
-      "text": 'Is this the right measurment?',
-        "quick_replies":[
-                  {
-                    "content_type":"text",
-                    "title":"YES!",
-                    "payload":"S"
-                  },{
-                    "content_type":"text",
-                    "title":"NO!",
-                    "payload":"nn"
-                  }]
-      // "attachment": {
-      //             "type": "template",
-      //             "payload": {
-      //               "template_type": "generic",
-      //               "elements": [{
-      //                 "title": "Pls. chooes the type",
-      //                 "buttons": [
-      //                   {
-      //                     "type": "postback",
-      //                     "title": "Ceromonies",
-      //                     "payload": "ceremony",
-      //                   },
-      //                   {
-      //                     "type": "postback",
-      //                     "title": "Simple",
-      //                     "payload": "S",
-      //                   }
-      //                 ],
-      //               }]
-      //             }
-      //           }
+         response = {
+      "attachment": {
+                  "type": "template",
+                  "payload": {
+                    "template_type": "generic",
+                    "elements": [{
+                      "title": "Pls. chooes the type",
+                      "buttons": [
+                        {
+                          "type": "postback",
+                          "title": "Ceromonies",
+                          "payload": "ceremony",
+                        },
+                        {
+                          "type": "postback",
+                          "title": "Simple",
+                          "payload": "S",
+                        }
+                      ],
+                    }]
+                  }
+                }
     }
+    bodymeasure(sender_psid);
     measurement.chest = false;
     measurement.upperArm = false;
     measurement.sleevelength = false;
@@ -986,13 +975,16 @@ function bodymeasure(sender_psid){
     let response5 = {"text": 'Hips: '+ userEnteredMeasurement.hips};
     let response6 = {"text": 'Thigh: ' + userEnteredMeasurement.thigh};
     let response7 = {"text": 'Inseam: '+ userEnteredMeasurement.inseam};
+    let response8 = {"text": 'Is this the right measurment?'};
       callSend(sender_psid,response1).then(()=>{
         return callSend(sender_psid,response2).then(()=>{
           return callSend(sender_psid,response3).then(()=>{
             return callSend(sender_psid,response4).then(()=>{
               return callSend(sender_psid,response5).then(()=>{
                 return callSend(sender_psid,response6).then(()=>{
-                  return callSend(sender_psid,response7);
+                  return callSend(sender_psid,response7).then(()=>{
+                    return callSend(sender_psid,response8);
+                  });
                 });
               });
             });
