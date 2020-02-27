@@ -246,8 +246,7 @@ function handleMessage(sender_psid, received_message) {
                   "payload": {
                     "template_type": "generic",
                     "elements": [{
-                      "title": "Now I get your body measurement!",
-                      "subtitle": "chest:" + userEnteredMeasurement.chest,
+                      "title": "Pls. chooes the type",
                       "buttons": [
                         {
                           "type": "postback",
@@ -637,14 +636,17 @@ function handleMessage(sender_psid, received_message) {
     let response4 = {"text": 'Waist: '+ userEnteredMeasurement.waist};
     let response5 = {"text": 'Hips: '+ userEnteredMeasurement.hips};
     let response6 = {"text": 'Thigh: ' + userEnteredMeasurement.thigh};
-    let response7 = {"text": 'Inseam: '+ userEnteredMeasurement.inseam}
+    let response7 = {"text": 'Inseam: '+ userEnteredMeasurement.inseam};
+    let response8 = {"text": 'Is this the right measurment?'};
       callSend(sender_psid,response1).then(()=>{
         return callSend(sender_psid,response2).then(()=>{
           return callSend(sender_psid,response3).then(()=>{
             return callSend(sender_psid,response4).then(()=>{
               return callSend(sender_psid,response5).then(()=>{
                 return callSend(sender_psid,response6).then(()=>{
-                  return callSend(sender_psid,response7);
+                  return callSend(sender_psid,response7).then(()=>{
+                    return callSend(sender_psid,response8);
+                  });
                 });
               });
             });
