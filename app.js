@@ -635,12 +635,18 @@ function handleMessage(sender_psid, received_message) {
     let response2 = {"text": 'Upper arm: ' + userEnteredMeasurement.upperArm};
     let response3 = {"text": 'Sleeve length: ' + userEnteredMeasurement.sleevelength};
     let response4 = {"text": 'Waist: '+ userEnteredMeasurement.waist};
-    let response5 = {"text": 'Hips: '+ userEnteredMeasurement.hips}
+    let response5 = {"text": 'Hips: '+ userEnteredMeasurement.hips};
+    let response6 = {"text": 'Thigh: ' + userEnteredMeasurement.thigh};
+    let response7 = {"text": 'Inseam: '+ userEnteredMeasurement.inseam}
       callSend(sender_psid,response1).then(()=>{
         return callSend(sender_psid,response2).then(()=>{
           return callSend(sender_psid,response3).then(()=>{
             return callSend(sender_psid,response4).then(()=>{
-              return callSend(sender_psid,response5);
+              return callSend(sender_psid,response5).then(()=>{
+                return callSend(sender_psid,response6).then(()=>{
+                  return callSend(sender_psid,response7);
+                });
+              });
             });
           });
         });
