@@ -40,6 +40,7 @@ let measurement = {
 }
 
 let designAttachment = false;
+let bdesignAttachment = false;
 
 let userEnteredMeasurement = {};
 
@@ -305,34 +306,6 @@ function handleMessage(sender_psid, received_message) {
         }
       }
     }
-  }else if (received_message.attachments) {
-    console.log('meta data',received_message);
-    let attachment_url = received_message.attachments[0].payload.url;
-    response = {
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "generic",
-          "elements": [{
-            "title": "Is this the right Design?",
-            "subtitle": "Tap a button to answer.",
-            "image_url": attachment_url,
-            "buttons": [
-              {
-                "type": "postback",
-                "title": "Yes!",
-                "payload": "yes",
-              },
-              {
-                "type": "postback",
-                "title": "No!",
-                "payload": "no",
-              }
-            ],
-          }]
-        }
-      }
-    }
   }else if (received_message.text == "Yes!") {    
     response = {
       "attachment":{
@@ -571,17 +544,55 @@ function handleMessage(sender_psid, received_message) {
                  }
     }
   }else if (received_message.text == "I do!") {    
-     response = { "text": "The estimated price and date is 15000ks and 14feb.2020.", 
+     response = { "text": "The same as the beaded emboroidery design that you have been send me?", 
                   "quick_replies":[
                   {
                     "content_type":"text",
-                    "title":"Order",
+                    "title":"YES",
                     "payload":"D"
                   },{
                     "content_type":"text",
-                    "title":"Cancle",
+                    "title":"NO",
                     "payload":"IWC"
                   }]
+    }
+  }else if (received_message.text == "YES") {    
+    response = {
+      "text": `The estimated price and date is 15000 and 14 feb 2020.`
+    }
+  }else if (received_message.text == "NO") {    
+    response = {
+      "text": `Ok! send me design.`
+    }
+    bdesignAttachment = true;
+  }else if (received_message.attachments && bdesignAttachment == true) {
+    console.log('meta data',received_message);
+    bdesignAttachment == false;
+    let attachment_url = received_message.attachments[0].payload.url;
+    response = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "Is this the right Design?",
+            "subtitle": "Tap a button to answer.",
+            "image_url": attachment_url,
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "Yes!",
+                "payload": "yes",
+              },
+              {
+                "type": "postback",
+                "title": "No!",
+                "payload": "no",
+              }
+            ],
+          }]
+        }
+      }
     }
   }else if (received_message.text == "Order") {    
     response = {
