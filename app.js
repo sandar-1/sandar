@@ -176,7 +176,7 @@ function handleMessage(sender_psid, received_message) {
     response = {
       "text": `OK!`
     }
-  }else if (received_message.text == "Start") {    
+  }else if (received_message.text == "Start" || received_message.text == "start") {    
     response = {
       "text": `First let's measure Chest.`
     }
