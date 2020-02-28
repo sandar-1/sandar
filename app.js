@@ -240,34 +240,7 @@ function handleMessage(sender_psid, received_message) {
     measurement.inseam = true;
   }else if (received_message.text && measurement.inseam == true) {   
     userEnteredMeasurement.inseam = received_message.text; 
-         response = {
-      "attachment": {
-                  "type": "template",
-                  "payload": {
-                    "template_type": "generic",
-                    "elements": [{
-                      "title": "Pls. chooes the type",
-                      "buttons": [
-                        {
-                          "type": "postback",
-                          "title": "Ceromonies",
-                          "payload": "ceremony",
-                        },
-                        {
-                          "type": "postback",
-                          "title": "Simple",
-                          "payload": "S",
-                        },
-                        {
-                          "type": "postback",
-                          "title": "Measuring again",
-                          "payload": "measureagain",
-                        }
-                      ],
-                    }]
-                  }
-                }
-    };
+      
     bodymeasure(sender_psid);
     measurement.chest = false;
     measurement.upperArm = false;
@@ -949,6 +922,34 @@ function bodymeasure(sender_psid){
     let response6 = {"text": 'Thigh: ' + userEnteredMeasurement.thigh};
     let response7 = {"text": 'Inseam: '+ userEnteredMeasurement.inseam};
     let response8 = {"text": 'Is this the right measurment?'};
+    let response9 = {
+      "attachment": {
+                  "type": "template",
+                  "payload": {
+                    "template_type": "generic",
+                    "elements": [{
+                      "title": "Pls. chooes the type",
+                      "buttons": [
+                        {
+                          "type": "postback",
+                          "title": "Ceromonies",
+                          "payload": "ceremony",
+                        },
+                        {
+                          "type": "postback",
+                          "title": "Simple",
+                          "payload": "S",
+                        },
+                        {
+                          "type": "postback",
+                          "title": "Measuring again",
+                          "payload": "measureagain",
+                        }
+                      ],
+                    }]
+                  }
+                }
+    };
       callSend(sender_psid,response1).then(()=>{
         return callSend(sender_psid,response2).then(()=>{
           return callSend(sender_psid,response3).then(()=>{
@@ -956,7 +957,9 @@ function bodymeasure(sender_psid){
               return callSend(sender_psid,response5).then(()=>{
                 return callSend(sender_psid,response6).then(()=>{
                   return callSend(sender_psid,response7).then(()=>{
-                    return callSend(sender_psid,response8);
+                    return callSend(sender_psid,response8).then(()=>{
+                        return callSend(sender_psid, response9);
+                    });
                   });
                 });
               });
