@@ -431,40 +431,6 @@ function handleMessage(sender_psid, received_message) {
                 "payload":"likethis3"
               }              
             ]      
-          },
-          {
-            "title":"This is up-to-date design!",
-            "image_url":"https://i.pinimg.com/236x/c9/63/7b/c9637bf64bba26e5da12852822f4779f.jpg",
-            "subtitle":"If you don't like, upload cloth design.",
-            "default_action": {
-              "type": "web_url",
-              "url": "https://i.pinimg.com/236x/c9/63/7b/c9637bf64bba26e5da12852822f4779f.jpg",
-              "webview_height_ratio": "tall",
-            },
-            "buttons":[
-             {
-                "type":"postback",
-                "title":"I like this one.",
-                "payload":"likethis4"
-              }              
-            ]      
-          },
-          {
-            "title":"This is up-to-date design!",
-            "image_url":"https://i.pinimg.com/236x/b4/57/dd/b457dd49dba5e06dd0f8862c11dfb184.jpg",
-            "subtitle":"If you don't like, upload cloth design.",
-            "default_action": {
-              "type": "web_url",
-              "url": "https://i.pinimg.com/236x/b4/57/dd/b457dd49dba5e06dd0f8862c11dfb184.jpg",
-              "webview_height_ratio": "tall",
-            },
-            "buttons":[
-             {
-                "type":"postback",
-                "title":"I like this one.",
-                "payload":"likethis5"
-              }              
-            ]      
           }
         ]
       }
