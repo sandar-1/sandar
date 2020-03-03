@@ -27,7 +27,19 @@ const
   request = require('request'),
   express = require('express'),
   body_parser = require('body-parser'),
+  firebase = require("firebase-admin"),
   app = express().use(body_parser.json()); // creates express http server
+
+  firebase.initializeApp({
+  credential: firebase.credential.cert({
+    "private_key": process.env.Firebase_privatekey.replace(/\\n/g, '\n'),
+    "client_email": process.env.Firebase_clientemail,
+    "project_id": process.env.Firebase_projectID,
+  }),
+  databaseURL: "https://sandarbot.firebaseio.com"
+ });
+
+let database = firebase.firestore();
 
 let measurement = {
   chest:false,
