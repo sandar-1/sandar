@@ -274,7 +274,7 @@ function handleMessage(sender_psid, received_message) {
     let attachment_url = received_message.attachments[0].payload.url;
 
     let data = {
-      name = 'su',
+      name = "su",
       cloth_design = attachment_url
     }
     db.collection('cloth_design').doc().set(data);
