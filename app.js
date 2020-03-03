@@ -157,7 +157,7 @@ function handlePostback(sender_psid, received_postback) {
    let response;
   let payload = received_postback.payload;
   if (payload === 'SEW') {
-    response = { "text": "You can say freely." }
+    sewing (sender_psid);
   }
   callSendAPI(sender_psid, response);
 }
