@@ -127,12 +127,9 @@ app.get('/webhook', (req, res) => {
   let token = req.query['hub.verify_token'];
   let challenge = req.query['hub.challenge'];
 
-  
-    
   // Check if a token and mode were sent
   if (mode && token) {
     
-  
     // Check the mode and token sent are correct
     if (mode === 'subscribe' && token === VERIFY_TOKEN) {
       
@@ -150,9 +147,7 @@ app.get('/webhook', (req, res) => {
 function handleMessage(sender_psid, received_message) {
   let response;
   if (received_message.text == "hi") {    
-    response = {
-      "text": `OK! See ya!`
-    }
+   greetUser (sender_psid);
   }
   callSendAPI(sender_psid, response);    
 }
@@ -191,7 +186,6 @@ function callSendAPI(sender_psid, response) {
   }); 
 }
 
-
 function callSendAPINew(sender_psid, response) {  
   let request_body = {
     "recipient": {
@@ -221,6 +215,82 @@ async function callSend(sender_psid, response){
   return 1;
 }
 
+function getUserProfile(sender_psid) {
+  return new Promise(resolve => {
+    request({
+      "uri": "https://graph.facebook.com/"+sender_psid+"?fields=first_name,last_name,profile_pic&access_token=EAAC0Amc4MRgBAGR5JMXzFDQBBZCbHRjOkVPeKg3UokgQzZAYlIAZBQoPnwsKo6FZBmSOd5kPm16TUJEFdveL9iZA4IAG2EN1IozqH17jKueHNU2rPObJYjxkL6Kq3WttHxYhaj83SGYNK9ZBEtYXkJTOiXVV9key1xS8WZCpWXoQy3bluiMysR5IYlm1Q9QfVQZD",
+      "method": "GET"
+      }, (err, res, body) => {
+        if (!err) { 
+          let data = JSON.parse(body);  
+          resolve(data);                 
+    } else {
+      console.error("Error:" + err);
+    }
+    });
+  });
+}
+
+/*function to greet user*/
+async function greetUser(sender_psid){  
+  let user = await getUserProfile(sender_psid);
+  let response1 = {"text": "Hi🙋‍♀. "+user.first_name+" "+user.last_name+". Warmly welcome to SH.🙆‍♀"};
+  let response2 = {"text": "Do you want to sew 👗 or want to share pictures 🤳. And you can also see pictures of others 😉."}
+  let response3 = {"text": "......"};  
+  let response4 = {
+      "attachment":{
+        "type":"template",
+        "payload":{
+          "template_type":"generic",
+          "elements":[
+          {
+            "title":"Welcome!",
+            "image_url":"https://images.pexels.com/photos/277253/pexels-photo-277253.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            "subtitle":"We have the right hat for everyone.",
+            "default_action":
+            {
+              "type": "web_url",
+              "url": "https://petersfancybrownhats.com/view?item=103",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+            {
+              "type":"postback",
+              "title":"Meal Delivery",
+              "payload":"pl-meal-deli"
+            }
+            ]
+          },
+          {
+            "title":"Welcome!",
+            "image_url":"https://images.pexels.com/photos/277253/pexels-photo-277253.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            "subtitle":"We have the right hat for everyone.",
+            "default_action":
+            {
+              "type": "web_url",
+              "url": "https://petersfancybrownhats.com/view?item=103",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+            {
+              "type":"postback",
+              "title":"Food Ingrediants",
+              "payload":"pl-food-ingre" 
+            }
+            ]
+          }
+          ]
+        }
+      }
+    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3).then(()=>{
+          return callSend(sender_psid, response4);
+        });
+      });
+    });
+  }
 
 function setupGetStartedButton(res){
         var messageData = {
