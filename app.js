@@ -293,9 +293,9 @@ async function greetUser(sender_psid){
   }
 
 /*Function for sew*/
-async function sewing (sender_psid) {
-  let response1 = {"text": "For what kind of event?"};
-  let response2 = {
+async function sewing(sender_psid){
+    let response1 = {"text":"For what kind of event?"};
+    let response2 = {
     "attachment":{
       "type":"template",
       "payload":{
@@ -369,8 +369,8 @@ async function sewing (sender_psid) {
         }
   } 
 };
-callSend(sender_psid, response1).then(()=>{
-    callSend(sender_psid, response2);
+  callSend(sender_psid, response1).then(()=>{
+    return callSend(sender_psid, response2);
   });
 }
 
