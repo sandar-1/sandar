@@ -275,7 +275,7 @@ function handleMessage(sender_psid, received_message) {
 
     let data = {
       name = "su",
-      cloth_design = received_message.attachments
+      date = "111111"
     };
     db.collection('cloth_design').doc().set(data);
 
