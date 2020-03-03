@@ -160,6 +160,12 @@ function handlePostback(sender_psid, received_postback) {
     sewing (sender_psid);
   }else if (payload === 'WEDDING') {
     forwedding (sender_psid);
+  }else if (payload === 'OCCASION') {
+    foroccasion (sender_psid);
+  }else if (payload === 'CASUAL') {
+    forcasual (sender_psid);
+  }else if (payload === 'ABD') {
+    forbechelor (sender_psid);
   }
   callSendAPI(sender_psid, response);
 }
@@ -396,7 +402,121 @@ async function forwedding (sender_psid){
            {
             "title":"I hope you like it.👩👩",
             "image_url":"https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
-            "subtitle":"It's okey! If you don't like it, you can send me any picture you like.",
+            "subtitle":"It's okey! If you don't like it, you can send me any design picture you like.",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"I like this one.",
+                "payload":"likethis1"
+              }              
+            ]      
+          }
+        ]
+      }
+    }
+    };
+  callSend(sender_psid, response1).then(()=>{
+    return callSend(sender_psid, response2).then(()=>{
+      return callSend(sender_psid, response3);
+    });
+  });
+}
+
+/*Function for occasion*/
+async function foroccasion (sender_psid){
+    let response1 = {"text":"Let me make it beautiful."};
+    let response2 = {"text":"Here are some good suggestions designs for you."};
+    let response3 = {
+      "attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"generic",
+        "elements":[
+           {
+            "title":"I hope you like it.👩👩",
+            "image_url":"https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
+            "subtitle":"It's okey! If you don't like it, you can send me any design picture you like.",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"I like this one.",
+                "payload":"likethis1"
+              }              
+            ]      
+          }
+        ]
+      }
+    }
+    };
+  callSend(sender_psid, response1).then(()=>{
+    return callSend(sender_psid, response2).then(()=>{
+      return callSend(sender_psid, response3);
+    });
+  });
+}
+
+/*Function for casual*/
+async function forcasual (sender_psid){
+    let response1 = {"text":"Sometimes it is nice to wear lightweight Myanmar dress.! "};
+    let response2 = {"text":"Here are some good suggestions designs for you."};
+    let response3 = {
+      "attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"generic",
+        "elements":[
+           {
+            "title":"I hope you like it.👩👩",
+            "image_url":"https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
+            "subtitle":"It's okey! If you don't like it, you can send me any design picture you like.",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"I like this one.",
+                "payload":"likethis1"
+              }              
+            ]      
+          }
+        ]
+      }
+    }
+    };
+  callSend(sender_psid, response1).then(()=>{
+    return callSend(sender_psid, response2).then(()=>{
+      return callSend(sender_psid, response3);
+    });
+  });
+}
+
+/*Function for bechelor*/
+async function forbechelor (sender_psid){
+    let response1 = {"text":"Congratulation Sis! You did it! "};
+    let response2 = {"text":"Here are some good suggestions designs for you."};
+    let response3 = {
+      "attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"generic",
+        "elements":[
+           {
+            "title":"I hope you like it.👩👩",
+            "image_url":"https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
+            "subtitle":"It's okey! If you don't like it, you can send me any design picture you like.",
             "default_action": {
               "type": "web_url",
               "url": "https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
