@@ -179,101 +179,7 @@ function handleMessage(sender_psid, received_message) {
     }
   }
   callSendAPI(sender_psid, response);    
-}else if (received_message.text == "What?") {    
-    response = {
-       "attachment":{
-                  "type":"template",
-                  "payload":{
-                    "template_type":"generic",
-                    "elements":[
-                       {
-                        "title":"Beaded embroidery on the cloth",
-                        "image_url":"https://i.pinimg.com/236x/fc/aa/15/fcaa15d588bb3c3cd0cefcb671d3674f--unik-baju.jpg",
-                        "subtitle":"Like this.....",
-                        "default_action": {
-                          "type": "web_url",
-                          "url": "https://i.pinimg.com/236x/fc/aa/15/fcaa15d588bb3c3cd0cefcb671d3674f--unik-baju.jpg",
-                          "webview_height_ratio": "tall",
-                        },
-                        "buttons":[
-                         {
-                            "type":"postback",
-                            "title":"Sure.",
-                            "payload":"sure"
-                          },{
-                            "type":"postback",
-                            "title":"Don't do it.",
-                            "payload":"ddt"
-                          }              
-                        ]      
-                      }
-                      ]
-                   }
-                 }
-    }
-  }else if (received_message.text == "I do!") {    
-     response = { "text": "The same as the beaded emboroidery design that you have been chonsen?", 
-                  "quick_replies":[
-                  {
-                    "content_type":"text",
-                    "title":"YES",
-                    "payload":"D"
-                  },{
-                    "content_type":"text",
-                    "title":"NO",
-                    "payload":"IWC"
-                  }]
-    }
-  }else if (received_message.text == "YES") {    
-    response = {
-      "text": `The estimated price and date is 15000 and 14 feb 2020.`,
-      "quick_replies":[
-                  {
-                    "content_type":"text",
-                    "title":"Order",
-                    "payload":"D"
-                  },{
-                    "content_type":"text",
-                    "title":"Cancle",
-                    "payload":"IWC"
-                  }]
-    }
-  }else if (received_message.text == "NO") {    
-    response = {
-      "text": `Ok! send me design.`
-    }
-    bdesignAttachment = true;
-    designAttachment = false;
-  }else if (received_message.attachments && bdesignAttachment == true) {
-    console.log('meta data',received_message);
-    bdesignAttachment == false;
-    let attachment_url = received_message.attachments[0].payload.url;
-    response = {
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "generic",
-          "elements": [{
-            "title": "Is this the right Design?",
-            "subtitle": "Tap a button to answer.",
-            "image_url": attachment_url,
-            "buttons": [
-              {
-                "type": "postback",
-                "title": "Yes!",
-                "payload": "YES",
-              },
-              {
-                "type": "postback",
-                "title": "No!",
-                "payload": "no",
-              }
-            ],
-          }]
-        }
-      }
-    }
-  }
+}
 
 function handlePostback(sender_psid, received_postback) {
   console.log('ok')
@@ -304,19 +210,6 @@ function handlePostback(sender_psid, received_postback) {
      }
   }else if (payload === 'no') {
     response = { "text": "What's wrong? It's ok, send me again." }
-  }else if (payload === 'YES') {
-    response = { "text": `The estimated price and date is 15000 and 14 feb 2020.`,
-                 "quick_replies":[
-                  {
-                    "content_type":"text",
-                    "title":"Order",
-                    "payload":"D"
-                  },{
-                    "content_type":"text",
-                    "title":"Cancle",
-                    "payload":"IWC"
-                  }]
-     }
   }
   callSendAPI(sender_psid, response);
 }
