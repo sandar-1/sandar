@@ -420,8 +420,6 @@ async function sewing(sender_psid){
 
 /*Function for wedding*/
 async function forwedding (sender_psid){
-    designAttachment = true;
-    bdesignAttachment = false;
     let response1 = {"text":"Congratulation! "};
     let response2 = {"text":"Here are some good suggestions designs for you."};
     let response3 = {
@@ -456,6 +454,8 @@ async function forwedding (sender_psid){
       return callSend(sender_psid, response3);
     });
   });
+  designAttachment = true;
+    bdesignAttachment = false;
 }
 
 /*Function for occasion*/
