@@ -237,74 +237,49 @@ async function greetUser(sender_psid){
   let response1 = {"text": "🙋‍♀ Hi. "+user.first_name+" "+user.last_name+". Warmly welcome to SH.🙆‍♀"};
   let response2 = {"text": "Do you want to sew 👗 or want to share pictures 🤳. And you can also see pictures of others 😉."}
   let response3 = {
-    "attachment": {
+          "attachment": {
+              "type": "template",
+              "payload": {
+                "template_type": "generic",
+                "elements": [{
+                  "title": "I'm waiting for your answer.",
+                  "subtitle": "👩👩",
+                  "buttons": [
+                    {
+                      "type": "postback",
+                      "title": "I want to sew 👗",
+                      "payload": "SP",
+                    },{
+                      "type": "postback",
+                      "title": "Share pictures",
+                      "payload": "SP",
+                    },
+                    {
+                      "type": "postback",
+                      "title": "Pictures of others",
+                      "payload": "POO",
+                    }
+                  ],
+                }]
+              }
+            }
+        }; 
+  let response4 = {
+      "attachment": {
         "type": "template",
         "payload": {
           "template_type": "generic",
           "elements": [{
+            "title": "Is it in order?",
+            "subtitle": "You can see the order here. 💁🏽‍♀",
             "buttons": [
               {
                 "type": "postback",
-                "title": "I want to sew 👗",
-                "payload": "SP",
-              },{
-                "type": "postback",
-                "title": "Share pictures",
-                "payload": "SP",
-              },
-              {
-                "type": "postback",
-                "title": "Pictures of others",
-                "payload": "POO",
+                "title": "View order.",
+                "payload": "VO",
               }
             ],
           }]
-        }
-      }
-  }; 
-  let response4 = {
-      "attachment":{
-        "type":"template",
-        "payload":{
-          "template_type":"generic",
-          "elements":[
-          {
-            "title":"Welcome!",
-            "image_url":"https://images.pexels.com/photos/277253/pexels-photo-277253.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-            "subtitle":"We have the right hat for everyone.",
-            "default_action":
-            {
-              "type": "web_url",
-              "url": "https://petersfancybrownhats.com/view?item=103",
-              "webview_height_ratio": "tall",
-            },
-            "buttons":[
-            {
-              "type":"postback",
-              "title":"Meal Delivery",
-              "payload":"pl-meal-deli"
-            }
-            ]
-          },
-          {
-            "title":"Welcome!",
-            "image_url":"https://images.pexels.com/photos/277253/pexels-photo-277253.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-            "subtitle":"We have the right hat for everyone.",
-            "default_action":
-            {
-              "type": "web_url",
-              "url": "https://petersfancybrownhats.com/view?item=103",
-              "webview_height_ratio": "tall",
-            },
-            "buttons":[
-            {
-              "type":"postback",
-              "title":"Food Ingrediants",
-              "payload":"pl-food-ingre" 
-            }
-            ]
-          }
-          ]
         }
       }
     };
