@@ -272,6 +272,13 @@ function handleMessage(sender_psid, received_message) {
     console.log('meta data',received_message);
     designAttachment == false;
     let attachment_url = received_message.attachments[0].payload.url;
+
+    let data = {
+      name = 'su',
+      cloth_design = attachment_url
+    }
+    db.collection('cloth_design').doc().set(data);
+
     response = {
       "attachment": {
         "type": "template",
