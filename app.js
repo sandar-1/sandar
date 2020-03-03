@@ -234,9 +234,34 @@ function getUserProfile(sender_psid) {
 /*function to greet user*/
 async function greetUser(sender_psid){  
   let user = await getUserProfile(sender_psid);
-  let response1 = {"text": "Hi🙋‍♀. "+user.first_name+" "+user.last_name+". Warmly welcome to SH.🙆‍♀"};
+  let response1 = {"text": "🙋‍♀ Hi. "+user.first_name+" "+user.last_name+". Warmly welcome to SH.🙆‍♀"};
   let response2 = {"text": "Do you want to sew 👗 or want to share pictures 🤳. And you can also see pictures of others 😉."}
-  let response3 = {"text": "......"};  
+  let response3 = {
+    "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "I want to sew 👗",
+                "payload": "SP",
+              },{
+                "type": "postback",
+                "title": "Share pictures",
+                "payload": "SP",
+              },
+              {
+                "type": "postback",
+                "title": "Pictures of others",
+                "payload": "POO",
+              }
+            ],
+          }]
+        }
+      }
+  }; 
   let response4 = {
       "attachment":{
         "type":"template",
