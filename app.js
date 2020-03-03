@@ -39,7 +39,7 @@ const
   databaseURL: "https://sandarbot.firebaseio.com"
  });
 
-let database = firebase.firestore();
+let db = firebase.firestore();
 
 let measurement = {
   chest:false,
