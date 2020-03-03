@@ -420,6 +420,8 @@ async function sewing(sender_psid){
 
 /*Function for wedding*/
 async function forwedding (sender_psid){
+    designAttachment = true;
+    bdesignAttachment = false;
     let response1 = {"text":"Congratulation! "};
     let response2 = {"text":"Here are some good suggestions designs for you."};
     let response3 = {
