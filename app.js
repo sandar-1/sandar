@@ -149,14 +149,8 @@ app.get('/webhook', (req, res) => {
 
 function handleMessage(sender_psid, received_message) {
   let response;
-  if (received_message.text == "Delivery!") {   
-  let data =  {
-    name = "su",
-    address = userAnswers,
-    date = "20.2.2020"
-  } 
-  db.collection('Assress').doc().set(data);
-    response = {
+  if (received_message.text == "Delivery!") {    
+    let response1 = {
       "text": `Pls send me address.`
     }
   }else if (received_message.text == "I will come!") {    
