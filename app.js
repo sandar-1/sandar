@@ -152,7 +152,14 @@ function handleMessage(sender_psid, received_message) {
   if (received_message.text == "Delivery!") {    
     let response1 = {
       "text": `Pls send me address.`
+    };
+    let response2 = {
+      "text": `Please send me address.`
     }
+    
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
   }else if (received_message.text == "I will come!") {    
     response = {
       "text": `OK! See ya!`
