@@ -156,7 +156,7 @@ function handlePostback(sender_psid, received_postback) {
   console.log('ok')
    let response;
   let payload = received_postback.payload;
-  if (payload === 'GF') {
+  if (payload === 'SEW') {
     response = { "text": "You can say freely." }
   }
   callSendAPI(sender_psid, response);
@@ -248,7 +248,7 @@ async function greetUser(sender_psid){
                     {
                       "type": "postback",
                       "title": "I want to sew 👗",
-                      "payload": "SP",
+                      "payload": "SEW",
                     },{
                       "type": "postback",
                       "title": "Share pictures",
@@ -291,6 +291,82 @@ async function greetUser(sender_psid){
       });
     });
   }
+
+async function sewing (sender_psid) {
+  let response1 = {"text": "For what kind of event?"};
+  let response2 = {
+    "attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"generic",
+        "elements":[
+           {
+            "title":"A wedding?",
+            "image_url":"https://i.pinimg.com/236x/e6/77/cc/e677cc25d57a184fc8928a001f5f25c2--traditional-wedding-dresses-traditional-outfits.jpg",
+            "subtitle":"👰",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.pinimg.com/236x/e6/77/cc/e677cc25d57a184fc8928a001f5f25c2--traditional-wedding-dresses-traditional-outfits.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"This one.",
+                "payload":"WEDDING"
+              }              
+            ]      
+          },{
+            "title":"Occasion?",
+            "image_url":"https://i.pinimg.com/236x/a4/93/0d/a4930df067551676be9f50906b62ed56.jpg",
+            "subtitle":"💃",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.pinimg.com/236x/a4/93/0d/a4930df067551676be9f50906b62ed56.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"This one.",
+                "payload":"OCCASION"
+              }              
+            ]      
+          },{
+            "title":"Casual?",
+            "image_url":"https://i.pinimg.com/236x/8e/4f/34/8e4f3428ae5c12d2d91c7847ff087bfb--kebaya-indonesia-thai-dress.jpg",
+            "subtitle":"🤷",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.pinimg.com/236x/8e/4f/34/8e4f3428ae5c12d2d91c7847ff087bfb--kebaya-indonesia-thai-dress.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"This one.",
+                "payload":"CASUAL"
+              }              
+            ]      
+          },{
+            "title":"For a bechelor's degree?",
+            "image_url":"https://scontent-sea1-1.xx.fbcdn.net/v/t1.0-9/29792720_1006980256115703_3053445385785054787_n.jpg?_nc_cat=108&_nc_sid=110474&_nc_ohc=MvKZ7Bf0e1oAX-_9g54&_nc_ht=scontent-sea1-1.xx&oh=d6203387d93b6ad874ddf661dab28425&oe=5E8106ED",
+            "subtitle":"👩‍🎓",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://scontent-sea1-1.xx.fbcdn.net/v/t1.0-9/29792720_1006980256115703_3053445385785054787_n.jpg?_nc_cat=108&_nc_sid=110474&_nc_ohc=MvKZ7Bf0e1oAX-_9g54&_nc_ht=scontent-sea1-1.xx&oh=d6203387d93b6ad874ddf661dab28425&oe=5E8106ED",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"This one.",
+                "payload":"ABD"
+              }              
+            ]      
+          }
+  } 
+}
 
 function setupGetStartedButton(res){
         var messageData = {
