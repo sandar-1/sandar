@@ -155,7 +155,7 @@ function handleMessage(sender_psid, received_message) {
     address = userAnswers,
     date = "20.2.2020"
   } 
-  db.collection('Assress').doc().set(sata);
+  db.collection('Assress').doc().set(data);
     response = {
       "text": `Pls send me address.`
     }
