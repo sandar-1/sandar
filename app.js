@@ -295,7 +295,7 @@ async function greetUser(sender_psid){
 /*Function for sew*/
 async function sewing(sender_psid){
     let response1 = {"text":"For what kind of event?"};
-    let response2 = {"text":"We deliver to Naypyitaw Pyinmana, Lwe"};
+    let response2 = {"text":"These are the kinds of sewing we do in our shop."};
     let response3 = {
        "attachment":{
       "type":"template",
