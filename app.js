@@ -195,21 +195,6 @@ function handlePostback(sender_psid, received_postback) {
     forcasual (sender_psid);
   }else if (payload === 'ABD') {
     forbechelor (sender_psid);
-  }else if (payload === 'yes') {
-    response = {  "text" : "Do you wanna put some fanncy beaded embroidery to make your cloth more beautyful ?",
-                  "quick_replies":[
-                  {
-                    "content_type":"text",
-                    "title":"What?",
-                    "payload":"D"
-                  },{
-                    "content_type":"text",
-                    "title":"I do!",
-                    "payload":"IWC"
-                  }]
-     }
-  }else if (payload === 'no') {
-    response = { "text": "What's wrong? It's ok, send me again." }
   }
   callSendAPI(sender_psid, response);
 }
