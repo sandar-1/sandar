@@ -278,6 +278,19 @@ function handlePostback(sender_psid, received_postback) {
      }
   }else if (payload === 'no') {
     response = { "text": "What's wrong! it's ok, send me again." }
+  }else if (payload === 'YES') {
+    response = { "text": `The estimated price and date is 15000 .`,
+                 "quick_replies":[
+                  {
+                    "content_type":"text",
+                    "title":"Order",
+                    "payload":"D"
+                  },{
+                    "content_type":"text",
+                    "title":"Cancle",
+                    "payload":"IWC"
+                  }]
+     }
   }
   callSendAPI(sender_psid, response);
 }
