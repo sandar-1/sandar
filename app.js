@@ -224,8 +224,8 @@ function handleMessage(sender_psid, received_message) {
     }
   }else if (received_message.text == "YES") {    
     let response1 = { "text": `The estimated price and date is 15000`};
-    let response2 = { "text": 'Now I only need your body measurement. Do you know how to measure?'};
-    let response3 = {
+    let response2 = { 
+      "text": 'Now I only need your body measurement. Do you know how to measure?',
       "quick_replies":[
                   {
                     "content_type":"text",
@@ -238,11 +238,7 @@ function handleMessage(sender_psid, received_message) {
                   }]
     };
     callSend(sender_psid, response1).then(()=>{
-      return callSend(sender_psid, response2).then(()=>{
-        return callSend(sender_psid, response3).then(()=>{
-          return callSend(sender_psid, response4);
-        });
-      });
+      return callSend(sender_psid, response2);
     });
   }else if (received_message.text == "NO") {    
     response = {
