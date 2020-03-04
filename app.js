@@ -222,6 +222,63 @@ function handleMessage(sender_psid, received_message) {
                     "payload":"IWC"
                   }]
     }
+  }else if (received_message.text == "YES") {    
+    let response1 = { "text": `The estimated price and date is 15000`};
+    let response2 = { "text": 'Now I only need your body measurement. Do you know how to measure?'};
+    let response3 = {
+      "quick_replies":[
+                  {
+                    "content_type":"text",
+                    "title":"How!",
+                    "payload":"h"
+                  },{
+                    "content_type":"text",
+                    "title":"I know.",
+                    "payload":"k"
+                  }]
+    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3).then(()=>{
+          return callSend(sender_psid, response4);
+        });
+      });
+    });
+  }else if (received_message.text == "NO") {    
+    response = {
+      "text": `Ok! send me design.`
+    }
+    bdesignAttachment = true;
+    designAttachment = false;
+  }else if (received_message.attachments && bdesignAttachment == true) {
+    console.log('meta data',received_message);
+    bdesignAttachment == false;
+    let attachment_url = received_message.attachments[0].payload.url;
+    response = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "Is this the right Design?",
+            "subtitle": "Tap a button to answer.",
+            "image_url": attachment_url,
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "Yes!",
+                "payload": "YES",
+              },
+              {
+                "type": "postback",
+                "title": "No!",
+                "payload": "no",
+              }
+            ],
+          }]
+        }
+      }
+    }
   }
   callSendAPI(sender_psid, response);    
 }
