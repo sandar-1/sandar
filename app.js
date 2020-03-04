@@ -212,7 +212,7 @@ function handleMessage(sender_psid, received_message) {
     });
   }else if (received_message.text == "NO") {    
     response = {
-      "text": `What's wrong! it's ok, send me again.`
+      "text": `Well, send me beaded embroidery desig picture as you like.`
     }
     bdesignAttachment = true;
     designAttachment = false;
@@ -677,18 +677,7 @@ async function bddesignw (sender_psid){
                           "type": "web_url",
                           "url": "https://i.pinimg.com/236x/fc/aa/15/fcaa15d588bb3c3cd0cefcb671d3674f--unik-baju.jpg",
                           "webview_height_ratio": "tall",
-                        },
-                        "buttons":[
-                         {
-                            "type":"postback",
-                            "title":"Sure.",
-                            "payload":"sure"
-                          },{
-                            "type":"postback",
-                            "title":"Don't do it.",
-                            "payload":"ddt"
-                          }              
-                        ]      
+                        }      
                       }
                       ]
                    }
