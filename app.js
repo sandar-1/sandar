@@ -158,8 +158,8 @@ function handleMessage(sender_psid, received_message) {
         "payload": {
           "template_type": "generic",
           "elements": [{
-            "title": "Your Design?",
-            "subtitle": "Tap a button to answer.",
+            "title": "Wow this one will totally suits you.",
+            "subtitle": "I can't wait to sew it.",
             "image_url": attachment_url,
             "buttons": [
               {
@@ -226,8 +226,8 @@ function handleMessage(sender_psid, received_message) {
         "payload": {
           "template_type": "generic",
           "elements": [{
-            "title": "Is this the right Design?",
-            "subtitle": "Tap a button to answer.",
+            "title": "Is tis one?",
+            "subtitle": "You exactly know how to blink others people eyes.",
             "image_url": attachment_url,
             "buttons": [
               {
