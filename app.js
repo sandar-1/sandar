@@ -178,37 +178,7 @@ function handleMessage(sender_psid, received_message) {
       }
     }
   }else if (received_message.text == "What?") {    
-    response = {
-       "attachment":{
-                  "type":"template",
-                  "payload":{
-                    "template_type":"generic",
-                    "elements":[
-                       {
-                        "title":"Like this .. you can get others people eyes on you. Because of this blink blink beaded emboroidery",
-                        "image_url":"https://i.pinimg.com/236x/fc/aa/15/fcaa15d588bb3c3cd0cefcb671d3674f--unik-baju.jpg",
-                        "subtitle":";)",
-                        "default_action": {
-                          "type": "web_url",
-                          "url": "https://i.pinimg.com/236x/fc/aa/15/fcaa15d588bb3c3cd0cefcb671d3674f--unik-baju.jpg",
-                          "webview_height_ratio": "tall",
-                        },
-                        "buttons":[
-                         {
-                            "type":"postback",
-                            "title":"Sure.",
-                            "payload":"sure"
-                          },{
-                            "type":"postback",
-                            "title":"Don't do it.",
-                            "payload":"ddt"
-                          }              
-                        ]      
-                      }
-                      ]
-                   }
-                 }
-    }
+    bddesignw (sender_psid);
   }else if (received_message.text == "I do!") {    
      response = { "text": "Ok! let's make others people eyes blink :D . Oh wait! the same pattern as the cloth design you have been chosen", 
                   "quick_replies":[
@@ -242,7 +212,7 @@ function handleMessage(sender_psid, received_message) {
     });
   }else if (received_message.text == "NO") {    
     response = {
-      "text": `Ok! send me design.`
+      "text": `What's wrong! it's ok, send me again.`
     }
     bdesignAttachment = true;
     designAttachment = false;
@@ -689,6 +659,76 @@ async function forbechelor (sender_psid){
   });
   designAttachment = true;
     bdesignAttachment = false;
+}
+
+/*Function for beaded embroidery what*/
+async function bddesignw (sender_psid){
+    let response1 = {
+       "attachment":{
+                  "type":"template",
+                  "payload":{
+                    "template_type":"generic",
+                    "elements":[
+                       {
+                        "title":"Like this .. you can get others people eyes on you. Because of this blink blink beaded embroidery",
+                        "image_url":"https://i.pinimg.com/236x/fc/aa/15/fcaa15d588bb3c3cd0cefcb671d3674f--unik-baju.jpg",
+                        "subtitle":";)",
+                        "default_action": {
+                          "type": "web_url",
+                          "url": "https://i.pinimg.com/236x/fc/aa/15/fcaa15d588bb3c3cd0cefcb671d3674f--unik-baju.jpg",
+                          "webview_height_ratio": "tall",
+                        },
+                        "buttons":[
+                         {
+                            "type":"postback",
+                            "title":"Sure.",
+                            "payload":"sure"
+                          },{
+                            "type":"postback",
+                            "title":"Don't do it.",
+                            "payload":"ddt"
+                          }              
+                        ]      
+                      }
+                      ]
+                   }
+                 }
+    };
+    let response2 = {"text":"Here are some good suggestions of beaded embroidery designs for you."};
+    let response3 = {
+      "attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"generic",
+        "elements":[
+           {
+            "title":"I hope you like it.👩👩",
+            "image_url":"https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
+            "subtitle":"It's okey! If you don't like it, you can send me any design picture you like.",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"I like this one.",
+                "payload":"likethis1"
+              }              
+            ]      
+          }
+        ]
+      }
+    }
+    };
+  callSend(sender_psid, response1).then(()=>{
+    return callSend(sender_psid, response2).then(()=>{
+      return callSend(sender_psid, response3);
+    });
+  });
+  designAttachment = false;
+    bdesignAttachment = true;
 }
 
 function setupGetStartedButton(res){
