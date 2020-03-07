@@ -255,44 +255,98 @@ function handlePostback(sender_psid, received_postback) {
   let payload = received_postback.payload;
   if (payload === 'SEW') {
     sewing (sender_psid);
-  }else if (payload === 'WEDDING') {
-    forwedding (sender_psid);
-  }else if (payload === 'OCCASION') {
-    foroccasion (sender_psid);
-  }else if (payload === 'CASUAL') {
-    forcasual (sender_psid);
-  }else if (payload === 'ABD') {
-    forbechelor (sender_psid);
-  }else if (payload === 'yes') {
-    response = {  "text" : "If you wish! you can add some beaded embroidery to make other people's eyes blink.",
-                  "quick_replies":[
-                  {
-                    "content_type":"text",
-                    "title":"What?",
-                    "payload":"D"
-                  },{
-                    "content_type":"text",
-                    "title":"I do!",
-                    "payload":"IWC"
-                  }]
-     }
-  }else if (payload === 'no') {
-    response = { "text": "What's wrong! it's ok, send me again." }
-  }else if (payload === 'YES') {
-    response = { "text": `The estimated price and date is 15000 .`,
-                 "quick_replies":[
-                  {
-                    "content_type":"text",
-                    "title":"Order",
-                    "payload":"D"
-                  },{
-                    "content_type":"text",
-                    "title":"Cancle",
-                    "payload":"IWC"
-                  }]
-     }
   }
   callSendAPI(sender_psid, response);
+}
+
+/*function to greet user*/
+async function greetUser(sender_psid){  
+  let user = await getUserProfile(sender_psid);
+  let response1 = {"text": "🙋‍♀ Hi. "+user.first_name+" "+user.last_name+". Warmly welcome to SH.🙆‍♀"};
+  let response2 = {"text": "Do you want to sew 👗 or want to share pictures 🤳. And you can also see pictures of others 😉."}
+  let response3 = {
+          "attachment": {
+              "type": "template",
+              "payload": {
+                "template_type": "generic",
+                "elements": [{
+                  "title": "I'm waiting for your answer.",
+                  "subtitle": "👩👩",
+                  "buttons": [
+                    {
+                      "type": "postback",
+                      "title": "I want to sew 👗",
+                      "payload": "SEW",
+                    },{
+                      "type": "postback",
+                      "title": "Share pictures",
+                      "payload": "SP",
+                    },
+                    {
+                      "type": "postback",
+                      "title": "Pictures of others",
+                      "payload": "POO",
+                    }
+                  ],
+                }]
+              }
+            }
+        }; 
+  let response4 = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "Is it in order?",
+            "subtitle": "You can see the order here. 💁🏽‍♀",
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "View order.",
+                "payload": "VO",
+              }
+            ],
+          }]
+        }
+      }
+    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3).then(()=>{
+          return callSend(sender_psid, response4);
+        });
+      });
+    });
+}
+
+async function sewing (sender_psid){
+  let response1 = {"text" : "You can also send us a design of the cloth that you want to sew."};
+  let response2 = {"text" : "If you want to customize all the designs, you have to choose or send in step by step."};
+  let response3 = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "Please, make your choice here.",
+            "subtitle": "💁🏽‍♀💁🏽‍♀💁🏽‍♀💁🏽‍♀",
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "By sending design.",
+                "payload": "send_design",
+              },
+              {
+                "type": "postback",
+                "title": "By customizing.",
+                "payload": "customize_design",
+              }
+            ],
+          }]
+        }
+      }
+    };
 }
 
 function callSendAPI(sender_psid, response) {
@@ -362,375 +416,6 @@ function getUserProfile(sender_psid) {
     }
     });
   });
-}
-
-/*function to greet user*/
-async function greetUser(sender_psid){  
-  let user = await getUserProfile(sender_psid);
-  let response1 = {"text": "🙋‍♀ Hi. "+user.first_name+" "+user.last_name+". Warmly welcome to SH.🙆‍♀"};
-  let response2 = {"text": "Do you want to sew 👗 or want to share pictures 🤳. And you can also see pictures of others 😉."}
-  let response3 = {
-          "attachment": {
-              "type": "template",
-              "payload": {
-                "template_type": "generic",
-                "elements": [{
-                  "title": "I'm waiting for your answer.",
-                  "subtitle": "👩👩",
-                  "buttons": [
-                    {
-                      "type": "postback",
-                      "title": "I want to sew 👗",
-                      "payload": "SEW",
-                    },{
-                      "type": "postback",
-                      "title": "Share pictures",
-                      "payload": "SP",
-                    },
-                    {
-                      "type": "postback",
-                      "title": "Pictures of others",
-                      "payload": "POO",
-                    }
-                  ],
-                }]
-              }
-            }
-        }; 
-  let response4 = {
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "generic",
-          "elements": [{
-            "title": "Is it in order?",
-            "subtitle": "You can see the order here. 💁🏽‍♀",
-            "buttons": [
-              {
-                "type": "postback",
-                "title": "View order.",
-                "payload": "VO",
-              }
-            ],
-          }]
-        }
-      }
-    };
-    callSend(sender_psid, response1).then(()=>{
-      return callSend(sender_psid, response2).then(()=>{
-        return callSend(sender_psid, response3).then(()=>{
-          return callSend(sender_psid, response4);
-        });
-      });
-    });
-  }
-
-/*Function for sew*/
-async function sewing(sender_psid){
-    let response1 = {"text":"For what kind of event?"};
-    let response2 = {"text":"These are the kinds of sewing we do in our shop."};
-    let response3 = {
-       "attachment":{
-      "type":"template",
-      "payload":{
-        "template_type":"generic",
-        "elements":[
-           {
-            "title":"A wedding?",
-            "image_url":"https://i.pinimg.com/236x/e6/77/cc/e677cc25d57a184fc8928a001f5f25c2--traditional-wedding-dresses-traditional-outfits.jpg",
-            "subtitle":"👰",
-            "default_action": {
-              "type": "web_url",
-              "url": "https://i.pinimg.com/236x/e6/77/cc/e677cc25d57a184fc8928a001f5f25c2--traditional-wedding-dresses-traditional-outfits.jpg",
-              "webview_height_ratio": "tall",
-            },
-            "buttons":[
-             {
-                "type":"postback",
-                "title":"This one.",
-                "payload":"WEDDING"
-              }              
-            ]      
-          },
-          {
-            "title":"Occasion?",
-            "image_url":"https://i.pinimg.com/236x/a4/93/0d/a4930df067551676be9f50906b62ed56.jpg",
-            "subtitle":"💃",
-            "default_action": {
-              "type": "web_url",
-              "url": "https://i.pinimg.com/236x/a4/93/0d/a4930df067551676be9f50906b62ed56.jpg",
-              "webview_height_ratio": "tall",
-            },
-            "buttons":[
-             {
-                "type":"postback",
-                "title":"This one.",
-                "payload":"OCCASION"
-              }              
-            ]      
-          },
-          {
-            "title":"Casual?",
-            "image_url":"https://i.pinimg.com/236x/8e/4f/34/8e4f3428ae5c12d2d91c7847ff087bfb--kebaya-indonesia-thai-dress.jpg",
-            "subtitle":"🤷",
-            "default_action": {
-              "type": "web_url",
-              "url": "https://i.pinimg.com/236x/8e/4f/34/8e4f3428ae5c12d2d91c7847ff087bfb--kebaya-indonesia-thai-dress.jpg",
-              "webview_height_ratio": "tall",
-            },
-            "buttons":[
-             {
-                "type":"postback",
-                "title":"This one.",
-                "payload":"CASUAL"
-              }              
-            ]      
-          },
-          {
-            "title":"For a bechelor's degree?",
-            "image_url":"https://scontent-sea1-1.xx.fbcdn.net/v/t1.0-9/29792720_1006980256115703_3053445385785054787_n.jpg?_nc_cat=108&_nc_sid=110474&_nc_ohc=MvKZ7Bf0e1oAX-_9g54&_nc_ht=scontent-sea1-1.xx&oh=d6203387d93b6ad874ddf661dab28425&oe=5E8106ED",
-            "subtitle":"👩‍🎓",
-            "default_action": {
-              "type": "web_url",
-              "url": "https://scontent-sea1-1.xx.fbcdn.net/v/t1.0-9/29792720_1006980256115703_3053445385785054787_n.jpg?_nc_cat=108&_nc_sid=110474&_nc_ohc=MvKZ7Bf0e1oAX-_9g54&_nc_ht=scontent-sea1-1.xx&oh=d6203387d93b6ad874ddf661dab28425&oe=5E8106ED",
-              "webview_height_ratio": "tall",
-            },
-            "buttons":[
-             {
-                "type":"postback",
-                "title":"This one.",
-                "payload":"ABD"
-              }              
-            ]      
-          }
-        ]
-      }
-    }
-  }
-  callSend(sender_psid, response1).then(()=>{
-    return callSend(sender_psid, response2).then(()=>{
-      return callSend(sender_psid, response3);
-    });
-  });
-}
-
-/*Function for wedding*/
-async function forwedding (sender_psid){
-    let response1 = {"text":"Congratulation! "};
-    let response2 = {"text":"Here are some good suggestions designs for you."};
-    let response3 = {
-      "attachment":{
-      "type":"template",
-      "payload":{
-        "template_type":"generic",
-        "elements":[
-           {
-            "title":"I hope you like it.👩👩",
-            "image_url":"https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
-            "subtitle":"It's okey! If you don't like it, you can send me any design picture you like.",
-            "default_action": {
-              "type": "web_url",
-              "url": "https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
-              "webview_height_ratio": "tall",
-            },
-            "buttons":[
-             {
-                "type":"postback",
-                "title":"I like this one.",
-                "payload":"likethis1"
-              }              
-            ]      
-          }
-        ]
-      }
-    }
-    };
-  callSend(sender_psid, response1).then(()=>{
-    return callSend(sender_psid, response2).then(()=>{
-      return callSend(sender_psid, response3);
-    });
-  });
-  designAttachment = true;
-    bdesignAttachment = false;
-}
-
-/*Function for occasion*/
-async function foroccasion (sender_psid){
-    let response1 = {"text":"Let me make it beautiful."};
-    let response2 = {"text":"Here are some good suggestions designs for you."};
-    let response3 = {
-      "attachment":{
-      "type":"template",
-      "payload":{
-        "template_type":"generic",
-        "elements":[
-           {
-            "title":"I hope you like it.👩👩",
-            "image_url":"https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
-            "subtitle":"It's okey! If you don't like it, you can send me any design picture you like.",
-            "default_action": {
-              "type": "web_url",
-              "url": "https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
-              "webview_height_ratio": "tall",
-            },
-            "buttons":[
-             {
-                "type":"postback",
-                "title":"I like this one.",
-                "payload":"likethis1"
-              }              
-            ]      
-          }
-        ]
-      }
-    }
-    };
-  callSend(sender_psid, response1).then(()=>{
-    return callSend(sender_psid, response2).then(()=>{
-      return callSend(sender_psid, response3);
-    });
-  });
-  designAttachment = true;
-    bdesignAttachment = false;
-}
-
-/*Function for casual*/
-async function forcasual (sender_psid){
-    let response1 = {"text":"Sometimes it is nice to wear lightweight Myanmar dress.! "};
-    let response2 = {"text":"Here are some good suggestions designs for you."};
-    let response3 = {
-      "attachment":{
-      "type":"template",
-      "payload":{
-        "template_type":"generic",
-        "elements":[
-           {
-            "title":"I hope you like it.👩👩",
-            "image_url":"https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
-            "subtitle":"It's okey! If you don't like it, you can send me any design picture you like.",
-            "default_action": {
-              "type": "web_url",
-              "url": "https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
-              "webview_height_ratio": "tall",
-            },
-            "buttons":[
-             {
-                "type":"postback",
-                "title":"I like this one.",
-                "payload":"likethis1"
-              }              
-            ]      
-          }
-        ]
-      }
-    }
-    };
-  callSend(sender_psid, response1).then(()=>{
-    return callSend(sender_psid, response2).then(()=>{
-      return callSend(sender_psid, response3);
-    });
-  });
-  designAttachment = true;
-    bdesignAttachment = false;
-}
-
-/*Function for bechelor*/
-async function forbechelor (sender_psid){
-    let response1 = {"text":"Congratulation Sis! You did it! "};
-    let response2 = {"text":"Here are some good suggestions designs for you."};
-    let response3 = {
-      "attachment":{
-      "type":"template",
-      "payload":{
-        "template_type":"generic",
-        "elements":[
-           {
-            "title":"I hope you like it.👩👩",
-            "image_url":"https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
-            "subtitle":"It's okey! If you don't like it, you can send me any design picture you like.",
-            "default_action": {
-              "type": "web_url",
-              "url": "https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
-              "webview_height_ratio": "tall",
-            },
-            "buttons":[
-             {
-                "type":"postback",
-                "title":"I like this one.",
-                "payload":"likethis1"
-              }              
-            ]      
-          }
-        ]
-      }
-    }
-    };
-  callSend(sender_psid, response1).then(()=>{
-    return callSend(sender_psid, response2).then(()=>{
-      return callSend(sender_psid, response3);
-    });
-  });
-  designAttachment = true;
-    bdesignAttachment = false;
-}
-
-/*Function for beaded embroidery what*/
-async function bddesignw (sender_psid){
-    let response1 = {
-       "attachment":{
-                  "type":"template",
-                  "payload":{
-                    "template_type":"generic",
-                    "elements":[
-                       {
-                        "title":"Like this .. you can get others people eyes on you. Because of this blink blink beaded embroidery",
-                        "image_url":"https://i.pinimg.com/236x/fc/aa/15/fcaa15d588bb3c3cd0cefcb671d3674f--unik-baju.jpg",
-                        "subtitle":";)",
-                        "default_action": {
-                          "type": "web_url",
-                          "url": "https://i.pinimg.com/236x/fc/aa/15/fcaa15d588bb3c3cd0cefcb671d3674f--unik-baju.jpg",
-                          "webview_height_ratio": "tall",
-                        }      
-                      }
-                      ]
-                   }
-                 }
-    };
-    let response2 = {"text":"Here are some good suggestions of beaded embroidery designs for you."};
-    let response3 = {
-      "attachment":{
-      "type":"template",
-      "payload":{
-        "template_type":"generic",
-        "elements":[
-           {
-            "title":"I hope you like it.👩👩",
-            "image_url":"https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
-            "subtitle":"It's okey! If you don't like it, you can send me any design picture you like.",
-            "default_action": {
-              "type": "web_url",
-              "url": "https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
-              "webview_height_ratio": "tall",
-            },
-            "buttons":[
-             {
-                "type":"postback",
-                "title":"I like this one.",
-                "payload":"likethis1"
-              }              
-            ]      
-          }
-        ]
-      }
-    }
-    };
-  callSend(sender_psid, response1).then(()=>{
-    return callSend(sender_psid, response2).then(()=>{
-      return callSend(sender_psid, response3);
-    });
-  });
-  designAttachment = false;
-    bdesignAttachment = true;
 }
 
 function setupGetStartedButton(res){
