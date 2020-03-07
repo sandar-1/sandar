@@ -251,6 +251,11 @@ async function sewing (sender_psid){
         }
       }
     };
+    callSend(sender_psid, response1).then(()=>{
+      callSend(sender_psid, response2).then(()=>{
+        callSend(sender_psid, response3);
+      });
+    });
 }
 
 function callSendAPI(sender_psid, response) {
