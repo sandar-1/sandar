@@ -148,6 +148,64 @@ function handleMessage(sender_psid, received_message) {
   let response;
   if (received_message.text == "hi") {    
    greetUser (sender_psid);
+  }else if (received_message.attachments && designAttachment == true) {
+    console.log('meta data',received_message);
+    designAttachment == false;
+    let attachment_url = received_message.attachments[0].payload.url;
+    response = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "Wow this one will totally suits you.",
+            "subtitle": "I can't wait to sew it.",
+            "image_url": attachment_url,
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "Yes!",
+                "payload": "yes",
+              },
+              {
+                "type": "postback",
+                "title": "No!",
+                "payload": "no",
+              }
+            ],
+          }]
+        }
+      }
+    }
+  }else if (received_message.attachments && bdesignAttachment == true) {
+    console.log('meta data',received_message);
+    bdesignAttachment == false;
+    let attachment_url = received_message.attachments[0].payload.url;
+    response = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "Is tis one?",
+            "subtitle": "You exactly know how to blink others people eyes.",
+            "image_url": attachment_url,
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "Yes!",
+                "payload": "YES",
+              },
+              {
+                "type": "postback",
+                "title": "No!",
+                "payload": "no",
+              }
+            ],
+          }]
+        }
+      }
+    }
   }
   callSendAPI(sender_psid, response);    
 }
@@ -158,6 +216,18 @@ function handlePostback(sender_psid, received_postback) {
   let payload = received_postback.payload;
   if (payload === 'SEW') {
     sewing (sender_psid);
+  }else if (payload === 'no') {
+    response = { "text": "What's wrong! it's ok, send me again." }
+  }else if (payload === 'yes') {
+    askforbeaded (sender_psid);
+  }else if (payload === 'send_design') {
+    let response1 = {"text" : "We will sew it look like the design you send."};
+    let response2 = {"text" : "well, send us the design you want to sew."};
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+    designAttachment = true;
+      bdesignAttachment = false;
   }
   callSendAPI(sender_psid, response);
 }
@@ -252,8 +322,42 @@ async function sewing (sender_psid){
       }
     };
     callSend(sender_psid, response1).then(()=>{
-      callSend(sender_psid, response2).then(()=>{
-        callSend(sender_psid, response3);
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
+    });
+}
+
+/*function for asking for beaded emboidery*/
+async function askforbeaded (sender_psid){
+  let response1 = {"text" : "If you wish! you can add some beaded embroidery to make other people's eyes blink."};
+    let response2 = {"text" : "Like this....."};
+    let response3 = {
+      "attachment":{
+            "type":"image", 
+            "payload":{
+              "url":"https://i.pinimg.com/originals/9b/82/cd/9b82cdc94464fa39a67444d6a5da0937.jpg", 
+              "is_reusable":true
+            }
+          }
+    };
+    let response4 = {
+      "text" : "If so, do I have to follow the beaded embroidery design from the cloth design you sent? Or is there anothe design that you want to do?",
+      "quick_replies":[{
+                        "content_type":"text",
+                        "title":"Yes.",
+                        "payload":"y"
+                      },{
+                        "content_type":"text",
+                        "title":"No",
+                        "payload":"n"
+                      }]
+    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3).then(()=>{
+          return callSend(sender_psid, response4);
+        });
       });
     });
 }
