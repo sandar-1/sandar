@@ -265,7 +265,9 @@ function handlePostback(sender_psid, received_postback) {
     designAttachment = false;
     bdesignAttachment = true;
   }else if (payload === 'nothing_added') {
-    response ={"text": "Ok, let's take your body measurement."};
+    worrymeasurment (sender_psid);
+  }else if (payload === 'add_beaded') {
+    worrymeasurment (sender_psid);
   }
   callSendAPI(sender_psid, response);
 }
@@ -736,6 +738,32 @@ async function forbechelor (sender_psid){
   });
   designAttachment = true;
     bdesignAttachment = false;
+}
+
+/*function for worry about measurement*/
+async function worrymeasurment (sender_psid){
+  let response1 = {"text": "Ok, let's take your body measurement."};
+    let response2 = {"text": "I'm worrying that you don't know how to measure. So, here are some tips for you."};
+    let response3 = {
+      "attachment":{
+            "type":"image", 
+            "payload":{
+              "url":"https://www.dummies.com/wp-content/uploads/how-to-get-your-body-measurements.jpg", 
+              "is_reusable":true
+            }
+          },
+          "quick_replies":[
+                  {
+                    "content_type":"text",
+                    "title":"Start",
+                    "payload":"S"
+                  }]
+    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
+    });
 }
 
 function callSendAPI(sender_psid, response) {
