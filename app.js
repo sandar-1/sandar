@@ -223,6 +223,14 @@ function handlePostback(sender_psid, received_postback) {
   }else if (payload === 'send_design') {
     response = {"text" : "We will sew it look like the design you send or chooes. "};
     askforevent (sender_psid);
+  }else if (payload === 'WEDDING') {
+    forwedding (sender_psid);
+  }else if (payload === 'OCCASION') {
+    foroccasion (sender_psid);
+  }else if (payload === 'CASUAL') {
+    forcasual (sender_psid);
+  }else if (payload === 'ABD') {
+    forbechelor (sender_psid);
   }
   callSendAPI(sender_psid, response);
 }
