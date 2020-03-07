@@ -231,6 +231,14 @@ function handlePostback(sender_psid, received_postback) {
     forcasual (sender_psid);
   }else if (payload === 'ABD') {
     forbechelor (sender_psid);
+  }else if (payload === 'nothing_added') {
+    worrymeasurment (sender_psid);
+  }else if (payload === 'add_beaded') {
+    worrymeasurment (sender_psid);
+  }else if (payload === 'i_do_have') {
+    response ={"text": "well, send me the beaded design that you want to do."};
+    designAttachment = false;
+    bdesignAttachment = true;
   }else if (payload === 'same_as_design') {
     let response1 = {"text":"Estimated price of putting beaded embroidery is around 10000. Depending on the beaded embroidery design."};
     let response2 = {
@@ -260,14 +268,6 @@ function handlePostback(sender_psid, received_postback) {
    callSend(sender_psid, response1).then(()=>{
     return callSend(sender_psid, response2);
    });
-  }else if (payload === 'i_do_have') {
-    response ={"text": "well, send me the beaded design that you want to do."};
-    designAttachment = false;
-    bdesignAttachment = true;
-  }else if (payload === 'nothing_added') {
-    worrymeasurment (sender_psid);
-  }else if (payload === 'add_beaded') {
-    worrymeasurment (sender_psid);
   }
   callSendAPI(sender_psid, response);
 }
@@ -764,6 +764,84 @@ async function worrymeasurment (sender_psid){
         return callSend(sender_psid, response3);
       });
     });
+}
+
+async function bodymeasuring(sender_psid, received_message) {
+  let response;
+  if (received_message.text == "Start" || received_message.text == "start") {    
+    response = {
+      "text": `First let's measure Chest.`
+    }
+    measurement.chest = true;
+  }else if (received_message.text && measurement.chest == true) {   
+    userEnteredMeasurement.chest =  received_message.text;
+    response = {
+      "text": `Now Upper arm.`
+    }
+    measurement.chest = false;
+    measurement.upperArm = true;
+  }else if (received_message.text && measurement.upperArm == true) { 
+    userEnteredMeasurement.upperArm = received_message.text; 
+    response = {
+      "text": `Let's measure Sleeve length.`
+    }
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = true;
+  }else if (received_message.text && measurement.sleevelength == true) { 
+    userEnteredMeasurement.sleevelength = received_message.text;   
+    response = {
+      "text": `And measure your Waist.`
+    }
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = true;
+  }else if (received_message.text && measurement.waist == true) {
+    userEnteredMeasurement.waist = received_message.text;    
+    response = {
+      "text": `Now your Hips.`
+    }
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = false;
+    measurement.hips = true;
+  }else if (received_message.text && measurement.hips == true) { 
+    userEnteredMeasurement.hips = received_message.text;   
+    response = {
+      "text": `Measure your Thigh.`
+    }
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = false;
+    measurement.hips = false;
+    measurement.thigh = true;
+  }else if (received_message.text && measurement.thigh == true) {   
+    userEnteredMeasurement.thigh = received_message.text; 
+    response = {
+      "text": `Finally! your Inseam.`
+    }
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = false;
+    measurement.hips = false;
+    measurement.thigh = false;
+    measurement.inseam = true;
+  }else if (received_message.text && measurement.inseam == true) {   
+    userEnteredMeasurement.inseam = received_message.text; 
+      
+    bodymeasure(sender_psid);
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = false;
+    measurement.hips = false;
+    measurement.thigh = false;
+    measurement.inseam = false;
+  }
 }
 
 function callSendAPI(sender_psid, response) {
