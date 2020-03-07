@@ -231,6 +231,41 @@ function handlePostback(sender_psid, received_postback) {
     forcasual (sender_psid);
   }else if (payload === 'ABD') {
     forbechelor (sender_psid);
+  }else if (payload === 'same_as_design') {
+    let response1 = {"text":"Estimated price of putting beaded embroidery is around 10000. Depending on the beaded embroidery design."};
+    let response2 = {
+    "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "All the estimated price will cost .......",
+            "subtitle": "Do you want to add or do not add beaded embroidery to control your budget?",
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "Add beaded",
+                "payload": "add_beaded",
+              },
+              {
+                "type": "postback",
+                "title": "Don't add beaded",
+                "payload": "nothing_added",
+              }
+            ],
+          }]
+        }
+      }
+   };
+   callSend(sender_psid, response1).then(()=>{
+    return callSend(sender_psid, response2);
+   });
+  }else if (payload === 'i_do_have') {
+    response ={"text": "well, send me the beaded design that you want to do."};
+    designAttachment = false;
+    bdesignAttachment = true;
+  }else if (payload === 'nothing_added') {
+    response ={"text": "Ok, let's take your body measurement."};
   }
   callSendAPI(sender_psid, response);
 }
@@ -345,21 +380,42 @@ async function askforbeaded (sender_psid){
           }
     };
     let response4 = {
-      "text" : "If so, do I have to follow the beaded embroidery design from the cloth design you sent? Or is there anothe design that you want to do?",
-      "quick_replies":[{
-                        "content_type":"text",
-                        "title":"Yes.",
-                        "payload":"y"
-                      },{
-                        "content_type":"text",
-                        "title":"No",
-                        "payload":"n"
-                      }]
-    };
+      "text" : "If so, do I have to follow the beaded embroidery design from the cloth design you sent?"};
+    let response5 ={
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "Or is there anothe design that you want to do?",
+            "subtitle": "💁🏽‍♀💁🏽‍♀💁🏽‍♀💁🏽‍♀",
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "I do have.",
+                "payload": "i_do_have",
+              },
+              {
+                "type": "postback",
+                "title": "Same as design.",
+                "payload": "same_as_design",
+              },
+              {
+                "type": "postback",
+                "title": "Nothing added.",
+                "payload": "nothing_added",
+              }
+            ]
+          }]
+        }
+      }
+    }
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2).then(()=>{
         return callSend(sender_psid, response3).then(()=>{
-          return callSend(sender_psid, response4);
+          return callSend(sender_psid, response4).then(()=>{
+            return callSend(sender_psid, response5);
+          });
         });
       });
     });
@@ -378,7 +434,7 @@ async function askforevent (sender_psid) {
            {
             "title":"A wedding?",
             "image_url":"https://i.pinimg.com/236x/e6/77/cc/e677cc25d57a184fc8928a001f5f25c2--traditional-wedding-dresses-traditional-outfits.jpg",
-            "subtitle":"👰",
+            "subtitle":"👰 The estimated price of wedding dress is range from 300000 to above.",
             "default_action": {
               "type": "web_url",
               "url": "https://i.pinimg.com/236x/e6/77/cc/e677cc25d57a184fc8928a001f5f25c2--traditional-wedding-dresses-traditional-outfits.jpg",
@@ -395,7 +451,7 @@ async function askforevent (sender_psid) {
           {
             "title":"Occasion?",
             "image_url":"https://i.pinimg.com/236x/a4/93/0d/a4930df067551676be9f50906b62ed56.jpg",
-            "subtitle":"💃",
+            "subtitle":"💃 The estimated price of occasion dress is range from 15000 to above.",
             "default_action": {
               "type": "web_url",
               "url": "https://i.pinimg.com/236x/a4/93/0d/a4930df067551676be9f50906b62ed56.jpg",
@@ -412,7 +468,7 @@ async function askforevent (sender_psid) {
           {
             "title":"Casual?",
             "image_url":"https://i.pinimg.com/236x/8e/4f/34/8e4f3428ae5c12d2d91c7847ff087bfb--kebaya-indonesia-thai-dress.jpg",
-            "subtitle":"🤷",
+            "subtitle":"🤷 The estimated price of casual dress is range from 8000 to above.",
             "default_action": {
               "type": "web_url",
               "url": "https://i.pinimg.com/236x/8e/4f/34/8e4f3428ae5c12d2d91c7847ff087bfb--kebaya-indonesia-thai-dress.jpg",
@@ -429,7 +485,7 @@ async function askforevent (sender_psid) {
           {
             "title":"For a bechelor's degree?",
             "image_url":"https://scontent-sea1-1.xx.fbcdn.net/v/t1.0-9/29792720_1006980256115703_3053445385785054787_n.jpg?_nc_cat=108&_nc_sid=110474&_nc_ohc=MvKZ7Bf0e1oAX-_9g54&_nc_ht=scontent-sea1-1.xx&oh=d6203387d93b6ad874ddf661dab28425&oe=5E8106ED",
-            "subtitle":"👩‍🎓",
+            "subtitle":"👩‍🎓 The estimated price of graduation dress is range from 30000 to above.",
             "default_action": {
               "type": "web_url",
               "url": "https://scontent-sea1-1.xx.fbcdn.net/v/t1.0-9/29792720_1006980256115703_3053445385785054787_n.jpg?_nc_cat=108&_nc_sid=110474&_nc_ohc=MvKZ7Bf0e1oAX-_9g54&_nc_ht=scontent-sea1-1.xx&oh=d6203387d93b6ad874ddf661dab28425&oe=5E8106ED",
