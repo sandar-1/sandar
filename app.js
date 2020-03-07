@@ -223,6 +223,7 @@ async function greetUser(sender_psid){
     });
 }
 
+/*Function for sew*/
 async function sewing (sender_psid){
   let response1 = {"text" : "You can also send us a design of the cloth that you want to sew."};
   let response2 = {"text" : "If you want to customize all the designs, you have to choose or send in step by step."};
