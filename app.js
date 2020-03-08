@@ -51,14 +51,10 @@ let measurement = {
   inseam:false,
 };
 let askingtocustomer = {
-  left:false,
-  right:false,
-  cover:false,
-  dontcover:false,
-  hkyaatehtamein:false,
-  hpi skrit:false,
-  shortwaist:false,
-  normalwaist:false,
+  hm_fold:false,
+  hm_length:false,
+  hm_type:false,
+  waist_length:false,
 };
 
 let designAttachment = false;
@@ -159,28 +155,33 @@ function handleMessage(sender_psid, received_message) {
   let response;
   if (received_message.text == "hi" || received_message.text == "Hi") {    
    greetUser (sender_psid);
-  }else if (received_message.text && askingtocustomer.left == true) {    
-    userEnteredAnswers.left = received_message.text;
+  }else if (received_message.text && askingtocustomer.hm_fold == true) {  
+    userEnteredAnswers.hm_fold = received_message.text;  
     asking_hm_length (sender_psid);
-    askingtocustomer.left = false;
-    askingtocustomer.right =false;
-  }else if (received_message.text && askingtocustomer.right == true) {   
-    userEnteredAnswers.right = received_message.text; 
-    asking_hm_length (sender_psid);
-    askingtocustomer.left = false;
-    askingtocustomer.right =false;
-  }else if (received_message.text == "Cover") {    
+    askingtocustomer.hm_fold = false;
+    askingtocustomer.hm_length = true;
+  }else if (received_message.text && askingtocustomer.hm_length == true) {  
+    userEnteredAnswers.hm_length = received_message.text;  
     asking_hm_type (sender_psid);
-  }else if (received_message.text == "Don't cover") {    
-    asking_hm_type (sender_psid);
-  }else if (received_message.text == "Hkyaate htamein") {    
+    askingtocustomer.hm_fold = false;
+    askingtocustomer.hm_length = false;
+    askingtocustomer.hm_type = true;
+  }else if (received_message.text $$ askingtocustomer.hm_type == true) {
+    userEnteredAnswers.hm_type = received_message.text;   
     asking_waist_length (sender_psid);
-  }else if (received_message.text == "Hpi skrit") {    
-    asking_waist_length (sender_psid);
-  }else if (received_message.text == "Short waist") {    
-    (sender_psid);
-  }else if (received_message.text == "Normal waist") {    
-     (sender_psid);
+    askingtocustomer.hm_fold = false;
+    askingtocustomer.hm_length = false;
+    askingtocustomer.hm_type = false;
+    askingtocustomer.waist_length = true;
+  }else if (received_message.text && askingtocustomer.waist_length == true) {
+    userEnteredAnswers.waist_length = received_message.text;    
+    response = {
+      "text": `Now Upper arm.`
+    }
+    askingtocustomer.hm_fold = false;
+    askingtocustomer.hm_length = false;
+    askingtocustomer.hm_type = false;
+    askingtocustomer.waist_length = false;
   }else if (received_message.text == "Start" || received_message.text == "start") {    
     response = {
       "text": `First let's measure Chest.`
@@ -929,8 +930,7 @@ async function asking_hm_fold (sender_psid) {
   callSend(sender_psid, response1).then(()=>{
     return callSend (sender_psid, response2);
   });
-  askingtocustomer.left = true;
-    askingtocustomer.right =true;
+  askingtocustomer.hm_fold = true;
 }
 
 /*function for asking htamein length*/
