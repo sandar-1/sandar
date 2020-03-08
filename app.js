@@ -908,7 +908,10 @@ async function asking_hm_fold (sender_psid) {
                     "title":"Right",
                     "payload":"R"
                   }]
-  }
+  };
+  callSend(sender_psid, response1).then(()=>{
+    return callSend (sender_psid, response2);
+  });
 }
 
 /*function for asking htamein length*/
@@ -926,7 +929,10 @@ async function asking_hm_length (sender_psid) {
                     "title":"Right",
                     "payload":"DC"
                   }]
-  }
+  };
+  callSend(sender_psid, response1).then(()=>{
+    return callSend (sender_psid, response2);
+  });
 }
 
 /*function for asking htamein type*/
@@ -944,7 +950,10 @@ async function asking_hm_type (sender_psid) {
                     "title":"Hpi skrit",
                     "payload":"HS"
                   }]
-  }
+  };
+  callSend(sender_psid, response1).then(()=>{
+    return callSend (sender_psid, response2);
+  });
 }
 
 /*function for asking waist length*/
@@ -962,7 +971,10 @@ async function asking_waist_length (sender_psid) {
                     "title":"Normal waist",
                     "payload":"NW"
                   }]
-  }
+  };
+  callSend(sender_psid, response1).then(()=>{
+    return callSend (sender_psid, response2);
+  });
 }
 
 function callSendAPI(sender_psid, response) {
