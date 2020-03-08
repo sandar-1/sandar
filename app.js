@@ -158,21 +158,13 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text && askingtocustomer.hm_fold == true) {  
     userEnteredAnswers.hm_fold = received_message.text;  
     asking_hm_length (sender_psid);
-    askingtocustomer.hm_fold = false;
-    askingtocustomer.hm_length = true;
   }else if (received_message.text && askingtocustomer.hm_length == true) {  
     userEnteredAnswers.hm_length = received_message.text;  
     asking_hm_type (sender_psid);
-    askingtocustomer.hm_fold = false;
-    askingtocustomer.hm_length = false;
-    askingtocustomer.hm_type = true;
   }else if (received_message.text $$ askingtocustomer.hm_type == true) {
     userEnteredAnswers.hm_type = received_message.text;   
     asking_waist_length (sender_psid);
-    askingtocustomer.hm_fold = false;
-    askingtocustomer.hm_length = false;
-    askingtocustomer.hm_type = false;
-    askingtocustomer.waist_length = true;
+
   }else if (received_message.text && askingtocustomer.waist_length == true) {
     userEnteredAnswers.waist_length = received_message.text;    
     response = {
@@ -930,7 +922,7 @@ async function asking_hm_fold (sender_psid) {
   callSend(sender_psid, response1).then(()=>{
     return callSend (sender_psid, response2);
   });
-  askingtocustomer.hm_fold = true;
+    askingtocustomer.hm_fold = true;
 }
 
 /*function for asking htamein length*/
@@ -952,6 +944,8 @@ async function asking_hm_length (sender_psid) {
   callSend(sender_psid, response1).then(()=>{
     return callSend (sender_psid, response2);
   });
+    askingtocustomer.hm_fold = false;
+    askingtocustomer.hm_length = true;
 }
 
 /*function for asking htamein type*/
@@ -973,6 +967,9 @@ async function asking_hm_type (sender_psid) {
   callSend(sender_psid, response1).then(()=>{
     return callSend (sender_psid, response2);
   });
+    askingtocustomer.hm_fold = false;
+    askingtocustomer.hm_length = false;
+    askingtocustomer.hm_type = true;
 }
 
 /*function for asking waist length*/
@@ -994,6 +991,10 @@ async function asking_waist_length (sender_psid) {
   callSend(sender_psid, response1).then(()=>{
     return callSend (sender_psid, response2);
   });
+    askingtocustomer.hm_fold = false;
+    askingtocustomer.hm_length = false;
+    askingtocustomer.hm_type = false;
+    askingtocustomer.waist_length = true;
 }
 
 function callSendAPI(sender_psid, response) {
