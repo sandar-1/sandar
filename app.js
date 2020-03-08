@@ -49,19 +49,12 @@ let measurement = {
   hips:false,
   thigh:false,
   inseam:false,
-};
-let askingtocustomer = {
-  hm_fold:false,
-  hm_length:false,
-  hm_type:false,
-  waist_length:false,
-};
+}
 
 let designAttachment = false;
 let bdesignAttachment = false;
 
 let userEnteredMeasurement = {};
-let userEnteredAnswers = {};
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
@@ -153,27 +146,8 @@ app.get('/webhook', (req, res) => {
 
 function handleMessage(sender_psid, received_message) {
   let response;
-  if (received_message.text == "hi" || received_message.text == "Hi") {    
+  if (received_message.text == "hi") {    
    greetUser (sender_psid);
-  }else if (received_message.text && askingtocustomer.hm_fold == true) {  
-    userEnteredAnswers.hm_fold = received_message.text;  
-    asking_hm_length (sender_psid);
-  }else if (received_message.text && askingtocustomer.hm_length == true) {  
-    userEnteredAnswers.hm_length = received_message.text;  
-    asking_hm_type (sender_psid);
-  }else if (received_message.text $$ askingtocustomer.hm_type == true) {
-    userEnteredAnswers.hm_type = received_message.text;   
-    asking_waist_length (sender_psid);
-
-  }else if (received_message.text && askingtocustomer.waist_length == true) {
-    userEnteredAnswers.waist_length = received_message.text;    
-    response = {
-      "text": `Now Upper arm.`
-    }
-    askingtocustomer.hm_fold = false;
-    askingtocustomer.hm_length = false;
-    askingtocustomer.hm_type = false;
-    askingtocustomer.waist_length = false;
   }else if (received_message.text == "Start" || received_message.text == "start") {    
     response = {
       "text": `First let's measure Chest.`
@@ -237,8 +211,9 @@ function handleMessage(sender_psid, received_message) {
     measurement.thigh = false;
     measurement.inseam = true;
   }else if (received_message.text && measurement.inseam == true) {   
-    userEnteredMeasurement.inseam = received_message.text;
-    bodyrecord(sender_psid);
+    userEnteredMeasurement.inseam = received_message.text; 
+      
+    bodymeasure(sender_psid);
     measurement.chest = false;
     measurement.upperArm = false;
     measurement.sleevelength = false;
@@ -329,14 +304,6 @@ function handlePostback(sender_psid, received_postback) {
     forcasual (sender_psid);
   }else if (payload === 'ABD') {
     forbechelor (sender_psid);
-  }else if (payload === 'nothing_added') {
-    asking_hm_fold (sender_psid);
-  }else if (payload === 'add_beaded') {
-    asking_hm_fold (sender_psid);
-  }else if (payload === 'i_do_have') {
-    response ={"text": "well, send me the beaded design that you want to do."};
-    designAttachment = false;
-    bdesignAttachment = true;
   }else if (payload === 'same_as_design') {
     let response1 = {"text":"Estimated price of putting beaded embroidery is around 10000. Depending on the beaded embroidery design."};
     let response2 = {
@@ -366,6 +333,14 @@ function handlePostback(sender_psid, received_postback) {
    callSend(sender_psid, response1).then(()=>{
     return callSend(sender_psid, response2);
    });
+  }else if (payload === 'i_do_have') {
+    response ={"text": "well, send me the beaded design that you want to do."};
+    designAttachment = false;
+    bdesignAttachment = true;
+  }else if (payload === 'nothing_added') {
+    worrymeasurment (sender_psid);
+  }else if (payload === 'add_beaded') {
+    worrymeasurment (sender_psid);
   }
   callSendAPI(sender_psid, response);
 }
@@ -864,8 +839,7 @@ async function worrymeasurment (sender_psid){
     });
 }
 
-/*function for showing body record*/
-function bodyrecord(sender_psid){
+function bodymeasure(sender_psid){
     let response1 = {"text": `Chest: `+ userEnteredMeasurement.chest};
     let response2 = {"text": 'Upper arm: ' + userEnteredMeasurement.upperArm};
     let response3 = {"text": 'Sleeve length: ' + userEnteredMeasurement.sleevelength};
@@ -873,18 +847,34 @@ function bodyrecord(sender_psid){
     let response5 = {"text": 'Hips: '+ userEnteredMeasurement.hips};
     let response6 = {"text": 'Thigh: ' + userEnteredMeasurement.thigh};
     let response7 = {"text": 'Inseam: '+ userEnteredMeasurement.inseam};
-    let response8 = {
-      "text": 'Is this the right measurment?',
-      "quick_replies":[
-                  {
-                    "content_type":"text",
-                    "title":"Yes",
-                    "payload":"y"
-                  },{
-                    "content_type":"text",
-                    "title":"Wrongly",
-                    "payload":"w"
-                  }]
+    let response8 = {"text": 'Is this the right measurment?'};
+    let response9 = {
+      "attachment": {
+                  "type": "template",
+                  "payload": {
+                    "template_type": "generic",
+                    "elements": [{
+                      "title": "Pls. chooes the type",
+                      "buttons": [
+                        {
+                          "type": "postback",
+                          "title": "Ceromonies",
+                          "payload": "ceremony",
+                        },
+                        {
+                          "type": "postback",
+                          "title": "Simple",
+                          "payload": "S",
+                        },
+                        {
+                          "type": "postback",
+                          "title": "Measuring again",
+                          "payload": "measureagain",
+                        }
+                      ],
+                    }]
+                  }
+                }
     };
       callSend(sender_psid,response1).then(()=>{
         return callSend(sender_psid,response2).then(()=>{
@@ -893,7 +883,9 @@ function bodyrecord(sender_psid){
               return callSend(sender_psid,response5).then(()=>{
                 return callSend(sender_psid,response6).then(()=>{
                   return callSend(sender_psid,response7).then(()=>{
-                    return callSend(sender_psid,response8);
+                    return callSend(sender_psid,response8).then(()=>{
+                        return callSend(sender_psid, response9);
+                    });
                   });
                 });
               });
@@ -901,106 +893,6 @@ function bodyrecord(sender_psid){
           });
         });
       });
-}
-
-/*function for asking htamein fold*/
-async function asking_hm_fold (sender_psid) {
-  let response1 = {
-    askingtocustomer.hm_fold = true;
-    "text": "well, how about Htamein?"
-  };
-  let response2 = {
-    "text": "Which fold do you want to cover. Left or Right?",
-    "quick_replies":[
-                  {
-                    "content_type":"text",
-                    "title":"Left",
-                    "payload":"L"
-                  },{
-                    "content_type":"text",
-                    "title":"Right",
-                    "payload":"R"
-                  }]
-  };
-  callSend(sender_psid, response1).then(()=>{
-    return callSend (sender_psid, response2);
-  });
-}
-
-/*function for asking htamein length*/
-async function asking_hm_length (sender_psid) {
-  let response1 = {
-    askingtocustomer.hm_fold = false;
-    askingtocustomer.hm_length = true;
-    "text": "How much length of Htamein do you want?"
-  };
-  let response2 = {
-    "text": "Do you want to cover your ankle or not?",
-    "quick_replies":[
-                  {
-                    "content_type":"text",
-                    "title":"Cover",
-                    "payload":"C"
-                  },{
-                    "content_type":"Don't cover",
-                    "title":"Right",
-                    "payload":"DC"
-                  }]
-  };
-  callSend(sender_psid, response1).then(()=>{
-    return callSend (sender_psid, response2);
-  });
-}
-
-/*function for asking htamein type*/
-async function asking_hm_type (sender_psid) {
-  let response1 = {
-    askingtocustomer.hm_fold = false;
-    askingtocustomer.hm_length = false;
-    askingtocustomer.hm_type = true;
-    "text": "What kind of Htamein?"
-  };
-  let response2 = {
-    "text": "Hkyaate htamein (sew with buttons)? Hpi skirt (sew with zip)?",
-    "quick_replies":[
-                  {
-                    "content_type":"text",
-                    "title":"Hkyaate htamein",
-                    "payload":"HH"
-                  },{
-                    "content_type":"Don't cover",
-                    "title":"Hpi skrit",
-                    "payload":"HS"
-                  }]
-  };
-  callSend(sender_psid, response1).then(()=>{
-    return callSend (sender_psid, response2);
-  });
-}
-
-/*function for asking waist length*/
-async function asking_waist_length (sender_psid) {
-  let response1 = {"text": "So, how about shirt?"};
-  let response2 = {
-    "text": "Short waist? OR Normal waist?",
-    "quick_replies":[
-                  {
-                    "content_type":"text",
-                    "title":"Short waist",
-                    "payload":"SW"
-                  },{
-                    "content_type":"Don't cover",
-                    "title":"Normal waist",
-                    "payload":"NW"
-                  }]
-  };
-  callSend(sender_psid, response1).then(()=>{
-    return callSend (sender_psid, response2);
-  });
-    askingtocustomer.hm_fold = false;
-    askingtocustomer.hm_length = false;
-    askingtocustomer.hm_type = false;
-    askingtocustomer.waist_length = true;
 }
 
 function callSendAPI(sender_psid, response) {
