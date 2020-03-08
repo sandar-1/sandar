@@ -49,12 +49,23 @@ let measurement = {
   hips:false,
   thigh:false,
   inseam:false,
-}
+};
+let askingtocustomer = {
+  left:false,
+  right:false,
+  cover:false,
+  dontcover:false,
+  hkyaatehtamein:false,
+  hpi skrit:false,
+  shortwaist:false,
+  normalwaist:false,
+};
 
 let designAttachment = false;
 let bdesignAttachment = false;
 
 let userEnteredMeasurement = {};
+let userEnteredAnswers = {};
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
@@ -148,10 +159,16 @@ function handleMessage(sender_psid, received_message) {
   let response;
   if (received_message.text == "hi" || received_message.text == "Hi") {    
    greetUser (sender_psid);
-  }else if (received_message.text == "Left") {    
+  }else if (received_message.text && askingtocustomer.left == true) {    
+    userEnteredAnswers.left = received_message.text;
     asking_hm_length (sender_psid);
-  }else if (received_message.text == "Right") {    
+    askingtocustomer.left = false;
+    askingtocustomer.right =false;
+  }else if (received_message.text && askingtocustomer.right == true) {   
+    userEnteredAnswers.right = received_message.text; 
     asking_hm_length (sender_psid);
+    askingtocustomer.left = false;
+    askingtocustomer.right =false;
   }else if (received_message.text == "Cover") {    
     asking_hm_type (sender_psid);
   }else if (received_message.text == "Don't cover") {    
@@ -912,6 +929,8 @@ async function asking_hm_fold (sender_psid) {
   callSend(sender_psid, response1).then(()=>{
     return callSend (sender_psid, response2);
   });
+  askingtocustomer.left = true;
+    askingtocustomer.right =true;
 }
 
 /*function for asking htamein length*/
