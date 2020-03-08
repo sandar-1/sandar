@@ -905,7 +905,10 @@ function bodyrecord(sender_psid){
 
 /*function for asking htamein fold*/
 async function asking_hm_fold (sender_psid) {
-  let response1 = {"text": "well, how about Htamein?"};
+  let response1 = {
+    askingtocustomer.hm_fold = true;
+    "text": "well, how about Htamein?"
+  };
   let response2 = {
     "text": "Which fold do you want to cover. Left or Right?",
     "quick_replies":[
@@ -922,12 +925,15 @@ async function asking_hm_fold (sender_psid) {
   callSend(sender_psid, response1).then(()=>{
     return callSend (sender_psid, response2);
   });
-    askingtocustomer.hm_fold = true;
 }
 
 /*function for asking htamein length*/
 async function asking_hm_length (sender_psid) {
-  let response1 = {"text": "How much length of Htamein do you want?"};
+  let response1 = {
+    askingtocustomer.hm_fold = false;
+    askingtocustomer.hm_length = true;
+    "text": "How much length of Htamein do you want?"
+  };
   let response2 = {
     "text": "Do you want to cover your ankle or not?",
     "quick_replies":[
@@ -944,13 +950,16 @@ async function asking_hm_length (sender_psid) {
   callSend(sender_psid, response1).then(()=>{
     return callSend (sender_psid, response2);
   });
-    askingtocustomer.hm_fold = false;
-    askingtocustomer.hm_length = true;
 }
 
 /*function for asking htamein type*/
 async function asking_hm_type (sender_psid) {
-  let response1 = {"text": "What kind of Htamein?"};
+  let response1 = {
+    askingtocustomer.hm_fold = false;
+    askingtocustomer.hm_length = false;
+    askingtocustomer.hm_type = true;
+    "text": "What kind of Htamein?"
+  };
   let response2 = {
     "text": "Hkyaate htamein (sew with buttons)? Hpi skirt (sew with zip)?",
     "quick_replies":[
@@ -967,9 +976,6 @@ async function asking_hm_type (sender_psid) {
   callSend(sender_psid, response1).then(()=>{
     return callSend (sender_psid, response2);
   });
-    askingtocustomer.hm_fold = false;
-    askingtocustomer.hm_length = false;
-    askingtocustomer.hm_type = true;
 }
 
 /*function for asking waist length*/
