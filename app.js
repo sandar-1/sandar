@@ -146,8 +146,24 @@ app.get('/webhook', (req, res) => {
 
 function handleMessage(sender_psid, received_message) {
   let response;
-  if (received_message.text == "hi") {    
+  if (received_message.text == "hi" || received_message.text == "Hi") {    
    greetUser (sender_psid);
+  }else if (received_message.text == "Left") {    
+    asking_hm_length (sender_psid);
+  }else if (received_message.text == "Right") {    
+    asking_hm_length (sender_psid);
+  }else if (received_message.text == "Cover") {    
+    asking_hm_type (sender_psid);
+  }else if (received_message.text == "Don't cover") {    
+    asking_hm_type (sender_psid);
+  }else if (received_message.text == "Hkyaate htamein") {    
+    asking_waist_length (sender_psid);
+  }else if (received_message.text == "Hpi skrit") {    
+    asking_waist_length (sender_psid);
+  }else if (received_message.text == "Short waist") {    
+    (sender_psid);
+  }else if (received_message.text == "Normal waist") {    
+     (sender_psid);
   }else if (received_message.text == "Start" || received_message.text == "start") {    
     response = {
       "text": `First let's measure Chest.`
@@ -303,6 +319,14 @@ function handlePostback(sender_psid, received_postback) {
     forcasual (sender_psid);
   }else if (payload === 'ABD') {
     forbechelor (sender_psid);
+  }else if (payload === 'nothing_added') {
+    asking_hm_fold (sender_psid);
+  }else if (payload === 'add_beaded') {
+    asking_hm_fold (sender_psid);
+  }else if (payload === 'i_do_have') {
+    response ={"text": "well, send me the beaded design that you want to do."};
+    designAttachment = false;
+    bdesignAttachment = true;
   }else if (payload === 'same_as_design') {
     let response1 = {"text":"Estimated price of putting beaded embroidery is around 10000. Depending on the beaded embroidery design."};
     let response2 = {
@@ -332,14 +356,6 @@ function handlePostback(sender_psid, received_postback) {
    callSend(sender_psid, response1).then(()=>{
     return callSend(sender_psid, response2);
    });
-  }else if (payload === 'i_do_have') {
-    response ={"text": "well, send me the beaded design that you want to do."};
-    designAttachment = false;
-    bdesignAttachment = true;
-  }else if (payload === 'nothing_added') {
-    worrymeasurment (sender_psid);
-  }else if (payload === 'add_beaded') {
-    worrymeasurment (sender_psid);
   }
   callSendAPI(sender_psid, response);
 }
@@ -838,6 +854,7 @@ async function worrymeasurment (sender_psid){
     });
 }
 
+/*function for showing body record*/
 function bodyrecord(sender_psid){
     let response1 = {"text": `Chest: `+ userEnteredMeasurement.chest};
     let response2 = {"text": 'Upper arm: ' + userEnteredMeasurement.upperArm};
@@ -874,6 +891,78 @@ function bodyrecord(sender_psid){
           });
         });
       });
+}
+
+/*function for asking htamein fold*/
+async function asking_hm_fold (sender_psid) {
+  let response1 = {"text": "well, how about Htamein?"};
+  let response2 = {
+    "text": "Which fold do you want to cover. Left or Right?",
+    "quick_replies":[
+                  {
+                    "content_type":"text",
+                    "title":"Left",
+                    "payload":"L"
+                  },{
+                    "content_type":"text",
+                    "title":"Right",
+                    "payload":"R"
+                  }]
+  }
+}
+
+/*function for asking htamein length*/
+async function asking_hm_length (sender_psid) {
+  let response1 = {"text": "How much length of Htamein do you want?"};
+  let response2 = {
+    "text": "Do you want to cover your ankle or not?",
+    "quick_replies":[
+                  {
+                    "content_type":"text",
+                    "title":"Cover",
+                    "payload":"C"
+                  },{
+                    "content_type":"Don't cover",
+                    "title":"Right",
+                    "payload":"DC"
+                  }]
+  }
+}
+
+/*function for asking htamein type*/
+async function asking_hm_type (sender_psid) {
+  let response1 = {"text": "What kind of Htamein?"};
+  let response2 = {
+    "text": "Hkyaate htamein (sew with buttons)? Hpi skirt (sew with zip)?",
+    "quick_replies":[
+                  {
+                    "content_type":"text",
+                    "title":"Hkyaate htamein",
+                    "payload":"HH"
+                  },{
+                    "content_type":"Don't cover",
+                    "title":"Hpi skrit",
+                    "payload":"HS"
+                  }]
+  }
+}
+
+/*function for asking waist length*/
+async function asking_waist_length (sender_psid) {
+  let response1 = {"text": "So, how about shirt?"};
+  let response2 = {
+    "text": "Short waist? OR Normal waist?",
+    "quick_replies":[
+                  {
+                    "content_type":"text",
+                    "title":"Short waist",
+                    "payload":"SW"
+                  },{
+                    "content_type":"Don't cover",
+                    "title":"Normal waist",
+                    "payload":"NW"
+                  }]
+  }
 }
 
 function callSendAPI(sender_psid, response) {
