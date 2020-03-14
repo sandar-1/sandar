@@ -306,6 +306,8 @@ function handlePostback(sender_psid, received_postback) {
     asking_to_upload_design (sender_psid);
   }else if (payload === 'measure_again') {
     response = {"text" : "Type 'Start' to measure again 💁"}
+  }else if (payload === 'yes_right_measurment') {
+    response = {"text" : "Ok!"}
   }else if (payload === 'same_as_design') {
     let response1 = {"text":"Estimated price of putting beaded embroidery is around 10000. Depending on the beaded embroidery design."};
     let response2 = {
