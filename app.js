@@ -596,58 +596,6 @@ async function asking_to_upload_design (sender_psid){
     bdesignAttachment = false;
 }
 
-/*Function for wedding*/
-async function forwedding (sender_psid){
-    let response1 = {"text":"Congratulation! "};
-    let response2 = {"text":"Please send me the cloth design you want to sew."};
-  callSend(sender_psid, response1).then(()=>{
-    return callSend(sender_psid, response2).then(()=>{
-      return callSend(sender_psid, response3);
-    });
-  });
-  designAttachment = true;
-    bdesignAttachment = false;
-}
-
-/*Function for occasion*/
-async function foroccasion (sender_psid){
-    let response1 = {"text":"Let me make it beautiful."};
-    let response2 = {"text":"Here are some good suggestions designs for you."};
-  callSend(sender_psid, response1).then(()=>{
-    return callSend(sender_psid, response2).then(()=>{
-      return callSend(sender_psid, response3);
-    });
-  });
-  designAttachment = true;
-    bdesignAttachment = false;
-}
-
-/*Function for casual*/
-async function forcasual (sender_psid){
-    let response1 = {"text":"Sometimes it is nice to wear lightweight Myanmar dress.! "};
-    let response2 = {"text":"Here are some good suggestions designs for you."};
-  callSend(sender_psid, response1).then(()=>{
-    return callSend(sender_psid, response2).then(()=>{
-      return callSend(sender_psid, response3);
-    });
-  });
-  designAttachment = true;
-    bdesignAttachment = false;
-}
-
-/*Function for bechelor*/
-async function forbechelor (sender_psid){
-    let response1 = {"text":"Congratulation Sis! You did it! "};
-    let response2 = {"text":"Here are some good suggestions designs for you."};
-  callSend(sender_psid, response1).then(()=>{
-    return callSend(sender_psid, response2).then(()=>{
-      return callSend(sender_psid, response3);
-    });
-  });
-  designAttachment = true;
-    bdesignAttachment = false;
-}
-
 /*function for worry about measurement*/
 async function worrymeasurment (sender_psid){
   let response1 = {"text": "Ok, let's take your body measurement."};
