@@ -518,7 +518,7 @@ async function askforevent (sender_psid) {
             "buttons":[
              {
                 "type":"postback",
-                "title":"This one.",
+                "title":"Wedding.",
                 "payload":"WEDDING"
               }              
             ]      
@@ -535,7 +535,7 @@ async function askforevent (sender_psid) {
             "buttons":[
              {
                 "type":"postback",
-                "title":"This one.",
+                "title":"Occasion.",
                 "payload":"OCCASION"
               }              
             ]      
@@ -552,13 +552,13 @@ async function askforevent (sender_psid) {
             "buttons":[
              {
                 "type":"postback",
-                "title":"This one.",
+                "title":"Casual.",
                 "payload":"CASUAL"
               }              
             ]      
           },
           {
-            "title":"For a bechelor's degree?",
+            "title":"For a Convocation?",
             "image_url":"https://scontent-sea1-1.xx.fbcdn.net/v/t1.0-9/29792720_1006980256115703_3053445385785054787_n.jpg?_nc_cat=108&_nc_sid=110474&_nc_ohc=MvKZ7Bf0e1oAX-_9g54&_nc_ht=scontent-sea1-1.xx&oh=d6203387d93b6ad874ddf661dab28425&oe=5E8106ED",
             "subtitle":"👩‍🎓 The estimated price of graduation dress is range from 30000 to above.",
             "default_action": {
@@ -569,7 +569,7 @@ async function askforevent (sender_psid) {
             "buttons":[
              {
                 "type":"postback",
-                "title":"This one.",
+                "title":"Convocation.",
                 "payload":"ABD"
               }              
             ]      
