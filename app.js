@@ -220,7 +220,6 @@ function handleMessage(sender_psid, received_message) {
     measurement.inseam = true;
   }else if (received_message.text && measurement.inseam == true) {   
     userEnteredMeasurement.inseam = received_message.text; 
-      
     bodymeasure(sender_psid);
     measurement.chest = false;
     measurement.upperArm = false;
@@ -263,7 +262,7 @@ function handleMessage(sender_psid, received_message) {
     useranswer.ankle = true;
   }else if (received_message.text && useranswer.ankle == true) { 
     userEnteredAnswer.ankle = received_message.text;   
-    response = {"text" : "ok"}
+    user_answer(sender_psid);
     useranswer.htameintype = false;
     useranswer.htameinfold = false;
     useranswer.khar = false;
@@ -353,6 +352,8 @@ function handlePostback(sender_psid, received_postback) {
     asking_to_upload_design (sender_psid);
   }else if (payload === 'measure_again') {
     response = {"text" : "Type 'Start' to measure again 💁"}
+  }else if (payload === 'yes_right') {
+    response = {"text" : "Ok!"}
   }else if (payload === 'yes_right_measurment') {
     let response1 = {"text" : "which type of htamein? "};
     let response2 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein."};
@@ -678,6 +679,47 @@ async function worrymeasurment (sender_psid){
     });
 }
 
+/*function for user answer*/
+function user_answer(sender_psid){
+  let response1 = {"text" : "Htamein Type:" + userEnteredAnswer.htameintype};
+  let response2 = {"text" : "Htamein Fold:" + userEnteredAnswer.htameinfold};
+  let response3 = {"text" : "Khar        :" + userEnteredAnswer.khar};
+  let response4 = {"text" : "Ankle       :" + userEnteredAnswer.ankle};
+  let response5 = {
+      "attachment": {
+                  "type": "template",
+                  "payload": {
+                    "template_type": "generic",
+                    "elements": [{
+                      "title": "Is this right?",
+                      "buttons": [
+                        {
+                          "type": "postback",
+                          "title": "Yes",
+                          "payload": "yes_right",
+                        },
+                        {
+                          "type": "postback",
+                          "title": "Ask me again.",
+                          "payload": "yes_right_measurment",
+                        }
+                      ],
+                    }]
+                  }
+                }
+    };
+  callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3).then(()=>{
+          return callSend(sender_psid, response4).then(()=>{
+            return callSend(sender_psid, response5);
+          });
+        });
+      });
+    });
+}
+
+/*function for body measurement record*/
 function bodymeasure(sender_psid){
     let response1 = {"text": `Chest: `+ userEnteredMeasurement.chest};
     let response2 = {"text": 'Upper arm: ' + userEnteredMeasurement.upperArm};
