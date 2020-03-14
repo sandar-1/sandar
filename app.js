@@ -297,13 +297,13 @@ function handlePostback(sender_psid, received_postback) {
     response = {"text" : "We will sew it look like the design you send or chooes. "};
     askforevent (sender_psid);
   }else if (payload === 'WEDDING') {
-    asking_to_upload_design (sender_psid);
+    forwedding (sender_psid);
   }else if (payload === 'OCCASION') {
-    asking_to_upload_design (sender_psid);
+    foroccasion (sender_psid);
   }else if (payload === 'CASUAL') {
-    asking_to_upload_design (sender_psid);
+    forcasual (sender_psid);
   }else if (payload === 'ABD') {
-    asking_to_upload_design (sender_psid);
+    forbechelor (sender_psid);
   }else if (payload === 'same_as_design') {
     let response1 = {"text":"Estimated price of putting beaded embroidery is around 10000. Depending on the beaded embroidery design."};
     let response2 = {
@@ -585,12 +585,229 @@ async function askforevent (sender_psid) {
   });
 }
 
-/*Function for asking to upload design*/
-async function asking_to_upload_design (sender_psid){
-    let response1 = {"text":"Well....."};
-    let response2 = {"text":"Please send me the cloth design you want to sew."};
+/*Function for wedding*/
+async function forwedding (sender_psid){
+    let response1 = {"text":"Congratulation! "};
+    let response2 = {"text":"Here are some good suggestions designs for you."};
+    let response3 = {
+      "attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"generic",
+        "elements":[
+           {
+            "title":"I hope you will like it.👩👩",
+            "image_url":"https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
+            "subtitle":"It's okey! If you don't like it, you can send me any design picture you like.",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"I like this one.",
+                "payload":"likethis1"
+              }              
+            ]      
+          },
+          {
+            "title":"I hope you will like it.👩👩",
+            "image_url":"https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
+            "subtitle":"It's okey! If you don't like it, you can send me any design picture you like.",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"I like this one.",
+                "payload":"likethis1"
+              }              
+            ]      
+          }
+        ]
+      }
+    }
+    };
   callSend(sender_psid, response1).then(()=>{
-    return callSend(sender_psid, response2);
+    return callSend(sender_psid, response2).then(()=>{
+      return callSend(sender_psid, response3);
+    });
+  });
+  designAttachment = true;
+    bdesignAttachment = false;
+}
+
+/*Function for occasion*/
+async function foroccasion (sender_psid){
+    let response1 = {"text":"Let me make it beautiful."};
+    let response2 = {"text":"Here are some good suggestions designs for you."};
+    let response3 = {
+      "attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"generic",
+        "elements":[
+           {
+            "title":"I hope you will like it.👩👩",
+            "image_url":"https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
+            "subtitle":"It's okey! If you don't like it, you can send me any design picture you like.",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"I like this one.",
+                "payload":"likethis1"
+              }              
+            ]      
+          },
+          {
+            "title":"I hope you will like it.👩👩",
+            "image_url":"https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
+            "subtitle":"It's okey! If you don't like it, you can send me any design picture you like.",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"I like this one.",
+                "payload":"likethis1"
+              }              
+            ]      
+          }
+        ]
+      }
+    }
+    };
+  callSend(sender_psid, response1).then(()=>{
+    return callSend(sender_psid, response2).then(()=>{
+      return callSend(sender_psid, response3);
+    });
+  });
+  designAttachment = true;
+    bdesignAttachment = false;
+}
+
+/*Function for casual*/
+async function forcasual (sender_psid){
+    let response1 = {"text":"Sometimes it is nice to wear lightweight Myanmar dress.! "};
+    let response2 = {"text":"Here are some good suggestions designs for you."};
+    let response3 = {
+      "attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"generic",
+        "elements":[
+           {
+            "title":"I hope you will like it.👩👩",
+            "image_url":"https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
+            "subtitle":"It's okey! If you don't like it, you can send me any design picture you like.",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"I like this one.",
+                "payload":"likethis1"
+              }              
+            ]      
+          },
+          {
+            "title":"I hope you will like it.👩👩",
+            "image_url":"https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
+            "subtitle":"It's okey! If you don't like it, you can send me any design picture you like.",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"I like this one.",
+                "payload":"likethis1"
+              }              
+            ]      
+          }
+        ]
+      }
+    }
+    };
+  callSend(sender_psid, response1).then(()=>{
+    return callSend(sender_psid, response2).then(()=>{
+      return callSend(sender_psid, response3);
+    });
+  });
+  designAttachment = true;
+    bdesignAttachment = false;
+}
+
+/*Function for bechelor*/
+async function forbechelor (sender_psid){
+    let response1 = {"text":"Congratulation Sis! You did it! "};
+    let response2 = {"text":"Here are some good suggestions designs for you."};
+    let response3 = {
+      "attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"generic",
+        "elements":[
+           {
+            "title":"I hope you will like it.👩👩",
+            "image_url":"https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
+            "subtitle":"It's okey! If you don't like it, you can send me any design picture you like.",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"I like this one.",
+                "payload":"likethis1"
+              }              
+            ]      
+          },
+          {
+            "title":"I hope you will like it.👩👩",
+            "image_url":"https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
+            "subtitle":"It's okey! If you don't like it, you can send me any design picture you like.",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.pinimg.com/236x/ba/d6/d6/bad6d638a17ee82b7c563483b65a7a2d--kebaya-indonesia-thai-dress.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"I like this one.",
+                "payload":"likethis1"
+              }              
+            ]      
+          }
+        ]
+      }
+    }
+    };
+  callSend(sender_psid, response1).then(()=>{
+    return callSend(sender_psid, response2).then(()=>{
+      return callSend(sender_psid, response3);
+    });
   });
   designAttachment = true;
     bdesignAttachment = false;
@@ -630,23 +847,29 @@ function bodymeasure(sender_psid){
     let response5 = {"text": 'Hips: '+ userEnteredMeasurement.hips};
     let response6 = {"text": 'Thigh: ' + userEnteredMeasurement.thigh};
     let response7 = {"text": 'Inseam: '+ userEnteredMeasurement.inseam};
-    let response8 = {
-                "attachment": {
+    let response8 = {"text": 'Is this the right measurment?'};
+    let response9 = {
+      "attachment": {
                   "type": "template",
                   "payload": {
                     "template_type": "generic",
                     "elements": [{
+                      "title": "Pls. chooes the type",
                       "buttons": [
-                      "title": "Is this the right measurment?",
                         {
                           "type": "postback",
-                          "title": "Yes",
-                          "payload": "yes_right_measurement",
+                          "title": "Ceromonies",
+                          "payload": "ceremony",
                         },
                         {
                           "type": "postback",
-                          "title": "No",
-                          "payload": "measure_again",
+                          "title": "Simple",
+                          "payload": "S",
+                        },
+                        {
+                          "type": "postback",
+                          "title": "Measuring again",
+                          "payload": "measureagain",
                         }
                       ],
                     }]
@@ -660,7 +883,9 @@ function bodymeasure(sender_psid){
               return callSend(sender_psid,response5).then(()=>{
                 return callSend(sender_psid,response6).then(()=>{
                   return callSend(sender_psid,response7).then(()=>{
-                    return callSend(sender_psid,response8);
+                    return callSend(sender_psid,response8).then(()=>{
+                        return callSend(sender_psid, response9);
+                    });
                   });
                 });
               });
