@@ -304,6 +304,8 @@ function handlePostback(sender_psid, received_postback) {
     asking_to_upload_design (sender_psid);
   }else if (payload === 'ABD') {
     asking_to_upload_design (sender_psid);
+  }else if (payload === 'measure_again') {
+    response = {"text" : "Type 'Start' to measure again 💁"}
   }else if (payload === 'same_as_design') {
     let response1 = {"text":"Estimated price of putting beaded embroidery is around 10000. Depending on the beaded embroidery design."};
     let response2 = {
@@ -630,29 +632,23 @@ function bodymeasure(sender_psid){
     let response5 = {"text": 'Hips: '+ userEnteredMeasurement.hips};
     let response6 = {"text": 'Thigh: ' + userEnteredMeasurement.thigh};
     let response7 = {"text": 'Inseam: '+ userEnteredMeasurement.inseam};
-    let response8 = {"text": 'Is this the right measurment?'};
-    let response9 = {
+    let response8 = {
       "attachment": {
                   "type": "template",
                   "payload": {
                     "template_type": "generic",
                     "elements": [{
-                      "title": "Pls. chooes the type",
+                      "title": "Is this the right measurment?",
                       "buttons": [
                         {
                           "type": "postback",
-                          "title": "Ceromonies",
-                          "payload": "ceremony",
+                          "title": "Yes",
+                          "payload": "yes_right_measurment",
                         },
                         {
                           "type": "postback",
-                          "title": "Simple",
-                          "payload": "S",
-                        },
-                        {
-                          "type": "postback",
-                          "title": "Measuring again",
-                          "payload": "measureagain",
+                          "title": "No",
+                          "payload": "measure_again",
                         }
                       ],
                     }]
@@ -666,9 +662,7 @@ function bodymeasure(sender_psid){
               return callSend(sender_psid,response5).then(()=>{
                 return callSend(sender_psid,response6).then(()=>{
                   return callSend(sender_psid,response7).then(()=>{
-                    return callSend(sender_psid,response8).then(()=>{
-                        return callSend(sender_psid, response9);
-                    });
+                    return callSend(sender_psid,response8);
                   });
                 });
               });
