@@ -86,8 +86,7 @@ app.post('/webhook', (req, res) => {
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
       if (webhook_event.message) {
-        handleMessage(sender_psid, webhook_event.message);  
-        measuring_body(sender_psid, webhook_event.message);      
+        handleMessage(sender_psid, webhook_event.message);        
       } else if (webhook_event.postback) {
         handlePostback(sender_psid, webhook_event.postback);
       }
@@ -149,81 +148,80 @@ function handleMessage(sender_psid, received_message) {
   let response;
   if (received_message.text == "hi") {    
    greetUser (sender_psid);
-  // }else if (received_message.text == "Start" || received_message.text == "start") {    
-  //   response = {
-  //     "text": `First let's measure Chest.`
-  //   }
-  //   measurement.chest = true;
-  // }else if (received_message.text && measurement.chest == true) {   
-  //   userEnteredMeasurement.chest =  received_message.text;
-  //   response = {
-  //     "text": `Now Upper arm.`
-  //   }
-  //   measurement.chest = false;
-  //   measurement.upperArm = true;
-  // }else if (received_message.text && measurement.upperArm == true) { 
-  //   userEnteredMeasurement.upperArm = received_message.text; 
-  //   response = {
-  //     "text": `Let's measure Sleeve length.`
-  //   }
-  //   measurement.chest = false;
-  //   measurement.upperArm = false;
-  //   measurement.sleevelength = true;
-  // }else if (received_message.text && measurement.sleevelength == true) { 
-  //   userEnteredMeasurement.sleevelength = received_message.text;   
-  //   response = {
-  //     "text": `And measure your Waist.`
-  //   }
-  //   measurement.chest = false;
-  //   measurement.upperArm = false;
-  //   measurement.sleevelength = false;
-  //   measurement.waist = true;
-  // }else if (received_message.text && measurement.waist == true) {
-  //   userEnteredMeasurement.waist = received_message.text;    
-  //   response = {
-  //     "text": `Now your Hips.`
-  //   }
-  //   measurement.chest = false;
-  //   measurement.upperArm = false;
-  //   measurement.sleevelength = false;
-  //   measurement.waist = false;
-  //   measurement.hips = true;
-  // }else if (received_message.text && measurement.hips == true) { 
-  //   userEnteredMeasurement.hips = received_message.text;   
-  //   response = {
-  //     "text": `Measure your Thigh.`
-  //   }
-  //   measurement.chest = false;
-  //   measurement.upperArm = false;
-  //   measurement.sleevelength = false;
-  //   measurement.waist = false;
-  //   measurement.hips = false;
-  //   measurement.thigh = true;
-  // }else if (received_message.text && measurement.thigh == true) {   
-  //   userEnteredMeasurement.thigh = received_message.text; 
-  //   response = {
-  //     "text": `Finally! your Inseam.`
-  //   }
-  //   measurement.chest = false;
-  //   measurement.upperArm = false;
-  //   measurement.sleevelength = false;
-  //   measurement.waist = false;
-  //   measurement.hips = false;
-  //   measurement.thigh = false;
-  //   measurement.inseam = true;
-  // }else if (received_message.text && measurement.inseam == true) {   
-  //   userEnteredMeasurement.inseam = received_message.text; 
+  }else if (received_message.text == "Start" || received_message.text == "start") {    
+    response = {
+      "text": `First let's measure Chest.`
+    }
+    measurement.chest = true;
+  }else if (received_message.text && measurement.chest == true) {   
+    userEnteredMeasurement.chest =  received_message.text;
+    response = {
+      "text": `Now Upper arm.`
+    }
+    measurement.chest = false;
+    measurement.upperArm = true;
+  }else if (received_message.text && measurement.upperArm == true) { 
+    userEnteredMeasurement.upperArm = received_message.text; 
+    response = {
+      "text": `Let's measure Sleeve length.`
+    }
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = true;
+  }else if (received_message.text && measurement.sleevelength == true) { 
+    userEnteredMeasurement.sleevelength = received_message.text;   
+    response = {
+      "text": `And measure your Waist.`
+    }
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = true;
+  }else if (received_message.text && measurement.waist == true) {
+    userEnteredMeasurement.waist = received_message.text;    
+    response = {
+      "text": `Now your Hips.`
+    }
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = false;
+    measurement.hips = true;
+  }else if (received_message.text && measurement.hips == true) { 
+    userEnteredMeasurement.hips = received_message.text;   
+    response = {
+      "text": `Measure your Thigh.`
+    }
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = false;
+    measurement.hips = false;
+    measurement.thigh = true;
+  }else if (received_message.text && measurement.thigh == true) {   
+    userEnteredMeasurement.thigh = received_message.text; 
+    response = {
+      "text": `Finally! your Inseam.`
+    }
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = false;
+    measurement.hips = false;
+    measurement.thigh = false;
+    measurement.inseam = true;
+  }else if (received_message.text && measurement.inseam == true) {   
+    userEnteredMeasurement.inseam = received_message.text; 
       
-  //   bodymeasure(sender_psid);
-  //   measurement.chest = false;
-  //   measurement.upperArm = false;
-  //   measurement.sleevelength = false;
-  //   measurement.waist = false;
-  //   measurement.hips = false;
-  //   measurement.thigh = false;
-  //   measurement.inseam = false;
-  // }
-  else if (received_message.attachments && designAttachment == true) {
+    bodymeasure(sender_psid);
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = false;
+    measurement.hips = false;
+    measurement.thigh = false;
+    measurement.inseam = false;
+  }else if (received_message.attachments && designAttachment == true) {
     console.log('meta data',received_message);
     designAttachment == false;
     let attachment_url = received_message.attachments[0].payload.url;
@@ -813,85 +811,6 @@ async function forbechelor (sender_psid){
   });
   designAttachment = true;
     bdesignAttachment = false;
-}
-
-/*function measuring*/
-function measuring_body (sender_psid, received_message) {
-  let response;
-  if (received_message.text == "Start" || received_message.text == "start") {    
-    response = {
-      "text": `First let's measure Chest.`
-    }
-    measurement.chest = true;
-  }else if (received_message.text && measurement.chest == true) {   
-    userEnteredMeasurement.chest =  received_message.text;
-    response = {
-      "text": `Now Upper arm.`
-    }
-    measurement.chest = false;
-    measurement.upperArm = true;
-  }else if (received_message.text && measurement.upperArm == true) { 
-    userEnteredMeasurement.upperArm = received_message.text; 
-    response = {
-      "text": `Let's measure Sleeve length.`
-    }
-    measurement.chest = false;
-    measurement.upperArm = false;
-    measurement.sleevelength = true;
-  }else if (received_message.text && measurement.sleevelength == true) { 
-    userEnteredMeasurement.sleevelength = received_message.text;   
-    response = {
-      "text": `And measure your Waist.`
-    }
-    measurement.chest = false;
-    measurement.upperArm = false;
-    measurement.sleevelength = false;
-    measurement.waist = true;
-  }else if (received_message.text && measurement.waist == true) {
-    userEnteredMeasurement.waist = received_message.text;    
-    response = {
-      "text": `Now your Hips.`
-    }
-    measurement.chest = false;
-    measurement.upperArm = false;
-    measurement.sleevelength = false;
-    measurement.waist = false;
-    measurement.hips = true;
-  }else if (received_message.text && measurement.hips == true) { 
-    userEnteredMeasurement.hips = received_message.text;   
-    response = {
-      "text": `Measure your Thigh.`
-    }
-    measurement.chest = false;
-    measurement.upperArm = false;
-    measurement.sleevelength = false;
-    measurement.waist = false;
-    measurement.hips = false;
-    measurement.thigh = true;
-  }else if (received_message.text && measurement.thigh == true) {   
-    userEnteredMeasurement.thigh = received_message.text; 
-    response = {
-      "text": `Finally! your Inseam.`
-    }
-    measurement.chest = false;
-    measurement.upperArm = false;
-    measurement.sleevelength = false;
-    measurement.waist = false;
-    measurement.hips = false;
-    measurement.thigh = false;
-    measurement.inseam = true;
-  }else if (received_message.text && measurement.inseam == true) {   
-    userEnteredMeasurement.inseam = received_message.text; 
-      
-    bodymeasure(sender_psid);
-    measurement.chest = false;
-    measurement.upperArm = false;
-    measurement.sleevelength = false;
-    measurement.waist = false;
-    measurement.hips = false;
-    measurement.thigh = false;
-    measurement.inseam = false;
-  }
 }
 
 /*function for worry about measurement*/
