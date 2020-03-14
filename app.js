@@ -675,14 +675,14 @@ async function worrymeasurment (sender_psid){
 }
 
 function bodymeasure(sender_psid){
-    let response2 = {"text": `Chest: `+ userEnteredMeasurement.chest};
-    let response3 = {"text": 'Upper arm: ' + userEnteredMeasurement.upperArm};
-    let response4 = {"text": 'Sleeve length: ' + userEnteredMeasurement.sleevelength};
-    let response5 = {"text": 'Waist: '+ userEnteredMeasurement.waist};
-    let response6 = {"text": 'Hips: '+ userEnteredMeasurement.hips};
-    let response7 = {"text": 'Thigh: ' + userEnteredMeasurement.thigh};
-    let response8 = {"text": 'Inseam: '+ userEnteredMeasurement.inseam};
-    let response9 = {
+    let response1 = {"text": `Chest: `+ userEnteredMeasurement.chest};
+    let response2 = {"text": 'Upper arm: ' + userEnteredMeasurement.upperArm};
+    let response3 = {"text": 'Sleeve length: ' + userEnteredMeasurement.sleevelength};
+    let response4 = {"text": 'Waist: '+ userEnteredMeasurement.waist};
+    let response5 = {"text": 'Hips: '+ userEnteredMeasurement.hips};
+    let response6 = {"text": 'Thigh: ' + userEnteredMeasurement.thigh};
+    let response7 = {"text": 'Inseam: '+ userEnteredMeasurement.inseam};
+    let response8 = {
                 "attachment": {
                   "type": "template",
                   "payload": {
@@ -712,9 +712,7 @@ function bodymeasure(sender_psid){
               return callSend(sender_psid,response5).then(()=>{
                 return callSend(sender_psid,response6).then(()=>{
                   return callSend(sender_psid,response7).then(()=>{
-                    return callSend(sender_psid,response8).then(()=>{
-                        return callSend(sender_psid, response9);
-                    });
+                    return callSend(sender_psid,response8);
                   });
                 });
               });
