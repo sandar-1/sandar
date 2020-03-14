@@ -49,13 +49,20 @@ let measurement = {
   hips:false,
   thigh:false,
   inseam:false,
-}
+};
 
+let useranswer = {
+  htameintype:false,
+  htameinfold:false,
+  khar:false,
+  ankle:false,
+};
 
 let designAttachment = false;
 let bdesignAttachment = false;
 
 let userEnteredMeasurement = {};
+let userEnteredAnswer = {};
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
@@ -222,6 +229,45 @@ function handleMessage(sender_psid, received_message) {
     measurement.hips = false;
     measurement.thigh = false;
     measurement.inseam = false;
+  }else if (received_message.text && useranswer.htameintype == true) { 
+    userEnteredAnswer.htameintype = received_message.text;   
+    let response1 = {"text": `which way you want to fold?`};
+    let response2 = {"text" : "Left fold/Right fold."};
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+    useranswer.htameintype = false;
+    useranswer.htameinfold = true;
+  }else if (received_message.text && useranswer.htameinfold == true) { 
+    let response1 = {"text": "Khar to (end exactly with the waist),"};
+    let response2 = {"text" : "Khar tin (ends at the hips) or"};
+    let response3 = {"text" : "khar shay (ends below the hips)"};
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
+    });
+    useranswer.htameintype = false;
+    useranswer.htameinfold = false;
+    useranswer.khar = true;
+  }else if (received_message.text && useranswer.khar == true) { 
+    userEnteredAnswer.khar = received_message.text;   
+    let response1 = {"text": `Would you like to cover ankle or not?`};
+    let response2 = {"text" : "Upper ankle/cover ankle."};
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+    useranswer.htameintype = false;
+    useranswer.htameinfold = false;
+    useranswer.khar = false;
+    useranswer.ankle = true;
+  }else if (received_message.text && useranswer.ankle == true) { 
+    userEnteredAnswer.ankle = received_message.text;   
+    response = {"text" : "ok"}
+    useranswer.htameintype = false;
+    useranswer.htameinfold = false;
+    useranswer.khar = false;
+    useranswer.ankle = false;
   }else if (received_message.attachments && designAttachment == true) {
     console.log('meta data',received_message);
     designAttachment == false;
@@ -308,7 +354,12 @@ function handlePostback(sender_psid, received_postback) {
   }else if (payload === 'measure_again') {
     response = {"text" : "Type 'Start' to measure again 💁"}
   }else if (payload === 'yes_right_measurment') {
-    response = {"text" : "Ok!"}
+    let response1 = {"text" : "which type of htamein? "};
+    let response2 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein."};
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+    useranswer.htameintype = true;
   }else if (payload === 'same_as_design') {
     let response1 = {"text":"Estimated price of putting beaded embroidery is around 10000. Depending on the beaded embroidery design."};
     let response2 = {
