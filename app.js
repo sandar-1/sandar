@@ -233,7 +233,7 @@ function handleMessage(sender_psid, received_message) {
                                       },{
                                         "content_type":"text",
                                         "title":"Right fold",
-                                        "payload":"k"
+                                        "payload":"rf"
                                       }]
                     };
     callSend(sender_psid, response1).then(()=>{
@@ -244,7 +244,22 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text && useranswer.htameinfold == true) { 
     let response1 = {"text": "Khar to (end exactly with the waist),"};
     let response2 = {"text" : "Khar tin (ends at the hips) or"};
-    let response3 = {"text" : "khar shay (ends below the hips)"};
+    let response3 = {"text" : "khar shay (ends below the hips)",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Khar To",
+                                        "payload":"kto"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Khar Tin",
+                                        "payload":"ktin"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Khar Shay",
+                                        "payload":"kshay"
+                                      }]
+                    };
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2).then(()=>{
         return callSend(sender_psid, response3);
@@ -256,7 +271,18 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text && useranswer.khar == true) { 
     userEnteredAnswer.khar = received_message.text;   
     let response1 = {"text": `Would you like to cover ankle or not?`};
-    let response2 = {"text" : "Upper ankle/cover ankle."};
+    let response2 = {"text" : "Upper ankle/cover ankle.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Upper Ankle",
+                                        "payload":"ya"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Cover Ankle",
+                                        "payload":"ca"
+                                      }]
+                    };
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });
@@ -360,7 +386,22 @@ function handlePostback(sender_psid, received_postback) {
     response = {"text" : "Ok!"}
   }else if (payload === 'yes_right_measurment') {
     let response1 = {"text" : "which type of htamein? "};
-    let response2 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein."};
+    let response2 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Cheik",
+                                        "payload":"c"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Hpi",
+                                        "payload":"hpi"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Simple",
+                                        "payload":"s"
+                                      }]
+                    };
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });
