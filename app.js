@@ -147,7 +147,7 @@ app.get('/webhook', (req, res) => {
 
 function handleMessage(sender_psid, received_message) {
   let response;
-  if (received_message.text == "hi") {    
+  if (received_message.text == "hi" || received_message.text == "Hi") {    
    greetUser (sender_psid);
   }else if (received_message.text == "Start" || received_message.text == "start") {    
     response = {
