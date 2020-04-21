@@ -415,7 +415,7 @@ function handlePostback(sender_psid, received_postback) {
     worrymeasurment (sender_psid);
   }else if (payload === 'same_as_design') {
     worrymeasurment (sender_psid);
-  }else if (payload === 'YESs') {
+  }else if (payload === 'YES') {
     worrymeasurment (sender_psid);
   }else if (payload === 'customize_design') {
     askforevent_customize (sender_psid);
