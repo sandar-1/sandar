@@ -915,25 +915,6 @@ function bodymeasure(sender_psid){
       });
 }
 
-/*function for All sending design report*/
-function Send_design_reprot(sender_psid){
-  let response1 = {"text" : "Here is all your data..."};
-  let response2 = {"text" : "image"};
-  let response3 = {"text" : "measurement"};
-  let response4 = {"text" : "Type"};
-  let response5 = { "text" : "If you want to change, type 'change'. "
-    };
-  callSend(sender_psid, response1).then(()=>{
-      return callSend(sender_psid, response2).then(()=>{
-        return callSend(sender_psid, response3).then(()=>{
-          return callSend(sender_psid, response4).then(()=>{
-            return callSend(sender_psid, response5);
-          });
-        });
-      });
-    });
-}
-
 function callSendAPI(sender_psid, response) {
   // Construct the message body
   let request_body = {
