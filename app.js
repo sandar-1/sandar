@@ -383,7 +383,7 @@ function handlePostback(sender_psid, received_postback) {
   }else if (payload === 'measure_again') {
     response = {"text" : "Type 'Start' to measure again 💁"}
   }else if (payload === 'yes_right') {
-    response = {"text" : "Ok!"}
+    Send_design_reprot (sender_psid);
   }else if (payload === 'yes_right_measurment') {
     let response1 = {"text" : "which type of htamein? "};
     let response2 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein.",
@@ -826,6 +826,26 @@ async function worrymeasurment (sender_psid){
     });
 }
 
+/*function for All sending design report*/
+function Send_design_reprot(sender_psid){
+  let response1 = {"text" : "Here is all your data..."};
+  let response2 = {user_answer(sender_psid)};
+  let response3 = {bodymeasure(sender_psid)};
+  let response4 = {"text" : "image"};
+  let response5 = { "text" : "If you want to change, type 'change'. "
+    };
+  callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3).then(()=>{
+          return callSend(sender_psid, response4).then(()=>{
+            return callSend(sender_psid, response5);
+          });
+        });
+      });
+    });
+}
+
+
 /*function for user answer*/
 function user_answer(sender_psid){
   let response1 = {"text" : "Htamein Type:" + userEnteredAnswer.htameintype};
@@ -847,7 +867,7 @@ function user_answer(sender_psid){
                         },
                         {
                           "type": "postback",
-                          "title": "Ask me again.",
+                          "title": "No",
                           "payload": "yes_right_measurment",
                         }
                       ],
