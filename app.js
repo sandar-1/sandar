@@ -407,42 +407,15 @@ function handlePostback(sender_psid, received_postback) {
       return callSend(sender_psid, response2);
     });
     useranswer.htameintype = true;
-  }else if (payload === 'same_as_design') {
-    let response1 = {"text":"Estimated price of putting beaded embroidery is around 10000. Depending on the beaded embroidery design."};
-    let response2 = {
-    "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "generic",
-          "elements": [{
-            "title": "All the estimated price will cost .......",
-            "subtitle": "Do you want to add or do not add beaded embroidery to control your budget?",
-            "buttons": [
-              {
-                "type": "postback",
-                "title": "Add beaded",
-                "payload": "add_beaded",
-              },
-              {
-                "type": "postback",
-                "title": "Don't add beaded",
-                "payload": "nothing_added",
-              }
-            ],
-          }]
-        }
-      }
-   };
-   callSend(sender_psid, response1).then(()=>{
-    return callSend(sender_psid, response2);
-   });
   }else if (payload === 'i_do_have') {
     response ={"text": "well, send me the beaded design that you want to do."};
     designAttachment = false;
     bdesignAttachment = true;
   }else if (payload === 'nothing_added') {
     worrymeasurment (sender_psid);
-  }else if (payload === 'add_beaded') {
+  }else if (payload === 'same_as_design') {
+    worrymeasurment (sender_psid);
+  }else if (payload === 'YESs') {
     worrymeasurment (sender_psid);
   }else if (payload === 'customize_design') {
     askforevent_customize (sender_psid);
