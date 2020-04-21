@@ -224,7 +224,18 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text && useranswer.htameintype == true) { 
     userEnteredAnswer.htameintype = received_message.text;   
     let response1 = {"text": `which way you want to fold?`};
-    let response2 = {"text" : "Left fold/Right fold."};
+    let response2 = {"text" : "Left fold/Right fold.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Left fold",
+                                        "payload":"lf"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Right fold",
+                                        "payload":"k"
+                                      }]
+                    };
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });
