@@ -242,6 +242,7 @@ function handleMessage(sender_psid, received_message) {
     useranswer.htameintype = false;
     useranswer.htameinfold = true;
   }else if (received_message.text && useranswer.htameinfold == true) { 
+    userEnteredAnswer.htameinfold = received_message.text;
     let response1 = {"text": "Khar to (end exactly with the waist),"};
     let response2 = {"text" : "Khar tin (ends at the hips) or"};
     let response3 = {"text" : "khar shay (ends below the hips)",
