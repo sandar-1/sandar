@@ -39,7 +39,8 @@ const
   databaseURL: "https://sandarbot.firebaseio.com"
  });
 
-let db = firebase.firestore();
+var db = firebase.database();
+var ref = db.ref("restricted_access/secret_document/items");
 
 let measurement = {
   chest:false,
@@ -890,6 +891,9 @@ function bodymeasure(sender_psid){
         });
       });
 }
+
+
+
 
 function callSendAPI(sender_psid, response) {
   // Construct the message body
