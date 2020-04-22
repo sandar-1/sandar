@@ -368,7 +368,7 @@ function handleMessage(sender_psid, received_message) {
           "template_type": "generic",
           "elements": [{
             "title": "Is tis one?",
-            "subtitle": "You exactly know how to blink others people eyes.",
+            "subtitle": ":)",
             "image_url": attachment_url,
             "buttons": [
               {
