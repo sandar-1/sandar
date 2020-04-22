@@ -381,6 +381,14 @@ function handlePostback(sender_psid, received_postback) {
     asking_to_upload_design (sender_psid);
   }else if (payload === 'ABD') {
     asking_to_upload_design (sender_psid);
+  }else if (payload === 'WEDDING_saw') {
+    worrymeasurment (sender_psid);
+  }else if (payload === 'OCCASION_saw') {
+    worrymeasurment (sender_psid);
+  }else if (payload === 'CASUAL_saw') {
+    worrymeasurment (sender_psid);
+  }else if (payload === 'ABD_saw') {
+    worrymeasurment (sender_psid);
   }else if (payload === 'measure_again') {
     response = {"text" : "Type 'Start' to measure again 💁"}
   }else if (payload === 'yes_right') {
@@ -417,8 +425,8 @@ function handlePostback(sender_psid, received_postback) {
     worrymeasurment (sender_psid);
   }else if (payload === 'YES') {
     worrymeasurment (sender_psid);
-  }else if (payload === 'customize_design') {
-    askforevent_customize (sender_psid);
+  }else if (payload === 'SAW') {
+    Sew_As_Wish (sender_psid);
   }
   callSendAPI(sender_psid, response);
 }
@@ -504,8 +512,8 @@ async function sewing (sender_psid){
               },
               {
                 "type": "postback",
-                "title": "By customizing.",
-                "payload": "customize_design",
+                "title": "Sew as you wish",
+                "payload": "SAW",
               }
             ],
           }]
@@ -663,9 +671,9 @@ async function askforevent (sender_psid) {
   });
 }
 
-/*function for asking event for customize*/
-async function askforevent_customize (sender_psid) {
-  let response1 = {"text":"For what kind of event?"};
+/*function for asking event for sew as wish*/
+async function Sew_As_Wish (sender_psid) {
+  let response1 = {"text":"Well....For what kind of event?"};
   let response2 = {"text":"These are the kinds of sewing we do in our shop."};
   let response3 = {
        "attachment":{
@@ -686,7 +694,7 @@ async function askforevent_customize (sender_psid) {
              {
                 "type":"postback",
                 "title":"Wedding.",
-                "payload":"WEDDING_C"
+                "payload":"WEDDING_saw"
               }              
             ]      
           },
@@ -703,7 +711,7 @@ async function askforevent_customize (sender_psid) {
              {
                 "type":"postback",
                 "title":"Occasion.",
-                "payload":"OCCASION_C"
+                "payload":"OCCASION_saw"
               }              
             ]      
           },
@@ -720,7 +728,7 @@ async function askforevent_customize (sender_psid) {
              {
                 "type":"postback",
                 "title":"Casual.",
-                "payload":"CASUAL_C"
+                "payload":"CASUAL_saw"
               }              
             ]      
           },
@@ -737,7 +745,7 @@ async function askforevent_customize (sender_psid) {
              {
                 "type":"postback",
                 "title":"Convocation.",
-                "payload":"ABD_C"
+                "payload":"ABD_saw"
               }              
             ]      
           }
@@ -750,17 +758,6 @@ async function askforevent_customize (sender_psid) {
       return callSend(sender_psid,response3);
     });
   });
-}
-
-/*Function for customize wedding*/
-async function customize_wedding (sender_psid){
-  let response1 = {"text":"Well...."};
-  let response2 = {"text":"Please send me the design you want to sew."};
-    callSend(sender_psid, response1).then(()=>{
-      return callSend(sender_psid, response2);
-    });
-  designAttachment = true;
-    bdesignAttachment = false;
 }
 
 /*Function for asking to upload design*/
