@@ -64,6 +64,7 @@ let sharepicAttachment = false;
 
 let userEnteredMeasurement = {};
 let userEnteredAnswer = {};
+let userImage = [];
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
@@ -302,7 +303,7 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.attachments && designAttachment == true) {
     console.log('meta data',received_message);
     designAttachment == false;
-    let attachment_url = received_message.attachments[0].payload.url;
+    userImage.push (received_message.attachments[0].payload.url);
     response = {
       "attachment": {
         "type": "template",
@@ -311,7 +312,7 @@ function handleMessage(sender_psid, received_message) {
           "elements": [{
             "title": "Is this design?",
             "subtitle": "Wow! this one will totally suits you.I can't wait to sew it.",
-            "image_url": attachment_url,
+            "image_url": userImage[0],
             "buttons": [
               {
                 "type": "postback",
@@ -331,7 +332,7 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.attachments && bdesignAttachment == true) {
     console.log('meta data',received_message);
     bdesignAttachment == false;
-    let attachment_url = received_message.attachments[0].payload.url;
+    userImage.push (received_message.attachments[0].payload.url);
     response = {
       "attachment": {
         "type": "template",
@@ -340,7 +341,7 @@ function handleMessage(sender_psid, received_message) {
           "elements": [{
             "title": "Is tis one?",
             "subtitle": "You exactly know how to blink others people eyes.",
-            "image_url": attachment_url,
+            "image_url": userImage[1],
             "buttons": [
               {
                 "type": "postback",
@@ -357,36 +358,36 @@ function handleMessage(sender_psid, received_message) {
         }
       }
     }
-  }else if (received_message.attachments && sharepicAttachment == true) {
-    console.log('meta data',received_message);
-    sharepicAttachment == false;
-    let attachment_url = received_message.attachments[0].payload.url;
-    response = {
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "generic",
-          "elements": [{
-            "title": "Is tis one?",
-            "subtitle": ":)",
-            "image_url": attachment_url,
-            "buttons": [
-              {
-                "type": "postback",
-                "title": "Yes!",
-                "payload": "yes_sp",
-              },
-              {
-                "type": "postback",
-                "title": "No!",
-                "payload": "no_sp",
-              }
-            ],
-          }]
-        }
-      }
-    }
-  }
+  // }else if (received_message.attachments && sharepicAttachment == true) {
+  //   console.log('meta data',received_message);
+  //   sharepicAttachment == false;
+  //   let attachment_url = received_message.attachments[0].payload.url;
+  //   response = {
+  //     "attachment": {
+  //       "type": "template",
+  //       "payload": {
+  //         "template_type": "generic",
+  //         "elements": [{
+  //           "title": "Is tis one?",
+  //           "subtitle": ":)",
+  //           "image_url": attachment_url,
+  //           "buttons": [
+  //             {
+  //               "type": "postback",
+  //               "title": "Yes!",
+  //               "payload": "yes_sp",
+  //             },
+  //             {
+  //               "type": "postback",
+  //               "title": "No!",
+  //               "payload": "no_sp",
+  //             }
+  //           ],
+  //         }]
+  //       }
+  //     }
+  //   }
+  // }
   callSendAPI(sender_psid, response);    
 }
 
