@@ -60,6 +60,7 @@ let useranswer = {
 
 let designAttachment = false;
 let bdesignAttachment = false;
+let sharepicAttachment = false;
 
 let userEnteredMeasurement = {};
 let userEnteredAnswer = {};
@@ -356,6 +357,35 @@ function handleMessage(sender_psid, received_message) {
         }
       }
     }
+  }else if (received_message.attachments && sharepicAttachment == true) {
+    console.log('meta data',received_message);
+    sharepicAttachment == false;
+    let attachment_url = received_message.attachments[0].payload.url;
+    response = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "Is tis one?",
+            "subtitle": "You exactly know how to blink others people eyes.",
+            "image_url": attachment_url,
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "Yes!",
+                "payload": "yes_sp",
+              },
+              {
+                "type": "postback",
+                "title": "No!",
+                "payload": "no_sp",
+              }
+            ],
+          }]
+        }
+      }
+    }
   }
   callSendAPI(sender_psid, response);    
 }
@@ -417,6 +447,7 @@ function handlePostback(sender_psid, received_postback) {
     useranswer.htameintype = true;
   }else if (payload === 'i_do_have') {
     response ={"text": "well, send me the beaded design that you want to do."};
+    sharepicAttachment = false;
     designAttachment = false;
     bdesignAttachment = true;
   }else if (payload === 'nothing_added') {
@@ -427,6 +458,11 @@ function handlePostback(sender_psid, received_postback) {
     worrymeasurment (sender_psid);
   }else if (payload === 'SAW') {
     Sew_As_Wish (sender_psid);
+  }else if (payload === 'SP') {
+    response ={"text": "share yor pictyre with any feedback."};
+    designAttachment = false;
+    bdesignAttachment = false;
+    sharepicAttachment = true;
   }
   callSendAPI(sender_psid, response);
 }
@@ -774,6 +810,7 @@ async function asking_to_upload_design (sender_psid){
     });
   designAttachment = true;
     bdesignAttachment = false;
+    sharepicAttachment = false;
 }
 
 /*function for worry about measurement*/
