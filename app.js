@@ -494,8 +494,8 @@ async function greetUser(sender_psid){
 
 /*Function for sew*/
 async function sewing (sender_psid){
-  let response1 = {"text" : "You can also send us a design of the cloth that you want to sew."};
-  let response2 = {"text" : "If you want to customize all the designs, you have to choose or send in step by step."};
+  let response1 = {"text" : "You can send us a design of the cloth that you want to sew."};
+  let response2 = {"text" : "It's Ok! if you don't have any idea you can make choice. And you can get idea by looking others pictures."};
   let response3 = {
       "attachment": {
         "type": "template",
@@ -514,7 +514,12 @@ async function sewing (sender_psid){
                 "type": "postback",
                 "title": "Sew as you wish",
                 "payload": "SAW",
-              }
+              },
+              {
+                "type": "postback",
+                "title": "Pictures of others",
+                "payload": "POO",
+                    }
             ],
           }]
         }
@@ -673,7 +678,7 @@ async function askforevent (sender_psid) {
 
 /*function for asking event for sew as wish*/
 async function Sew_As_Wish (sender_psid) {
-  let response1 = {"text":"Well....For what kind of event?"};
+  let response1 = {"text":"Thank you for believing to us. Umm....It will eat my head but I will try my best. Oh....for what kind of event?"};
   let response2 = {"text":"These are the kinds of sewing we do in our shop."};
   let response3 = {
        "attachment":{
