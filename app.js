@@ -39,8 +39,7 @@ const
   databaseURL: "https://sandarbot.firebaseio.com"
  });
 
-var db = firebase.database();
-var ref = db.ref("restricted_access/secret_document/items");
+let db = firebase.firestore();
 
 let measurement = {
   chest:false,
