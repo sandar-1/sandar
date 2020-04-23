@@ -57,11 +57,13 @@ let measurement = {
 
 let sendAttachment = {
   sharepic = false;
+  design = false;
+  bdesign = false;
 }
 
-let designAttachment = false;
-let bdesignAttachment = false;
-let sharepicAttachment = false;
+// let designAttachment = false;
+// let bdesignAttachment = false;
+// let sharepicAttachment = false;
 
 let userEnteredMeasurement = {};
 let userSendAttachment = {};
@@ -328,10 +330,11 @@ function handleMessage(sender_psid, received_message) {
     measurement.htameinfold = false;
     measurement.khar = false;
     measurement.ankle = false;
-  }else if (received_message.attachments && designAttachment == true) {
+  }else if (received_message.attachments && sendAttachment.design == true) {
     console.log('meta data',received_message);
-    designAttachment == false;
+    sendAttachment.design == false;
     let attachment_url = received_message.attachments[0].payload.url;
+    userSendAttachment.design = attachment_url;
     response = {
       "attachment": {
         "type": "template",
@@ -357,10 +360,11 @@ function handleMessage(sender_psid, received_message) {
         }
       }
     }
-  }else if (received_message.attachments && bdesignAttachment == true) {
+  }else if (received_message.attachments && sendAttachment.bdesign == true) {
     console.log('meta data',received_message);
-    bdesignAttachment == false;
+    sendAttachment.bdesign == false;
     let attachment_url = received_message.attachments[0].payload.url;
+    userSendAttachment.bdesign = attachment_url;
     response = {
       "attachment": {
         "type": "template",
@@ -479,8 +483,8 @@ function handlePostback(sender_psid, received_postback) {
   }else if (payload === 'i_do_have') {
     response ={"text": "well, send me the beaded design that you want to do."};
     sendAttachment.sharepic = false;
-    designAttachment = false;
-    bdesignAttachment = true;
+    sendAttachment.design = false;
+    sendAttachment.bdesign = true;
   }else if (payload === 'nothing_added') {
     worrymeasurment (sender_psid);
   }else if (payload === 'same_as_design') {
@@ -491,8 +495,8 @@ function handlePostback(sender_psid, received_postback) {
     Sew_As_Wish (sender_psid);
   }else if (payload === 'SP') {
     response ={"text": "share yor pictyre with any feedback."};
-    designAttachment = false;
-    bdesignAttachment = false;
+    sendAttachment.design = false;
+    sendAttachment.bdesign = false;
     sendAttachment.sharepic = true;
   }
   callSendAPI(sender_psid, response);
@@ -839,9 +843,9 @@ async function asking_to_upload_design (sender_psid){
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });
-  designAttachment = true;
-    bdesignAttachment = false;
-    userSendAttachment.sharepic = false;
+  sendAttachment.design = true;
+    sendAttachment.bdesign = false;
+    sendAttachment.sharepic = false;
 }
 
 /*function for worry about measurement*/
