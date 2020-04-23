@@ -328,8 +328,7 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.attachments && designAttachment == true) {
     console.log('meta data',received_message);
     designAttachment == false;
-    let attachment_url2 = received_message.attachments[0].payload.url;
-    designAttachment = attachment_url2;
+    let attachment_url = received_message.attachments[0].payload.url;
     response = {
       "attachment": {
         "type": "template",
@@ -338,7 +337,7 @@ function handleMessage(sender_psid, received_message) {
           "elements": [{
             "title": "Is this design?",
             "subtitle": "Wow! this one will totally suits you.I can't wait to sew it.",
-            "image_url": attachment_url2,
+            "image_url": attachment_url,
             "buttons": [
               {
                 "type": "postback",
@@ -358,8 +357,7 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.attachments && bdesignAttachment == true) {
     console.log('meta data',received_message);
     bdesignAttachment == false;
-    let attachment_url1 = received_message.attachments[0].payload.url;
-    bdesignAttachment = attachment_url1;
+    let attachment_url = received_message.attachments[0].payload.url;
     response = {
       "attachment": {
         "type": "template",
@@ -368,7 +366,7 @@ function handleMessage(sender_psid, received_message) {
           "elements": [{
             "title": "Is tis one?",
             "subtitle": "You exactly know how to blink others people eyes.",
-            "image_url": attachment_url1,
+            "image_url": attachment_url,
             "buttons": [
               {
                 "type": "postback",
@@ -389,7 +387,6 @@ function handleMessage(sender_psid, received_message) {
     console.log('meta data',received_message);
     sharepicAttachment == false;
     let attachment_url = received_message.attachments[0].payload.url;
-    sharepicAttachment = attachment_url;
     response = {
       "attachment": {
         "type": "template",
@@ -453,8 +450,6 @@ function handlePostback(sender_psid, received_postback) {
   }else if (payload === 'yes_right') {
     saveData(sender_psid);
     response = {"text" : "Ok!"}
-  }else if (payload === 'yes_sp') {
-    response = {"text" : "Okkk!"}
   }else if (payload === 'yes_right_measurment') {
     let response1 = {"text" : "which type of htamein? "};
     let response2 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein.",
@@ -975,21 +970,10 @@ function saveData(sender_psid) {
     htameinfold : userEnteredMeasurement.htameinfold,
     khar : userEnteredMeasurement.khar,
     ankle : userEnteredMeasurement.ankle,
-    clothDesign : designAttachment,
-    beadedDesign : bdesignAttachment,
   }
-
-  db.collection('user_photo').add(sharepic);
+  db.collection('user_information').add(info);
 }
 
-// /*function function save photo to firebase*/
-// function savePhoto(sender_psid) {
-//   const sharepic = {
-//     photo : sharepicAttachment,
-//   }
-
-//   db.collection('user_information').add(info);
-// }
 
 function callSendAPI(sender_psid, response) {
   // Construct the message body
