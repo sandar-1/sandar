@@ -448,6 +448,7 @@ function handlePostback(sender_psid, received_postback) {
   }else if (payload === 'measure_again') {
     response = {"text" : "Type 'Start' to measure again 💁"}
   }else if (payload === 'yes_right') {
+    saveData();
     response = {"text" : "Ok!"}
   }else if (payload === 'yes_right_measurment') {
     let response1 = {"text" : "which type of htamein? "};
