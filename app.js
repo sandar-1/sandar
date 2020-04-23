@@ -55,17 +55,12 @@ let measurement = {
   ankle:false,
 };
 
-let sendAttachment = {
-  design = false;
-  bdesign = false;
-  sharepic = false;
-}
-// let designAttachment = false;
-// let bdesignAttachment = false;
-// let sharepicAttachment = false;
+
+let designAttachment = false;
+let bdesignAttachment = false;
+let sharepicAttachment = false;
 
 let userEnteredMeasurement = {};
-let userSendAttachment = {};
 
 
 // Sets server port and logs message on success
@@ -275,11 +270,10 @@ function handleMessage(sender_psid, received_message) {
     userEnteredMeasurement.ankle = received_message.text;   
     user_answer(sender_psid);
     measurement.ankle = false;
-  }else if (received_message.attachments && sendAttachment.design == true) {
+  }else if (received_message.attachments && designAttachment == true) {
     console.log('meta data',received_message);
-    sendAttachment.design == false;
+    designAttachment == false;
     let attachment_url = received_message.attachments[0].payload.url;
-    userSendAttachment.design = attachment_url;
     response = {
       "attachment": {
         "type": "template",
@@ -305,11 +299,10 @@ function handleMessage(sender_psid, received_message) {
         }
       }
     }
-  }else if (received_message.attachments && sendAttachment.bdesign == true) {
+  }else if (received_message.attachments && bdesignAttachment == true) {
     console.log('meta data',received_message);
-    sendAttachment.bdesign  == false;
+    bdesignAttachment == false;
     let attachment_url = received_message.attachments[0].payload.url;
-    userSendAttachment.bdesign = attachment_url;
     response = {
       "attachment": {
         "type": "template",
@@ -335,11 +328,10 @@ function handleMessage(sender_psid, received_message) {
         }
       }
     }
-  }else if (received_message.attachments && sendAttachment.sharepic == true) {
+  }else if (received_message.attachments && sharepicAttachment == true) {
     console.log('meta data',received_message);
-    sendAttachment.sharepic == false;
+    sharepicAttachment == false;
     let attachment_url = received_message.attachments[0].payload.url;
-    userSendAttachment.sharepic = attachment_url;
     response = {
       "attachment": {
         "type": "template",
@@ -427,7 +419,9 @@ function handlePostback(sender_psid, received_postback) {
     measurement.htameintype = true;
   }else if (payload === 'i_do_have') {
     response ={"text": "well, send me the beaded design that you want to do."};
-    sendAttachment.bdesign = true;
+    sharepicAttachment = false;
+    designAttachment = false;
+    bdesignAttachment = true;
   }else if (payload === 'nothing_added') {
     worrymeasurment (sender_psid);
   }else if (payload === 'same_as_design') {
@@ -438,7 +432,9 @@ function handlePostback(sender_psid, received_postback) {
     Sew_As_Wish (sender_psid);
   }else if (payload === 'SP') {
     response ={"text": "share yor pictyre with any feedback."};
-    sendAttachment.sharepic = true;
+    designAttachment = false;
+    bdesignAttachment = false;
+    sharepicAttachment = true;
   }
   callSendAPI(sender_psid, response);
 }
@@ -784,7 +780,9 @@ async function asking_to_upload_design (sender_psid){
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });
-  sendAttachment.design = true;
+  designAttachment = true;
+    bdesignAttachment = false;
+    sharepicAttachment = false;
 }
 
 /*function for worry about measurement*/
