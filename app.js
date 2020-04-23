@@ -329,6 +329,7 @@ function handleMessage(sender_psid, received_message) {
     console.log('meta data',received_message);
     designAttachment == false;
     let attachment_url = received_message.attachments[0].payload.url;
+    designAttachment = attachment_url
     response = {
       "attachment": {
         "type": "template",
@@ -357,7 +358,8 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.attachments && bdesignAttachment == true) {
     console.log('meta data',received_message);
     bdesignAttachment == false;
-    let attachment_url = received_message.attachments[0].payload.url;
+    let attachment_url1 = received_message.attachments[0].payload.url;
+    bdesignAttachment = attachment_url1
     response = {
       "attachment": {
         "type": "template",
@@ -366,7 +368,7 @@ function handleMessage(sender_psid, received_message) {
           "elements": [{
             "title": "Is tis one?",
             "subtitle": "You exactly know how to blink others people eyes.",
-            "image_url": attachment_url,
+            "image_url": attachment_url1,
             "buttons": [
               {
                 "type": "postback",
@@ -970,6 +972,8 @@ function saveData(sender_psid) {
     htameinfold : userEnteredMeasurement.htameinfold,
     khar : userEnteredMeasurement.khar,
     ankle : userEnteredMeasurement.ankle,
+    clothDesign : designAttachment,
+    beadedDesign : bdesignAttachment,
   }
   db.collection('user_information').add(info);
 }
