@@ -453,6 +453,8 @@ function handlePostback(sender_psid, received_postback) {
   }else if (payload === 'yes_right') {
     saveData(sender_psid);
     response = {"text" : "Ok!"}
+  }else if (payload === 'yes_sp') {
+    saveData (sender_psid);
   }else if (payload === 'yes_right_measurment') {
     let response1 = {"text" : "which type of htamein? "};
     let response2 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein.",
