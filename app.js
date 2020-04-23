@@ -959,17 +959,17 @@ function bodymeasure(sender_psid){
 function saveData(sender_psid) {
   const info = {
     id : sender_psid,
-    chest : userEnteredMeasurement,
-    upperArm : userEnteredMeasurement,
-    sleevelength : userEnteredMeasurement,
-    waist : userEnteredMeasurement,
-    hips : userEnteredMeasurement,
-    thigh : userEnteredMeasurement,
-    inseam : userEnteredMeasurement,
-    htameintype : userEnteredMeasurement,
-    htameinfold : userEnteredMeasurement,
-    khar : userEnteredMeasurement,
-    ankle : userEnteredMeasurement,
+    chest : userEnteredMeasurement.chest,
+    upperArm : userEnteredMeasurement.upperArm,
+    sleevelength : userEnteredMeasurement.sleevelength,
+    waist : userEnteredMeasurement.waist,
+    hips : userEnteredMeasurement.hips,
+    thigh : userEnteredMeasurement.thigh,
+    inseam : userEnteredMeasurement.inseam,
+    htameintype : userEnteredMeasurement.htameintype,
+    htameinfold : userEnteredMeasurement.htameinfold,
+    khar : userEnteredMeasurement.khar,
+    ankle : userEnteredMeasurement.ankle,
   }
   db.collection('user_information').add(info);
 }
