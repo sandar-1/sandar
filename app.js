@@ -363,8 +363,8 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.attachments && sendAttachment.bdesign == true) {
     console.log('meta data',received_message);
     sendAttachment.bdesign == false;
-    let attachment_url = received_message.attachments[0].payload.url;
-    userSendAttachment.bdesign = attachment_url;
+    let attachment_url1 = received_message.attachments[0].payload.url;
+    userSendAttachment.bdesign = attachment_url1;
     response = {
       "attachment": {
         "type": "template",
@@ -373,7 +373,7 @@ function handleMessage(sender_psid, received_message) {
           "elements": [{
             "title": "Is tis one?",
             "subtitle": "You exactly know how to blink others people eyes.",
-            "image_url": attachment_url,
+            "image_url": attachment_url1,
             "buttons": [
               {
                 "type": "postback",
@@ -393,8 +393,8 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.attachments && sendAttachment.sharepic == true) {
     console.log('meta data',received_message);
     sendAttachment.sharepic == false;
-    let attachment_url = received_message.attachments[0].payload.url;
-    userSendAttachment.sharepic = attachment_url;
+    let attachment_url2 = received_message.attachments[0].payload.url;
+    userSendAttachment.sharepic = attachment_url2;
     response = {
       "attachment": {
         "type": "template",
@@ -403,7 +403,7 @@ function handleMessage(sender_psid, received_message) {
           "elements": [{
             "title": "Is tis one?",
             "subtitle": ":)",
-            "image_url": attachment_url,
+            "image_url": attachment_url2,
             "buttons": [
               {
                 "type": "postback",
