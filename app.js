@@ -971,7 +971,7 @@ function saveData() {
     khar : userEnteredMeasurement,
     ankle : userEnteredMeasurement,
   }
-  db.collection('user_information').add(info)
+  db.collection('user_information').add(info);
 }
 
 
