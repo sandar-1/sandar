@@ -55,13 +55,16 @@ let measurement = {
   ankle:false,
 };
 
+let sendAttachment = {
+  sharepic = false;
+}
 
 let designAttachment = false;
 let bdesignAttachment = false;
 let sharepicAttachment = false;
 
 let userEnteredMeasurement = {};
-
+let userSendAttachment = {};
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
@@ -383,10 +386,11 @@ function handleMessage(sender_psid, received_message) {
         }
       }
     }
-  }else if (received_message.attachments && sharepicAttachment == true) {
+  }else if (received_message.attachments && sendAttachment.sharepic == true) {
     console.log('meta data',received_message);
-    sharepicAttachment == false;
+    sendAttachment.sharepic == false;
     let attachment_url = received_message.attachments[0].payload.url;
+    userSendAttachment.sharepic = attachment_url;
     response = {
       "attachment": {
         "type": "template",
@@ -474,7 +478,7 @@ function handlePostback(sender_psid, received_postback) {
     measurement.htameintype = true;
   }else if (payload === 'i_do_have') {
     response ={"text": "well, send me the beaded design that you want to do."};
-    sharepicAttachment = false;
+    sendAttachment.sharepic = false;
     designAttachment = false;
     bdesignAttachment = true;
   }else if (payload === 'nothing_added') {
@@ -489,7 +493,7 @@ function handlePostback(sender_psid, received_postback) {
     response ={"text": "share yor pictyre with any feedback."};
     designAttachment = false;
     bdesignAttachment = false;
-    sharepicAttachment = true;
+    sendAttachment.sharepic = true;
   }
   callSendAPI(sender_psid, response);
 }
@@ -837,7 +841,7 @@ async function asking_to_upload_design (sender_psid){
     });
   designAttachment = true;
     bdesignAttachment = false;
-    sharepicAttachment = false;
+    userSendAttachment.sharepic = false;
 }
 
 /*function for worry about measurement*/
