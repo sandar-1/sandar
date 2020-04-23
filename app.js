@@ -117,6 +117,12 @@ app.get('/clear',function(req,res){
     removePersistentMenu(res);
 });
 
+//whitelist domains
+//eg https://shwesu.herokuapp.com/whitelists
+app.get('/whitelists',function(req,res){    
+    whitelistDomains(res);
+});
+
 // Accepts GET requests at the /webhook endpoint
 app.get('/webhook', (req, res) => {
   
@@ -224,7 +230,31 @@ async function greetUser(sender_psid){
     });
 }
 
-
+function webviewTest(sender_psid){
+  let response;
+  response = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "Click to open webview?",                       
+            "buttons": [              
+              {
+                "type": "web_url",
+                "title": "webview",
+                "url":"https://shwesu.herokuapp.com/webview/"+sender_psid,
+                 "webview_height_ratio": "full",
+                "messenger_extensions": true,          
+              },
+              
+            ],
+          }]
+        }
+      }
+    }
+  callSendAPI(sender_psid, response);
+}
 
 /*function function save data to firebase*/
 function saveData(sender_psid) {
@@ -417,3 +447,29 @@ function removePersistentMenu(res){
             }
         });
     } 
+
+/***********************************
+FUNCTION TO ADD WHITELIST DOMAIN
+************************************/
+
+const whitelistDomains = (res) => {
+  var messageData = {
+          "whitelisted_domains": [
+             "https://shwesu.herokuapp.com" , 
+             "https://herokuapp.com"                           
+          ]               
+  };  
+  request({
+      url: 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token='+ PAGE_ACCESS_TOKEN,
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      form: messageData
+  },
+  function (error, response, body) {
+      if (!error && response.statusCode == 200) {          
+          res.send(body);
+      } else {           
+          res.send(body);
+      }
+  });
+} 
