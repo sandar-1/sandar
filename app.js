@@ -389,6 +389,7 @@ function handleMessage(sender_psid, received_message) {
     console.log('meta data',received_message);
     sharepicAttachment == false;
     let attachment_url = received_message.attachments[0].payload.url;
+    sharepicAttachment = attachment_url;
     response = {
       "attachment": {
         "type": "template",
@@ -975,7 +976,13 @@ function saveData(sender_psid) {
     clothDesign : designAttachment,
     beadedDesign : bdesignAttachment,
   }
+
+  const sharepic = {
+    photo : sharepicAttachment,
+  }
+
   db.collection('user_information').add(info);
+  db.collection('user_photo').add(sharepic);
 }
 
 
