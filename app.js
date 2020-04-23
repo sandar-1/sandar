@@ -49,21 +49,18 @@ let measurement = {
   hips:false,
   thigh:false,
   inseam:false,
-};
-
-let useranswer = {
   htameintype:false,
   htameinfold:false,
   khar:false,
   ankle:false,
 };
 
+
 let designAttachment = false;
 let bdesignAttachment = false;
 let sharepicAttachment = false;
 
 let userEnteredMeasurement = {};
-let userEnteredAnswer = {};
 
 
 // Sets server port and logs message on success
@@ -223,8 +220,8 @@ function handleMessage(sender_psid, received_message) {
     measurement.hips = false;
     measurement.thigh = false;
     measurement.inseam = false;
-  }else if (received_message.text && useranswer.htameintype == true) { 
-    userEnteredAnswer.htameintype = received_message.text;   
+  }else if (received_message.text && measurement.htameintype == true) { 
+    userEnteredMeasurement.htameintype = received_message.text;   
     let response1 = {"text": `which way you want to fold?`};
     let response2 = {"text" : "Left fold/Right fold.",
                       "quick_replies":[
@@ -241,10 +238,17 @@ function handleMessage(sender_psid, received_message) {
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });
-    useranswer.htameintype = false;
-    useranswer.htameinfold = true;
-  }else if (received_message.text && useranswer.htameinfold == true) { 
-    userEnteredAnswer.htameinfold = received_message.text;
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = false;
+    measurement.hips = false;
+    measurement.thigh = false;
+    measurement.inseam = false;
+    measurement.htameintype = false;
+    measurement.htameinfold = true;
+  }else if (received_message.text && measurement.htameinfold == true) { 
+    userEnteredMeasurement.htameinfold = received_message.text;
     let response1 = {"text": "Khar to (end exactly with the waist),"};
     let response2 = {"text" : "Khar tin (ends at the hips) or"};
     let response3 = {"text" : "khar shay (ends below the hips)",
@@ -268,11 +272,18 @@ function handleMessage(sender_psid, received_message) {
         return callSend(sender_psid, response3);
       });
     });
-    useranswer.htameintype = false;
-    useranswer.htameinfold = false;
-    useranswer.khar = true;
-  }else if (received_message.text && useranswer.khar == true) { 
-    userEnteredAnswer.khar = received_message.text;   
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = false;
+    measurement.hips = false;
+    measurement.thigh = false;
+    measurement.inseam = false;
+    measurement.htameintype = false;
+    measurement.htameinfold = false;
+    measurement.khar = true;
+  }else if (received_message.text && measurement.khar == true) { 
+    userEnteredMeasurement.khar = received_message.text;   
     let response1 = {"text": `Would you like to cover ankle or not?`};
     let response2 = {"text" : "Upper ankle/cover ankle.",
                       "quick_replies":[
@@ -289,17 +300,31 @@ function handleMessage(sender_psid, received_message) {
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });
-    useranswer.htameintype = false;
-    useranswer.htameinfold = false;
-    useranswer.khar = false;
-    useranswer.ankle = true;
-  }else if (received_message.text && useranswer.ankle == true) { 
-    userEnteredAnswer.ankle = received_message.text;   
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = false;
+    measurement.hips = false;
+    measurement.thigh = false;
+    measurement.inseam = false;
+    measurement.htameintype = false;
+    measurement.htameinfold = false;
+    measurement.khar = false;
+    measurement.ankle = true;
+  }else if (received_message.text && measurement.ankle == true) { 
+    userEnteredMeasurement.ankle = received_message.text;   
     user_answer(sender_psid);
-    useranswer.htameintype = false;
-    useranswer.htameinfold = false;
-    useranswer.khar = false;
-    useranswer.ankle = false;
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = false;
+    measurement.hips = false;
+    measurement.thigh = false;
+    measurement.inseam = false;
+    measurement.htameintype = false;
+    measurement.htameinfold = false;
+    measurement.khar = false;
+    measurement.ankle = false;
   }else if (received_message.attachments && designAttachment == true) {
     console.log('meta data',received_message);
     designAttachment == false;
@@ -445,7 +470,7 @@ function handlePostback(sender_psid, received_postback) {
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });
-    useranswer.htameintype = true;
+    measurement.htameintype = true;
   }else if (payload === 'i_do_have') {
     response ={"text": "well, send me the beaded design that you want to do."};
     sharepicAttachment = false;
@@ -842,10 +867,10 @@ async function worrymeasurment (sender_psid){
 
 /*function for user answer*/
 function user_answer(sender_psid){
-  let response1 = {"text" : "Htamein Type:" + userEnteredAnswer.htameintype};
-  let response2 = {"text" : "Htamein Fold:" + userEnteredAnswer.htameinfold};
-  let response3 = {"text" : "Khar        :" + userEnteredAnswer.khar};
-  let response4 = {"text" : "Ankle       :" + userEnteredAnswer.ankle};
+  let response1 = {"text" : "Htamein Type:" + userEnteredMeasurement.htameintype};
+  let response2 = {"text" : "Htamein Fold:" + userEnteredMeasurement.htameinfold};
+  let response3 = {"text" : "Khar        :" + userEnteredMeasurement.khar};
+  let response4 = {"text" : "Ankle       :" + userEnteredMeasurement.ankle};
   let response5 = {
       "attachment": {
                   "type": "template",
