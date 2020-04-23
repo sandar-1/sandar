@@ -874,7 +874,9 @@ function user_answer(sender_psid){
   let response2 = {"text" : "Htamein Fold:" + userEnteredMeasurement.htameinfold};
   let response3 = {"text" : "Khar        :" + userEnteredMeasurement.khar};
   let response4 = {"text" : "Ankle       :" + userEnteredMeasurement.ankle};
-  let response5 = {
+  let response5 = {"text" : "cloth       :" + designAttachment};
+  let response6 = {"text" : "beaded       :" + bdesignAttachment};
+  let response7 = {
       "attachment": {
                   "type": "template",
                   "payload": {
@@ -901,7 +903,11 @@ function user_answer(sender_psid){
       return callSend(sender_psid, response2).then(()=>{
         return callSend(sender_psid, response3).then(()=>{
           return callSend(sender_psid, response4).then(()=>{
-            return callSend(sender_psid, response5);
+            return callSend(sender_psid, response5).then (()=>{
+              return callSend(sender_psid, response6).then (()=>{
+                return callSend(sender_psid, response7);
+              });
+            });
           });
         });
       });
