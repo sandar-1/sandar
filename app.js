@@ -55,12 +55,17 @@ let measurement = {
   ankle:false,
 };
 
-
-let designAttachment = false;
-let bdesignAttachment = false;
-let sharepicAttachment = false;
+let sendAttachment = {
+  design = false;
+  bdesign = false;
+  sharepic = false;
+}
+// let designAttachment = false;
+// let bdesignAttachment = false;
+// let sharepicAttachment = false;
 
 let userEnteredMeasurement = {};
+let userSendAttachment = {};
 
 
 // Sets server port and logs message on success
@@ -165,7 +170,6 @@ function handleMessage(sender_psid, received_message) {
     response = {
       "text": `Let's measure Sleeve length.`
     }
-    measurement.chest = false;
     measurement.upperArm = false;
     measurement.sleevelength = true;
   }else if (received_message.text && measurement.sleevelength == true) { 
@@ -173,8 +177,6 @@ function handleMessage(sender_psid, received_message) {
     response = {
       "text": `And measure your Waist.`
     }
-    measurement.chest = false;
-    measurement.upperArm = false;
     measurement.sleevelength = false;
     measurement.waist = true;
   }else if (received_message.text && measurement.waist == true) {
@@ -182,9 +184,6 @@ function handleMessage(sender_psid, received_message) {
     response = {
       "text": `Now your Hips.`
     }
-    measurement.chest = false;
-    measurement.upperArm = false;
-    measurement.sleevelength = false;
     measurement.waist = false;
     measurement.hips = true;
   }else if (received_message.text && measurement.hips == true) { 
@@ -192,10 +191,6 @@ function handleMessage(sender_psid, received_message) {
     response = {
       "text": `Measure your Thigh.`
     }
-    measurement.chest = false;
-    measurement.upperArm = false;
-    measurement.sleevelength = false;
-    measurement.waist = false;
     measurement.hips = false;
     measurement.thigh = true;
   }else if (received_message.text && measurement.thigh == true) {   
@@ -203,22 +198,11 @@ function handleMessage(sender_psid, received_message) {
     response = {
       "text": `Finally! your Inseam.`
     }
-    measurement.chest = false;
-    measurement.upperArm = false;
-    measurement.sleevelength = false;
-    measurement.waist = false;
-    measurement.hips = false;
     measurement.thigh = false;
     measurement.inseam = true;
   }else if (received_message.text && measurement.inseam == true) {   
     userEnteredMeasurement.inseam = received_message.text; 
     bodymeasure(sender_psid);
-    measurement.chest = false;
-    measurement.upperArm = false;
-    measurement.sleevelength = false;
-    measurement.waist = false;
-    measurement.hips = false;
-    measurement.thigh = false;
     measurement.inseam = false;
   }else if (received_message.text && measurement.htameintype == true) { 
     userEnteredMeasurement.htameintype = received_message.text;   
@@ -238,13 +222,6 @@ function handleMessage(sender_psid, received_message) {
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });
-    measurement.chest = false;
-    measurement.upperArm = false;
-    measurement.sleevelength = false;
-    measurement.waist = false;
-    measurement.hips = false;
-    measurement.thigh = false;
-    measurement.inseam = false;
     measurement.htameintype = false;
     measurement.htameinfold = true;
   }else if (received_message.text && measurement.htameinfold == true) { 
@@ -272,14 +249,6 @@ function handleMessage(sender_psid, received_message) {
         return callSend(sender_psid, response3);
       });
     });
-    measurement.chest = false;
-    measurement.upperArm = false;
-    measurement.sleevelength = false;
-    measurement.waist = false;
-    measurement.hips = false;
-    measurement.thigh = false;
-    measurement.inseam = false;
-    measurement.htameintype = false;
     measurement.htameinfold = false;
     measurement.khar = true;
   }else if (received_message.text && measurement.khar == true) { 
@@ -300,35 +269,17 @@ function handleMessage(sender_psid, received_message) {
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });
-    measurement.chest = false;
-    measurement.upperArm = false;
-    measurement.sleevelength = false;
-    measurement.waist = false;
-    measurement.hips = false;
-    measurement.thigh = false;
-    measurement.inseam = false;
-    measurement.htameintype = false;
-    measurement.htameinfold = false;
     measurement.khar = false;
     measurement.ankle = true;
   }else if (received_message.text && measurement.ankle == true) { 
     userEnteredMeasurement.ankle = received_message.text;   
     user_answer(sender_psid);
-    measurement.chest = false;
-    measurement.upperArm = false;
-    measurement.sleevelength = false;
-    measurement.waist = false;
-    measurement.hips = false;
-    measurement.thigh = false;
-    measurement.inseam = false;
-    measurement.htameintype = false;
-    measurement.htameinfold = false;
-    measurement.khar = false;
     measurement.ankle = false;
-  }else if (received_message.attachments && designAttachment == true) {
+  }else if (received_message.attachments && sendAttachment.design == true) {
     console.log('meta data',received_message);
-    designAttachment == false;
+    sendAttachment.design == false;
     let attachment_url = received_message.attachments[0].payload.url;
+    userSendAttachment.design = attachment_url;
     response = {
       "attachment": {
         "type": "template",
@@ -354,10 +305,11 @@ function handleMessage(sender_psid, received_message) {
         }
       }
     }
-  }else if (received_message.attachments && bdesignAttachment == true) {
+  }else if (received_message.attachments && sendAttachment.bdesign == true) {
     console.log('meta data',received_message);
-    bdesignAttachment == false;
+    sendAttachment.bdesign  == false;
     let attachment_url = received_message.attachments[0].payload.url;
+    userSendAttachment.bdesign = attachment_url;
     response = {
       "attachment": {
         "type": "template",
@@ -383,10 +335,11 @@ function handleMessage(sender_psid, received_message) {
         }
       }
     }
-  }else if (received_message.attachments && sharepicAttachment == true) {
+  }else if (received_message.attachments && sendAttachment.sharepic == true) {
     console.log('meta data',received_message);
-    sharepicAttachment == false;
+    sendAttachment.sharepic == false;
     let attachment_url = received_message.attachments[0].payload.url;
+    userSendAttachment.sharepic = attachment_url;
     response = {
       "attachment": {
         "type": "template",
@@ -474,9 +427,7 @@ function handlePostback(sender_psid, received_postback) {
     measurement.htameintype = true;
   }else if (payload === 'i_do_have') {
     response ={"text": "well, send me the beaded design that you want to do."};
-    sharepicAttachment = false;
-    designAttachment = false;
-    bdesignAttachment = true;
+    sendAttachment.bdesign = true;
   }else if (payload === 'nothing_added') {
     worrymeasurment (sender_psid);
   }else if (payload === 'same_as_design') {
@@ -487,9 +438,7 @@ function handlePostback(sender_psid, received_postback) {
     Sew_As_Wish (sender_psid);
   }else if (payload === 'SP') {
     response ={"text": "share yor pictyre with any feedback."};
-    designAttachment = false;
-    bdesignAttachment = false;
-    sharepicAttachment = true;
+    sendAttachment.sharepic = true;
   }
   callSendAPI(sender_psid, response);
 }
@@ -835,9 +784,7 @@ async function asking_to_upload_design (sender_psid){
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });
-  designAttachment = true;
-    bdesignAttachment = false;
-    sharepicAttachment = false;
+  sendAttachment.design = true;
 }
 
 /*function for worry about measurement*/
