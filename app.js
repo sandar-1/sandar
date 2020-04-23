@@ -954,7 +954,24 @@ function bodymeasure(sender_psid){
       });
 }
 
-
+/*function function save data to firebase*/
+function saveData() {
+  const info = {
+    id : sender_psid,
+    chest : userEnteredMeasurement,
+    upperArm : userEnteredMeasurement,
+    sleevelength : userEnteredMeasurement,
+    waist : userEnteredMeasurement,
+    hips : userEnteredMeasurement,
+    thigh : userEnteredMeasurement,
+    inseam : userEnteredMeasurement,
+    htameintype : userEnteredMeasurement,
+    htameinfold : userEnteredMeasurement,
+    khar : userEnteredMeasurement,
+    ankle : userEnteredMeasurement,
+  }
+  db.collection('user_information').add(info)
+}
 
 
 function callSendAPI(sender_psid, response) {
