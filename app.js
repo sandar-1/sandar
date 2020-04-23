@@ -328,8 +328,8 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.attachments && designAttachment == true) {
     console.log('meta data',received_message);
     designAttachment == false;
-    let attachment_url = received_message.attachments[0].payload.url;
-    designAttachment = attachment_url
+    let attachment_url2 = received_message.attachments[0].payload.url;
+    designAttachment = attachment_url2;
     response = {
       "attachment": {
         "type": "template",
@@ -338,7 +338,7 @@ function handleMessage(sender_psid, received_message) {
           "elements": [{
             "title": "Is this design?",
             "subtitle": "Wow! this one will totally suits you.I can't wait to sew it.",
-            "image_url": attachment_url,
+            "image_url": attachment_url2,
             "buttons": [
               {
                 "type": "postback",
@@ -359,7 +359,7 @@ function handleMessage(sender_psid, received_message) {
     console.log('meta data',received_message);
     bdesignAttachment == false;
     let attachment_url1 = received_message.attachments[0].payload.url;
-    bdesignAttachment = attachment_url1
+    bdesignAttachment = attachment_url1;
     response = {
       "attachment": {
         "type": "template",
