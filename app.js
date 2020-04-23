@@ -454,7 +454,6 @@ function handlePostback(sender_psid, received_postback) {
     saveData(sender_psid);
     response = {"text" : "Ok!"}
   }else if (payload === 'yes_sp') {
-    savePhoto(sender_psid);
     response = {"text" : "Okkk!"}
   }else if (payload === 'yes_right_measurment') {
     let response1 = {"text" : "which type of htamein? "};
@@ -983,14 +982,14 @@ function saveData(sender_psid) {
   db.collection('user_photo').add(sharepic);
 }
 
-/*function function save data to firebase*/
-function savePhoto(sender_psid) {
-  const sharepic = {
-    photo : sharepicAttachment,
-  }
+// /*function function save photo to firebase*/
+// function savePhoto(sender_psid) {
+//   const sharepic = {
+//     photo : sharepicAttachment,
+//   }
 
-  db.collection('user_information').add(info);
-}
+//   db.collection('user_information').add(info);
+// }
 
 function callSendAPI(sender_psid, response) {
   // Construct the message body
