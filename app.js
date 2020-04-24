@@ -494,45 +494,6 @@ async function greetUser(sender_psid){
     });
 }
 
-/*Function for sew*/
-async function sewing (sender_psid){
-  let response1 = {"text" : "You can send us a design of the cloth that you want to sew."};
-  let response2 = {"text" : "It's Ok! if you don't have any idea you can make choice. And you can get idea by looking others pictures."};
-  let response3 = {
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "generic",
-          "elements": [{
-            "title": "Please, make your choice here.",
-            "subtitle": "💁🏽‍♀💁🏽‍♀💁🏽‍♀💁🏽‍♀",
-            "buttons": [
-              {
-                "type": "postback",
-                "title": "By sending design.",
-                "payload": "send_design",
-              },
-              {
-                "type": "postback",
-                "title": "Sew as you wish",
-                "payload": "SAW",
-              },
-              {
-                "type": "postback",
-                "title": "Pictures of others",
-                "payload": "POO",
-                    }
-            ],
-          }]
-        }
-      }
-    };
-    callSend(sender_psid, response1).then(()=>{
-      return callSend(sender_psid, response2).then(()=>{
-        return callSend(sender_psid, response3);
-      });
-    });
-}
 
 /*function for asking for beaded emboidery*/
 async function askforbeaded (sender_psid){
@@ -598,13 +559,8 @@ async function asking_cus_design (sender_psid){
                       "type":"template",
                       "payload":{
                         "template_type":"button",
-                        "text":"What do you want to do next?",
+                        "text":"Send if you have one. :)",
                         "buttons":[
-                          {
-                            "type":"postback",
-                            "payload":"https://www.messenger.com",
-                            "title":"Sending design"
-                          },
                           {
                             "type":"web_url",
                             "url":"https://www.messenger.com",
@@ -619,7 +575,7 @@ async function asking_cus_design (sender_psid){
         return callSend(sender_psid, response3);
       });
     });
-  designAttachment = true;
+    designAttachment = true;
 }
 
 /*function for asking event*/
