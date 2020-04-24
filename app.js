@@ -728,7 +728,7 @@ async function askforevent (sender_psid) {
 }
 
 /*function for Wedding event*/
-async function wedding (sender_psid) {
+function wedding (sender_psid) {
   let response1 = {"text" : "For a wedding dress there are two prices at 150000 Ks and 300000 Ks. "};
     let response2 = { "attachment":{
                         "type":"template",
@@ -747,7 +747,7 @@ async function wedding (sender_psid) {
                               "buttons":[
                                {
                                   "type":"postback",
-                                  "title":"300000 Ks.",
+                                  "title":"I choose 300000 Ks.",
                                   "payload":"weddingd_htameinsaim"
                                 }              
                               ]      
@@ -764,7 +764,7 @@ async function wedding (sender_psid) {
                               "buttons":[
                                {
                                   "type":"postback",
-                                  "title":"150000 Ks.",
+                                  "title":"I choose 150000 Ks.",
                                   "payload":"wedding_simple"
                                 }              
                               ]      
