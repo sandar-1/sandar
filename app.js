@@ -465,7 +465,7 @@ function handlePostback(sender_psid, received_postback) {
     askforevent (sender_psid);
   }else if (payload === 'WEDDING') {
     wedding_event (sender_psid);
-  }else if (payload === 'WEDDING') {
+  }else if (payload === 'choose_wedding') {
     response = {"text" : "To make sure your decision please send us price.",
                       "quick_replies":[
                                       {
@@ -760,7 +760,7 @@ async function wedding_event (sender_psid) {
                                {
                                   "type":"postback",
                                   "title":"I choose 300000 Ks.",
-                                  "payload":"weddingd_htameinsaim"
+                                  "payload":"choose_wedding"
                                 }              
                               ]      
                             },
@@ -777,7 +777,7 @@ async function wedding_event (sender_psid) {
                                {
                                   "type":"postback",
                                   "title":"I choose 150000 Ks.",
-                                  "payload":"wedding_simple"
+                                  "payload":"choose_wedding"
                                 }              
                               ]      
                             }
