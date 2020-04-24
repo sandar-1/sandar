@@ -462,10 +462,22 @@ function handlePostback(sender_psid, received_postback) {
     });
     measurement.htameintype = true;
   }else if (payload === 'yes_right') {
-    saveData(sender_psid);
     askforevent (sender_psid);
   }else if (payload === 'WEDDING') {
     wedding_event (sender_psid);
+  }else if (payload === 'WEDDING') {
+    response = {"text" : "To make sure your decision please send us price.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"300000 Ks",
+                                        "payload":"wedding_price"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"150000 Ks",
+                                        "payload":"wedding_price"
+                                      }]
+                    };
   }
   callSendAPI(sender_psid, response);
 }
