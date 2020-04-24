@@ -758,6 +758,16 @@ async function wedding_event (sender_psid) {
                           ]
                         }
                       }
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"300000 Ks",
+                                        "payload":"wedding_price"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"150000 Ks",
+                                        "payload":"wedding_price"
+                                      }]
                     };
     
     callSend(sender_psid, response1).then(()=>{
