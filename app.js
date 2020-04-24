@@ -744,7 +744,18 @@ function showAllDataToCus(sender_psid) {
   let response11= {"text" : "Khar        :" + userEnteredInfo.khar};
   let response12= {"text" : "Ankle       :" + userEnteredInfo.ankle};
   let response13= {"text" : "Cloth design:" + userSendAttachment.designAttachment};
-  let response13= {"text" : "If you want to one of thoes type 'Change'"};
+  let response13= {"text" : "Confirm or change",
+                    "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Confirm",
+                                        "payload":"confirm"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Change",
+                                        "payload":"change"
+                                      }]
+                  };
 
   callSend(sender_psid,response1).then(()=>{
         return callSend(sender_psid,response2).then(()=>{
