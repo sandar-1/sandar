@@ -57,6 +57,7 @@ let userInfo = {
   price : false,
 };
 
+
 let designAttachment = false;
 let bdesignAttachment = false;
 let sharepicAttachment = false;
@@ -64,12 +65,6 @@ let sharepicAttachment = false;
 let userEnteredInfo = {};
 let userSendAttachment = {};
 
-let payload = {
-  recipient: {
-    id : sender_psid
-  },
-  sender_action : 'trying_on'
-}
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
