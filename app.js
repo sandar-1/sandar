@@ -463,7 +463,7 @@ function handlePostback(sender_psid, received_postback) {
     measurement.htameintype = true;
   }else if (payload === 'yes_right') {
     saveData(sender_psid);
-    response = {"text" : "Ok!"}
+    askforevent (sender_psid);
   }
   callSendAPI(sender_psid, response);
 }
