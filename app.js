@@ -461,6 +461,9 @@ function handlePostback(sender_psid, received_postback) {
       return callSend(sender_psid, response2);
     });
     measurement.htameintype = true;
+  }else if (payload === 'yes_right') {
+    saveData(sender_psid);
+    response = {"text" : "Ok!"}
   }
   callSendAPI(sender_psid, response);
 }
@@ -930,6 +933,7 @@ function bodymeasure(sender_psid){
 function saveData(sender_psid) {
   const info = {
     id : sender_psid,
+    name : userEnteredMeasurement.name,
     chest : userEnteredMeasurement.chest,
     upperArm : userEnteredMeasurement.upperArm,
     sleevelength : userEnteredMeasurement.sleevelength,
