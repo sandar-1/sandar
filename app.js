@@ -384,7 +384,7 @@ function handlePostback(sender_psid, received_postback) {
     response = {"text": "Please tell me your name. :) "}
     userInfo.name = true;
   }else if (payload === 'delivered') {
-    response = {"text": "OK! It can be any bus stop. Contact 0912345678. Well.. tell me your name. :) "}
+    response = {"text": "OK! It can be any bus stop from Tatkone. Contact 0912345678. Well.. tell me your name. :) "}
     userInfo.name = true;
   }else if (payload === 'yes_right_measurment') {
     let response1 = {"text" : "which type of htamein? "};
@@ -430,6 +430,8 @@ function handlePostback(sender_psid, received_postback) {
     showAllDataToCus (sender_psid);
   }else if (payload === 'no') {
     response = { "text": "What's wrong! it's ok, send me again." }
+  }else if (payload === 'confirm') {
+    saveData (sender_psid);
   }
   callSendAPI(sender_psid, response);
 }
