@@ -151,7 +151,7 @@ function handleMessage(sender_psid, received_message) {
    greetUser (sender_psid);
   }else if (received_message.text && measurement.name == true) {   
     userEnteredMeasurement.name =  received_message.text;
-     let response1 = {"text": "Let's get your body measurement. Here are way to measure your body. Hopefully that will be useful. :)"};    
+     let response1 = {"text": "Let's get your body measurement. Here are ways to measure your body. Hopefully that will be useful. :)"};    
      let response2 = {
       "attachment":{
             "type":"image", 
@@ -439,6 +439,28 @@ function handlePostback(sender_psid, received_postback) {
   if (payload === 'SEW') {
     response = { "text": "Please tell me your name. :) " }
     measurement.name = true;
+  }else if (payload === 'yes_right_measurment') {
+    let response1 = {"text" : "which type of htamein? "};
+    let response2 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Cheik",
+                                        "payload":"c"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Hpi",
+                                        "payload":"hpi"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Simple",
+                                        "payload":"s"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+    measurement.htameintype = true;
   }
   callSendAPI(sender_psid, response);
 }
