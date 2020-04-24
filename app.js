@@ -41,7 +41,7 @@ const
 
 let db = firebase.firestore();
 
-let measurement = {
+let userInfo = {
   name : false,
   chest:false,
   upperArm:false,
@@ -54,6 +54,7 @@ let measurement = {
   htameinfold:false,
   khar:false,
   ankle:false,
+  price : false,
 };
 
 
@@ -61,7 +62,7 @@ let designAttachment = false;
 let bdesignAttachment = false;
 let sharepicAttachment = false;
 
-let userEnteredMeasurement = {};
+let userEnteredInfo = {};
 
 
 // Sets server port and logs message on success
@@ -149,8 +150,8 @@ function handleMessage(sender_psid, received_message) {
   let response;
   if (received_message.text == "hi" || received_message.text == "Hi") {    
    greetUser (sender_psid);
-  }else if (received_message.text && measurement.name == true) {   
-    userEnteredMeasurement.name =  received_message.text;
+  }else if (received_message.text && userInfo.name == true) {   
+    userEnteredInfo.name =  received_message.text;
      let response1 = {"text": "Let's get your body measurement. Here are ways to measure your body. Hopefully that will be useful. :)"};    
      let response2 = {
       "attachment":{
@@ -167,56 +168,56 @@ function handleMessage(sender_psid, received_message) {
         return callSend(sender_psid, response3);
       });
     });
-    measurement.chest = true;
-    measurement.name = false;
-  }else if (received_message.text && measurement.chest == true) {   
-    userEnteredMeasurement.chest =  received_message.text;
+    userInfo.chest = true;
+    userInfo.name = false;
+  }else if (received_message.text && userInfo.chest == true) {   
+    userEnteredInfo.chest =  received_message.text;
     response = {
       "text": `Now Upper arm.`
     }
-    measurement.chest = false;
-    measurement.upperArm = true;
-  }else if (received_message.text && measurement.upperArm == true) { 
-    userEnteredMeasurement.upperArm = received_message.text; 
+    userInfo.chest = false;
+    userInfo.upperArm = true;
+  }else if (received_message.text && userInfo.upperArm == true) { 
+    userEnteredInfo.upperArm = received_message.text; 
     response = {
       "text": `Let's measure Sleeve length.`
     }
-    measurement.upperArm = false;
-    measurement.sleevelength = true;
-  }else if (received_message.text && measurement.sleevelength == true) { 
-    userEnteredMeasurement.sleevelength = received_message.text;   
+    userInfo.upperArm = false;
+    userInfo.sleevelength = true;
+  }else if (received_message.text && userInfo.sleevelength == true) { 
+    userEnteredInfo.sleevelength = received_message.text;   
     response = {
       "text": `And measure your Waist.`
     }
-    measurement.sleevelength = false;
-    measurement.waist = true;
-  }else if (received_message.text && measurement.waist == true) {
-    userEnteredMeasurement.waist = received_message.text;    
+    userInfo.sleevelength = false;
+    userInfo.waist = true;
+  }else if (received_message.text && userInfo.waist == true) {
+    userEnteredInfo.waist = received_message.text;    
     response = {
       "text": `Now your Hips.`
     }
-    measurement.waist = false;
-    measurement.hips = true;
-  }else if (received_message.text && measurement.hips == true) { 
-    userEnteredMeasurement.hips = received_message.text;   
+    userInfo.waist = false;
+    userInfo.hips = true;
+  }else if (received_message.text && userInfo.hips == true) { 
+    userEnteredInfo.hips = received_message.text;   
     response = {
       "text": `Measure your Thigh.`
     }
-    measurement.hips = false;
-    measurement.thigh = true;
-  }else if (received_message.text && measurement.thigh == true) {   
-    userEnteredMeasurement.thigh = received_message.text; 
+    userInfo.hips = false;
+    userInfo.thigh = true;
+  }else if (received_message.text && userInfo.thigh == true) {   
+    userEnteredInfo.thigh = received_message.text; 
     response = {
       "text": `Finally! your Inseam.`
     }
-    measurement.thigh = false;
-    measurement.inseam = true;
-  }else if (received_message.text && measurement.inseam == true) {   
-    userEnteredMeasurement.inseam = received_message.text; 
+    userInfo.thigh = false;
+    userInfo.inseam = true;
+  }else if (received_message.text && userInfo.inseam == true) {   
+    userEnteredInfo.inseam = received_message.text; 
     bodymeasure(sender_psid);
-    measurement.inseam = false;
-  }else if (received_message.text && measurement.htameintype == true) { 
-    userEnteredMeasurement.htameintype = received_message.text;   
+    userInfo.inseam = false;
+  }else if (received_message.text && userInfo.htameintype == true) { 
+    userEnteredInfo.htameintype = received_message.text;   
     let response1 = {"text": `which way you want to fold?`};
     let response2 = {"text" : "Left fold/Right fold.",
                       "quick_replies":[
@@ -233,10 +234,10 @@ function handleMessage(sender_psid, received_message) {
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });
-    measurement.htameintype = false;
-    measurement.htameinfold = true;
-  }else if (received_message.text && measurement.htameinfold == true) { 
-    userEnteredMeasurement.htameinfold = received_message.text;
+    userInfo.htameintype = false;
+    userInfo.htameinfold = true;
+  }else if (received_message.text && userInfo.htameinfold == true) { 
+    userEnteredInfo.htameinfold = received_message.text;
     let response1 = {"text": "Khar to (end exactly with the waist),"};
     let response2 = {"text" : "Khar tin (ends at the hips) or"};
     let response3 = {"text" : "khar shay (ends below the hips)",
@@ -260,10 +261,10 @@ function handleMessage(sender_psid, received_message) {
         return callSend(sender_psid, response3);
       });
     });
-    measurement.htameinfold = false;
-    measurement.khar = true;
-  }else if (received_message.text && measurement.khar == true) { 
-    userEnteredMeasurement.khar = received_message.text;   
+    userInfo.htameinfold = false;
+    userInfo.khar = true;
+  }else if (received_message.text && userInfo.khar == true) { 
+    userEnteredInfo.khar = received_message.text;   
     let response1 = {"text": `Would you like to cover ankle or not?`};
     let response2 = {"text" : "Upper ankle/cover ankle.",
                       "quick_replies":[
@@ -280,12 +281,12 @@ function handleMessage(sender_psid, received_message) {
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });
-    measurement.khar = false;
-    measurement.ankle = true;
-  }else if (received_message.text && measurement.ankle == true) { 
-    userEnteredMeasurement.ankle = received_message.text;   
+    userInfo.khar = false;
+    userInfo.ankle = true;
+  }else if (received_message.text && userInfo.ankle == true) { 
+    userEnteredInfo.ankle = received_message.text;   
     user_answer(sender_psid);
-    measurement.ankle = false;
+    userInfo.ankle = false;
   }else if (received_message.attachments && designAttachment == true) {
     console.log('meta data',received_message);
     designAttachment == false;
@@ -383,7 +384,7 @@ function handlePostback(sender_psid, received_postback) {
   let payload = received_postback.payload;
   if (payload === 'SEW') {
     response = { "text": "Please tell me your name. :) " }
-    measurement.name = true;
+    userInfo.name = true;
   }else if (payload === 'yes_right_measurment') {
     let response1 = {"text" : "which type of htamein? "};
     let response2 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein.",
@@ -405,7 +406,7 @@ function handlePostback(sender_psid, received_postback) {
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });
-    measurement.htameintype = true;
+    userInfo.htameintype = true;
   }else if (payload === 'yes_right') {
     askforevent (sender_psid);
   }else if (payload === 'WEDDING') {
@@ -738,10 +739,10 @@ async function wedding_event (sender_psid) {
 
 /*function for user answer*/
 function user_answer(sender_psid){
-  let response1 = {"text" : "Htamein Type:" + userEnteredMeasurement.htameintype};
-  let response2 = {"text" : "Htamein Fold:" + userEnteredMeasurement.htameinfold};
-  let response3 = {"text" : "Khar        :" + userEnteredMeasurement.khar};
-  let response4 = {"text" : "Ankle       :" + userEnteredMeasurement.ankle};
+  let response1 = {"text" : "Htamein Type:" + userEnteredInfo.htameintype};
+  let response2 = {"text" : "Htamein Fold:" + userEnteredInfo.htameinfold};
+  let response3 = {"text" : "Khar        :" + userEnteredInfo.khar};
+  let response4 = {"text" : "Ankle       :" + userEnteredInfo.ankle};
   let response5 = {
       "attachment": {
                   "type": "template",
@@ -776,15 +777,15 @@ function user_answer(sender_psid){
     });
 }
 
-/*function for body measurement record*/
+/*function for body infomation record*/
 function bodymeasure(sender_psid){
-    let response1 = {"text": `Chest: `+ userEnteredMeasurement.chest};
-    let response2 = {"text": 'Upper arm: ' + userEnteredMeasurement.upperArm};
-    let response3 = {"text": 'Sleeve length: ' + userEnteredMeasurement.sleevelength};
-    let response4 = {"text": 'Waist: '+ userEnteredMeasurement.waist};
-    let response5 = {"text": 'Hips: '+ userEnteredMeasurement.hips};
-    let response6 = {"text": 'Thigh: ' + userEnteredMeasurement.thigh};
-    let response7 = {"text": 'Inseam: '+ userEnteredMeasurement.inseam};
+    let response1 = {"text": `Chest: `+ userEnteredInfo.chest};
+    let response2 = {"text": 'Upper arm: ' + userEnteredInfo.upperArm};
+    let response3 = {"text": 'Sleeve length: ' + userEnteredInfo.sleevelength};
+    let response4 = {"text": 'Waist: '+ userEnteredInfo.waist};
+    let response5 = {"text": 'Hips: '+ userEnteredInfo.hips};
+    let response6 = {"text": 'Thigh: ' + userEnteredInfo.thigh};
+    let response7 = {"text": 'Inseam: '+ userEnteredInfo.inseam};
     let response8 = {
       "attachment": {
                   "type": "template",
@@ -829,18 +830,18 @@ function bodymeasure(sender_psid){
 function saveData(sender_psid) {
   const info = {
     id : sender_psid,
-    name : userEnteredMeasurement.name,
-    chest : userEnteredMeasurement.chest,
-    upperArm : userEnteredMeasurement.upperArm,
-    sleevelength : userEnteredMeasurement.sleevelength,
-    waist : userEnteredMeasurement.waist,
-    hips : userEnteredMeasurement.hips,
-    thigh : userEnteredMeasurement.thigh,
-    inseam : userEnteredMeasurement.inseam,
-    htameintype : userEnteredMeasurement.htameintype,
-    htameinfold : userEnteredMeasurement.htameinfold,
-    khar : userEnteredMeasurement.khar,
-    ankle : userEnteredMeasurement.ankle,
+    name : userEnteredInfo.name,
+    chest : userEnteredInfo.chest,
+    upperArm : userEnteredInfo.upperArm,
+    sleevelength : userEnteredInfo.sleevelength,
+    waist : userEnteredInfo.waist,
+    hips : userEnteredInfo.hips,
+    thigh : userEnteredInfo.thigh,
+    inseam : userEnteredInfo.inseam,
+    htameintype : userEnteredInfo.htameintype,
+    htameinfold : userEnteredInfo.htameinfold,
+    khar : userEnteredInfo.khar,
+    ankle : userEnteredInfo.ankle,
   }
   db.collection('user_information').add(info);
 }
