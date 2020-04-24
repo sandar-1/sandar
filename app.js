@@ -730,7 +730,7 @@ async function asking_cus_design (sender_psid){
 }
 
 /*function function save data to firebase*/
-function showAllDataToCus(sender_psid) {
+async function showAllDataToCus(sender_psid) {
   let response1 = {"text": userEnteredInfo.name +` here are your body measurement, types and cloth design.`};
   let response2 = {"text": `Chest        : `+ userEnteredInfo.chest};
   let response3 = {"text": 'Upper arm    : ' + userEnteredInfo.upperArm};
