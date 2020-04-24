@@ -687,11 +687,11 @@ async function askforevent (sender_psid) {
           },
           {
             "title":"For a Convocation?",
-            "image_url":"https://scontent-sea1-1.xx.fbcdn.net/v/t1.0-9/29792720_1006980256115703_3053445385785054787_n.jpg?_nc_cat=108&_nc_sid=110474&_nc_ohc=MvKZ7Bf0e1oAX-_9g54&_nc_ht=scontent-sea1-1.xx&oh=d6203387d93b6ad874ddf661dab28425&oe=5E8106ED",
+            "image_url":"https://www.textiledirectory.com.mm/images/YadanarWin/1.6.2019/dress/3.jpg",
             "subtitle":"👩‍🎓 The estimated price of graduation dress is range from 30000 to above.",
             "default_action": {
               "type": "web_url",
-              "url": "https://scontent-sea1-1.xx.fbcdn.net/v/t1.0-9/29792720_1006980256115703_3053445385785054787_n.jpg?_nc_cat=108&_nc_sid=110474&_nc_ohc=MvKZ7Bf0e1oAX-_9g54&_nc_ht=scontent-sea1-1.xx&oh=d6203387d93b6ad874ddf661dab28425&oe=5E8106ED",
+              "url": "https://www.textiledirectory.com.mm/images/YadanarWin/1.6.2019/dress/3.jpg",
               "webview_height_ratio": "tall",
             },
             "buttons":[
@@ -699,95 +699,6 @@ async function askforevent (sender_psid) {
                 "type":"postback",
                 "title":"Convocation.",
                 "payload":"ABD"
-              }              
-            ]      
-          }
-        ]
-      }
-    }
-  };
-  callSend(sender_psid,response1).then(()=>{
-    return callSend(sender_psid,response2).then(()=>{
-      return callSend(sender_psid,response3);
-    });
-  });
-}
-
-/*function for asking event for sew as wish*/
-async function Sew_As_Wish (sender_psid) {
-  let response1 = {"text":"Thank you for believing to us. Umm....It will eat my head but I will try my best. Oh....for what kind of event?"};
-  let response2 = {"text":"These are the kinds of sewing we do in our shop."};
-  let response3 = {
-       "attachment":{
-      "type":"template",
-      "payload":{
-        "template_type":"generic",
-        "elements":[
-           {
-            "title":"A wedding?",
-            "image_url":"https://i.pinimg.com/236x/e6/77/cc/e677cc25d57a184fc8928a001f5f25c2--traditional-wedding-dresses-traditional-outfits.jpg",
-            "subtitle":"👰 The estimated price of wedding dress is range from 300000 to above.",
-            "default_action": {
-              "type": "web_url",
-              "url": "https://i.pinimg.com/236x/e6/77/cc/e677cc25d57a184fc8928a001f5f25c2--traditional-wedding-dresses-traditional-outfits.jpg",
-              "webview_height_ratio": "tall",
-            },
-            "buttons":[
-             {
-                "type":"postback",
-                "title":"Wedding.",
-                "payload":"WEDDING_saw"
-              }              
-            ]      
-          },
-          {
-            "title":"Occasion?",
-            "image_url":"https://i.pinimg.com/236x/a4/93/0d/a4930df067551676be9f50906b62ed56.jpg",
-            "subtitle":"💃 The estimated price of occasion dress is range from 15000 to above.",
-            "default_action": {
-              "type": "web_url",
-              "url": "https://i.pinimg.com/236x/a4/93/0d/a4930df067551676be9f50906b62ed56.jpg",
-              "webview_height_ratio": "tall",
-            },
-            "buttons":[
-             {
-                "type":"postback",
-                "title":"Occasion.",
-                "payload":"OCCASION_saw"
-              }              
-            ]      
-          },
-          {
-            "title":"Casual?",
-            "image_url":"https://i.pinimg.com/236x/8e/4f/34/8e4f3428ae5c12d2d91c7847ff087bfb--kebaya-indonesia-thai-dress.jpg",
-            "subtitle":"🤷 The estimated price of casual dress is range from 8000 to above.",
-            "default_action": {
-              "type": "web_url",
-              "url": "https://i.pinimg.com/236x/8e/4f/34/8e4f3428ae5c12d2d91c7847ff087bfb--kebaya-indonesia-thai-dress.jpg",
-              "webview_height_ratio": "tall",
-            },
-            "buttons":[
-             {
-                "type":"postback",
-                "title":"Casual.",
-                "payload":"CASUAL_saw"
-              }              
-            ]      
-          },
-          {
-            "title":"For a Convocation?",
-            "image_url":"https://scontent-sea1-1.xx.fbcdn.net/v/t1.0-9/29792720_1006980256115703_3053445385785054787_n.jpg?_nc_cat=108&_nc_sid=110474&_nc_ohc=MvKZ7Bf0e1oAX-_9g54&_nc_ht=scontent-sea1-1.xx&oh=d6203387d93b6ad874ddf661dab28425&oe=5E8106ED",
-            "subtitle":"👩‍🎓 The estimated price of graduation dress is range from 30000 to above.",
-            "default_action": {
-              "type": "web_url",
-              "url": "https://scontent-sea1-1.xx.fbcdn.net/v/t1.0-9/29792720_1006980256115703_3053445385785054787_n.jpg?_nc_cat=108&_nc_sid=110474&_nc_ohc=MvKZ7Bf0e1oAX-_9g54&_nc_ht=scontent-sea1-1.xx&oh=d6203387d93b6ad874ddf661dab28425&oe=5E8106ED",
-              "webview_height_ratio": "tall",
-            },
-            "buttons":[
-             {
-                "type":"postback",
-                "title":"Convocation.",
-                "payload":"ABD_saw"
               }              
             ]      
           }
