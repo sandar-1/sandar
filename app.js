@@ -744,7 +744,7 @@ function showAllDataToCus(sender_psid) {
   let response11= {"text" : "Khar        :" + userEnteredInfo.khar};
   let response12= {"text" : "Ankle       :" + userEnteredInfo.ankle};
   let response13= {"text" : "Cloth design:" + userSendAttachment.designAttachment};
-  let response13= {"text" : "Confirm or change"};
+  let response14= {"text" : "Confirm or change"};
 
   callSend(sender_psid,response1).then(()=>{
         return callSend(sender_psid,response2).then(()=>{
@@ -758,7 +758,9 @@ function showAllDataToCus(sender_psid) {
                         return callSend(sender_psid,response10).then(()=>{
                           return callSend(sender_psid,response11).then(()=>{
                             return callSend(sender_psid,response12).then(()=>{
-                              return callSend(sender_psid,response13);
+                              return callSend(sender_psid,response13).then(()=>{
+                                return callSend(sender_psid,response14);
+                              });
                             });
                           });
                         });
