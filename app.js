@@ -148,27 +148,27 @@ app.get('/webhook', (req, res) => {
 function handleMessage(sender_psid, received_message) {
   let response;
   if (received_message.text == "hi" || received_message.text == "Hi") {    
-   greetUser (sender_psid);
-  }else if (received_message.text && userInformation.name == true) {   
-    userEnteredInformation.name =  received_message.text;
-    let response1 = {"text" : "Let's get your body measurement. Here are some ways to measure your body. Hopefully it will be usefull. :)"};
-    let response2 = {"attachment":{
-                        "type":"image", 
-                        "payload":{
-                        "url":"https://www.dummies.com/wp-content/uploads/how-to-get-your-body-measurements.jpg", 
-                        "is_reusable":true
-                                  }
-                    }                    
-    };
-    let response3 = {"text" = "Well.... let's measure your Chest first. "};
-     callSend(sender_psid, response1).then(()=>{
-      return callSend(sender_psid, response2).then(()=>{
-        return callSend(sender_psid, response3);
-      });
-    });
-    userInformation.name = false;
-    userInformation.chest = true;
-  }
+     greetUser (sender_psid);}
+  // }else if (received_message.text && userInformation.name == true) {   
+  //   userEnteredInformation.name =  received_message.text;
+  //   let response1 = {"text" : "Let's get your body measurement. Here are some ways to measure your body. Hopefully it will be usefull. :)"};
+  //   let response2 = {"attachment":{
+  //                       "type":"image", 
+  //                       "payload":{
+  //                       "url":"https://www.dummies.com/wp-content/uploads/how-to-get-your-body-measurements.jpg", 
+  //                       "is_reusable":true
+  //                                 }
+  //                   }                    
+  //   };
+  //   let response3 = {"text" = "Well.... let's measure your Chest first. "};
+  //    callSend(sender_psid, response1).then(()=>{
+  //     return callSend(sender_psid, response2).then(()=>{
+  //       return callSend(sender_psid, response3);
+  //     });
+  //   });
+  //   userInformation.name = false;
+  //   userInformation.chest = true;
+  // }
   callSendAPI(sender_psid, response);    
 }
 
