@@ -743,7 +743,15 @@ async function showAllDataToCus(sender_psid) {
   let response10= {"text" : "Htamein Fold:" + userEnteredInfo.htameinfold};
   let response11= {"text" : "Khar        :" + userEnteredInfo.khar};
   let response12= {"text" : "Ankle       :" + userEnteredInfo.ankle};
-  let response13= {"text" : "Cloth design:" + userSendAttachment.designAttachment};
+  let response13= {
+    "attachment":{
+            "type":"image", 
+            "payload":{
+              "url":userSendAttachment.designAttachment, 
+              "is_reusable":true
+            }
+          }
+  };
   let response14= {"text" : "Confirm or change"};
 
   callSend(sender_psid,response1).then(()=>{
