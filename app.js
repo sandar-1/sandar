@@ -360,7 +360,31 @@ function handlePostback(sender_psid, received_postback) {
    let response;
   let payload = received_postback.payload;
   if (payload === 'SEW') {
-    response = { "text": "Please tell me your name. :) " }
+    response = {"attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"Is your cloth closuer in our shop? Or delivery?",
+                        "buttons":[
+                          {
+                            "type":"postback",
+                            "payload":"delivered",
+                            "title":"Will be delivered "
+                          },
+                          {
+                            "type":"postback",
+                            "payload":"Inshop",
+                            "title":"Is in your shop"
+                          }
+                        ]
+                      }
+                    } 
+                 }
+  }else if (payload === 'Inshop') {
+    response = {"text": "Please tell me your name. :) "}
+    userInfo.name = true;
+  }else if (payload === 'delivered') {
+    response = {"text": "OK! It can be any bus stop. Contact 0912345678. Well.. tell me your name. :) "}
     userInfo.name = true;
   }else if (payload === 'yes_right_measurment') {
     let response1 = {"text" : "which type of htamein? "};
@@ -729,6 +753,7 @@ async function asking_cus_design (sender_psid){
     designAttachment = true;
 }
 
+
 /*function function save data to firebase*/
 async function showAllDataToCus(sender_psid) {
   let response1 = {"text": userEnteredInfo.name +` here are your body measurement, types and cloth design.`};
@@ -752,7 +777,18 @@ async function showAllDataToCus(sender_psid) {
             }
           }
   };
-  let response14= {"text" : "Confirm or change"};
+  let response14= {"text" : "Confirm or change",
+                    "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Confirm",
+                                        "payload":"confirm"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Change",
+                                        "payload":"change"
+                                      }]
+  };
 
   callSend(sender_psid,response1).then(()=>{
         return callSend(sender_psid,response2).then(()=>{
