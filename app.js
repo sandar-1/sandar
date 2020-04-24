@@ -63,6 +63,7 @@ let bdesignAttachment = false;
 let sharepicAttachment = false;
 
 let userEnteredInfo = {};
+let userSendAttachment = {};
 
 
 // Sets server port and logs message on success
@@ -295,6 +296,7 @@ function handleMessage(sender_psid, received_message) {
     console.log('meta data',received_message);
     designAttachment == false;
     let attachment_url = received_message.attachments[0].payload.url;
+    userSendAttachment.designAttachment = attachment_url;
     response = {
       "attachment": {
         "type": "template",
@@ -313,35 +315,6 @@ function handleMessage(sender_psid, received_message) {
               {
                 "type": "postback",
                 "title": "No, sorry. :(",
-                "payload": "no",
-              }
-            ],
-          }]
-        }
-      }
-    }
-  }else if (received_message.attachments && bdesignAttachment == true) {
-    console.log('meta data',received_message);
-    bdesignAttachment == false;
-    let attachment_url = received_message.attachments[0].payload.url;
-    response = {
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "generic",
-          "elements": [{
-            "title": "Is tis one?",
-            "subtitle": "You exactly know how to blink others people eyes.",
-            "image_url": attachment_url,
-            "buttons": [
-              {
-                "type": "postback",
-                "title": "Yes!",
-                "payload": "YES",
-              },
-              {
-                "type": "postback",
-                "title": "No!",
                 "payload": "no",
               }
             ],
@@ -429,6 +402,10 @@ function handlePostback(sender_psid, received_postback) {
                                       }]
                     };
                     userInfo.price = true;
+  }else if (payload === 'yes') {
+    showAllDataToCus (sender_psid);
+  }else if (payload === 'no') {
+    response = { "text": "What's wrong! it's ok, send me again." }
   }
   callSendAPI(sender_psid, response);
 }
@@ -494,52 +471,85 @@ async function greetUser(sender_psid){
     });
 }
 
-
-/*function for asking for beaded emboidery*/
-async function askforbeaded (sender_psid){
-  let response1 = {"text" : "If you wish! you can add some beaded embroidery to make other people's eyes blink."};
-    let response2 = {"text" : "Like this....."};
-    let response3 = {
-      "attachment":{
-            "type":"image", 
-            "payload":{
-              "url":"https://i.pinimg.com/originals/9b/82/cd/9b82cdc94464fa39a67444d6a5da0937.jpg", 
-              "is_reusable":true
-            }
-          }
-    };
-    let response4 = {
-      "text" : "If so, do I have to follow the beaded embroidery design from the cloth design you sent?"};
-    let response5 ={
+/*function for body infomation record*/
+function bodymeasure(sender_psid){
+    let response1 = {"text": `Chest: `+ userEnteredInfo.chest};
+    let response2 = {"text": 'Upper arm: ' + userEnteredInfo.upperArm};
+    let response3 = {"text": 'Sleeve length: ' + userEnteredInfo.sleevelength};
+    let response4 = {"text": 'Waist: '+ userEnteredInfo.waist};
+    let response5 = {"text": 'Hips: '+ userEnteredInfo.hips};
+    let response6 = {"text": 'Thigh: ' + userEnteredInfo.thigh};
+    let response7 = {"text": 'Inseam: '+ userEnteredInfo.inseam};
+    let response8 = {
       "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "generic",
-          "elements": [{
-            "title": "Or is there anothe design that you want to do?",
-            "subtitle": "💁🏽‍♀💁🏽‍♀💁🏽‍♀💁🏽‍♀",
-            "buttons": [
-              {
-                "type": "postback",
-                "title": "I do have.",
-                "payload": "i_do_have",
-              },
-              {
-                "type": "postback",
-                "title": "Same as design.",
-                "payload": "same_as_design",
-              },
-              {
-                "type": "postback",
-                "title": "Nothing added.",
-                "payload": "nothing_added",
-              }
-            ]
-          }]
-        }
-      }
-    }
-    callSend(sender_psid, response1).then(()=>{
+                  "type": "template",
+                  "payload": {
+                    "template_type": "generic",
+                    "elements": [{
+                      "title": "Is this the right measurment?",
+                      "buttons": [
+                        {
+                          "type": "postback",
+                          "title": "Yes",
+                          "payload": "yes_right_measurment",
+                        },
+                        {
+                          "type": "postback",
+                          "title": "No",
+                          "payload": "measure_again",
+                        }
+                      ],
+                    }]
+                  }
+                }
+    };
+      callSend(sender_psid,response1).then(()=>{
+        return callSend(sender_psid,response2).then(()=>{
+          return callSend(sender_psid,response3).then(()=>{
+            return callSend(sender_psid,response4).then(()=>{
+              return callSend(sender_psid,response5).then(()=>{
+                return callSend(sender_psid,response6).then(()=>{
+                  return callSend(sender_psid,response7).then(()=>{
+                    return callSend(sender_psid,response8);
+                  });
+                });
+              });
+            });
+          });
+        });
+      });
+}
+
+/*function for user answer*/
+function user_answer(sender_psid){
+  let response1 = {"text" : "Htamein Type:" + userEnteredInfo.htameintype};
+  let response2 = {"text" : "Htamein Fold:" + userEnteredInfo.htameinfold};
+  let response3 = {"text" : "Khar        :" + userEnteredInfo.khar};
+  let response4 = {"text" : "Ankle       :" + userEnteredInfo.ankle};
+  let response5 = {
+      "attachment": {
+                  "type": "template",
+                  "payload": {
+                    "template_type": "generic",
+                    "elements": [{
+                      "title": "Is this right?",
+                      "buttons": [
+                        {
+                          "type": "postback",
+                          "title": "Yes",
+                          "payload": "yes_right",
+                        },
+                        {
+                          "type": "postback",
+                          "title": "No",
+                          "payload": "yes_right_measurment",
+                        }
+                      ],
+                    }]
+                  }
+                }
+    };
+  callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2).then(()=>{
         return callSend(sender_psid, response3).then(()=>{
           return callSend(sender_psid, response4).then(()=>{
@@ -548,34 +558,6 @@ async function askforbeaded (sender_psid){
         });
       });
     });
-}
-
-/*Function for asking the customer design*/
-async function asking_cus_design (sender_psid){
-  let response1 = {"text":"Well...."};
-  let response2 = {"text":"Send me the design you want to sew. If not you can get some idea from viewing others pictures."};
-  let response3 = {
-                    "attachment":{
-                      "type":"template",
-                      "payload":{
-                        "template_type":"button",
-                        "text":"Send if you have one. :)",
-                        "buttons":[
-                          {
-                            "type":"web_url",
-                            "url":"https://www.messenger.com",
-                            "title":"Viewing pictures"
-                          }
-                        ]
-                      }
-                    }
-  };
-    callSend(sender_psid, response1).then(()=>{
-      return callSend(sender_psid, response2).then(()=>{
-        return callSend(sender_psid, response3);
-      });
-    });
-    designAttachment = true;
 }
 
 /*function for asking event*/
@@ -719,86 +701,69 @@ async function wedding_event (sender_psid) {
     });
 }
 
-/*function for user answer*/
-function user_answer(sender_psid){
-  let response1 = {"text" : "Htamein Type:" + userEnteredInfo.htameintype};
-  let response2 = {"text" : "Htamein Fold:" + userEnteredInfo.htameinfold};
-  let response3 = {"text" : "Khar        :" + userEnteredInfo.khar};
-  let response4 = {"text" : "Ankle       :" + userEnteredInfo.ankle};
-  let response5 = {
-      "attachment": {
-                  "type": "template",
-                  "payload": {
-                    "template_type": "generic",
-                    "elements": [{
-                      "title": "Is this right?",
-                      "buttons": [
-                        {
-                          "type": "postback",
-                          "title": "Yes",
-                          "payload": "yes_right",
-                        },
-                        {
-                          "type": "postback",
-                          "title": "No",
-                          "payload": "yes_right_measurment",
-                        }
-                      ],
-                    }]
-                  }
-                }
-    };
-  callSend(sender_psid, response1).then(()=>{
+/*Function for asking the customer design*/
+async function asking_cus_design (sender_psid){
+  let response1 = {"text":"Well...."};
+  let response2 = {"text":"Send me the design you want to sew. If not you can get some idea from viewing others pictures."};
+  let response3 = {
+                    "attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"Send if you have one. :)",
+                        "buttons":[
+                          {
+                            "type":"web_url",
+                            "url":"https://www.messenger.com",
+                            "title":"Viewing pictures"
+                          }
+                        ]
+                      }
+                    }
+  };
+    callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2).then(()=>{
-        return callSend(sender_psid, response3).then(()=>{
-          return callSend(sender_psid, response4).then(()=>{
-            return callSend(sender_psid, response5);
-          });
-        });
+        return callSend(sender_psid, response3);
       });
     });
+    designAttachment = true;
 }
 
-/*function for body infomation record*/
-function bodymeasure(sender_psid){
-    let response1 = {"text": `Chest: `+ userEnteredInfo.chest};
-    let response2 = {"text": 'Upper arm: ' + userEnteredInfo.upperArm};
-    let response3 = {"text": 'Sleeve length: ' + userEnteredInfo.sleevelength};
-    let response4 = {"text": 'Waist: '+ userEnteredInfo.waist};
-    let response5 = {"text": 'Hips: '+ userEnteredInfo.hips};
-    let response6 = {"text": 'Thigh: ' + userEnteredInfo.thigh};
-    let response7 = {"text": 'Inseam: '+ userEnteredInfo.inseam};
-    let response8 = {
-      "attachment": {
-                  "type": "template",
-                  "payload": {
-                    "template_type": "generic",
-                    "elements": [{
-                      "title": "Is this the right measurment?",
-                      "buttons": [
-                        {
-                          "type": "postback",
-                          "title": "Yes",
-                          "payload": "yes_right_measurment",
-                        },
-                        {
-                          "type": "postback",
-                          "title": "No",
-                          "payload": "measure_again",
-                        }
-                      ],
-                    }]
-                  }
-                }
-    };
-      callSend(sender_psid,response1).then(()=>{
+/*function function save data to firebase*/
+function showAllDataToCus(sender_psid) {
+  let response1 = {"text": userEnteredInfo.name +` here are your body measurement, types and cloth design.`};
+  let response2 = {"text": `Chest        : `+ userEnteredInfo.chest};
+  let response3 = {"text": 'Upper arm    : ' + userEnteredInfo.upperArm};
+  let response4 = {"text": 'Sleeve length: ' + userEnteredInfo.sleevelength};
+  let response5 = {"text": 'Waist        : '+ userEnteredInfo.waist};
+  let response6 = {"text": 'Hips         : '+ userEnteredInfo.hips};
+  let response7 = {"text": 'Thigh        : ' + userEnteredInfo.thigh};
+  let response8 = {"text": 'Inseam       : '+ userEnteredInfo.inseam};
+  let response9 = {"text" : "Htamein Type:" + userEnteredInfo.htameintype};
+  let response10= {"text" : "Htamein Fold:" + userEnteredInfo.htameinfold};
+  let response11= {"text" : "Khar        :" + userEnteredInfo.khar};
+  let response12= {"text" : "Ankle       :" + userEnteredInfo.ankle};
+  let response13= {"text" : "Cloth design:" + userSendAttachment.designAttachment};
+  let response13= {"text" : "If you want to one of thoes type 'Change'"};
+
+  callSend(sender_psid,response1).then(()=>{
         return callSend(sender_psid,response2).then(()=>{
           return callSend(sender_psid,response3).then(()=>{
             return callSend(sender_psid,response4).then(()=>{
               return callSend(sender_psid,response5).then(()=>{
                 return callSend(sender_psid,response6).then(()=>{
                   return callSend(sender_psid,response7).then(()=>{
-                    return callSend(sender_psid,response8);
+                    return callSend(sender_psid,response8).then(()=>{
+                      return callSend(sender_psid,response9).then(()=>{
+                        return callSend(sender_psid,response10).then(()=>{
+                          return callSend(sender_psid,response11).then(()=>{
+                            return callSend(sender_psid,response12).then(()=>{
+                              return callSend(sender_psid,response13);
+                            });
+                          });
+                        });
+                      });
+                    });
                   });
                 });
               });
@@ -824,6 +789,8 @@ function saveData(sender_psid) {
     htameinfold : userEnteredInfo.htameinfold,
     khar : userEnteredInfo.khar,
     ankle : userEnteredInfo.ankle,
+    price : userEnteredInfo.price,
+    cloth_design : userSendAttachment.designAttachment,
   }
   db.collection('user_information').add(info);
 }
