@@ -743,14 +743,7 @@ async function wedding_event (sender_psid) {
                                 "type": "web_url",
                                 "url": "https://i.pinimg.com/originals/30/5b/7e/305b7e837297d439044f8f5519f505f0.jpg",
                                 "webview_height_ratio": "tall",
-                              },
-                              "buttons":[
-                               {
-                                  "type":"postback",
-                                  "title":"I choose 300000 Ks.",
-                                  "payload":"weddingd_htameinsaim"
-                                }              
-                              ]      
+                              }     
                             },
                             {
                               "title":"Simple wedding dress. ?",
@@ -760,14 +753,7 @@ async function wedding_event (sender_psid) {
                                 "type": "web_url",
                                 "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTLpF_QJWgoY4cHy1pZsxDfQc3Q8YuvTXIjC3oc7Jpbqv3KoX63&usqp=CAU",
                                 "webview_height_ratio": "tall",
-                              },
-                              "buttons":[
-                               {
-                                  "type":"postback",
-                                  "title":"I choose 150000 Ks.",
-                                  "payload":"wedding_simple"
-                                }              
-                              ]      
+                              }     
                             }
                           ]
                         }
