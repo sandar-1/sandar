@@ -746,7 +746,7 @@ async function wedding_event (sender_psid) {
                               },
                               "buttons":[
                                {
-                                  "type":"text",
+                                  "type":"postback",
                                   "title":"I choose 300000 Ks.",
                                   "payload":"weddingd_htameinsaim"
                                 }              
@@ -763,7 +763,7 @@ async function wedding_event (sender_psid) {
                               },
                               "buttons":[
                                {
-                                  "type":"text",
+                                  "type":"postback",
                                   "title":"I choose 150000 Ks.",
                                   "payload":"wedding_simple"
                                 }              
