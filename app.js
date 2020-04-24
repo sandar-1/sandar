@@ -285,8 +285,12 @@ function handleMessage(sender_psid, received_message) {
     userInfo.ankle = true;
   }else if (received_message.text && userInfo.ankle == true) { 
     userEnteredInfo.ankle = received_message.text;   
-    user_answer(sender_psid);
+    user_answer (sender_psid);
     userInfo.ankle = false;
+  }else if (received_message.text && userInfo.price == true) { 
+    userEnteredInfo.price = received_message.text;   
+    asking_cus_design (sender_psid);
+    userInfo.price = false;
   }else if (received_message.attachments && designAttachment == true) {
     console.log('meta data',received_message);
     designAttachment == false;
@@ -424,6 +428,7 @@ function handlePostback(sender_psid, received_postback) {
                                         "payload":"wedding_price"
                                       }]
                     };
+                    userInfo.price = true;
   }
   callSendAPI(sender_psid, response);
 }
@@ -584,16 +589,37 @@ async function askforbeaded (sender_psid){
     });
 }
 
-/*Function for asking to upload design*/
-async function asking_to_upload_design (sender_psid){
+/*Function for asking the customer design*/
+async function asking_cus_design (sender_psid){
   let response1 = {"text":"Well...."};
-  let response2 = {"text":"Please send me the design you want to sew."};
+  let response2 = {"text":"Send me the design you want to sew. If not you can get some idea from viewing others pictures."};
+  let response3 = {
+                    "attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"What do you want to do next?",
+                        "buttons":[
+                          {
+                            "type":"postback",
+                            "payload":"https://www.messenger.com",
+                            "title":"Sending design"
+                          },
+                          {
+                            "type":"web_url",
+                            "url":"https://www.messenger.com",
+                            "title":"Viewing pictures"
+                          }
+                        ]
+                      }
+                    }
+  };
     callSend(sender_psid, response1).then(()=>{
-      return callSend(sender_psid, response2);
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
     });
   designAttachment = true;
-    bdesignAttachment = false;
-    sharepicAttachment = false;
 }
 
 /*function for asking event*/
