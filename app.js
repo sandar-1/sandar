@@ -464,6 +464,8 @@ function handlePostback(sender_psid, received_postback) {
   }else if (payload === 'yes_right') {
     saveData(sender_psid);
     askforevent (sender_psid);
+  }else if (payload === 'WEDDING') {
+    wedding (sender_psid);
   }
   callSendAPI(sender_psid, response);
 }
@@ -624,6 +626,18 @@ async function askforbeaded (sender_psid){
     });
 }
 
+/*Function for asking to upload design*/
+async function asking_to_upload_design (sender_psid){
+  let response1 = {"text":"Well...."};
+  let response2 = {"text":"Please send me the design you want to sew."};
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+  designAttachment = true;
+    bdesignAttachment = false;
+    sharepicAttachment = false;
+}
+
 /*function for asking event*/
 async function askforevent (sender_psid) {
   let response1 = {"text":"For what kind of event?"};
@@ -635,9 +649,9 @@ async function askforevent (sender_psid) {
         "template_type":"generic",
         "elements":[
            {
-            "title":"A wedding?",
+            "title":"Wedding?",
             "image_url":"https://i.pinimg.com/236x/e6/77/cc/e677cc25d57a184fc8928a001f5f25c2--traditional-wedding-dresses-traditional-outfits.jpg",
-            "subtitle":"👰 The estimated price of wedding dress is range from 300000 to above.",
+            "subtitle":"👰",
             "default_action": {
               "type": "web_url",
               "url": "https://i.pinimg.com/236x/e6/77/cc/e677cc25d57a184fc8928a001f5f25c2--traditional-wedding-dresses-traditional-outfits.jpg",
@@ -654,7 +668,7 @@ async function askforevent (sender_psid) {
           {
             "title":"Occasion?",
             "image_url":"https://i.pinimg.com/236x/a4/93/0d/a4930df067551676be9f50906b62ed56.jpg",
-            "subtitle":"💃 The estimated price of occasion dress is range from 15000 to above.",
+            "subtitle":"💃",
             "default_action": {
               "type": "web_url",
               "url": "https://i.pinimg.com/236x/a4/93/0d/a4930df067551676be9f50906b62ed56.jpg",
@@ -669,26 +683,9 @@ async function askforevent (sender_psid) {
             ]      
           },
           {
-            "title":"Casual?",
-            "image_url":"https://i.pinimg.com/236x/8e/4f/34/8e4f3428ae5c12d2d91c7847ff087bfb--kebaya-indonesia-thai-dress.jpg",
-            "subtitle":"🤷 The estimated price of casual dress is range from 8000 to above.",
-            "default_action": {
-              "type": "web_url",
-              "url": "https://i.pinimg.com/236x/8e/4f/34/8e4f3428ae5c12d2d91c7847ff087bfb--kebaya-indonesia-thai-dress.jpg",
-              "webview_height_ratio": "tall",
-            },
-            "buttons":[
-             {
-                "type":"postback",
-                "title":"Casual.",
-                "payload":"CASUAL"
-              }              
-            ]      
-          },
-          {
             "title":"For a Convocation?",
             "image_url":"https://www.textiledirectory.com.mm/images/YadanarWin/1.6.2019/dress/3.jpg",
-            "subtitle":"👩‍🎓 The estimated price of graduation dress is range from 30000 to above.",
+            "subtitle":"👩‍🎓 ",
             "default_action": {
               "type": "web_url",
               "url": "https://www.textiledirectory.com.mm/images/YadanarWin/1.6.2019/dress/3.jpg",
@@ -699,6 +696,23 @@ async function askforevent (sender_psid) {
                 "type":"postback",
                 "title":"Convocation.",
                 "payload":"ABD"
+              }              
+            ]      
+          },
+          {
+            "title":"Casual?",
+            "image_url":"https://i.pinimg.com/236x/8e/4f/34/8e4f3428ae5c12d2d91c7847ff087bfb--kebaya-indonesia-thai-dress.jpg",
+            "subtitle":"🤷",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.pinimg.com/236x/8e/4f/34/8e4f3428ae5c12d2d91c7847ff087bfb--kebaya-indonesia-thai-dress.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"Casual.",
+                "payload":"CASUAL"
               }              
             ]      
           }
@@ -713,41 +727,51 @@ async function askforevent (sender_psid) {
   });
 }
 
-/*Function for asking to upload design*/
-async function asking_to_upload_design (sender_psid){
-  let response1 = {"text":"Well...."};
-  let response2 = {"text":"Please send me the design you want to sew."};
+/*function for Wedding event*/
+async function wedding (sender_psid) {
+  let response1 = {"text" : "For a wedding dress there are two prices at 150000 Ks and 300000 Ks. "};
+    let response2 = { "attachment":{
+                        "type":"template",
+                        "payload":{
+                          "template_type":"generic",
+                          "elements":[
+                             {
+                              "title":"Wedding dress with htamein saim.",
+                              "image_url":"https://i.pinimg.com/originals/30/5b/7e/305b7e837297d439044f8f5519f505f0.jpg",
+                              "subtitle":"Will include much beaded embroidery design and that will look like an ancient princess dress.",
+                              "default_action": {
+                                "type": "web_url",
+                                "url": "https://i.pinimg.com/originals/30/5b/7e/305b7e837297d439044f8f5519f505f0.jpg",
+                                "webview_height_ratio": "tall",
+                              },
+                              "buttons":[
+                               {
+                                  "type":"postback",
+                                  "title":"300000 Ks.",
+                                  "payload":"weddingd_htameinsaim"
+                                }              
+                              ]      
+                            },
+                            {
+                              "title":"Simple wedding dress. ?",
+                              "image_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTLpF_QJWgoY4cHy1pZsxDfQc3Q8YuvTXIjC3oc7Jpbqv3KoX63&usqp=CAU",
+                              "subtitle":"will not include much beaded embroidery design and longer htamein saim.",
+                              "default_action": {
+                                "type": "web_url",
+                                "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTLpF_QJWgoY4cHy1pZsxDfQc3Q8YuvTXIjC3oc7Jpbqv3KoX63&usqp=CAU",
+                                "webview_height_ratio": "tall",
+                              },
+                              "buttons":[
+                               {
+                                  "type":"postback",
+                                  "title":"150000 Ks.",
+                                  "payload":"wedding_simple"
+                                }              
+                              ]      
+                            }
+                    };
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
-    });
-  designAttachment = true;
-    bdesignAttachment = false;
-    sharepicAttachment = false;
-}
-
-/*function for worry about measurement*/
-async function worrymeasurment (sender_psid){
-  let response1 = {"text": "Ok, let's take your body measurement."};
-    let response2 = {"text": "I'm worrying that you don't know how to measure. So, here are some tips for you."};
-    let response3 = {
-      "attachment":{
-            "type":"image", 
-            "payload":{
-              "url":"https://www.dummies.com/wp-content/uploads/how-to-get-your-body-measurements.jpg", 
-              "is_reusable":true
-            }
-          },
-          "quick_replies":[
-                  {
-                    "content_type":"text",
-                    "title":"Start",
-                    "payload":"S"
-                  }]
-    };
-    callSend(sender_psid, response1).then(()=>{
-      return callSend(sender_psid, response2).then(()=>{
-        return callSend(sender_psid, response3);
-      });
     });
 }
 
@@ -859,7 +883,6 @@ function saveData(sender_psid) {
   }
   db.collection('user_information').add(info);
 }
-
 
 function callSendAPI(sender_psid, response) {
   // Construct the message body
