@@ -41,8 +41,7 @@ const
 
 let db = firebase.firestore();
 
-let userInformation = {
-  name : false;
+let measurement = {
   chest:false,
   upperArm:false,
   sleevelength:false,
@@ -61,7 +60,7 @@ let designAttachment = false;
 let bdesignAttachment = false;
 let sharepicAttachment = false;
 
-let userEnteredInformation = {};
+let userEnteredMeasurement = {};
 
 
 // Sets server port and logs message on success
@@ -148,27 +147,272 @@ app.get('/webhook', (req, res) => {
 function handleMessage(sender_psid, received_message) {
   let response;
   if (received_message.text == "hi" || received_message.text == "Hi") {    
-     greetUser (sender_psid);}
-  // }else if (received_message.text && userInformation.name == true) {   
-  //   userEnteredInformation.name =  received_message.text;
-  //   let response1 = {"text" : "Let's get your body measurement. Here are some ways to measure your body. Hopefully it will be usefull. :)"};
-  //   let response2 = {"attachment":{
-  //                       "type":"image", 
-  //                       "payload":{
-  //                       "url":"https://www.dummies.com/wp-content/uploads/how-to-get-your-body-measurements.jpg", 
-  //                       "is_reusable":true
-  //                                 }
-  //                   }                    
-  //   };
-  //   let response3 = {"text" = "Well.... let's measure your Chest first. "};
-  //    callSend(sender_psid, response1).then(()=>{
-  //     return callSend(sender_psid, response2).then(()=>{
-  //       return callSend(sender_psid, response3);
-  //     });
-  //   });
-  //   userInformation.name = false;
-  //   userInformation.chest = true;
-  // }
+   greetUser (sender_psid);
+  }else if (received_message.text == "Start" || received_message.text == "start") {    
+    response = {
+      "text": `First let's measure Chest.`
+    }
+    measurement.chest = true;
+  }else if (received_message.text && measurement.chest == true) {   
+    userEnteredMeasurement.chest =  received_message.text;
+    response = {
+      "text": `Now Upper arm.`
+    }
+    measurement.chest = false;
+    measurement.upperArm = true;
+  }else if (received_message.text && measurement.upperArm == true) { 
+    userEnteredMeasurement.upperArm = received_message.text; 
+    response = {
+      "text": `Let's measure Sleeve length.`
+    }
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = true;
+  }else if (received_message.text && measurement.sleevelength == true) { 
+    userEnteredMeasurement.sleevelength = received_message.text;   
+    response = {
+      "text": `And measure your Waist.`
+    }
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = true;
+  }else if (received_message.text && measurement.waist == true) {
+    userEnteredMeasurement.waist = received_message.text;    
+    response = {
+      "text": `Now your Hips.`
+    }
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = false;
+    measurement.hips = true;
+  }else if (received_message.text && measurement.hips == true) { 
+    userEnteredMeasurement.hips = received_message.text;   
+    response = {
+      "text": `Measure your Thigh.`
+    }
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = false;
+    measurement.hips = false;
+    measurement.thigh = true;
+  }else if (received_message.text && measurement.thigh == true) {   
+    userEnteredMeasurement.thigh = received_message.text; 
+    response = {
+      "text": `Finally! your Inseam.`
+    }
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = false;
+    measurement.hips = false;
+    measurement.thigh = false;
+    measurement.inseam = true;
+  }else if (received_message.text && measurement.inseam == true) {   
+    userEnteredMeasurement.inseam = received_message.text; 
+    bodymeasure(sender_psid);
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = false;
+    measurement.hips = false;
+    measurement.thigh = false;
+    measurement.inseam = false;
+  }else if (received_message.text && measurement.htameintype == true) { 
+    userEnteredMeasurement.htameintype = received_message.text;   
+    let response1 = {"text": `which way you want to fold?`};
+    let response2 = {"text" : "Left fold/Right fold.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Left fold",
+                                        "payload":"lf"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Right fold",
+                                        "payload":"rf"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = false;
+    measurement.hips = false;
+    measurement.thigh = false;
+    measurement.inseam = false;
+    measurement.htameintype = false;
+    measurement.htameinfold = true;
+  }else if (received_message.text && measurement.htameinfold == true) { 
+    userEnteredMeasurement.htameinfold = received_message.text;
+    let response1 = {"text": "Khar to (end exactly with the waist),"};
+    let response2 = {"text" : "Khar tin (ends at the hips) or"};
+    let response3 = {"text" : "khar shay (ends below the hips)",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Khar To",
+                                        "payload":"kto"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Khar Tin",
+                                        "payload":"ktin"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Khar Shay",
+                                        "payload":"kshay"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
+    });
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = false;
+    measurement.hips = false;
+    measurement.thigh = false;
+    measurement.inseam = false;
+    measurement.htameintype = false;
+    measurement.htameinfold = false;
+    measurement.khar = true;
+  }else if (received_message.text && measurement.khar == true) { 
+    userEnteredMeasurement.khar = received_message.text;   
+    let response1 = {"text": `Would you like to cover ankle or not?`};
+    let response2 = {"text" : "Upper ankle/cover ankle.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Upper Ankle",
+                                        "payload":"ya"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Cover Ankle",
+                                        "payload":"ca"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = false;
+    measurement.hips = false;
+    measurement.thigh = false;
+    measurement.inseam = false;
+    measurement.htameintype = false;
+    measurement.htameinfold = false;
+    measurement.khar = false;
+    measurement.ankle = true;
+  }else if (received_message.text && measurement.ankle == true) { 
+    userEnteredMeasurement.ankle = received_message.text;   
+    user_answer(sender_psid);
+    measurement.chest = false;
+    measurement.upperArm = false;
+    measurement.sleevelength = false;
+    measurement.waist = false;
+    measurement.hips = false;
+    measurement.thigh = false;
+    measurement.inseam = false;
+    measurement.htameintype = false;
+    measurement.htameinfold = false;
+    measurement.khar = false;
+    measurement.ankle = false;
+  }else if (received_message.attachments && designAttachment == true) {
+    console.log('meta data',received_message);
+    designAttachment == false;
+    let attachment_url = received_message.attachments[0].payload.url;
+    response = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "Is this design?",
+            "subtitle": "Wow! this one will totally suits you.I can't wait to sew it.",
+            "image_url": attachment_url,
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "Yes, that one. :)",
+                "payload": "yes",
+              },
+              {
+                "type": "postback",
+                "title": "No, sorry. :(",
+                "payload": "no",
+              }
+            ],
+          }]
+        }
+      }
+    }
+  }else if (received_message.attachments && bdesignAttachment == true) {
+    console.log('meta data',received_message);
+    bdesignAttachment == false;
+    let attachment_url = received_message.attachments[0].payload.url;
+    response = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "Is tis one?",
+            "subtitle": "You exactly know how to blink others people eyes.",
+            "image_url": attachment_url,
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "Yes!",
+                "payload": "YES",
+              },
+              {
+                "type": "postback",
+                "title": "No!",
+                "payload": "no",
+              }
+            ],
+          }]
+        }
+      }
+    }
+  }else if (received_message.attachments && sharepicAttachment == true) {
+    console.log('meta data',received_message);
+    sharepicAttachment == false;
+    let attachment_url = received_message.attachments[0].payload.url;
+    response = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "Is tis one?",
+            "subtitle": ":)",
+            "image_url": attachment_url,
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "Yes!",
+                "payload": "yes_sp",
+              },
+              {
+                "type": "postback",
+                "title": "No!",
+                "payload": "no_sp",
+              }
+            ],
+          }]
+        }
+      }
+    }
+  }
   callSendAPI(sender_psid, response);    
 }
 
@@ -177,8 +421,75 @@ function handlePostback(sender_psid, received_postback) {
    let response;
   let payload = received_postback.payload;
   if (payload === 'SEW') {
-    let response = {"text" : "Please tell me your name. :)"};
-    userInformation.name = true;
+    sewing (sender_psid);
+  }else if (payload === 'no') {
+    response = { "text": "What's wrong! it's ok, send me again." }
+  }else if (payload === 'yes') {
+    askforbeaded (sender_psid);
+  }else if (payload === 'send_design') {
+    response = {"text" : "We will sew it look like the design you send or chooes. "};
+    askforevent (sender_psid);
+  }else if (payload === 'WEDDING') {
+    asking_to_upload_design (sender_psid);
+  }else if (payload === 'OCCASION') {
+    asking_to_upload_design (sender_psid);
+  }else if (payload === 'CASUAL') {
+    asking_to_upload_design (sender_psid);
+  }else if (payload === 'ABD') {
+    asking_to_upload_design (sender_psid);
+  }else if (payload === 'WEDDING_saw') {
+    worrymeasurment (sender_psid);
+  }else if (payload === 'OCCASION_saw') {
+    worrymeasurment (sender_psid);
+  }else if (payload === 'CASUAL_saw') {
+    worrymeasurment (sender_psid);
+  }else if (payload === 'ABD_saw') {
+    worrymeasurment (sender_psid);
+  }else if (payload === 'measure_again') {
+    response = {"text" : "Type 'Start' to measure again 💁"}
+  }else if (payload === 'yes_right') {
+    saveData(sender_psid);
+    response = {"text" : "Ok!"}
+  }else if (payload === 'yes_right_measurment') {
+    let response1 = {"text" : "which type of htamein? "};
+    let response2 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Cheik",
+                                        "payload":"c"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Hpi",
+                                        "payload":"hpi"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Simple",
+                                        "payload":"s"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+    measurement.htameintype = true;
+  }else if (payload === 'i_do_have') {
+    response ={"text": "well, send me the beaded design that you want to do."};
+    sharepicAttachment = false;
+    designAttachment = false;
+    bdesignAttachment = true;
+  }else if (payload === 'nothing_added') {
+    worrymeasurment (sender_psid);
+  }else if (payload === 'same_as_design') {
+    worrymeasurment (sender_psid);
+  }else if (payload === 'YES') {
+    worrymeasurment (sender_psid);
+  }else if (payload === 'SAW') {
+    Sew_As_Wish (sender_psid);
+  }else if (payload === 'SP') {
+    response ={"text": "share yor pictyre with any feedback."};
+    designAttachment = false;
+    bdesignAttachment = false;
+    sharepicAttachment = true;
   }
   callSendAPI(sender_psid, response);
 }
@@ -244,8 +555,405 @@ async function greetUser(sender_psid){
     });
 }
 
+/*Function for sew*/
+async function sewing (sender_psid){
+  let response1 = {"text" : "You can send us a design of the cloth that you want to sew."};
+  let response2 = {"text" : "It's Ok! if you don't have any idea you can make choice. And you can get idea by looking others pictures."};
+  let response3 = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "Please, make your choice here.",
+            "subtitle": "💁🏽‍♀💁🏽‍♀💁🏽‍♀💁🏽‍♀",
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "By sending design.",
+                "payload": "send_design",
+              },
+              {
+                "type": "postback",
+                "title": "Sew as you wish",
+                "payload": "SAW",
+              },
+              {
+                "type": "postback",
+                "title": "Pictures of others",
+                "payload": "POO",
+                    }
+            ],
+          }]
+        }
+      }
+    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
+    });
+}
 
+/*function for asking for beaded emboidery*/
+async function askforbeaded (sender_psid){
+  let response1 = {"text" : "If you wish! you can add some beaded embroidery to make other people's eyes blink."};
+    let response2 = {"text" : "Like this....."};
+    let response3 = {
+      "attachment":{
+            "type":"image", 
+            "payload":{
+              "url":"https://i.pinimg.com/originals/9b/82/cd/9b82cdc94464fa39a67444d6a5da0937.jpg", 
+              "is_reusable":true
+            }
+          }
+    };
+    let response4 = {
+      "text" : "If so, do I have to follow the beaded embroidery design from the cloth design you sent?"};
+    let response5 ={
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "Or is there anothe design that you want to do?",
+            "subtitle": "💁🏽‍♀💁🏽‍♀💁🏽‍♀💁🏽‍♀",
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "I do have.",
+                "payload": "i_do_have",
+              },
+              {
+                "type": "postback",
+                "title": "Same as design.",
+                "payload": "same_as_design",
+              },
+              {
+                "type": "postback",
+                "title": "Nothing added.",
+                "payload": "nothing_added",
+              }
+            ]
+          }]
+        }
+      }
+    }
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3).then(()=>{
+          return callSend(sender_psid, response4).then(()=>{
+            return callSend(sender_psid, response5);
+          });
+        });
+      });
+    });
+}
 
+/*function for asking event*/
+async function askforevent (sender_psid) {
+  let response1 = {"text":"For what kind of event?"};
+  let response2 = {"text":"These are the kinds of sewing we do in our shop."};
+  let response3 = {
+       "attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"generic",
+        "elements":[
+           {
+            "title":"A wedding?",
+            "image_url":"https://i.pinimg.com/236x/e6/77/cc/e677cc25d57a184fc8928a001f5f25c2--traditional-wedding-dresses-traditional-outfits.jpg",
+            "subtitle":"👰 The estimated price of wedding dress is range from 300000 to above.",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.pinimg.com/236x/e6/77/cc/e677cc25d57a184fc8928a001f5f25c2--traditional-wedding-dresses-traditional-outfits.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"Wedding.",
+                "payload":"WEDDING"
+              }              
+            ]      
+          },
+          {
+            "title":"Occasion?",
+            "image_url":"https://i.pinimg.com/236x/a4/93/0d/a4930df067551676be9f50906b62ed56.jpg",
+            "subtitle":"💃 The estimated price of occasion dress is range from 15000 to above.",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.pinimg.com/236x/a4/93/0d/a4930df067551676be9f50906b62ed56.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"Occasion.",
+                "payload":"OCCASION"
+              }              
+            ]      
+          },
+          {
+            "title":"Casual?",
+            "image_url":"https://i.pinimg.com/236x/8e/4f/34/8e4f3428ae5c12d2d91c7847ff087bfb--kebaya-indonesia-thai-dress.jpg",
+            "subtitle":"🤷 The estimated price of casual dress is range from 8000 to above.",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.pinimg.com/236x/8e/4f/34/8e4f3428ae5c12d2d91c7847ff087bfb--kebaya-indonesia-thai-dress.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"Casual.",
+                "payload":"CASUAL"
+              }              
+            ]      
+          },
+          {
+            "title":"For a Convocation?",
+            "image_url":"https://scontent-sea1-1.xx.fbcdn.net/v/t1.0-9/29792720_1006980256115703_3053445385785054787_n.jpg?_nc_cat=108&_nc_sid=110474&_nc_ohc=MvKZ7Bf0e1oAX-_9g54&_nc_ht=scontent-sea1-1.xx&oh=d6203387d93b6ad874ddf661dab28425&oe=5E8106ED",
+            "subtitle":"👩‍🎓 The estimated price of graduation dress is range from 30000 to above.",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://scontent-sea1-1.xx.fbcdn.net/v/t1.0-9/29792720_1006980256115703_3053445385785054787_n.jpg?_nc_cat=108&_nc_sid=110474&_nc_ohc=MvKZ7Bf0e1oAX-_9g54&_nc_ht=scontent-sea1-1.xx&oh=d6203387d93b6ad874ddf661dab28425&oe=5E8106ED",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"Convocation.",
+                "payload":"ABD"
+              }              
+            ]      
+          }
+        ]
+      }
+    }
+  };
+  callSend(sender_psid,response1).then(()=>{
+    return callSend(sender_psid,response2).then(()=>{
+      return callSend(sender_psid,response3);
+    });
+  });
+}
+
+/*function for asking event for sew as wish*/
+async function Sew_As_Wish (sender_psid) {
+  let response1 = {"text":"Thank you for believing to us. Umm....It will eat my head but I will try my best. Oh....for what kind of event?"};
+  let response2 = {"text":"These are the kinds of sewing we do in our shop."};
+  let response3 = {
+       "attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"generic",
+        "elements":[
+           {
+            "title":"A wedding?",
+            "image_url":"https://i.pinimg.com/236x/e6/77/cc/e677cc25d57a184fc8928a001f5f25c2--traditional-wedding-dresses-traditional-outfits.jpg",
+            "subtitle":"👰 The estimated price of wedding dress is range from 300000 to above.",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.pinimg.com/236x/e6/77/cc/e677cc25d57a184fc8928a001f5f25c2--traditional-wedding-dresses-traditional-outfits.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"Wedding.",
+                "payload":"WEDDING_saw"
+              }              
+            ]      
+          },
+          {
+            "title":"Occasion?",
+            "image_url":"https://i.pinimg.com/236x/a4/93/0d/a4930df067551676be9f50906b62ed56.jpg",
+            "subtitle":"💃 The estimated price of occasion dress is range from 15000 to above.",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.pinimg.com/236x/a4/93/0d/a4930df067551676be9f50906b62ed56.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"Occasion.",
+                "payload":"OCCASION_saw"
+              }              
+            ]      
+          },
+          {
+            "title":"Casual?",
+            "image_url":"https://i.pinimg.com/236x/8e/4f/34/8e4f3428ae5c12d2d91c7847ff087bfb--kebaya-indonesia-thai-dress.jpg",
+            "subtitle":"🤷 The estimated price of casual dress is range from 8000 to above.",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.pinimg.com/236x/8e/4f/34/8e4f3428ae5c12d2d91c7847ff087bfb--kebaya-indonesia-thai-dress.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"Casual.",
+                "payload":"CASUAL_saw"
+              }              
+            ]      
+          },
+          {
+            "title":"For a Convocation?",
+            "image_url":"https://scontent-sea1-1.xx.fbcdn.net/v/t1.0-9/29792720_1006980256115703_3053445385785054787_n.jpg?_nc_cat=108&_nc_sid=110474&_nc_ohc=MvKZ7Bf0e1oAX-_9g54&_nc_ht=scontent-sea1-1.xx&oh=d6203387d93b6ad874ddf661dab28425&oe=5E8106ED",
+            "subtitle":"👩‍🎓 The estimated price of graduation dress is range from 30000 to above.",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://scontent-sea1-1.xx.fbcdn.net/v/t1.0-9/29792720_1006980256115703_3053445385785054787_n.jpg?_nc_cat=108&_nc_sid=110474&_nc_ohc=MvKZ7Bf0e1oAX-_9g54&_nc_ht=scontent-sea1-1.xx&oh=d6203387d93b6ad874ddf661dab28425&oe=5E8106ED",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"Convocation.",
+                "payload":"ABD_saw"
+              }              
+            ]      
+          }
+        ]
+      }
+    }
+  };
+  callSend(sender_psid,response1).then(()=>{
+    return callSend(sender_psid,response2).then(()=>{
+      return callSend(sender_psid,response3);
+    });
+  });
+}
+
+/*Function for asking to upload design*/
+async function asking_to_upload_design (sender_psid){
+  let response1 = {"text":"Well...."};
+  let response2 = {"text":"Please send me the design you want to sew."};
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+  designAttachment = true;
+    bdesignAttachment = false;
+    sharepicAttachment = false;
+}
+
+/*function for worry about measurement*/
+async function worrymeasurment (sender_psid){
+  let response1 = {"text": "Ok, let's take your body measurement."};
+    let response2 = {"text": "I'm worrying that you don't know how to measure. So, here are some tips for you."};
+    let response3 = {
+      "attachment":{
+            "type":"image", 
+            "payload":{
+              "url":"https://www.dummies.com/wp-content/uploads/how-to-get-your-body-measurements.jpg", 
+              "is_reusable":true
+            }
+          },
+          "quick_replies":[
+                  {
+                    "content_type":"text",
+                    "title":"Start",
+                    "payload":"S"
+                  }]
+    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
+    });
+}
+
+/*function for user answer*/
+function user_answer(sender_psid){
+  let response1 = {"text" : "Htamein Type:" + userEnteredMeasurement.htameintype};
+  let response2 = {"text" : "Htamein Fold:" + userEnteredMeasurement.htameinfold};
+  let response3 = {"text" : "Khar        :" + userEnteredMeasurement.khar};
+  let response4 = {"text" : "Ankle       :" + userEnteredMeasurement.ankle};
+  let response5 = {
+      "attachment": {
+                  "type": "template",
+                  "payload": {
+                    "template_type": "generic",
+                    "elements": [{
+                      "title": "Is this right?",
+                      "buttons": [
+                        {
+                          "type": "postback",
+                          "title": "Yes",
+                          "payload": "yes_right",
+                        },
+                        {
+                          "type": "postback",
+                          "title": "No",
+                          "payload": "yes_right_measurment",
+                        }
+                      ],
+                    }]
+                  }
+                }
+    };
+  callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3).then(()=>{
+          return callSend(sender_psid, response4).then(()=>{
+            return callSend(sender_psid, response5);
+          });
+        });
+      });
+    });
+}
+
+/*function for body measurement record*/
+function bodymeasure(sender_psid){
+    let response1 = {"text": `Chest: `+ userEnteredMeasurement.chest};
+    let response2 = {"text": 'Upper arm: ' + userEnteredMeasurement.upperArm};
+    let response3 = {"text": 'Sleeve length: ' + userEnteredMeasurement.sleevelength};
+    let response4 = {"text": 'Waist: '+ userEnteredMeasurement.waist};
+    let response5 = {"text": 'Hips: '+ userEnteredMeasurement.hips};
+    let response6 = {"text": 'Thigh: ' + userEnteredMeasurement.thigh};
+    let response7 = {"text": 'Inseam: '+ userEnteredMeasurement.inseam};
+    let response8 = {
+      "attachment": {
+                  "type": "template",
+                  "payload": {
+                    "template_type": "generic",
+                    "elements": [{
+                      "title": "Is this the right measurment?",
+                      "buttons": [
+                        {
+                          "type": "postback",
+                          "title": "Yes",
+                          "payload": "yes_right_measurment",
+                        },
+                        {
+                          "type": "postback",
+                          "title": "No",
+                          "payload": "measure_again",
+                        }
+                      ],
+                    }]
+                  }
+                }
+    };
+      callSend(sender_psid,response1).then(()=>{
+        return callSend(sender_psid,response2).then(()=>{
+          return callSend(sender_psid,response3).then(()=>{
+            return callSend(sender_psid,response4).then(()=>{
+              return callSend(sender_psid,response5).then(()=>{
+                return callSend(sender_psid,response6).then(()=>{
+                  return callSend(sender_psid,response7).then(()=>{
+                    return callSend(sender_psid,response8);
+                  });
+                });
+              });
+            });
+          });
+        });
+      });
+}
 
 /*function function save data to firebase*/
 function saveData(sender_psid) {
