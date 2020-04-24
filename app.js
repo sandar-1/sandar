@@ -465,7 +465,7 @@ function handlePostback(sender_psid, received_postback) {
     saveData(sender_psid);
     askforevent (sender_psid);
   }else if (payload === 'WEDDING') {
-    wedding (sender_psid);
+    wedding_event (sender_psid);
   }
   callSendAPI(sender_psid, response);
 }
@@ -728,7 +728,7 @@ async function askforevent (sender_psid) {
 }
 
 /*function for Wedding event*/
-function wedding (sender_psid) {
+async function wedding_event (sender_psid) {
   let response1 = {"text" : "For a wedding dress there are two prices at 150000 Ks and 300000 Ks. "};
     let response2 = { "attachment":{
                         "type":"template",
