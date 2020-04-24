@@ -432,6 +432,7 @@ function handlePostback(sender_psid, received_postback) {
     response = { "text": "What's wrong! it's ok, send me again." }
   }else if (payload === 'confirm') {
     saveData (sender_psid);
+    response =  {"text":"OK"}
   }
   callSendAPI(sender_psid, response);
 }
