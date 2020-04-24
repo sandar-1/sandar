@@ -42,6 +42,7 @@ const
 let db = firebase.firestore();
 
 let measurement = {
+  name : false,
   chest:false,
   upperArm:false,
   sleevelength:false,
@@ -421,7 +422,8 @@ function handlePostback(sender_psid, received_postback) {
    let response;
   let payload = received_postback.payload;
   if (payload === 'SEW') {
-    sewing (sender_psid);
+    response = { "text": "Please tell me your name. :) " }
+    measurement.name = true;
   }else if (payload === 'no') {
     response = { "text": "What's wrong! it's ok, send me again." }
   }else if (payload === 'yes') {
