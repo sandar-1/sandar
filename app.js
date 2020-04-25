@@ -476,12 +476,7 @@ function handlePostback(sender_psid, received_postback) {
       return callSend(sender_psid, response2);
     });
     userInfo.htameintype = true;
-  }
-  callSendAPI(sender_psid, response);
-}
-
-function handlepricePostback(sender_psid, received_postback){
-  else if (payload === 'choose_wedding') {
+  }else if (payload === 'choose_wedding') {
     response = {"text" : "To make sure your decision please send us price.",
                       "quick_replies":[
                                       {
@@ -494,6 +489,7 @@ function handlepricePostback(sender_psid, received_postback){
                                         "payload":"wedding_price"
                                       }]
                     };
+                    userInfo.price = true;
   }else if (payload === 'choose_occasion') {
     response = {"text" : "To make sure your decision please send us price.",
                       "quick_replies":[
@@ -507,9 +503,9 @@ function handlepricePostback(sender_psid, received_postback){
                                         "payload":"occasion_price"
                                       }]
                     };
+                    userInfo.price = true;
   }
-  userInfo.price = true;
-  callSendAPI(sender_psid, response)
+  callSendAPI(sender_psid, response);
 }
 
 /*function to greet user*/
