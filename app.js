@@ -732,11 +732,11 @@ async function askforevent (sender_psid) {
           },
           {
             "title":"For a Convocation?",
-            "image_url":"https://lh3.googleusercontent.com/proxy/DR-jQtXW-zmxte2x0YfpGDanWWT8HyNWZMdnDMz5m64WI_fHzMclqZmxaAnH1hbvc4VN3gWEmRopTOKswrcCV22NHdQm80mrqrzi9odgUto4e5OKzg",
+            "image_url":"https://www.tic.edu.mm/wp-content/uploads/2018/05/31311065_776695719183162_6949008994670709342_o-1024x680.jpg",
             "subtitle":"👩‍🎓 ",
             "default_action": {
               "type": "web_url",
-              "url": "https://lh3.googleusercontent.com/proxy/DR-jQtXW-zmxte2x0YfpGDanWWT8HyNWZMdnDMz5m64WI_fHzMclqZmxaAnH1hbvc4VN3gWEmRopTOKswrcCV22NHdQm80mrqrzi9odgUto4e5OKzg",
+              "url": "https://www.tic.edu.mm/wp-content/uploads/2018/05/31311065_776695719183162_6949008994670709342_o-1024x680.jpg",
               "webview_height_ratio": "tall",
             },
             "buttons":[
