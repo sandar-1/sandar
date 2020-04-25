@@ -178,26 +178,28 @@ function handleMessage(sender_psid, received_message) {
   //   callSend(sender_psid, response1).then(()=>{
   //     return callSend(sender_psid, response2);
   //   });
-  // }else if (received_message.text == "Chest" || received_message.text == "chest" ) {
-  //  response = { "text" : "Send me update measurement. :)"}
-  //  changing.chest = true;
-  // }else if (received_message.text && changing.chest == true) {   
-  //   userEnteredInfo.chest =  received_message.text;
-  //   response = {
-  //     "text": `Are you sure?`,
-  //     "quick_replies":[
-  //                       {
-  //                       "content_type":"text",
-  //                       "title":"Sure",
-  //                       "payload":"change_sure"
-  //                       },{
-  //                       "content_type":"text",
-  //                       "title":"No",
-  //                       "payload":"change_chestno"
-  //                       }]
-  //   }
-  //   changing.chest = false;
-  // }else if (received_message.quick_reply.payload  === "change_chestno") {
+  // }
+  else if (received_message.text == "Chest" || received_message.text == "chest" ) {
+   response = { "text" : "Send me update measurement. :)"}
+   changing.chest = true;
+  }else if (received_message.text && changing.chest == true) {   
+    userEnteredInfo.chest =  received_message.text;
+    response = {
+      "text": `Are you sure?`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"No",
+                        "payload":"change_chestno"
+                        }]
+    }
+    changing.chest = false;
+  }
+  //else if (received_message.quick_reply.payload  === "change_chestno") {
   //  response = { "text" : "Send me update measurement. :)"}
   //  changing.chest = true;
   // }
