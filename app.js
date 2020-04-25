@@ -527,11 +527,11 @@ function handlePostback(sender_psid, received_postback) {
                       "quick_replies":[
                                       {
                                         "content_type":"text",
-                                        "title":"30000 Ks",
+                                        "title":"10000 Ks",
                                         "payload":"casual_price"
                                       },{
                                         "content_type":"text",
-                                        "title":"20000 Ks",
+                                        "title":"8000 Ks",
                                         "payload":"casual_price"
                                       }]
                     };
