@@ -152,7 +152,7 @@ function handleMessage(sender_psid, received_message) {
   if (received_message.text == "hi" || received_message.text == "Hi") {    
    greetUser (sender_psid);
   }else if (received_message.text == "confirm" || received_message.text == "Confirm") {    
-   greetUser (sender_psid);
+   saveData (sender_psid);
    response = { "text" : "OK :)"}
   }else if (received_message.text && userInfo.name == true) {   
     userEnteredInfo.name =  received_message.text;
