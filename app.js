@@ -698,11 +698,11 @@ async function askforevent (sender_psid) {
         "elements":[
            {
             "title":"Wedding?",
-            "image_url":"https://i.ytimg.com/vi/TN8PgYFNlSY/maxresdefault.jpg",
+            "image_url":"https://www.gomyanmartours.com/wp-content/uploads/2014/11/Rituals-in-Myanmar-Wedding-Ceremony.jpg",
             "subtitle":"👰",
             "default_action": {
               "type": "web_url",
-              "url": "https://i.ytimg.com/vi/TN8PgYFNlSY/maxresdefault.jpg",
+              "url": "https://www.gomyanmartours.com/wp-content/uploads/2014/11/Rituals-in-Myanmar-Wedding-Ceremony.jpg",
               "webview_height_ratio": "tall",
             },
             "buttons":[
