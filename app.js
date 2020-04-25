@@ -151,6 +151,8 @@ function handleMessage(sender_psid, received_message) {
   let response;
   if (received_message.text == "hi" || received_message.text == "Hi") {    
    greetUser (sender_psid);
+  }else if (received_message.payload == "confirm") {    
+   saveData (sender_psid);
   }else if (received_message.text && userInfo.name == true) {   
     userEnteredInfo.name =  received_message.text;
      let response1 = {"text": "Let's get your body measurement. Here are ways to measure your body. Hopefully that will be useful. :)"};    
@@ -430,9 +432,6 @@ function handlePostback(sender_psid, received_postback) {
     showAllDataToCus (sender_psid);
   }else if (payload === 'no') {
     response = { "text": "What's wrong! it's ok, send me again." }
-  }else if (payload === 'confirm') {
-    saveData (sender_psid);
-    response =  {"text":"OK"}
   }
   callSendAPI(sender_psid, response);
 }
