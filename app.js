@@ -169,10 +169,11 @@ function handleMessage(sender_psid, received_message) {
    saveData (sender_psid);
    response = { "text" : "OK :)"}
   }
-  else if (received_message.text == "Chest" || received_message.text == "chest" && changing.chest == true) {
+  /*****************************************/
+  else if (received_message.text == "Chest" || received_message.text == "chest") {
    response = { "text" : "Send me update measurement. :)"}
-   userInfo.chest = true;
-  }else if (received_message.text && userInfo.chest == true) {   
+   changing.chest = true;
+  }else if (received_message.text && changing.chest == true) {   
     userEnteredInfo.chest =  received_message.text;
     response = {
       "text": `Are you sure?`,
@@ -190,10 +191,11 @@ function handleMessage(sender_psid, received_message) {
     userInfo.chest = false;
   }else if (received_message.payload === "change_chestno") {
    response = { "text" : "Send me update measurement. :)"}
-   userInfo.chest = true;
+   changing.chest = true;
   }else if (received_message.payload == "change_sure") {    
     response = {"text": "Ok... is there anything you want to change then type the key word that you want to change.:) "}
   }
+  /****************************************************************/
   else if (received_message.text == "change" || received_message.text == "Change") {
    response = {
     "attachment":{
@@ -453,7 +455,6 @@ function handlePostback(sender_psid, received_postback) {
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });
-    changing.chest = true;
   }else if (payload === 'change_htamein') {
     let response1 = { "text" : "Type what you want to change. Please write the same as key word which you want to change. The key words are"};
     let response2 = { "text" : "Type/ Fold/ Khar/ Ankle."};
