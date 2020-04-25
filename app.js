@@ -684,11 +684,11 @@ async function askforevent (sender_psid) {
         "elements":[
            {
             "title":"Wedding?",
-            "image_url":"https://i.pinimg.com/236x/e6/77/cc/e677cc25d57a184fc8928a001f5f25c2--traditional-wedding-dresses-traditional-outfits.jpg",
+            "image_url":"https://i.ytimg.com/vi/TN8PgYFNlSY/maxresdefault.jpg",
             "subtitle":"👰",
             "default_action": {
               "type": "web_url",
-              "url": "https://i.pinimg.com/236x/e6/77/cc/e677cc25d57a184fc8928a001f5f25c2--traditional-wedding-dresses-traditional-outfits.jpg",
+              "url": "https://i.ytimg.com/vi/TN8PgYFNlSY/maxresdefault.jpg",
               "webview_height_ratio": "tall",
             },
             "buttons":[
