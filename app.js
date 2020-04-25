@@ -154,6 +154,33 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text == "confirm" || received_message.text == "Confirm") {    
    saveData (sender_psid);
    response = { "text" : "OK :)"}
+  }else if (received_message.text == "change" || received_message.text == "Change") {
+   response = {
+    "attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"Choose what you wnat to change.",
+                        "buttons":[
+                          {
+                            "type":"postback",
+                            "payload":"change_bdmeasurement",
+                            "title":"Body measurement"
+                          },
+                          {
+                            "type":"postback",
+                            "payload":"change_htamein",
+                            "title":"Type fo htamein"
+                          },
+                          {
+                            "type":"postback",
+                            "payload":"change_design",
+                            "title":"Cloth design"
+                          }
+                        ]
+                      }
+                    } 
+   }
   }else if (received_message.text && userInfo.name == true) {   
     userEnteredInfo.name =  received_message.text;
      let response1 = {"text": "Let's get your body measurement. Here are ways to measure your body. Hopefully that will be useful. :)"};    
@@ -362,7 +389,35 @@ function handlePostback(sender_psid, received_postback) {
   console.log('ok')
    let response;
   let payload = received_postback.payload;
-  if (payload === 'SEW') {
+  if (payload === 'yes_right') {
+    askforevent (sender_psid);
+  }else if (payload === 'WEDDING') {
+    wedding_event (sender_psid);
+  }else if (payload === 'yes') {
+    showAllDataToCus (sender_psid);
+  }else if (payload === 'no') {
+    response = { "text": "What's wrong! it's ok, send me again." }
+  }else if (payload === 'Inshop') {
+    response = {"text": "Please tell me your name. :) "}
+    userInfo.name = true;
+  }else if (payload === 'delivered') {
+    response = {"text": "OK! It can be any bus stop from Tatkone. Contact 0912345678. Well.. tell me your name. :) "}
+    userInfo.name = true;
+  }else if (payload === 'change_design') {
+    response = { "text": "What's wrong! it's ok, send me again." }
+  }else if (payload === 'change_bdmeasurement') {
+    let response1 = { "text" : "Type what you want to chane. Please write the same as word which you want to change. The words are"};
+    let response2 = { "text" : "Chest/ Arm/ Sleeve/ Waist/ Hips/ Thigh/ Inseam."};
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+  }else if (payload === 'change_htamein') {
+    let response1 = { "text" : "Type what you want to chane. Please write the same as word which you want to change. The words are"};
+    let response2 = { "text" : "Type/ Fold/ Khar/ Ankle."};
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+  }else if (payload === 'SEW') {
     response = {"attachment":{
                       "type":"template",
                       "payload":{
@@ -383,12 +438,6 @@ function handlePostback(sender_psid, received_postback) {
                       }
                     } 
                  }
-  }else if (payload === 'Inshop') {
-    response = {"text": "Please tell me your name. :) "}
-    userInfo.name = true;
-  }else if (payload === 'delivered') {
-    response = {"text": "OK! It can be any bus stop from Tatkone. Contact 0912345678. Well.. tell me your name. :) "}
-    userInfo.name = true;
   }else if (payload === 'yes_right_measurment') {
     let response1 = {"text" : "which type of htamein? "};
     let response2 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein.",
@@ -411,10 +460,6 @@ function handlePostback(sender_psid, received_postback) {
       return callSend(sender_psid, response2);
     });
     userInfo.htameintype = true;
-  }else if (payload === 'yes_right') {
-    askforevent (sender_psid);
-  }else if (payload === 'WEDDING') {
-    wedding_event (sender_psid);
   }else if (payload === 'choose_wedding') {
     response = {"text" : "To make sure your decision please send us price.",
                       "quick_replies":[
@@ -429,10 +474,6 @@ function handlePostback(sender_psid, received_postback) {
                                       }]
                     };
                     userInfo.price = true;
-  }else if (payload === 'yes') {
-    showAllDataToCus (sender_psid);
-  }else if (payload === 'no') {
-    response = { "text": "What's wrong! it's ok, send me again." }
   }
   callSendAPI(sender_psid, response);
 }
