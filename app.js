@@ -504,6 +504,20 @@ function handlePostback(sender_psid, received_postback) {
                                       }]
                     };
                     userInfo.price = true;
+  }else if (payload === 'choose_convocation') {
+    response = {"text" : "To make sure your decision please send us price.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"30000 Ks",
+                                        "payload":"convocation_price"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"20000 Ks",
+                                        "payload":"convocation_price"
+                                      }]
+                    };
+                    userInfo.price = true;
   }
   callSendAPI(sender_psid, response);
 }
@@ -704,11 +718,11 @@ async function askforevent (sender_psid) {
           },
           {
             "title":"For a Convocation?",
-            "image_url":"https://www.textiledirectory.com.mm/images/YadanarWin/1.6.2019/dress/3.jpg",
+            "image_url":"https://lh3.googleusercontent.com/proxy/DR-jQtXW-zmxte2x0YfpGDanWWT8HyNWZMdnDMz5m64WI_fHzMclqZmxaAnH1hbvc4VN3gWEmRopTOKswrcCV22NHdQm80mrqrzi9odgUto4e5OKzg",
             "subtitle":"👩‍🎓 ",
             "default_action": {
               "type": "web_url",
-              "url": "https://www.textiledirectory.com.mm/images/YadanarWin/1.6.2019/dress/3.jpg",
+              "url": "https://lh3.googleusercontent.com/proxy/DR-jQtXW-zmxte2x0YfpGDanWWT8HyNWZMdnDMz5m64WI_fHzMclqZmxaAnH1hbvc4VN3gWEmRopTOKswrcCV22NHdQm80mrqrzi9odgUto4e5OKzg",
               "webview_height_ratio": "tall",
             },
             "buttons":[
@@ -851,6 +865,58 @@ async function occasion_event (sender_psid) {
     });
 }
 
+/*function for Convocation event*/
+async function Convocation_event (sender_psid) {
+  let response1 = {"text" : "For a Convocation dress there are two prices at 30000 Ks and 20000 Ks. Same as occasion dress but little fancy. :)  "};
+    let response2 = { "attachment":{
+                        "type":"template",
+                        "payload":{
+                          "template_type":"generic",
+                          "elements":[
+                             {
+                              "title":"Convocation dress with beaded embroidery.",
+                              "image_url":"https://www.textiledirectory.com.mm/images/hsuyeehtet/8.1/3.jpg",
+                              "subtitle":"Will include much beaded embroidery and more fancy.",
+                              "default_action": {
+                                "type": "web_url",
+                                "url": "https://www.textiledirectory.com.mm/images/hsuyeehtet/8.1/3.jpg",
+                                "webview_height_ratio": "tall",
+                              },
+                              "buttons":[
+                               {
+                                  "type":"postback",
+                                  "title":"I choose 30000 Ks.",
+                                  "payload":"choose_convocation"
+                                }              
+                              ]      
+                            },
+                            {
+                              "title":"Simple Convocation dress.",
+                              "image_url":"https://qph.fs.quoracdn.net/main-qimg-9e8cb835ef77635c3233c1ee716728db.webp",
+                              "subtitle":"will not much beaded embroidery.",
+                              "default_action": {
+                                "type": "web_url",
+                                "url": "https://qph.fs.quoracdn.net/main-qimg-9e8cb835ef77635c3233c1ee716728db.webp",
+                                "webview_height_ratio": "tall",
+                              },
+                              "buttons":[
+                               {
+                                  "type":"postback",
+                                  "title":"I choose 20000 Ks.",
+                                  "payload":"choose_convocation"
+                                }              
+                              ]      
+                            }
+                          ]
+                        }
+                      }
+                    };
+    
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+}
+
 /*Function for asking the customer design*/
 async function asking_cus_design (sender_psid){
   let response1 = {"text":"Well...."};
@@ -861,11 +927,6 @@ async function asking_cus_design (sender_psid){
                       "payload":{
                         "template_type":"button",
                         "text":"Send if you have one. :)",
-                        "default_action": {
-                                "type": "web_url",
-                                "url": "https://i.pinimg.com/originals/19/e5/92/19e59201981b2ec2b0e74535507411d4.jpg",
-                                "webview_height_ratio": "tall",
-                              },
                         "buttons":[
                           {
                             "type":"web_url",
