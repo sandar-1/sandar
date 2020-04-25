@@ -170,7 +170,7 @@ function handleMessage(sender_psid, received_message) {
    response = { "text" : "OK :)"}
   }
   /*****************************************/
-  else if (received_message.text == "Chest" || received_message.text == "chest") {
+  else if (received_message.text == "Chest" || received_message.text == "chest" ) {
    response = { "text" : "Send me update measurement. :)"}
    changing.chest = true;
   }else if (received_message.text && changing.chest == true) {   
@@ -188,9 +188,10 @@ function handleMessage(sender_psid, received_message) {
                         "payload":"change_chestno"
                         }]
     }
-    userInfo.chest = false;
+    changing.chest = false;
   }else if (received_message.quick_reply.payload  === "change_chestno") {
    response = { "text" : "Send me update measurement. :)"}
+   changing.chest = true;
   }else if (received_message.quick_reply.payload  == "change_sure") {    
     response = {"text": "Ok... is there anything you want to change then type the key word that you want to change.:) "}
   }
