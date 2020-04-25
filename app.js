@@ -149,12 +149,7 @@ app.get('/webhook', (req, res) => {
 
 function handleMessage(sender_psid, received_message) {
   let response;
-  if (received_message.payload === "change_chestno") {
-   response = { "text" : "Send me update measurement. :)"}
-   userInfo.chest = true;
-  }else if (received_message.payload == "change_sure") {    
-    response = {"text": "Ok... is there anything you want to change then type the key word that you want to change.:) "}
-  }else if (received_message.text == "hi" || received_message.text == "Hi") {    
+  if (received_message.text == "hi" || received_message.text == "Hi") {    
    greetUser (sender_psid);
   }else if (received_message.text == "confirm" || received_message.text == "Confirm") {    
    saveData (sender_psid);
@@ -178,6 +173,11 @@ function handleMessage(sender_psid, received_message) {
                         }]
     }
     userInfo.chest = false;
+  }else if (received_message.payload === "change_chestno") {
+   response = { "text" : "Send me update measurement. :)"}
+   userInfo.chest = true;
+  }else if (received_message.payload == "change_sure") {    
+    response = {"text": "Ok... is there anything you want to change then type the key word that you want to change.:) "}
   }else if (received_message.text == "change" || received_message.text == "Change") {
    response = {
     "attachment":{
