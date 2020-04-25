@@ -57,6 +57,7 @@ let userInfo = {
   price : false,
 };
 
+let changechest : false;
 
 let designAttachment = false;
 let bdesignAttachment = false;
@@ -156,32 +157,32 @@ function handleMessage(sender_psid, received_message) {
    response = { "text" : "OK :)"}
   }
 
-  // else if (received_message.text == "Chest" || received_message.text == "chest") {
-  //  response = { "text" : "Send me update measurement. :)"}
-  //  userInfo.chest = true;
-  // }else if (received_message.text && userInfo.chest == true) {   
-  //   userEnteredInfo.chest =  received_message.text;
-  //   response = {
-  //     "text": `Are you sure?`,
-  //     "quick_replies":[
-  //                       {
-  //                       "content_type":"text",
-  //                       "title":"Sure",
-  //                       "payload":"change_sure"
-  //                       },{
-  //                       "content_type":"text",
-  //                       "title":"No",
-  //                       "payload":"change_chestno"
-  //                       }]
-  //   }
-  //   userInfo.chest = false;
-  // }else if (received_message.payload === "change_chestno") {
-  //  response = { "text" : "Send me update measurement. :)"}
-  //  userInfo.chest = true;
-  // }else if (received_message.payload == "change_sure") {    
-  //   response = {"text": "Ok... is there anything you want to change then type the key word that you want to change.:) "}
-  // }
-  
+  else if (received_message.text == "Chest" || received_message.text == "chest" && changechest == true) {
+   response = { "text" : "Send me update measurement. :)"}
+   userInfo.chest = true;
+  }else if (received_message.text && userInfo.chest == true) {   
+    userEnteredInfo.chest =  received_message.text;
+    response = {
+      "text": `Are you sure?`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"No",
+                        "payload":"change_chestno"
+                        }]
+    }
+    userInfo.chest = false;
+  }else if (received_message.payload === "change_chestno") {
+   response = { "text" : "Send me update measurement. :)"}
+   userInfo.chest = true;
+  }else if (received_message.payload == "change_sure") {    
+    response = {"text": "Ok... is there anything you want to change then type the key word that you want to change.:) "}
+  }
+
   else if (received_message.text == "change" || received_message.text == "Change") {
    response = {
     "attachment":{
