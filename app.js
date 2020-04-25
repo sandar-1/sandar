@@ -154,7 +154,9 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text == "confirm" || received_message.text == "Confirm") {    
    saveData (sender_psid);
    response = { "text" : "OK :)"}
-  }else if (received_message.text == "Chest" || received_message.text == "chest") {
+  }
+
+  else if (received_message.text == "Chest" || received_message.text == "chest") {
    response = { "text" : "Send me update measurement. :)"}
    userInfo.chest = true;
   }else if (received_message.text && userInfo.chest == true) {   
@@ -178,7 +180,34 @@ function handleMessage(sender_psid, received_message) {
    userInfo.chest = true;
   }else if (received_message.payload === "change_sure") {    
     response = {"text": "Ok... is there anything you want to change then type the key word that you want to change.:) "}
-  } else if (received_message.text == "change" || received_message.text == "Change") {
+  }else if (received_message.text == "arm" || received_message.text == "Arm") {
+   response = { "text" : "Send me update measurement. :)"}
+   userInfo.chest = true;
+  }else if (received_message.text && userInfo.chest == true) {   
+    userEnteredInfo.chest =  received_message.text;
+    response = {
+      "text": `Are you sure?`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"No",
+                        "payload":"change_armno"
+                        }]
+    }
+    userInfo.chest = false;
+  }else if (received_message.payload === "change_armno") {
+   response = { "text" : "Send me update measurement. :)"}
+   userInfo.chest = true;
+  }else if (received_message.payload === "change_sure") {    
+    response = {"text": "Ok... is there anything you want to change then type the key word that you want to change.:) "}
+  }
+
+
+  else if (received_message.text == "change" || received_message.text == "Change") {
    response = {
     "attachment":{
                       "type":"template",
