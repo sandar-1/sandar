@@ -153,6 +153,7 @@ function handleMessage(sender_psid, received_message) {
    greetUser (sender_psid);
   }else if (received_message.text == "confirm" || received_message.text == "Confirm") {    
    greetUser (sender_psid);
+   response = { "text" : "OK :)"}
   }else if (received_message.text && userInfo.name == true) {   
     userEnteredInfo.name =  received_message.text;
      let response1 = {"text": "Let's get your body measurement. Here are ways to measure your body. Hopefully that will be useful. :)"};    
