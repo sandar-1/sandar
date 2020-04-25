@@ -154,60 +154,35 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text == "confirm" || received_message.text == "Confirm") {    
    saveData (sender_psid);
    response = { "text" : "OK :)"}
-  }
-
-  else if (received_message.text == "Chest" || received_message.text == "chest") {
+  }else if (received_message.text == "Chest" || received_message.text == "chest") {
    response = { "text" : "Send me update measurement. :)"}
    userInfo.chest = true;
   }else if (received_message.text && userInfo.chest == true) {   
     userEnteredInfo.chest =  received_message.text;
     response = {
       "text": `Are you sure?`,
-      "quick_replies":[
-                        {
-                        "content_type":"text",
-                        "title":"Sure",
-                        "payload":"change_sure"
-                        },{
-                        "content_type":"text",
-                        "title":"No",
-                        "payload":"change_chestno"
-                        }]
+      "attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"Are you sure?",
+                        "buttons":[
+                          {
+                            "type":"postback",
+                            "payload":"change_sure",
+                            "title":"Sure"
+                          },
+                          {
+                            "type":"postback",
+                            "payload":"change_chestno",
+                            "title":"No"
+                          }
+                        ]
+                      }
+                    } 
     }
     userInfo.chest = false;
-  }else if (received_message.payload === "change_chestno") {
-   response = { "text" : "Send me update measurement. :)"}
-   userInfo.chest = true;
-  }else if (received_message.payload === "change_sure") {    
-    response = {"text": "Ok... is there anything you want to change then type the key word that you want to change.:) "}
-  }else if (received_message.text == "arm" || received_message.text == "Arm") {
-   response = { "text" : "Send me update measurement. :)"}
-   userInfo.chest = true;
-  }else if (received_message.text && userInfo.chest == true) {   
-    userEnteredInfo.chest =  received_message.text;
-    response = {
-      "text": `Are you sure?`,
-      "quick_replies":[
-                        {
-                        "content_type":"text",
-                        "title":"Sure",
-                        "payload":"change_sure"
-                        },{
-                        "content_type":"text",
-                        "title":"No",
-                        "payload":"change_armno"
-                        }]
-    }
-    userInfo.chest = false;
-  }else if (received_message.payload === "change_armno") {
-   response = { "text" : "Send me update measurement. :)"}
-   userInfo.chest = true;
-  }else if (received_message.payload === "change_sure") {    
-    response = {"text": "Ok... is there anything you want to change then type the key word that you want to change.:) "}
-  }
-
-
-  else if (received_message.text == "change" || received_message.text == "Change") {
+  }else if (received_message.text == "change" || received_message.text == "Change") {
    response = {
     "attachment":{
                       "type":"template",
@@ -456,6 +431,11 @@ function handlePostback(sender_psid, received_postback) {
   }else if (payload === 'delivered') {
     response = {"text": "OK! It can be any bus stop from Tatkone. Contact 0912345678. Well.. tell me your name. :) "}
     userInfo.name = true;
+  }else if (payload === 'change_chestno') {
+   response = { "text" : "Send me update measurement. :)"}
+   userInfo.chest = true;
+  }else if (payload === 'change_sure') {
+    response = {"text": "Ok... is there anything you want to change then type the key word that you want to change.:) "}
   }else if (payload === 'change_design') {
     response = { "text": "What's wrong! it's ok, send me again." }
   }else if (payload === 'change_bdmeasurement') {
