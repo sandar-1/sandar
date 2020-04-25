@@ -518,6 +518,20 @@ function handlePostback(sender_psid, received_postback) {
                                       }]
                     };
                     userInfo.price = true;
+  }else if (payload === 'choose_casual') {
+    response = {"text" : "To make sure your decision please send us price.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"30000 Ks",
+                                        "payload":"casual_price"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"20000 Ks",
+                                        "payload":"casual_price"
+                                      }]
+                    };
+                    userInfo.price = true;
   }
   callSendAPI(sender_psid, response);
 }
@@ -735,11 +749,11 @@ async function askforevent (sender_psid) {
           },
           {
             "title":"Casual?",
-            "image_url":"https://i.pinimg.com/236x/8e/4f/34/8e4f3428ae5c12d2d91c7847ff087bfb--kebaya-indonesia-thai-dress.jpg",
+            "image_url":"https://www.mmtimes.com/sites/mmtimes.com/files/styles/mmtimes_ratio_d_feature_detail/public/images/mte/2017/educentre/jan-2017/7-failed-system.jpg?itok=PPR9BjOg",
             "subtitle":"🤷",
             "default_action": {
               "type": "web_url",
-              "url": "https://i.pinimg.com/236x/8e/4f/34/8e4f3428ae5c12d2d91c7847ff087bfb--kebaya-indonesia-thai-dress.jpg",
+              "url": "https://www.mmtimes.com/sites/mmtimes.com/files/styles/mmtimes_ratio_d_feature_detail/public/images/mte/2017/educentre/jan-2017/7-failed-system.jpg?itok=PPR9BjOg",
               "webview_height_ratio": "tall",
             },
             "buttons":[
@@ -904,6 +918,58 @@ async function Convocation_event (sender_psid) {
                                   "type":"postback",
                                   "title":"I choose 20000 Ks.",
                                   "payload":"choose_convocation"
+                                }              
+                              ]      
+                            }
+                          ]
+                        }
+                      }
+                    };
+    
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+}
+
+/*function for Casual event*/
+async function Casual_event (sender_psid) {
+  let response1 = {"text" : "For a Casual dress there are two prices at 10000 Ks and 80000 Ks. Same as occasion dress but little fancy. :)  "};
+    let response2 = { "attachment":{
+                        "type":"template",
+                        "payload":{
+                          "template_type":"generic",
+                          "elements":[
+                             {
+                              "title":"Fancy Casual dress.",
+                              "image_url":"https://i.pinimg.com/736x/1d/cd/88/1dcd88d9fb72287be584e4ab12168d1f.jpg",
+                              "subtitle":"Will be fancy and uptodate design.",
+                              "default_action": {
+                                "type": "web_url",
+                                "url": "https://i.pinimg.com/736x/1d/cd/88/1dcd88d9fb72287be584e4ab12168d1f.jpg",
+                                "webview_height_ratio": "tall",
+                              },
+                              "buttons":[
+                               {
+                                  "type":"postback",
+                                  "title":"I choose 10000 Ks.",
+                                  "payload":"choose_casual"
+                                }              
+                              ]      
+                            },
+                            {
+                              "title":"Simple Casual dress.",
+                              "image_url":"https://scontent-yyz1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/c0.179.1440.1440a/s640x640/62401071_2331144570297641_8473543770910940542_n.jpg?_nc_ht=scontent-yyz1-1.cdninstagram.com&_nc_cat=105&_nc_ohc=GRfCBd9gmBMAX8hvJMG&oh=9a51ee59ed6a84cb822fa59c6a4abf71&oe=5ECE844A",
+                              "subtitle":"Just a simple.",
+                              "default_action": {
+                                "type": "web_url",
+                                "url": "https://scontent-yyz1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/c0.179.1440.1440a/s640x640/62401071_2331144570297641_8473543770910940542_n.jpg?_nc_ht=scontent-yyz1-1.cdninstagram.com&_nc_cat=105&_nc_ohc=GRfCBd9gmBMAX8hvJMG&oh=9a51ee59ed6a84cb822fa59c6a4abf71&oe=5ECE844A",
+                                "webview_height_ratio": "tall",
+                              },
+                              "buttons":[
+                               {
+                                  "type":"postback",
+                                  "title":"I choose 8000 Ks.",
+                                  "payload":"choose_casual"
                                 }              
                               ]      
                             }
