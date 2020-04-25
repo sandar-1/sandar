@@ -170,7 +170,9 @@ function handleMessage(sender_psid, received_message) {
    response = { "text" : "OK :)"}
   }
   /*****************************************/
-  else if (received_message.text == "Chest" || received_message.text == "chest" ) {
+  else if (received_message.text == "done" || received_message.text == "Done" ) {
+    showAllDataToCus (sender_psid);
+  }else if (received_message.text == "Chest" || received_message.text == "chest" ) {
    response = { "text" : "Send me update measurement. :)"}
    changing.chest = true;
   }else if (received_message.text && changing.chest == true) {   
@@ -193,7 +195,11 @@ function handleMessage(sender_psid, received_message) {
    response = { "text" : "Send me update measurement. :)"}
    changing.chest = true;
   }else if (received_message.quick_reply.payload  == "change_sure") {    
-    response = {"text": "Ok... is there anything you want to change then type the key word that you want to change.:) "}
+    let response1 = {"text": "Ok... is there anything you want to change then type the key word that you want to change. :) "};
+    let response2 = {"text" : " If there is nothing to change write 'Done' to view update record. :)"}
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
   }
   /****************************************************************/
   else if (received_message.text == "change" || received_message.text == "Change") {
