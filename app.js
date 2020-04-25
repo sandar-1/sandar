@@ -154,7 +154,7 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text == "confirm" || received_message.text == "Confirm") {    
    saveData (sender_psid);
    response = { "text" : "OK :)"}
-  }else if (received_message.text == "Chest" || received_message.text == "chest" || received_message.payload == "change_chestno") {
+  }else if (received_message.text == "Chest" || received_message.text == "chest") {
    response = { "text" : "Send me update measurement. :)"}
    userInfo.chest = true;
   }else if (received_message.text && userInfo.chest == true) {   
@@ -173,7 +173,12 @@ function handleMessage(sender_psid, received_message) {
                         }]
     }
     userInfo.chest = false;
-  }else if (received_message.text == "change" || received_message.text == "Change") {
+  }else if (received_message.payload == "change_chestno") {
+   response = { "text" : "Send me update measurement. :)"}
+   userInfo.chest = true;
+  }else if (received_message.payload == "change_sure") {    
+    response = {"text": "Ok... is there anything you want to change then type the key word that you want to change.:) "}
+  } else if (received_message.text == "change" || received_message.text == "Change") {
    response = {
     "attachment":{
                       "type":"template",
@@ -421,9 +426,6 @@ function handlePostback(sender_psid, received_postback) {
     userInfo.name = true;
   }else if (payload === 'delivered') {
     response = {"text": "OK! It can be any bus stop from Tatkone. Contact 0912345678. Well.. tell me your name. :) "}
-    userInfo.name = true;
-  }else if (payload === 'change_sure') {
-    response = {"text": "Ok... is there anything you want to change then type the key word that you want to change.:) "}
     userInfo.name = true;
   }else if (payload === 'change_design') {
     response = { "text": "What's wrong! it's ok, send me again." }
