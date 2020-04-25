@@ -200,28 +200,6 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.quick_reply.payload  === "change_chestno") {
    response = { "text" : "Send me update measurement. :)"}
    changing.chest = true;
-  }else if (received_message.text == "Arm" || received_message.text == "arm" ) {
-   response = { "text" : "Send me update measurement. :)"}
-   changing.upperArm = true;
-  }else if (received_message.text && changing.upperArm == true) {   
-    userEnteredInfo.upperArm =  received_message.text;
-    response = {
-      "text": `Are you sure?`,
-      "quick_replies":[
-                        {
-                        "content_type":"text",
-                        "title":"Sure",
-                        "payload":"change_sure"
-                        },{
-                        "content_type":"text",
-                        "title":"No",
-                        "payload":"change_chestno"
-                        }]
-    }
-    changing.upperArm = false;
-  }else if (received_message.quick_reply.payload  === "change_chestno") {
-   response = { "text" : "Send me update measurement. :) :)"}
-   changing.upperArm = true;
   }
   /****************************************************************/
   else if (received_message.text == "change" || received_message.text == "Change") {
