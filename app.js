@@ -222,6 +222,28 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.quick_reply.payload  === "change_chestno") {
    response = { "text" : "Send me update measurement. :) :)"}
    changing.upperArm = true;
+  }else if (received_message.text == "Sleeve" || received_message.text == "sleeve" ) {
+   response = { "text" : "Send me update measurement. :)"}
+   changing.sleevelength = true;
+  }else if (received_message.text && changing.sleevelength == true) {   
+    userEnteredInfo.sleevelength =  received_message.text;
+    response = {
+      "text": `Are you sure?`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"No",
+                        "payload":"change_chestno"
+                        }]
+    }
+    changing.sleevelength = false;
+  }else if (received_message.quick_reply.payload  === "change_chestno") {
+   response = { "text" : "Send me update measurement. :)"}
+   changing.sleevelength = true;
   }
   /****************************************************************/
   else if (received_message.text == "change" || received_message.text == "Change") {
