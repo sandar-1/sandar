@@ -504,22 +504,22 @@ function handlePostback(sender_psid, received_postback) {
                                       }]
                     };
                     userInfo.price = true;
+  }else if (payload === 'choose_convocation') {
+    response = {"text" : "To make sure your decision please send us price.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"30000 Ks",
+                                        "payload":"convocation_price"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"20000 Ks",
+                                        "payload":"convocation_price"
+                                      }]
+                    };
+                    userInfo.price = true;
   }
-  // else if (payload === 'choose_convocation') {
-  //   response = {"text" : "To make sure your decision please send us price.",
-  //                     "quick_replies":[
-  //                                     {
-  //                                       "content_type":"text",
-  //                                       "title":"30000 Ks",
-  //                                       "payload":"convocation_price"
-  //                                     },{
-  //                                       "content_type":"text",
-  //                                       "title":"20000 Ks",
-  //                                       "payload":"convocation_price"
-  //                                     }]
-  //                   };
-  //                   userInfo.price = true;
-  // }else if (payload === 'choose_casual') {
+  // else if (payload === 'choose_casual') {
   //   response = {"text" : "To make sure your decision please send us price.",
   //                     "quick_replies":[
   //                                     {
