@@ -168,86 +168,7 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text == "confirm" || received_message.text == "Confirm") {    
    saveData (sender_psid);
    response = { "text" : "OK :)"}
-  }
-  /*****************************************/
-  // else if (received_message.text == "done" || received_message.text == "Done" ) {
-  //   showAllDataToCus (sender_psid);
-  // }else if (received_message.quick_reply.payload  == "change_sure") {    
-  //   let response1 = {"text": "Ok... is there anything you want to change then type the key word that you want to change. :) "};
-  //   let response2 = {"text" : " If there is nothing to change write 'Done' to view update record. :)"}
-  //   callSend(sender_psid, response1).then(()=>{
-  //     return callSend(sender_psid, response2);
-  //   });
-  // }else if (received_message.text == "Chest" || received_message.text == "chest" ) {
-  //  response = { "text" : "Send me update measurement. :)"}
-  //  changing.chest = true;
-  // }else if (received_message.text && changing.chest == true) {   
-  //   userEnteredInfo.chest =  received_message.text;
-  //   response = {
-  //     "text": `Are you sure?`,
-  //     "quick_replies":[
-  //                       {
-  //                       "content_type":"text",
-  //                       "title":"Sure",
-  //                       "payload":"change_sure"
-  //                       },{
-  //                       "content_type":"text",
-  //                       "title":"No",
-  //                       "payload":"change_chestno"
-  //                       }]
-  //   }
-  //   changing.chest = false;
-  // }else if (received_message.quick_reply.payload  === "change_chestno") {
-  //  response = { "text" : "Send me update measurement. :)"}
-  //  changing.chest = true;
-  // }
-  // else if (received_message.text == "Arm" || received_message.text == "arm" ) {
-  //  response = { "text" : "Send me update measurement. :)"}
-  //  changing.upperArm = true;
-  // }else if (received_message.text && changing.upperArm == true) {   
-  //   userEnteredInfo.upperArm =  received_message.text;
-  //   response = {
-  //     "text": `Are you sure?`,
-  //     "quick_replies":[
-  //                       {
-  //                       "content_type":"text",
-  //                       "title":"Sure",
-  //                       "payload":"change_sure"
-  //                       },{
-  //                       "content_type":"text",
-  //                       "title":"No",
-  //                       "payload":"change_chestno"
-  //                       }]
-  //   }
-  //   changing.upperArm = false;
-  // }else if (received_message.quick_reply.payload  === "change_chestno") {
-  //  response = { "text" : "Send me update measurement. :) :)"}
-  //  changing.upperArm = true;
-  // }else if (received_message.text == "Sleeve" || received_message.text == "sleeve" ) {
-  //  response = { "text" : "Send me update measurement. :)"}
-  //  changing.sleevelength = true;
-  // }else if (received_message.text && changing.sleevelength == true) {   
-  //   userEnteredInfo.sleevelength =  received_message.text;
-  //   response = {
-  //     "text": `Are you sure?`,
-  //     "quick_replies":[
-  //                       {
-  //                       "content_type":"text",
-  //                       "title":"Sure",
-  //                       "payload":"change_sure"
-  //                       },{
-  //                       "content_type":"text",
-  //                       "title":"No",
-  //                       "payload":"change_chestno"
-  //                       }]
-  //   }
-  //   changing.sleevelength = false;
-  // }else if (received_message.quick_reply.payload  === "change_chestno") {
-  //  response = { "text" : "Send me update measurement. :)"}
-  //  changing.sleevelength = true;
-  // }
-  /****************************************************************/
-  else if (received_message.text == "change" || received_message.text == "Change") {
+  }else if (received_message.text == "change" || received_message.text == "Change") {
    response = {
     "attachment":{
                       "type":"template",
@@ -565,6 +486,20 @@ function handlePostback(sender_psid, received_postback) {
                                       },{
                                         "content_type":"text",
                                         "title":"150000 Ks",
+                                        "payload":"wedding_price"
+                                      }]
+                    };
+                    userInfo.price = true;
+  }else if (payload === 'choose_occasion') {
+    response = {"text" : "To make sure your decision please send us price.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"20000 Ks",
+                                        "payload":"wedding_price"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"10000 Ks",
                                         "payload":"wedding_price"
                                       }]
                     };
@@ -926,6 +861,11 @@ async function asking_cus_design (sender_psid){
                       "payload":{
                         "template_type":"button",
                         "text":"Send if you have one. :)",
+                        "default_action": {
+                                "type": "web_url",
+                                "url": "https://i.pinimg.com/originals/19/e5/92/19e59201981b2ec2b0e74535507411d4.jpg",
+                                "webview_height_ratio": "tall",
+                              },
                         "buttons":[
                           {
                             "type":"web_url",
