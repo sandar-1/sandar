@@ -154,31 +154,35 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text == "confirm" || received_message.text == "Confirm") {    
    saveData (sender_psid);
    response = { "text" : "OK :)"}
-  }else if (received_message.text == "Chest" || received_message.text == "chest") {
-   response = { "text" : "Send me update measurement. :)"}
-   userInfo.chest = true;
-  }else if (received_message.text && userInfo.chest == true) {   
-    userEnteredInfo.chest =  received_message.text;
-    response = {
-      "text": `Are you sure?`,
-      "quick_replies":[
-                        {
-                        "content_type":"text",
-                        "title":"Sure",
-                        "payload":"change_sure"
-                        },{
-                        "content_type":"text",
-                        "title":"No",
-                        "payload":"change_chestno"
-                        }]
-    }
-    userInfo.chest = false;
-  }else if (received_message.payload === "change_chestno") {
-   response = { "text" : "Send me update measurement. :)"}
-   userInfo.chest = true;
-  }else if (received_message.payload == "change_sure") {    
-    response = {"text": "Ok... is there anything you want to change then type the key word that you want to change.:) "}
-  }else if (received_message.text == "change" || received_message.text == "Change") {
+  }
+
+  // else if (received_message.text == "Chest" || received_message.text == "chest") {
+  //  response = { "text" : "Send me update measurement. :)"}
+  //  userInfo.chest = true;
+  // }else if (received_message.text && userInfo.chest == true) {   
+  //   userEnteredInfo.chest =  received_message.text;
+  //   response = {
+  //     "text": `Are you sure?`,
+  //     "quick_replies":[
+  //                       {
+  //                       "content_type":"text",
+  //                       "title":"Sure",
+  //                       "payload":"change_sure"
+  //                       },{
+  //                       "content_type":"text",
+  //                       "title":"No",
+  //                       "payload":"change_chestno"
+  //                       }]
+  //   }
+  //   userInfo.chest = false;
+  // }else if (received_message.payload === "change_chestno") {
+  //  response = { "text" : "Send me update measurement. :)"}
+  //  userInfo.chest = true;
+  // }else if (received_message.payload == "change_sure") {    
+  //   response = {"text": "Ok... is there anything you want to change then type the key word that you want to change.:) "}
+  // }
+  
+  else if (received_message.text == "change" || received_message.text == "Change") {
    response = {
     "attachment":{
                       "type":"template",
@@ -417,6 +421,8 @@ function handlePostback(sender_psid, received_postback) {
     askforevent (sender_psid);
   }else if (payload === 'WEDDING') {
     wedding_event (sender_psid);
+  }else if (payload === 'OCCASION') {
+    occasion_event (sender_psid);
   }else if (payload === 'yes') {
     showAllDataToCus (sender_psid);
   }else if (payload === 'no') {
@@ -681,11 +687,11 @@ async function askforevent (sender_psid) {
           },
           {
             "title":"Occasion?",
-            "image_url":"https://i.pinimg.com/236x/a4/93/0d/a4930df067551676be9f50906b62ed56.jpg",
+            "image_url":"https://www.exoticvoyages.com/uploads/images/userfiles/2015/09/Unidentify-Myanmar-women-in-Festival-Procession-near-Heritage-Site-in-BaganMyanmar.jpg",
             "subtitle":"💃",
             "default_action": {
               "type": "web_url",
-              "url": "https://i.pinimg.com/236x/a4/93/0d/a4930df067551676be9f50906b62ed56.jpg",
+              "url": "https://www.exoticvoyages.com/uploads/images/userfiles/2015/09/Unidentify-Myanmar-women-in-Festival-Procession-near-Heritage-Site-in-BaganMyanmar.jpg",
               "webview_height_ratio": "tall",
             },
             "buttons":[
@@ -793,6 +799,58 @@ async function wedding_event (sender_psid) {
     });
 }
 
+/*function for Occasion event*/
+async function occasion_event (sender_psid) {
+  let response1 = {"text" : "For a Occasion dress there are two prices at 20000 Ks and 10000 Ks. "};
+    let response2 = { "attachment":{
+                        "type":"template",
+                        "payload":{
+                          "template_type":"generic",
+                          "elements":[
+                             {
+                              "title":"Occasion dress with beaded embroidery.",
+                              "image_url":"https://i.pinimg.com/originals/19/e5/92/19e59201981b2ec2b0e74535507411d4.jpg",
+                              "subtitle":"Will include beaded embroidery.",
+                              "default_action": {
+                                "type": "web_url",
+                                "url": "https://i.pinimg.com/originals/19/e5/92/19e59201981b2ec2b0e74535507411d4.jpg",
+                                "webview_height_ratio": "tall",
+                              },
+                              "buttons":[
+                               {
+                                  "type":"postback",
+                                  "title":"I choose 20000 Ks.",
+                                  "payload":"choose_occasion"
+                                }              
+                              ]      
+                            },
+                            {
+                              "title":"Simple occasion dress.",
+                              "image_url":"https://i.pinimg.com/originals/b4/ba/d8/b4bad8617c6ef7f2e1dba80a8a21e70a.jpg",
+                              "subtitle":"will not include beaded embroidery.",
+                              "default_action": {
+                                "type": "web_url",
+                                "url": "https://i.pinimg.com/originals/b4/ba/d8/b4bad8617c6ef7f2e1dba80a8a21e70a.jpg",
+                                "webview_height_ratio": "tall",
+                              },
+                              "buttons":[
+                               {
+                                  "type":"postback",
+                                  "title":"I choose 10000 Ks.",
+                                  "payload":"choose_occasion"
+                                }              
+                              ]      
+                            }
+                          ]
+                        }
+                      }
+                    };
+    
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+}
+
 /*Function for asking the customer design*/
 async function asking_cus_design (sender_psid){
   let response1 = {"text":"Well...."};
@@ -821,7 +879,6 @@ async function asking_cus_design (sender_psid){
     designAttachment = true;
 }
 
-
 /*function function save data to firebase*/
 async function showAllDataToCus(sender_psid) {
   let response1 = {"text": userEnteredInfo.name +` here are your body measurement, types and cloth design.`};
@@ -832,10 +889,10 @@ async function showAllDataToCus(sender_psid) {
   let response6 = {"text": 'Hips         : '+ userEnteredInfo.hips};
   let response7 = {"text": 'Thigh        : ' + userEnteredInfo.thigh};
   let response8 = {"text": 'Inseam       : '+ userEnteredInfo.inseam};
-  let response9 = {"text" : "Htamein Type:" + userEnteredInfo.htameintype};
-  let response10= {"text" : "Htamein Fold:" + userEnteredInfo.htameinfold};
-  let response11= {"text" : "Khar        :" + userEnteredInfo.khar};
-  let response12= {"text" : "Ankle       :" + userEnteredInfo.ankle};
+  let response9 = {"text": "Htamein Type:" + userEnteredInfo.htameintype};
+  let response10= {"text": "Htamein Fold:" + userEnteredInfo.htameinfold};
+  let response11= {"text": "Khar        :" + userEnteredInfo.khar};
+  let response12= {"text": "Ankle       :" + userEnteredInfo.ankle};
   let response13= {
     "attachment":{
             "type":"image", 
