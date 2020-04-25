@@ -332,7 +332,7 @@ function handleMessage(sender_psid, received_message) {
     userEnteredInfo.ankle = received_message.text;   
     user_answer (sender_psid);
     userInfo.ankle = false;
-  }else if (received_message.text && userInfo.price == true) { 
+  }else if (received_message.quicl_reply.payload === "wedding_price" && userInfo.price == true) { 
     userEnteredInfo.price = received_message.text;   
     asking_cus_design (sender_psid);
     userInfo.price = false;
@@ -496,11 +496,11 @@ function handlePostback(sender_psid, received_postback) {
                                       {
                                         "content_type":"text",
                                         "title":"20000 Ks",
-                                        "payload":"wedding_price"
+                                        "payload":"occasion_price"
                                       },{
                                         "content_type":"text",
                                         "title":"10000 Ks",
-                                        "payload":"wedding_price"
+                                        "payload":"occasion_price"
                                       }]
                     };
                     userInfo.price = true;
