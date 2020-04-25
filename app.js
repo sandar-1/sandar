@@ -155,7 +155,6 @@ function handleMessage(sender_psid, received_message) {
    saveData (sender_psid);
    response = { "text" : "OK :)"}
   }
-
   // else if (received_message.text == "Chest" || received_message.text == "chest") {
   //  response = { "text" : "Send me update measurement. :)"}
   //  userInfo.chest = true;
