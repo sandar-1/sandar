@@ -1434,14 +1434,14 @@ function setupPersistentMenu(res){
                         "type":"nested",
                         "call_to_actions":[
                             {
-                              "title":"Sewing the cloth",
+                              "title":"I want to sew",
                               "type":"postback",
-                              "payload":"STC"
+                              "payload":"SEW"
                             },
                             {
-                              "title":"Give feedback!",
+                              "title":"Share Pictures",
                               "type":"postback",
-                              "payload":"GF"
+                              "payload":"SF"
                             },
                             {
                               "title":"View order",
