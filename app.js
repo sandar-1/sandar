@@ -105,8 +105,12 @@ app.post('/webhook', (req, res) => {
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
       if (webhook_event.message) {
-        handleMessage(sender_psid, webhook_event.message);        
-      } else if (webhook_event.postback) {
+      if(webhook_event.message.quick_reply){
+        handleQuickReply(sender_psid, webhook_event.message.quick_reply.payload);
+        }else{
+        handleMessage(sender_psid, webhook_event.message);
+        }
+      }else if (webhook_event.postback) {
         handlePostback(sender_psid, webhook_event.postback);
       }
       
@@ -159,16 +163,6 @@ app.get('/webhook', (req, res) => {
       res.sendStatus(403);      
     }
   }
-
-  if (webhook_event.message) {
-if(webhook_event.message.quick_reply){
-handleQuickReply(sender_psid, webhook_event.message.quick_reply.payload);
-}else{
-handleMessage(sender_psid, webhook_event.message);
-}
-} else if (webhook_event.postback) {
-handlePostback(sender_psid, webhook_event.postback);
-}
 
 });
 
