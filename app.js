@@ -374,7 +374,7 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.attachments && sharepicAttachment == true) {
     console.log('meta data',received_message);
     sharepicAttachment == false;
-    let attachment_url = received_message.attachments.payload.url;
+    let attachment_url = received_message.attachments[0].payload.url;
     userSendAttachment.sharepicAttachment = attachment_url;
     response = {"text" = "And tell me how you feel. :)"}
     userInfo.cusFeedback = true;
