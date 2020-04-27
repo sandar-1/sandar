@@ -1393,6 +1393,14 @@ function saveData(sender_psid) {
     cloth_design : userSendAttachment.designAttachment,
   }
   db.collection('user_information').add(info);
+
+    const order_info = {
+    id : sender_psid,
+    name : userEnteredInfo.name,
+    price : userEnteredInfo.price,
+    cloth_design : userSendAttachment.designAttachment,
+  }
+  db.collection('order_information').add(order_info);
 }
 
 function callSendAPI(sender_psid, response) {
