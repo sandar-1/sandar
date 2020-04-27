@@ -532,7 +532,7 @@ function handleMessage(sender_psid, received_message) {
     changing.inseam = false;
   }
 /*******************************Change type******************************************************/
-  else if (received_message.text == "type" || received_message.text == "Type" || received_message.quick_reply.payload == "change_type") {
+  else if (received_message.text == "type" || received_message.text == "Type") {
    let response1 = {"text" : "which type of htamein? "};
     let response2 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein.",
                       "quick_replies":[
