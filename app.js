@@ -395,7 +395,9 @@ function handleMessage(sender_psid, received_message) {
         }
       }
     }
-  }else if (received_message.text == "Chest" || received_message.text == "chest" ) {
+  }
+//changing measruements
+  else if (received_message.text == "Chest" || received_message.text == "chest" ) {
    response = { "text" : "Send me update measurement. :)"}
    changing.chest = true;
   }else if (received_message.text && changing.chest == true) {   
@@ -529,8 +531,8 @@ function handleMessage(sender_psid, received_message) {
     }
     changing.inseam = false;
   }
-/*************************************************************************************/
-  else if (received_message.text == "type" || received_message.text == "Type") {
+//changing type
+  else if (received_message.text == "type" || received_message.text == "Type" ) {
    let response1 = {"text" : "which type of htamein? "};
     let response2 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein.",
                       "quick_replies":[
