@@ -403,49 +403,42 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text && changing.chest == true) {   
     userEnteredInfo.chest =  received_message.text;
    askingSure(sender_psid);
-    changing.chest = false;
   }else if (received_message.text == "Arm" || received_message.text == "arm" ) {
    response = { "text" : "Send me update measurement. :)"}
    changing.upperArm = true;
   }else if (received_message.text && changing.upperArm == true) {   
     userEnteredInfo.upperArm =  received_message.text;
     askingSure(sender_psid);
-    changing.upperArm = false;
   }else if (received_message.text == "Sleeve" || received_message.text == "sleeve" ) {
    response = { "text" : "Send me update measurement. :)"}
    changing.sleevelength = true;
   }else if (received_message.text && changing.sleevelength == true) {   
     userEnteredInfo.sleevelength =  received_message.text;
     askingSure(sender_psid);
-    changing.sleevelength = false;
   }else if (received_message.text == "waist" || received_message.text == "Waist" ) {
    response = { "text" : "Send me update measurement. :)"}
    changing.waist = true;
   }else if (received_message.text && changing.waist == true) {   
     userEnteredInfo.waist =  received_message.text;
     askingSure(sender_psid);
-    changing.waist = false;
   }else if (received_message.text == "hips" || received_message.text == "Hips" ) {
    response = { "text" : "Send me update measurement. :)"}
    changing.hips = true;
   }else if (received_message.text && changing.hips == true) {   
     userEnteredInfo.hips =  received_message.text;
     askingSure(sender_psid);
-    changing.hips = false;
   }else if (received_message.text == "thigh" || received_message.text == "Thigh" ) {
    response = { "text" : "Send me update measurement. :)"}
    changing.thigh = true;
   }else if (received_message.text && changing.thigh == true) {   
     userEnteredInfo.thigh =  received_message.text;
     askingSure(sender_psid);
-    changing.thigh = false;
   }else if (received_message.text == "inseam" || received_message.text == "Inseam" ) {
    response = { "text" : "Send me update measurement. :)"}
    changing.inseam = true;
   }else if (received_message.text && changing.inseam == true) {   
     userEnteredInfo.inseam =  received_message.text;
     askingSure(sender_psid);
-    changing.inseam = false;
   }
 /*******************************Change type******************************************************/
   else if (received_message.text == "type" || received_message.text == "Type" ) {
@@ -701,6 +694,13 @@ function askingSure (sender_psid){
                         "payload":"change_measurement"
                         }]
     }
+   changing.chest = false;
+   changing.upperArm = false;
+   changing.sleevelength = false;
+   changing.waist = false;
+   changing.hips = false;false
+   changing.thigh = false;
+   changing.inseam = false;
     callSendAPI(sender_psid, response);
 }
 
