@@ -538,11 +538,11 @@ function handleMessage(sender_psid, received_message) {
    response = { "text" : "Send me update measurement. :)"}
    changing.chest = true;
    changing.upperArm = true;
-   changing.sleevelength:true;
-   changing.waist:true;
-   changing.hips:true;
-   changing.thigh:true;
-   changing.inseam:true;
+   changing.sleevelength = true;
+   changing.waist = true;
+   changing.hips = true;
+   changing.thigh = true;
+   changing.inseam = true;
   }else if (received_message.text == "done" || received_message.text == "Done" ) {
     showAllDataToCus (sender_psid);
   }
