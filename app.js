@@ -395,7 +395,9 @@ function handleMessage(sender_psid, received_message) {
         }
       }
     }
-  }else if (received_message.text == "Chest" || received_message.text == "chest" ) {
+  }
+/*************************Change measurement*********************************************/
+  else if (received_message.text == "Chest" || received_message.text == "chest" ) {
    response = { "text" : "Send me update measurement. :)"}
    changing.chest = true;
   }else if (received_message.text && changing.chest == true) {   
@@ -529,8 +531,8 @@ function handleMessage(sender_psid, received_message) {
     }
     changing.inseam = false;
   }
-/*************************************************************************************/
-  else if (received_message.text == "type" || received_message.text == "Type") {
+/*******************************Change type******************************************************/
+  else if (received_message.text == "type" || received_message.text == "Type" || received_message.quick_reply.payload == "change_type") {
    let response1 = {"text" : "which type of htamein? "};
     let response2 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein.",
                       "quick_replies":[
@@ -568,7 +570,7 @@ function handleMessage(sender_psid, received_message) {
                         }]
     }
     changing.htameintype = false;
-  }else if (received_message.text == "Fold" || received_message.text == "fold") {
+  }else if (received_message.text == "Fold" || received_message.text == "fold" || received_message.quick_reply.payload == "change_type_fold") {
    let response1 = {"text": `which way you want to fold?`};
     let response2 = {"text" : "Left fold/Right fold.",
                       "quick_replies":[
@@ -598,7 +600,7 @@ function handleMessage(sender_psid, received_message) {
                         },{
                         "content_type":"text",
                         "title":"no",
-                        "payload":"change_type"
+                        "payload":"change_type_fold"
                         }]
     }
     changing.fold = false;
