@@ -410,7 +410,7 @@ function handleMessage(sender_psid, received_message) {
                         },{
                         "content_type":"text",
                         "title":"No",
-                        "payload":"change_chestno"
+                        "payload":"change_measurement"
                         }]
     }
     changing.chest = false;
@@ -429,7 +429,7 @@ function handleMessage(sender_psid, received_message) {
                         },{
                         "content_type":"text",
                         "title":"No",
-                        "payload":"change_armno"
+                        "payload":"change_measurement"
                         }]
     }
     changing.upperArm = false;
@@ -448,7 +448,7 @@ function handleMessage(sender_psid, received_message) {
                         },{
                         "content_type":"text",
                         "title":"No",
-                        "payload":"change_armno"
+                        "payload":"change_measurement"
                         }]
     }
     changing.sleevelength = false;
@@ -467,7 +467,7 @@ function handleMessage(sender_psid, received_message) {
                         },{
                         "content_type":"text",
                         "title":"No",
-                        "payload":"change_armno"
+                        "payload":"change_measurement"
                         }]
     }
     changing.waist = false;
@@ -486,7 +486,7 @@ function handleMessage(sender_psid, received_message) {
                         },{
                         "content_type":"text",
                         "title":"No",
-                        "payload":"change_armno"
+                        "payload":"change_measurement"
                         }]
     }
     changing.hips = false;
@@ -505,7 +505,7 @@ function handleMessage(sender_psid, received_message) {
                         },{
                         "content_type":"text",
                         "title":"No",
-                        "payload":"change_armno"
+                        "payload":"change_measurement"
                         }]
     }
     changing.thigh = false;
@@ -524,11 +524,87 @@ function handleMessage(sender_psid, received_message) {
                         },{
                         "content_type":"text",
                         "title":"No",
-                        "payload":"change_armno"
+                        "payload":"change_measurement"
                         }]
     }
     changing.inseam = false;
-  }else if (received_message.text == "Sure") {    
+  }
+/*************************************************************************************/
+  else if (received_message.text == "type" || received_message.text == "Type") {
+   let response1 = {"text" : "which type of htamein? "};
+    let response2 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Cheik",
+                                        "payload":"c"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Hpi",
+                                        "payload":"hpi"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Simple",
+                                        "payload":"s"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+   changing.htameintype = true;
+  }else if (received_message.text && changing.htameintype == true) {   
+    userEnteredInfo.htameintype =  received_message.text;
+    response = {
+      "text": `Are you sure?`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"no",
+                        "payload":"change_type"
+                        }]
+    }
+    changing.htameintype = false;
+  }else if (received_message.text == "Fold" || received_message.text == "fold") {
+   let response1 = {"text": `which way you want to fold?`};
+    let response2 = {"text" : "Left fold/Right fold.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Left fold",
+                                        "payload":"lf"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Right fold",
+                                        "payload":"rf"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+   changing.fold = true;
+  }else if (received_message.text && changing.fold == true) {   
+    userEnteredInfo.fold =  received_message.text;
+    response = {
+      "text": `Are you sure?`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"no",
+                        "payload":"change_type"
+                        }]
+    }
+    changing.fold = false;
+  }
+/***********************************************************************************/
+  else if (received_message.text == "Sure") {    
     let response1 = {"text": "Ok... is there anything you want to change then type the key word that you want to change. :) "};
     let response2 = {"text" : " If there is nothing to change write 'Done' to view update record. :)"}
     callSend(sender_psid, response1).then(()=>{
