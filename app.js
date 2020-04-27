@@ -108,6 +108,8 @@ app.post('/webhook', (req, res) => {
         handleMessage(sender_psid, webhook_event.message);        
       } else if (webhook_event.postback) {
         handlePostback(sender_psid, webhook_event.postback);
+      } else if (webhook_event.massage.quick_reply) {
+        handleQuickreply (sender_psid, webhook_event.message.quick_reply.payload);
       }
       
     });
