@@ -396,8 +396,8 @@ function handleMessage(sender_psid, received_message) {
       }
     }
   }
-//changing measruements
-  else if (received_message.text == "Chest" || received_message.text == "chest" ) {
+//changing userinfo
+  else if (received_message.text == "Chest" || received_message.text == "chest" || received_message.text == "No") {
    response = { "text" : "Send me update measurement. :)"}
    changing.chest = true;
   }else if (received_message.text && changing.chest == true) {   
@@ -416,7 +416,7 @@ function handleMessage(sender_psid, received_message) {
                         }]
     }
     changing.chest = false;
-  }else if (received_message.text == "Arm" || received_message.text == "arm" ) {
+  }else if (received_message.text == "Arm" || received_message.text == "arm" || received_message.text == "No") {
    response = { "text" : "Send me update measurement. :)"}
    changing.upperArm = true;
   }else if (received_message.text && changing.upperArm == true) {   
@@ -435,7 +435,7 @@ function handleMessage(sender_psid, received_message) {
                         }]
     }
     changing.upperArm = false;
-  }else if (received_message.text == "Sleeve" || received_message.text == "sleeve" ) {
+  }else if (received_message.text == "Sleeve" || received_message.text == "sleeve" || received_message.text == "No") {
    response = { "text" : "Send me update measurement. :)"}
    changing.sleevelength = true;
   }else if (received_message.text && changing.sleevelength == true) {   
@@ -454,7 +454,7 @@ function handleMessage(sender_psid, received_message) {
                         }]
     }
     changing.sleevelength = false;
-  }else if (received_message.text == "waist" || received_message.text == "Waist" ) {
+  }else if (received_message.text == "waist" || received_message.text == "Waist" || received_message.text == "No") {
    response = { "text" : "Send me update measurement. :)"}
    changing.waist = true;
   }else if (received_message.text && changing.waist == true) {   
@@ -473,7 +473,7 @@ function handleMessage(sender_psid, received_message) {
                         }]
     }
     changing.waist = false;
-  }else if (received_message.text == "hips" || received_message.text == "Hips" ) {
+  }else if (received_message.text == "hips" || received_message.text == "Hips" || received_message.text == "No") {
    response = { "text" : "Send me update measurement. :)"}
    changing.hips = true;
   }else if (received_message.text && changing.hips == true) {   
@@ -492,7 +492,7 @@ function handleMessage(sender_psid, received_message) {
                         }]
     }
     changing.hips = false;
-  }else if (received_message.text == "thigh" || received_message.text == "Thigh" ) {
+  }else if (received_message.text == "thigh" || received_message.text == "Thigh" || received_message.text == "No") {
    response = { "text" : "Send me update measurement. :)"}
    changing.thigh = true;
   }else if (received_message.text && changing.thigh == true) {   
@@ -511,7 +511,7 @@ function handleMessage(sender_psid, received_message) {
                         }]
     }
     changing.thigh = false;
-  }else if (received_message.text == "inseam" || received_message.text == "Inseam" ) {
+  }else if (received_message.text == "inseam" || received_message.text == "Inseam" || received_message.text == "No") {
    response = { "text" : "Send me update measurement. :)"}
    changing.inseam = true;
   }else if (received_message.text && changing.inseam == true) {   
@@ -530,9 +530,7 @@ function handleMessage(sender_psid, received_message) {
                         }]
     }
     changing.inseam = false;
-  }
-//changing type
-  else if (received_message.text == "type" || received_message.text == "Type" || received_message.text == "NO") {
+  }else if (received_message.text == "type" || received_message.text == "Type" || received_message.text == "NO") {
    let response1 = {"text" : "which type of htamein? "};
     let response2 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein.",
                       "quick_replies":[
@@ -679,26 +677,17 @@ function handleMessage(sender_psid, received_message) {
                         }]
     }
     changing.ankle = false;
-  }
-/***********************************************************************************/
-  else if (received_message.text == "Sure") {    
+  }else if (received_message.text == "Sure") {    
     let response1 = {"text": "Ok... is there anything you want to change then type the key word that you want to change. :) "};
     let response2 = {"text" : " If there is nothing to change write 'Done' to view update record. :)"}
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });
-  }else if (received_message.text == "No") {
-   response = { "text" : "Send me update measurement. :)"}
-   changing.chest = true;
-   changing.upperArm = true;
-   changing.sleevelength = true;
-   changing.waist = true;
-   changing.hips = true;
-   changing.thigh = true;
-   changing.inseam = true;
   }else if (received_message.text == "done" || received_message.text == "Done" ) {
     showAllDataToCus (sender_psid);
   }
+/***********************************************************************************/
+  
   callSendAPI(sender_psid, response);    
 }
 
