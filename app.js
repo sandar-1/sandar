@@ -570,7 +570,7 @@ function handleMessage(sender_psid, received_message) {
                         }]
     }
     changing.htameintype = false;
-  }else if (received_message.text == "Fold" || received_message.text == "fold" || received_message.quick_reply.payload == "change_type") {
+  }else if (received_message.text == "Fold" || received_message.text == "fold") {
    let response1 = {"text": `which way you want to fold?`};
     let response2 = {"text" : "Left fold/Right fold.",
                       "quick_replies":[
