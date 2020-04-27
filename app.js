@@ -105,9 +105,7 @@ app.post('/webhook', (req, res) => {
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
       if (webhook_event.message) {
-        handleMessage(sender_psid, webhook_event.message);        
-      } else if (webhook_event.message.quick_reply) {
-        handleQuickreply (sender_psid, webhook_event.message.quick_reply.payload);
+        handleMessage(sender_psid, webhook_event.message, webhook_event.message.quick_reply.payload);        
       } else if (webhook_event.postback) {
         handlePostback(sender_psid, webhook_event.postback);
       }
@@ -163,21 +161,21 @@ app.get('/webhook', (req, res) => {
   }
 });
 
-function handleQuickreply(sender_psid, received_message) {
-  console.log('ok')
-   let response;;
-  if (received_message.quick_reply.payload  == "change_sure") {    
-    let response1 = {"text": "Ok... is there anything you want to change then type the key word that you want to change. :) "};
-    let response2 = {"text" : " If there is nothing to change write 'Done' to view update record. :)"}
-    callSend(sender_psid, response1).then(()=>{
-      return callSend(sender_psid, response2);
-    });
-  }else if (received_message.quick_reply.payload  === "change_chestno") {
-   response = { "text" : "Send me update measurement. :)"}
-   changing.chest = true;
-  }
-  callSendAPI(sender_psid, response); 
-}
+// function handleQuickreply(sender_psid, received_message) {
+//   console.log('ok')
+//    let response;;
+//   if (received_message.quick_reply.payload  == "change_sure") {    
+//     let response1 = {"text": "Ok... is there anything you want to change then type the key word that you want to change. :) "};
+//     let response2 = {"text" : " If there is nothing to change write 'Done' to view update record. :)"}
+//     callSend(sender_psid, response1).then(()=>{
+//       return callSend(sender_psid, response2);
+//     });
+//   }else if (received_message.quick_reply.payload  === "change_chestno") {
+//    response = { "text" : "Send me update measurement. :)"}
+//    changing.chest = true;
+//   }
+//   callSendAPI(sender_psid, response); 
+// }
 
 function handleMessage(sender_psid, received_message) {
   let response;
@@ -432,6 +430,9 @@ function handleMessage(sender_psid, received_message) {
                         }]
     }
     changing.chest = false;
+  }else if (received_message.quick_reply.payload  === "change_chestno") {
+   response = { "text" : "Send me update measurement. :)"}
+   changing.chest = true;
   }
   callSendAPI(sender_psid, response);    
 }
