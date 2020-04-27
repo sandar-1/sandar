@@ -106,10 +106,10 @@ app.post('/webhook', (req, res) => {
       // pass the event to the appropriate handler function
       if (webhook_event.message) {
         handleMessage(sender_psid, webhook_event.message);        
-      } else if (webhook_event.postback) {
-        handlePostback(sender_psid, webhook_event.postback);
       } else if (webhook_event.massage.quick_reply) {
         handleQuickreply (sender_psid, webhook_event.message.quick_reply.payload);
+      } else if (webhook_event.postback) {
+        handlePostback(sender_psid, webhook_event.postback);
       }
       
     });
@@ -162,6 +162,20 @@ app.get('/webhook', (req, res) => {
     }
   }
 });
+
+function handleQuickreply(sender_psid, received_message) {
+  console.log('ok')
+   let response;
+  let payload = received_postback.payload;
+  if (payload  == "change_sure") {    
+    let response1 = {"text": "Ok... is there anything you want to change then type the key word that you want to change. :) "};
+    let response2 = {"text" : " If there is nothing to change write 'Done' to view update record. :)"}
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+  }
+  callSendAPI(sender_psid, response); 
+}
 
 function handleMessage(sender_psid, received_message) {
   let response;
