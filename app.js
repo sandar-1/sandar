@@ -337,10 +337,6 @@ function handleMessage(sender_psid, received_message) {
     userEnteredInfo.price = received_message.text;   
     asking_cus_design (sender_psid);
     userInfo.price = false;
-  }else if (received_message.text && userInfo.cusFeedback == true) { 
-    userEnteredInfo.cusFeedback = received_message.text;
-    response = {"text" = "Thank you very much for your support. :)"}
-    userInfo.price = false;
   }else if (received_message.attachments && designAttachment == true) {
     console.log('meta data',received_message);
     designAttachment == false;
@@ -375,7 +371,6 @@ function handleMessage(sender_psid, received_message) {
     console.log('meta data',received_message);
     sharepicAttachment == false;
     let attachment_url = received_message.attachments[0].payload.url;
-     userSendAttachment.sharepicAttachment = attachment_url;
     response = {
       "attachment": {
         "type": "template",
@@ -743,7 +738,6 @@ function handlePostback(sender_psid, received_postback) {
       return callSend(sender_psid, response2);
     });
     sharepicAttachment = true;
-    userInfo.cusFeedback = false;
   }else if (payload === 'SEW') {
     response = {"attachment":{
                       "type":"template",
