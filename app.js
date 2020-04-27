@@ -376,6 +376,31 @@ function handleMessage(sender_psid, received_message) {
     sharepicAttachment == false;
     let attachment_url = received_message.attachments.payload.url;
     userSendAttachment.sharepicAttachment = attachment_url;
+    response = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "Is tis one?",
+            "subtitle": ":)",
+            "image_url": attachment_url,
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "Yes!",
+                "payload": "yes_sp",
+              },
+              {
+                "type": "postback",
+                "title": "No!",
+                "payload": "no_sp",
+              }
+            ],
+          }]
+        }
+      }
+    }
   }
 //changing userinfo
   else if (received_message.text == "Chest" || received_message.text == "chest" || received_message.text == "No") {
