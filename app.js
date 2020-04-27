@@ -401,7 +401,7 @@ function handleMessage(sender_psid, received_message) {
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });
-  }else if (received_message.text == "Chest" || received_message.text == "chest" ) {
+  }else if (received_message.text == "Chest" || received_message.text == "chest" || received_message.quick_reply.payload  === "change_chestno" ) {
    response = { "text" : "Send me update measurement. :)"}
    changing.chest = true;
   }else if (received_message.text && changing.chest == true) {   
@@ -420,9 +420,6 @@ function handleMessage(sender_psid, received_message) {
                         }]
     }
     changing.chest = false;
-  }else if (received_message.quick_reply.payload  === "change_chestno") {
-   response = { "text" : "Send me update measurement. :) :)"}
-   changing.chest = true;
   }
   callSendAPI(sender_psid, response);    
 }
