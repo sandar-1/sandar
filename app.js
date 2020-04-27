@@ -395,53 +395,142 @@ function handleMessage(sender_psid, received_message) {
         }
       }
     }
-  }
-/*************************Change measurement*********************************************/
-  else if (received_message.text == "Chest" || received_message.text == "chest" ) {
+  }else if (received_message.text == "Chest" || received_message.text == "chest" ) {
    response = { "text" : "Send me update measurement. :)"}
    changing.chest = true;
   }else if (received_message.text && changing.chest == true) {   
     userEnteredInfo.chest =  received_message.text;
-   askingSure(sender_psid);
+    response = {
+      "text": `Are you sure?`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"No",
+                        "payload":"change_measurement"
+                        }]
+    }
+    changing.chest = false;
   }else if (received_message.text == "Arm" || received_message.text == "arm" ) {
    response = { "text" : "Send me update measurement. :)"}
    changing.upperArm = true;
   }else if (received_message.text && changing.upperArm == true) {   
     userEnteredInfo.upperArm =  received_message.text;
-    askingSure(sender_psid);
+    response = {
+      "text": `Are you sure?`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"No",
+                        "payload":"change_measurement"
+                        }]
+    }
+    changing.upperArm = false;
   }else if (received_message.text == "Sleeve" || received_message.text == "sleeve" ) {
    response = { "text" : "Send me update measurement. :)"}
    changing.sleevelength = true;
   }else if (received_message.text && changing.sleevelength == true) {   
     userEnteredInfo.sleevelength =  received_message.text;
-    askingSure(sender_psid);
+    response = {
+      "text": `Are you sure?`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"No",
+                        "payload":"change_measurement"
+                        }]
+    }
+    changing.sleevelength = false;
   }else if (received_message.text == "waist" || received_message.text == "Waist" ) {
    response = { "text" : "Send me update measurement. :)"}
    changing.waist = true;
   }else if (received_message.text && changing.waist == true) {   
     userEnteredInfo.waist =  received_message.text;
-    askingSure(sender_psid);
+    response = {
+      "text": `Are you sure?`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"No",
+                        "payload":"change_measurement"
+                        }]
+    }
+    changing.waist = false;
   }else if (received_message.text == "hips" || received_message.text == "Hips" ) {
    response = { "text" : "Send me update measurement. :)"}
    changing.hips = true;
   }else if (received_message.text && changing.hips == true) {   
     userEnteredInfo.hips =  received_message.text;
-    askingSure(sender_psid);
+    response = {
+      "text": `Are you sure?`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"No",
+                        "payload":"change_measurement"
+                        }]
+    }
+    changing.hips = false;
   }else if (received_message.text == "thigh" || received_message.text == "Thigh" ) {
    response = { "text" : "Send me update measurement. :)"}
    changing.thigh = true;
   }else if (received_message.text && changing.thigh == true) {   
     userEnteredInfo.thigh =  received_message.text;
-    askingSure(sender_psid);
+    response = {
+      "text": `Are you sure?`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"No",
+                        "payload":"change_measurement"
+                        }]
+    }
+    changing.thigh = false;
   }else if (received_message.text == "inseam" || received_message.text == "Inseam" ) {
    response = { "text" : "Send me update measurement. :)"}
    changing.inseam = true;
   }else if (received_message.text && changing.inseam == true) {   
     userEnteredInfo.inseam =  received_message.text;
-    askingSure(sender_psid);
+    response = {
+      "text": `Are you sure?`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"No",
+                        "payload":"change_measurement"
+                        }]
+    }
+    changing.inseam = false;
   }
-/*******************************Change type******************************************************/
-  else if (received_message.text == "type" || received_message.text == "Type" ) {
+/*************************************************************************************/
+  else if (received_message.text == "type" || received_message.text == "Type") {
    let response1 = {"text" : "which type of htamein? "};
     let response2 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein.",
                       "quick_replies":[
@@ -509,7 +598,7 @@ function handleMessage(sender_psid, received_message) {
                         },{
                         "content_type":"text",
                         "title":"no",
-                        "payload":"change_type_fold"
+                        "payload":"change_type"
                         }]
     }
     changing.fold = false;
@@ -542,8 +631,6 @@ function handlePostback(sender_psid, received_postback) {
   let payload = received_postback.payload;
   if (payload === 'yes_right') {
     askforevent (sender_psid);
-  }else if (payload === 'get_started') {
-    greetUser (sender_psid);
   }else if (payload === 'WEDDING') {
     wedding_event (sender_psid);
   }else if (payload === 'OCCASION') {
@@ -677,31 +764,6 @@ function handlePostback(sender_psid, received_postback) {
                     userInfo.price = true;
   }
   callSendAPI(sender_psid, response);
-}
-
-/*function asking change sure*/
-function askingSure (sender_psid){
-  response = {
-      "text": `Are you sure?`,
-      "quick_replies":[
-                        {
-                        "content_type":"text",
-                        "title":"Sure",
-                        "payload":"change_sure"
-                        },{
-                        "content_type":"text",
-                        "title":"No",
-                        "payload":"change_measurement"
-                        }]
-    }
-   changing.chest = false;
-   changing.upperArm = false;
-   changing.sleevelength = false;
-   changing.waist = false;
-   changing.hips = false;false
-   changing.thigh = false;
-   changing.inseam = false;
-    callSendAPI(sender_psid, response);
 }
 
 /*function to greet user*/
@@ -1370,14 +1432,14 @@ function setupPersistentMenu(res){
                         "type":"nested",
                         "call_to_actions":[
                             {
-                              "title":"I want to sew",
+                              "title":"Sewing the cloth",
                               "type":"postback",
-                              "payload":"SEW"
+                              "payload":"STC"
                             },
                             {
-                              "title":"Share Pictures",
+                              "title":"Give feedback!",
                               "type":"postback",
-                              "payload":"SF"
+                              "payload":"GF"
                             },
                             {
                               "title":"View order",
