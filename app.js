@@ -421,118 +421,46 @@ function handleMessage(sender_psid, received_message) {
    changing.upperArm = true;
   }else if (received_message.text && changing.upperArm == true) {   
     userEnteredInfo.upperArm =  received_message.text;
-    response = {
-      "text": `Are you sure?`,
-      "quick_replies":[
-                        {
-                        "content_type":"text",
-                        "title":"Sure",
-                        "payload":"change_sure"
-                        },{
-                        "content_type":"text",
-                        "title":"No",
-                        "payload":"change_measurement"
-                        }]
-    }
+    askingSure(sender_psid);
     changing.upperArm = false;
   }else if (received_message.text == "Sleeve" || received_message.text == "sleeve" ) {
    response = { "text" : "Send me update measurement. :)"}
    changing.sleevelength = true;
   }else if (received_message.text && changing.sleevelength == true) {   
     userEnteredInfo.sleevelength =  received_message.text;
-    response = {
-      "text": `Are you sure?`,
-      "quick_replies":[
-                        {
-                        "content_type":"text",
-                        "title":"Sure",
-                        "payload":"change_sure"
-                        },{
-                        "content_type":"text",
-                        "title":"No",
-                        "payload":"change_measurement"
-                        }]
-    }
+    askingSure(sender_psid);
     changing.sleevelength = false;
   }else if (received_message.text == "waist" || received_message.text == "Waist" ) {
    response = { "text" : "Send me update measurement. :)"}
    changing.waist = true;
   }else if (received_message.text && changing.waist == true) {   
     userEnteredInfo.waist =  received_message.text;
-    response = {
-      "text": `Are you sure?`,
-      "quick_replies":[
-                        {
-                        "content_type":"text",
-                        "title":"Sure",
-                        "payload":"change_sure"
-                        },{
-                        "content_type":"text",
-                        "title":"No",
-                        "payload":"change_measurement"
-                        }]
-    }
+    askingSure(sender_psid);
     changing.waist = false;
   }else if (received_message.text == "hips" || received_message.text == "Hips" ) {
    response = { "text" : "Send me update measurement. :)"}
    changing.hips = true;
   }else if (received_message.text && changing.hips == true) {   
     userEnteredInfo.hips =  received_message.text;
-    response = {
-      "text": `Are you sure?`,
-      "quick_replies":[
-                        {
-                        "content_type":"text",
-                        "title":"Sure",
-                        "payload":"change_sure"
-                        },{
-                        "content_type":"text",
-                        "title":"No",
-                        "payload":"change_measurement"
-                        }]
-    }
+    askingSure(sender_psid);
     changing.hips = false;
   }else if (received_message.text == "thigh" || received_message.text == "Thigh" ) {
    response = { "text" : "Send me update measurement. :)"}
    changing.thigh = true;
   }else if (received_message.text && changing.thigh == true) {   
     userEnteredInfo.thigh =  received_message.text;
-    response = {
-      "text": `Are you sure?`,
-      "quick_replies":[
-                        {
-                        "content_type":"text",
-                        "title":"Sure",
-                        "payload":"change_sure"
-                        },{
-                        "content_type":"text",
-                        "title":"No",
-                        "payload":"change_measurement"
-                        }]
-    }
+    askingSure(sender_psid);
     changing.thigh = false;
   }else if (received_message.text == "inseam" || received_message.text == "Inseam" ) {
    response = { "text" : "Send me update measurement. :)"}
    changing.inseam = true;
   }else if (received_message.text && changing.inseam == true) {   
     userEnteredInfo.inseam =  received_message.text;
-    response = {
-      "text": `Are you sure?`,
-      "quick_replies":[
-                        {
-                        "content_type":"text",
-                        "title":"Sure",
-                        "payload":"change_sure"
-                        },{
-                        "content_type":"text",
-                        "title":"No",
-                        "payload":"change_measurement"
-                        }]
-    }
+    askingSure(sender_psid);
     changing.inseam = false;
   }
 /*******************************Change type******************************************************/
-  else if (received_message.text == "type" || received_message.text == "Type" || received_message.quick_reply.payload == "change_type") {
+  else if (received_message.text == "type" || received_message.text == "Type" ) {
    let response1 = {"text" : "which type of htamein? "};
     let response2 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein.",
                       "quick_replies":[
@@ -570,7 +498,7 @@ function handleMessage(sender_psid, received_message) {
                         }]
     }
     changing.htameintype = false;
-  }else if (received_message.text == "Fold" || received_message.text == "fold" ) {
+  }else if (received_message.text == "Fold" || received_message.text == "fold") {
    let response1 = {"text": `which way you want to fold?`};
     let response2 = {"text" : "Left fold/Right fold.",
                       "quick_replies":[
@@ -768,6 +696,24 @@ function handlePostback(sender_psid, received_postback) {
                     userInfo.price = true;
   }
   callSendAPI(sender_psid, response);
+}
+
+/*function asking change sure*/
+function askingSure (sender_psid){
+  response = {
+      "text": `Are you sure?`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"No",
+                        "payload":"change_measurement"
+                        }]
+    }
+    callSendAPI(sender_psid, response);
 }
 
 /*function to greet user*/
