@@ -161,6 +161,16 @@ app.get('/webhook', (req, res) => {
   }
 });
 
+if (webhook_event.message) {
+if(webhook_event.message.quick_reply){
+handleQuickReply(sender_psid, webhook_event.message.quick_reply.payload);
+}else{
+handleMessage(sender_psid, webhook_event.message);
+}
+} else if (webhook_event.postback) {
+handlePostback(sender_psid, webhook_event.postback);
+}
+
 function handleMessage(sender_psid, received_message) {
   let response;
   if (received_message.text == "hi" || received_message.text == "Hi") {    
@@ -401,7 +411,7 @@ function handleMessage(sender_psid, received_message) {
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });
-  }else if (received_message.text == "Chest" || received_message.text == "chest" || received_message.quick_reply.payload  === "change_chestno" ) {
+  }else if (received_message.text == "Chest" || received_message.text == "chest" ) {
    response = { "text" : "Send me update measurement. :)"}
    changing.chest = true;
   }else if (received_message.text && changing.chest == true) {   
@@ -420,6 +430,9 @@ function handleMessage(sender_psid, received_message) {
                         }]
     }
     changing.chest = false;
+  }else if (received_message.quick_reply.payload  === "change_chestno") {
+   response = { "text" : "Send me update measurement. :) :)"}
+   changing.chest = true;
   }
   callSendAPI(sender_psid, response);    
 }
