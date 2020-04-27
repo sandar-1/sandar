@@ -89,16 +89,6 @@ app.post('/webhook', (req, res) => {
   // Parse the request body from the POST
   let body = req.body;
 
-if (webhook_event.message) {
-if(webhook_event.message.quick_reply){
-handleQuickReply(sender_psid, webhook_event.message.quick_reply.payload);
-}else{
-handleMessage(sender_psid, webhook_event.message);
-}
-} else if (webhook_event.postback) {
-handlePostback(sender_psid, webhook_event.postback);
-}
-
   // Check the webhook event is from a Page subscription
   if (body.object === 'page') {
 
