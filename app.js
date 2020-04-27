@@ -166,7 +166,7 @@ app.get('/webhook', (req, res) => {
 function handleQuickreply(sender_psid, received_message) {
   console.log('ok')
    let response;
-  let payload = received_postback.payload;
+  let payload = received_message.quick_reply.payload;
   if (payload  == "change_sure") {    
     let response1 = {"text": "Ok... is there anything you want to change then type the key word that you want to change. :) "};
     let response2 = {"text" : " If there is nothing to change write 'Done' to view update record. :)"}
