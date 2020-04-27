@@ -395,6 +395,25 @@ function handleMessage(sender_psid, received_message) {
         }
       }
     }
+  }else if (received_message.text == "Chest" || received_message.text == "chest" ) {
+   response = { "text" : "Send me update measurement. :)"}
+   changing.chest = true;
+  }else if (received_message.text && changing.chest == true) {   
+    userEnteredInfo.chest =  received_message.text;
+    response = {
+      "text": `Are you sure?`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"No",
+                        "payload":"change_chestno"
+                        }]
+    }
+    changing.chest = false;
   }
   callSendAPI(sender_psid, response);    
 }
