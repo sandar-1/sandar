@@ -172,6 +172,9 @@ function handleQuickreply(sender_psid, received_message) {
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });
+  }else if (received_message.quick_reply.payload  === "change_chestno") {
+   response = { "text" : "Send me update measurement. :)"}
+   changing.chest = true;
   }
   callSendAPI(sender_psid, response); 
 }
