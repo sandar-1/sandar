@@ -376,31 +376,8 @@ function handleMessage(sender_psid, received_message) {
     sharepicAttachment == false;
     let attachment_url = received_message.attachments.payload.url;
     userSendAttachment.sharepicAttachment = attachment_url;
-    response = {
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "generic",
-          "elements": [{
-            "title": "Is tis one?",
-            "subtitle": ":)",
-            "image_url": attachment_url,
-            "buttons": [
-              {
-                "type": "postback",
-                "title": "Yes!",
-                "payload": "yes_sp",
-              },
-              {
-                "type": "postback",
-                "title": "No!",
-                "payload": "no_sp",
-              }
-            ],
-          }]
-        }
-      }
-    }
+    response = {"text" = "And tell me how you feel. :)"}
+    userInfo.cusFeedback = true;
   }
 //changing userinfo
   else if (received_message.text == "Chest" || received_message.text == "chest" || received_message.text == "No") {
@@ -738,12 +715,11 @@ function handlePostback(sender_psid, received_postback) {
     });
   }else if (payload === 'SP') {
     let response1 = { "text" : "Let's take a look at the most beautiful images with cloth sewn by ShweHsu."};
-    let response2 = { "text" : "And tell me how you feel. :)"};
+    let response2 = { "text" : ""};
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });
     sharepicAttachment = true;
-    userInfo.cusFeedback = true;
   }else if (payload === 'SEW') {
     response = {"attachment":{
                       "type":"template",
