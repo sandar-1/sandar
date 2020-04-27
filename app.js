@@ -687,7 +687,6 @@ function handleMessage(sender_psid, received_message) {
     showAllDataToCus (sender_psid);
   }
 /***********************************************************************************/
-  
   callSendAPI(sender_psid, response);    
 }
 
@@ -1231,7 +1230,7 @@ async function convocation_event (sender_psid) {
 
 /*function for Casual event*/
 async function casual_event (sender_psid) {
-  let response1 = {"text" : "For a Casual dress there are two prices at 10000 Ks and 80000 Ks. Same as occasion dress but little fancy. :)  "};
+  let response1 = {"text" : "For a Casual dress there are two prices at 10000 Ks and 8000 Ks. Same as occasion dress but little fancy. :)  "};
     let response2 = { "attachment":{
                         "type":"template",
                         "payload":{
@@ -1500,19 +1499,19 @@ function setupPersistentMenu(res){
                         "type":"nested",
                         "call_to_actions":[
                             {
-                              "title":"Sewing the cloth",
+                              "title":"I want to sew",
                               "type":"postback",
-                              "payload":"STC"
+                              "payload":"SEW"
                             },
                             {
-                              "title":"Give feedback!",
+                              "title":"Share pictures",
                               "type":"postback",
-                              "payload":"GF"
+                              "payload":"SP"
                             },
                             {
-                              "title":"View order",
+                              "title":"View others pictures",
                               "type":"postback",
-                              "payload":"VO"
+                              "payload":"POO"
                             }
                         ]
                       },
