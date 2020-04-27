@@ -402,19 +402,7 @@ function handleMessage(sender_psid, received_message) {
    changing.chest = true;
   }else if (received_message.text && changing.chest == true) {   
     userEnteredInfo.chest =  received_message.text;
-    response = {
-      "text": `Are you sure?`,
-      "quick_replies":[
-                        {
-                        "content_type":"text",
-                        "title":"Sure",
-                        "payload":"change_sure"
-                        },{
-                        "content_type":"text",
-                        "title":"No",
-                        "payload":"change_measurement"
-                        }]
-    }
+   askingSure(sender_psid);
     changing.chest = false;
   }else if (received_message.text == "Arm" || received_message.text == "arm" ) {
    response = { "text" : "Send me update measurement. :)"}
