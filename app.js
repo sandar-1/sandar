@@ -55,6 +55,7 @@ let userInfo = {
   khar:false,
   ankle:false,
   price : false,
+  cusFeedback : false,
 };
 
 let changing = {
@@ -730,6 +731,14 @@ function handlePostback(sender_psid, received_postback) {
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });
+  }else if (payload === 'SP') {
+    let response1 = { "text" : "Let's take a look at the most beautiful images with cloth sewn by ShweHsu."};
+    let response2 = { "text" : "And tell me how you feel. :)"};
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+    sharepicAttachment = true;
+    userInfo.cusFeedback = true;
   }else if (payload === 'SEW') {
     response = {"attachment":{
                       "type":"template",
