@@ -439,6 +439,10 @@ function handleMessage(sender_psid, received_message) {
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });
+  }else if (received_message.text == "No") {
+   response = { "text" : "Send me update measurement. :)"}
+   changing.chest = true;
+   changing.upperArm = true;
   }
   callSendAPI(sender_psid, response);    
 }
