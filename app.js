@@ -631,7 +631,9 @@ function handlePostback(sender_psid, received_postback) {
   console.log('ok')
    let response;
   let payload = received_postback.payload;
-  if (payload === 'yes_right') {
+  if (payload === 'get_started') {
+    greetUser (sender_psid);
+  }else if (payload === 'yes_right') {
     askforevent (sender_psid);
   }else if (payload === 'WEDDING') {
     wedding_event (sender_psid);
