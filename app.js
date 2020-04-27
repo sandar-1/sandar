@@ -105,12 +105,8 @@ app.post('/webhook', (req, res) => {
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
       if (webhook_event.message) {
-      if(webhook_event.message.quick_reply){
-        handleQuickReply(sender_psid, webhook_event.message.quick_reply.payload);
-        }else{
-        handleMessage(sender_psid, webhook_event.message);
-        }
-      }else if (webhook_event.postback) {
+        handleMessage(sender_psid, webhook_event.message);        
+      } else if (webhook_event.postback) {
         handlePostback(sender_psid, webhook_event.postback);
       }
       
@@ -163,21 +159,7 @@ app.get('/webhook', (req, res) => {
       res.sendStatus(403);      
     }
   }
-
 });
-
-// function handleQuickReply (sender_psid, received_message) {
-//   console.log('ok')
-//    let response;
-//   let payload = received_message.quick_reply.payload;
-//   if (received_message.quick_reply.payload  == "change_sure") {    
-//     let response1 = {"text": "Ok... is there anything you want to change then type the key word that you want to change. :) "};
-//     let response2 = {"text" : " If there is nothing to change write 'Done' to view update record. :)"}
-//     callSend(sender_psid, response1).then(()=>{
-//       return callSend(sender_psid, response2);
-//     });
-//   }
-// }
 
 function handleMessage(sender_psid, received_message) {
   let response;
