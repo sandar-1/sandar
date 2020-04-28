@@ -701,10 +701,11 @@ function handlePostback(sender_psid, received_postback) {
     greetUser (sender_psid);
   }else if (payload === 'yes_right') {
     askforevent (sender_psid);
-  }else if (payload === 'WEDDING' && userinfo.event = true) {
+  }else if (payload === 'WEDDING' && userInfo.event = true) {
     userEnteredInfo.event = received_postback.title;
     console.log('ok wedding')
     wedding_event (sender_psid);
+    userInfo.event = false;
   }else if (payload === 'OCCASION') {
     occasion_event (sender_psid);
   }else if (payload === 'ABD') {
@@ -1139,7 +1140,7 @@ async function askforevent (sender_psid) {
       return callSend(sender_psid,response3);
     });
   });
-  userinfo.event = true;
+  userInfo.event = true;
 }
 
 /*function for Wedding event*/
