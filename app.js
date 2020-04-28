@@ -55,7 +55,6 @@ let userInfo = {
   khar:false,
   ankle:false,
   price : false,
-  cusFeedback : false,
 
 };
 
@@ -170,527 +169,526 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text == "confirm" || received_message.text == "Confirm") {    
    saveData (sender_psid);
    response = { "text" : "OK :)"}
+  }else if (received_message.text == "change" || received_message.text == "Change") {
+   response = {
+    "attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"Choose what you wnat to change.",
+                        "buttons":[
+                          {
+                            "type":"postback",
+                            "payload":"change_bdmeasurement",
+                            "title":"Body measurement"
+                          },
+                          {
+                            "type":"postback",
+                            "payload":"change_htamein",
+                            "title":"Type fo htamein"
+                          },
+                          {
+                            "type":"postback",
+                            "payload":"change_design",
+                            "title":"Cloth design"
+                          }
+                        ]
+                      }
+                    } 
+   }
+  }else if (received_message.text && userInfo.name == true) {   
+    userEnteredInfo.name =  received_message.text;
+     let response1 = {"text": "Let's get your body measurement. Here are ways to measure your body. Hopefully that will be useful. :)"};    
+     let response2 = {
+      "attachment":{
+            "type":"image", 
+            "payload":{
+              "url":"https://www.dummies.com/wp-content/uploads/how-to-get-your-body-measurements.jpg", 
+              "is_reusable":true
+            }
+          }
+    };
+    let response3 = {"text" : "Well.. let's measure Chest first."}
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
+    });
+    userInfo.chest = true;
+    userInfo.name = false;
+  }else if (received_message.text && userInfo.chest == true) {   
+    userEnteredInfo.chest =  received_message.text;
+    response = {
+      "text": `Now Upper arm.`
+    }
+    userInfo.chest = false;
+    userInfo.upperArm = true;
+  }else if (received_message.text && userInfo.upperArm == true) { 
+    userEnteredInfo.upperArm = received_message.text; 
+    response = {
+      "text": `Let's measure Sleeve length.`
+    }
+    userInfo.upperArm = false;
+    userInfo.sleevelength = true;
+  }else if (received_message.text && userInfo.sleevelength == true) { 
+    userEnteredInfo.sleevelength = received_message.text;   
+    response = {
+      "text": `And measure your Waist.`
+    }
+    userInfo.sleevelength = false;
+    userInfo.waist = true;
+  }else if (received_message.text && userInfo.waist == true) {
+    userEnteredInfo.waist = received_message.text;    
+    response = {
+      "text": `Now your Hips.`
+    }
+    userInfo.waist = false;
+    userInfo.hips = true;
+  }else if (received_message.text && userInfo.hips == true) { 
+    userEnteredInfo.hips = received_message.text;   
+    response = {
+      "text": `Measure your Thigh.`
+    }
+    userInfo.hips = false;
+    userInfo.thigh = true;
+  }else if (received_message.text && userInfo.thigh == true) {   
+    userEnteredInfo.thigh = received_message.text; 
+    response = {
+      "text": `Finally! your Inseam.`
+    }
+    userInfo.thigh = false;
+    userInfo.inseam = true;
+  }else if (received_message.text && userInfo.inseam == true) {   
+    userEnteredInfo.inseam = received_message.text; 
+    bodymeasure(sender_psid);
+    userInfo.inseam = false;
+  }else if (received_message.text && userInfo.htameintype == true) { 
+    userEnteredInfo.htameintype = received_message.text;   
+    let response1 = {"text": `which way you want to fold?`};
+    let response2 = {"text" : "Left fold/Right fold.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Left fold",
+                                        "payload":"lf"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Right fold",
+                                        "payload":"rf"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+    userInfo.htameintype = false;
+    userInfo.htameinfold = true;
+  }else if (received_message.text && userInfo.htameinfold == true) { 
+    userEnteredInfo.htameinfold = received_message.text;
+    let response1 = {"text": "Khar to (end exactly with the waist),"};
+    let response2 = {"text" : "Khar tin (ends at the hips) or"};
+    let response3 = {"text" : "khar shay (ends below the hips)",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Khar To",
+                                        "payload":"kto"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Khar Tin",
+                                        "payload":"ktin"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Khar Shay",
+                                        "payload":"kshay"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
+    });
+    userInfo.htameinfold = false;
+    userInfo.khar = true;
+  }else if (received_message.text && userInfo.khar == true) { 
+    userEnteredInfo.khar = received_message.text;   
+    let response1 = {"text": `Would you like to cover ankle or not?`};
+    let response2 = {"text" : "Upper ankle/cover ankle.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Upper Ankle",
+                                        "payload":"ua"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Cover Ankle",
+                                        "payload":"ca"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+    userInfo.khar = false;
+    userInfo.ankle = true;
+  }else if (received_message.text && userInfo.ankle == true) { 
+    userEnteredInfo.ankle = received_message.text;   
+    user_answer (sender_psid);
+    userInfo.ankle = false;
+  }else if (received_message.text && userInfo.price == true) { 
+    userEnteredInfo.price = received_message.text;   
+    asking_cus_design (sender_psid);
+    userInfo.price = false;
+  }else if (received_message.attachments && designAttachment == true) {
+    console.log('meta data',received_message);
+    designAttachment == false;
+    let attachment_url = received_message.attachments[0].payload.url;
+    userSendAttachment.designAttachment = attachment_url;
+    response = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "Is this design?",
+            "subtitle": "Wow! this one will totally suits you.I can't wait to sew it.",
+            "image_url": attachment_url,
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "Yes, that one. :)",
+                "payload": "yes",
+              },
+              {
+                "type": "postback",
+                "title": "No, sorry. :(",
+                "payload": "no",
+              }
+            ],
+          }]
+        }
+      }
+    }
+  }else if (received_message.attachments && sharepicAttachment == true) {
+    console.log('meta data',received_message);
+    sharepicAttachment == false;
+    let attachment_url = received_message.attachments[0].payload.url;
+    response = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "Is tis one?",
+            "subtitle": ":)",
+            "image_url": attachment_url,
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "Yes!",
+                "payload": "yes_sp",
+              },
+              {
+                "type": "postback",
+                "title": "No!",
+                "payload": "no_sp",
+              }
+            ],
+          }]
+        }
+      }
+    }
   }
-//   else if (received_message.text == "change" || received_message.text == "Change") {
-//    response = {
-//     "attachment":{
-//                       "type":"template",
-//                       "payload":{
-//                         "template_type":"button",
-//                         "text":"Choose what you wnat to change.",
-//                         "buttons":[
-//                           {
-//                             "type":"postback",
-//                             "payload":"change_bdmeasurement",
-//                             "title":"Body measurement"
-//                           },
-//                           {
-//                             "type":"postback",
-//                             "payload":"change_htamein",
-//                             "title":"Type fo htamein"
-//                           },
-//                           {
-//                             "type":"postback",
-//                             "payload":"change_design",
-//                             "title":"Cloth design"
-//                           }
-//                         ]
-//                       }
-//                     } 
-//    }
-//   }else if (received_message.text && userInfo.name == true) {   
-//     userEnteredInfo.name =  received_message.text;
-//      let response1 = {"text": "Let's get your body measurement. Here are ways to measure your body. Hopefully that will be useful. :)"};    
-//      let response2 = {
-//       "attachment":{
-//             "type":"image", 
-//             "payload":{
-//               "url":"https://www.dummies.com/wp-content/uploads/how-to-get-your-body-measurements.jpg", 
-//               "is_reusable":true
-//             }
-//           }
-//     };
-//     let response3 = {"text" : "Well.. let's measure Chest first."}
-//     callSend(sender_psid, response1).then(()=>{
-//       return callSend(sender_psid, response2).then(()=>{
-//         return callSend(sender_psid, response3);
-//       });
-//     });
-//     userInfo.chest = true;
-//     userInfo.name = false;
-//   }else if (received_message.text && userInfo.chest == true) {   
-//     userEnteredInfo.chest =  received_message.text;
-//     response = {
-//       "text": `Now Upper arm.`
-//     }
-//     userInfo.chest = false;
-//     userInfo.upperArm = true;
-//   }else if (received_message.text && userInfo.upperArm == true) { 
-//     userEnteredInfo.upperArm = received_message.text; 
-//     response = {
-//       "text": `Let's measure Sleeve length.`
-//     }
-//     userInfo.upperArm = false;
-//     userInfo.sleevelength = true;
-//   }else if (received_message.text && userInfo.sleevelength == true) { 
-//     userEnteredInfo.sleevelength = received_message.text;   
-//     response = {
-//       "text": `And measure your Waist.`
-//     }
-//     userInfo.sleevelength = false;
-//     userInfo.waist = true;
-//   }else if (received_message.text && userInfo.waist == true) {
-//     userEnteredInfo.waist = received_message.text;    
-//     response = {
-//       "text": `Now your Hips.`
-//     }
-//     userInfo.waist = false;
-//     userInfo.hips = true;
-//   }else if (received_message.text && userInfo.hips == true) { 
-//     userEnteredInfo.hips = received_message.text;   
-//     response = {
-//       "text": `Measure your Thigh.`
-//     }
-//     userInfo.hips = false;
-//     userInfo.thigh = true;
-//   }else if (received_message.text && userInfo.thigh == true) {   
-//     userEnteredInfo.thigh = received_message.text; 
-//     response = {
-//       "text": `Finally! your Inseam.`
-//     }
-//     userInfo.thigh = false;
-//     userInfo.inseam = true;
-//   }else if (received_message.text && userInfo.inseam == true) {   
-//     userEnteredInfo.inseam = received_message.text; 
-//     bodymeasure(sender_psid);
-//     userInfo.inseam = false;
-//   }else if (received_message.text && userInfo.htameintype == true) { 
-//     userEnteredInfo.htameintype = received_message.text;   
-//     let response1 = {"text": `which way you want to fold?`};
-//     let response2 = {"text" : "Left fold/Right fold.",
-//                       "quick_replies":[
-//                                       {
-//                                         "content_type":"text",
-//                                         "title":"Left fold",
-//                                         "payload":"lf"
-//                                       },{
-//                                         "content_type":"text",
-//                                         "title":"Right fold",
-//                                         "payload":"rf"
-//                                       }]
-//                     };
-//     callSend(sender_psid, response1).then(()=>{
-//       return callSend(sender_psid, response2);
-//     });
-//     userInfo.htameintype = false;
-//     userInfo.htameinfold = true;
-//   }else if (received_message.text && userInfo.htameinfold == true) { 
-//     userEnteredInfo.htameinfold = received_message.text;
-//     let response1 = {"text": "Khar to (end exactly with the waist),"};
-//     let response2 = {"text" : "Khar tin (ends at the hips) or"};
-//     let response3 = {"text" : "khar shay (ends below the hips)",
-//                       "quick_replies":[
-//                                       {
-//                                         "content_type":"text",
-//                                         "title":"Khar To",
-//                                         "payload":"kto"
-//                                       },{
-//                                         "content_type":"text",
-//                                         "title":"Khar Tin",
-//                                         "payload":"ktin"
-//                                       },{
-//                                         "content_type":"text",
-//                                         "title":"Khar Shay",
-//                                         "payload":"kshay"
-//                                       }]
-//                     };
-//     callSend(sender_psid, response1).then(()=>{
-//       return callSend(sender_psid, response2).then(()=>{
-//         return callSend(sender_psid, response3);
-//       });
-//     });
-//     userInfo.htameinfold = false;
-//     userInfo.khar = true;
-//   }else if (received_message.text && userInfo.khar == true) { 
-//     userEnteredInfo.khar = received_message.text;   
-//     let response1 = {"text": `Would you like to cover ankle or not?`};
-//     let response2 = {"text" : "Upper ankle/cover ankle.",
-//                       "quick_replies":[
-//                                       {
-//                                         "content_type":"text",
-//                                         "title":"Upper Ankle",
-//                                         "payload":"ua"
-//                                       },{
-//                                         "content_type":"text",
-//                                         "title":"Cover Ankle",
-//                                         "payload":"ca"
-//                                       }]
-//                     };
-//     callSend(sender_psid, response1).then(()=>{
-//       return callSend(sender_psid, response2);
-//     });
-//     userInfo.khar = false;
-//     userInfo.ankle = true;
-//   }else if (received_message.text && userInfo.ankle == true) { 
-//     userEnteredInfo.ankle = received_message.text;   
-//     user_answer (sender_psid);
-//     userInfo.ankle = false;
-//   }else if (received_message.text && userInfo.price == true) { 
-//     userEnteredInfo.price = received_message.text;   
-//     asking_cus_design (sender_psid);
-//     userInfo.price = false;
-//   }else if (received_message.attachments && designAttachment == true) {
-//     console.log('meta data',received_message);
-//     designAttachment == false;
-//     let attachment_url = received_message.attachments[0].payload.url;
-//     userSendAttachment.designAttachment = attachment_url;
-//     response = {
-//       "attachment": {
-//         "type": "template",
-//         "payload": {
-//           "template_type": "generic",
-//           "elements": [{
-//             "title": "Is this design?",
-//             "subtitle": "Wow! this one will totally suits you.I can't wait to sew it.",
-//             "image_url": attachment_url,
-//             "buttons": [
-//               {
-//                 "type": "postback",
-//                 "title": "Yes, that one. :)",
-//                 "payload": "yes",
-//               },
-//               {
-//                 "type": "postback",
-//                 "title": "No, sorry. :(",
-//                 "payload": "no",
-//               }
-//             ],
-//           }]
-//         }
-//       }
-//     }
-//   }else if (received_message.attachments && sharepicAttachment == true) {
-//     console.log('meta data',received_message);
-//     sharepicAttachment == false;
-//     let attachment_url = received_message.attachments[0].payload.url;
-//     response = {
-//       "attachment": {
-//         "type": "template",
-//         "payload": {
-//           "template_type": "generic",
-//           "elements": [{
-//             "title": "Is tis one?",
-//             "subtitle": ":)",
-//             "image_url": attachment_url,
-//             "buttons": [
-//               {
-//                 "type": "postback",
-//                 "title": "Yes!",
-//                 "payload": "yes_sp",
-//               },
-//               {
-//                 "type": "postback",
-//                 "title": "No!",
-//                 "payload": "no_sp",
-//               }
-//             ],
-//           }]
-//         }
-//       }
-//     }
-//   }
-// //changing userinfo
-//   else if (received_message.text == "Chest" || received_message.text == "chest" || received_message.text == "No") {
-//    response = { "text" : "Send me update measurement. :)"}
-//    changing.chest = true;
-//   }else if (received_message.text && changing.chest == true) {   
-//     userEnteredInfo.chest =  received_message.text;
-//     response = {
-//       "text": `Are you sure?`,
-//       "quick_replies":[
-//                         {
-//                         "content_type":"text",
-//                         "title":"Sure",
-//                         "payload":"change_sure"
-//                         },{
-//                         "content_type":"text",
-//                         "title":"No",
-//                         "payload":"change_measurement"
-//                         }]
-//     }
-//     changing.chest = false;
-//   }else if (received_message.text == "Arm" || received_message.text == "arm" || received_message.text == "No") {
-//    response = { "text" : "Send me update measurement. :)"}
-//    changing.upperArm = true;
-//   }else if (received_message.text && changing.upperArm == true) {   
-//     userEnteredInfo.upperArm =  received_message.text;
-//     response = {
-//       "text": `Are you sure?`,
-//       "quick_replies":[
-//                         {
-//                         "content_type":"text",
-//                         "title":"Sure",
-//                         "payload":"change_sure"
-//                         },{
-//                         "content_type":"text",
-//                         "title":"No",
-//                         "payload":"change_measurement"
-//                         }]
-//     }
-//     changing.upperArm = false;
-//   }else if (received_message.text == "Sleeve" || received_message.text == "sleeve" || received_message.text == "No") {
-//    response = { "text" : "Send me update measurement. :)"}
-//    changing.sleevelength = true;
-//   }else if (received_message.text && changing.sleevelength == true) {   
-//     userEnteredInfo.sleevelength =  received_message.text;
-//     response = {
-//       "text": `Are you sure?`,
-//       "quick_replies":[
-//                         {
-//                         "content_type":"text",
-//                         "title":"Sure",
-//                         "payload":"change_sure"
-//                         },{
-//                         "content_type":"text",
-//                         "title":"No",
-//                         "payload":"change_measurement"
-//                         }]
-//     }
-//     changing.sleevelength = false;
-//   }else if (received_message.text == "waist" || received_message.text == "Waist" || received_message.text == "No") {
-//    response = { "text" : "Send me update measurement. :)"}
-//    changing.waist = true;
-//   }else if (received_message.text && changing.waist == true) {   
-//     userEnteredInfo.waist =  received_message.text;
-//     response = {
-//       "text": `Are you sure?`,
-//       "quick_replies":[
-//                         {
-//                         "content_type":"text",
-//                         "title":"Sure",
-//                         "payload":"change_sure"
-//                         },{
-//                         "content_type":"text",
-//                         "title":"No",
-//                         "payload":"change_measurement"
-//                         }]
-//     }
-//     changing.waist = false;
-//   }else if (received_message.text == "hips" || received_message.text == "Hips" || received_message.text == "No") {
-//    response = { "text" : "Send me update measurement. :)"}
-//    changing.hips = true;
-//   }else if (received_message.text && changing.hips == true) {   
-//     userEnteredInfo.hips =  received_message.text;
-//     response = {
-//       "text": `Are you sure?`,
-//       "quick_replies":[
-//                         {
-//                         "content_type":"text",
-//                         "title":"Sure",
-//                         "payload":"change_sure"
-//                         },{
-//                         "content_type":"text",
-//                         "title":"No",
-//                         "payload":"change_measurement"
-//                         }]
-//     }
-//     changing.hips = false;
-//   }else if (received_message.text == "thigh" || received_message.text == "Thigh" || received_message.text == "No") {
-//    response = { "text" : "Send me update measurement. :)"}
-//    changing.thigh = true;
-//   }else if (received_message.text && changing.thigh == true) {   
-//     userEnteredInfo.thigh =  received_message.text;
-//     response = {
-//       "text": `Are you sure?`,
-//       "quick_replies":[
-//                         {
-//                         "content_type":"text",
-//                         "title":"Sure",
-//                         "payload":"change_sure"
-//                         },{
-//                         "content_type":"text",
-//                         "title":"No",
-//                         "payload":"change_measurement"
-//                         }]
-//     }
-//     changing.thigh = false;
-//   }else if (received_message.text == "inseam" || received_message.text == "Inseam" || received_message.text == "No") {
-//    response = { "text" : "Send me update measurement. :)"}
-//    changing.inseam = true;
-//   }else if (received_message.text && changing.inseam == true) {   
-//     userEnteredInfo.inseam =  received_message.text;
-//     response = {
-//       "text": `Are you sure?`,
-//       "quick_replies":[
-//                         {
-//                         "content_type":"text",
-//                         "title":"Sure",
-//                         "payload":"change_sure"
-//                         },{
-//                         "content_type":"text",
-//                         "title":"No",
-//                         "payload":"change_measurement"
-//                         }]
-//     }
-//     changing.inseam = false;
-//   }else if (received_message.text == "type" || received_message.text == "Type" || received_message.text == "NO") {
-//    let response1 = {"text" : "which type of htamein? "};
-//     let response2 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein.",
-//                       "quick_replies":[
-//                                       {
-//                                         "content_type":"text",
-//                                         "title":"Cheik",
-//                                         "payload":"c"
-//                                       },{
-//                                         "content_type":"text",
-//                                         "title":"Hpi",
-//                                         "payload":"hpi"
-//                                       },{
-//                                         "content_type":"text",
-//                                         "title":"Simple",
-//                                         "payload":"s"
-//                                       }]
-//                     };
-//     callSend(sender_psid, response1).then(()=>{
-//       return callSend(sender_psid, response2);
-//     });
-//    changing.htameintype = true;
-//   }else if (received_message.text && changing.htameintype == true) {   
-//     userEnteredInfo.htameintype =  received_message.text;
-//     response = {
-//       "text": `Are you sure?`,
-//       "quick_replies":[
-//                         {
-//                         "content_type":"text",
-//                         "title":"Sure",
-//                         "payload":"change_sure"
-//                         },{
-//                         "content_type":"text",
-//                         "title":"NO",
-//                         "payload":"change_type"
-//                         }]
-//     }
-//     changing.htameintype = false;
-//   }else if (received_message.text == "Fold" || received_message.text == "fold" || received_message.text == "No.") {
-//    let response1 = {"text": `which way you want to fold?`};
-//     let response2 = {"text" : "Left fold/Right fold.",
-//                       "quick_replies":[
-//                                       {
-//                                         "content_type":"text",
-//                                         "title":"Left fold",
-//                                         "payload":"lf"
-//                                       },{
-//                                         "content_type":"text",
-//                                         "title":"Right fold",
-//                                         "payload":"rf"
-//                                       }]
-//                     };
-//     callSend(sender_psid, response1).then(()=>{
-//       return callSend(sender_psid, response2);
-//     });
-//    changing.fold = true;
-//   }else if (received_message.text && changing.fold == true) {   
-//     userEnteredInfo.fold =  received_message.text;
-//     response = {
-//       "text": `Are you sure?`,
-//       "quick_replies":[
-//                         {
-//                         "content_type":"text",
-//                         "title":"Sure",
-//                         "payload":"change_sure"
-//                         },{
-//                         "content_type":"text",
-//                         "title":"No.",
-//                         "payload":"change_type"
-//                         }]
-//     }
-//     changing.fold = false;
-//   }else if (received_message.text == "khar" || received_message.text == "Khar" || received_message.text == "No..") {
-//     let response1 = {"text": "Khar to (end exactly with the waist),"};
-//     let response2 = {"text" : "Khar tin (ends at the hips) or"};
-//     let response3 = {"text" : "khar shay (ends below the hips)",
-//                       "quick_replies":[
-//                                       {
-//                                         "content_type":"text",
-//                                         "title":"Khar To",
-//                                         "payload":"kto"
-//                                       },{
-//                                         "content_type":"text",
-//                                         "title":"Khar Tin",
-//                                         "payload":"ktin"
-//                                       },{
-//                                         "content_type":"text",
-//                                         "title":"Khar Shay",
-//                                         "payload":"kshay"
-//                                       }]
-//                     };
-//     callSend(sender_psid, response1).then(()=>{
-//       return callSend(sender_psid, response2).then(()=>{
-//         return callSend(sender_psid, response3);
-//       });
-//     });
-//    changing.khar = true;
-//   }else if (received_message.text && changing.khar == true) {   
-//     userEnteredInfo.khar =  received_message.text;
-//     response = {
-//       "text": `Are you sure?`,
-//       "quick_replies":[
-//                         {
-//                         "content_type":"text",
-//                         "title":"Sure",
-//                         "payload":"change_sure"
-//                         },{
-//                         "content_type":"text",
-//                         "title":"No..",
-//                         "payload":"change_type"
-//                         }]
-//     }
-//     changing.khar = false;
-//   }else if (received_message.text == "Ankle" || received_message.text == "ankle" || received_message.text == "No..." ) {
-//     let response1 = {"text": `Would you like to cover ankle or not?`};
-//     let response2 = {"text" : "Upper ankle/cover ankle.",
-//                       "quick_replies":[
-//                                       {
-//                                         "content_type":"text",
-//                                         "title":"Upper Ankle",
-//                                         "payload":"ua"
-//                                       },{
-//                                         "content_type":"text",
-//                                         "title":"Cover Ankle",
-//                                         "payload":"ca"
-//                                       }]
-//                     };
-//     callSend(sender_psid, response1).then(()=>{
-//       return callSend(sender_psid, response2);
-//     });
-//    changing.ankle = true;
-//   }else if (received_message.text && changing.ankle == true) {   
-//     userEnteredInfo.ankle =  received_message.text;
-//     response = {
-//       "text": `Are you sure?`,
-//       "quick_replies":[
-//                         {
-//                         "content_type":"text",
-//                         "title":"Sure",
-//                         "payload":"change_sure"
-//                         },{
-//                         "content_type":"text",
-//                         "title":"No...",
-//                         "payload":"change_type"
-//                         }]
-//     }
-//     changing.ankle = false;
-//   }else if (received_message.text == "Sure") {    
-//     let response1 = {"text": "Ok... is there anything you want to change then type the key word that you want to change. :) "};
-//     let response2 = {"text" : " If there is nothing to change write 'Done' to view update record. :)"}
-//     callSend(sender_psid, response1).then(()=>{
-//       return callSend(sender_psid, response2);
-//     });
-//   }else if (received_message.text == "done" || received_message.text == "Done" ) {
-//     showAllDataToCus (sender_psid);
-//   }
-// /***********************************************************************************/
-//   callSendAPI(sender_psid, response);    
+//changing userinfo
+  else if (received_message.text == "Chest" || received_message.text == "chest" || received_message.text == "No") {
+   response = { "text" : "Send me update measurement. :)"}
+   changing.chest = true;
+  }else if (received_message.text && changing.chest == true) {   
+    userEnteredInfo.chest =  received_message.text;
+    response = {
+      "text": `Are you sure?`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"No",
+                        "payload":"change_measurement"
+                        }]
+    }
+    changing.chest = false;
+  }else if (received_message.text == "Arm" || received_message.text == "arm" || received_message.text == "No") {
+   response = { "text" : "Send me update measurement. :)"}
+   changing.upperArm = true;
+  }else if (received_message.text && changing.upperArm == true) {   
+    userEnteredInfo.upperArm =  received_message.text;
+    response = {
+      "text": `Are you sure?`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"No",
+                        "payload":"change_measurement"
+                        }]
+    }
+    changing.upperArm = false;
+  }else if (received_message.text == "Sleeve" || received_message.text == "sleeve" || received_message.text == "No") {
+   response = { "text" : "Send me update measurement. :)"}
+   changing.sleevelength = true;
+  }else if (received_message.text && changing.sleevelength == true) {   
+    userEnteredInfo.sleevelength =  received_message.text;
+    response = {
+      "text": `Are you sure?`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"No",
+                        "payload":"change_measurement"
+                        }]
+    }
+    changing.sleevelength = false;
+  }else if (received_message.text == "waist" || received_message.text == "Waist" || received_message.text == "No") {
+   response = { "text" : "Send me update measurement. :)"}
+   changing.waist = true;
+  }else if (received_message.text && changing.waist == true) {   
+    userEnteredInfo.waist =  received_message.text;
+    response = {
+      "text": `Are you sure?`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"No",
+                        "payload":"change_measurement"
+                        }]
+    }
+    changing.waist = false;
+  }else if (received_message.text == "hips" || received_message.text == "Hips" || received_message.text == "No") {
+   response = { "text" : "Send me update measurement. :)"}
+   changing.hips = true;
+  }else if (received_message.text && changing.hips == true) {   
+    userEnteredInfo.hips =  received_message.text;
+    response = {
+      "text": `Are you sure?`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"No",
+                        "payload":"change_measurement"
+                        }]
+    }
+    changing.hips = false;
+  }else if (received_message.text == "thigh" || received_message.text == "Thigh" || received_message.text == "No") {
+   response = { "text" : "Send me update measurement. :)"}
+   changing.thigh = true;
+  }else if (received_message.text && changing.thigh == true) {   
+    userEnteredInfo.thigh =  received_message.text;
+    response = {
+      "text": `Are you sure?`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"No",
+                        "payload":"change_measurement"
+                        }]
+    }
+    changing.thigh = false;
+  }else if (received_message.text == "inseam" || received_message.text == "Inseam" || received_message.text == "No") {
+   response = { "text" : "Send me update measurement. :)"}
+   changing.inseam = true;
+  }else if (received_message.text && changing.inseam == true) {   
+    userEnteredInfo.inseam =  received_message.text;
+    response = {
+      "text": `Are you sure?`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"No",
+                        "payload":"change_measurement"
+                        }]
+    }
+    changing.inseam = false;
+  }else if (received_message.text == "type" || received_message.text == "Type" || received_message.text == "NO") {
+   let response1 = {"text" : "which type of htamein? "};
+    let response2 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Cheik",
+                                        "payload":"c"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Hpi",
+                                        "payload":"hpi"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Simple",
+                                        "payload":"s"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+   changing.htameintype = true;
+  }else if (received_message.text && changing.htameintype == true) {   
+    userEnteredInfo.htameintype =  received_message.text;
+    response = {
+      "text": `Are you sure?`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"NO",
+                        "payload":"change_type"
+                        }]
+    }
+    changing.htameintype = false;
+  }else if (received_message.text == "Fold" || received_message.text == "fold" || received_message.text == "No.") {
+   let response1 = {"text": `which way you want to fold?`};
+    let response2 = {"text" : "Left fold/Right fold.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Left fold",
+                                        "payload":"lf"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Right fold",
+                                        "payload":"rf"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+   changing.fold = true;
+  }else if (received_message.text && changing.fold == true) {   
+    userEnteredInfo.fold =  received_message.text;
+    response = {
+      "text": `Are you sure?`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"No.",
+                        "payload":"change_type"
+                        }]
+    }
+    changing.fold = false;
+  }else if (received_message.text == "khar" || received_message.text == "Khar" || received_message.text == "No..") {
+    let response1 = {"text": "Khar to (end exactly with the waist),"};
+    let response2 = {"text" : "Khar tin (ends at the hips) or"};
+    let response3 = {"text" : "khar shay (ends below the hips)",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Khar To",
+                                        "payload":"kto"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Khar Tin",
+                                        "payload":"ktin"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Khar Shay",
+                                        "payload":"kshay"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
+    });
+   changing.khar = true;
+  }else if (received_message.text && changing.khar == true) {   
+    userEnteredInfo.khar =  received_message.text;
+    response = {
+      "text": `Are you sure?`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"No..",
+                        "payload":"change_type"
+                        }]
+    }
+    changing.khar = false;
+  }else if (received_message.text == "Ankle" || received_message.text == "ankle" || received_message.text == "No..." ) {
+    let response1 = {"text": `Would you like to cover ankle or not?`};
+    let response2 = {"text" : "Upper ankle/cover ankle.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Upper Ankle",
+                                        "payload":"ua"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Cover Ankle",
+                                        "payload":"ca"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+   changing.ankle = true;
+  }else if (received_message.text && changing.ankle == true) {   
+    userEnteredInfo.ankle =  received_message.text;
+    response = {
+      "text": `Are you sure?`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"No...",
+                        "payload":"change_type"
+                        }]
+    }
+    changing.ankle = false;
+  }else if (received_message.text == "Sure") {    
+    let response1 = {"text": "Ok... is there anything you want to change then type the key word that you want to change. :) "};
+    let response2 = {"text" : " If there is nothing to change write 'Done' to view update record. :)"}
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+  }else if (received_message.text == "done" || received_message.text == "Done" ) {
+    showAllDataToCus (sender_psid);
+  }
+/***********************************************************************************/
+  callSendAPI(sender_psid, response);    
 }
 
 function handlePostback(sender_psid, received_postback) {
