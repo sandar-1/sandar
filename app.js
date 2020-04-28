@@ -749,6 +749,32 @@ function handleMessage(sender_psid, received_message) {
   callSendAPI(sender_psid, response);    
 }
 
+function webviewTest(sender_psid){
+  let response;
+  response = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "Click to open webview?",                       
+            "buttons": [              
+              {
+                "type": "web_url",
+                "title": "webview",
+                "url":"https://shwesu.herokuapp.com/webview/"+sender_psid,
+                 "webview_height_ratio": "tall",
+                "messenger_extensions": true,          
+              },
+              
+            ],
+          }]
+        }
+      }
+    }
+  callSendAPI(sender_psid, response);
+}
+
 function handlePostback(sender_psid, received_postback) {
   console.log('ok')
    let response;
@@ -1641,3 +1667,29 @@ function removePersistentMenu(res){
             }
         });
     } 
+
+/***********************************
+FUNCTION TO ADD WHITELIST DOMAIN
+************************************/
+
+const whitelistDomains = (res) => {
+  var messageData = {
+          "whitelisted_domains": [
+             "https://shwesu.herokuapp.com" , 
+             "https://herokuapp.com"                           
+          ]               
+  };  
+  request({
+      url: 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token='+ PAGE_ACCESS_TOKEN,
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      form: messageData
+  },
+  function (error, response, body) {
+      if (!error && response.statusCode == 200) {          
+          res.send(body);
+      } else {           
+          res.send(body);
+      }
+  });
+} 
