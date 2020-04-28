@@ -32,15 +32,26 @@ const
   fs = require('fs'),
   multer  = require('multer'),  
   app = express().use(body_parser.json()); // creates express http server
+ 
+ // parse application/x-www-form-urlencoded
 
-  firebase.initializeApp({
+app.use(body_parser.json());
+app.use(body_parser.urlencoded());
+
+
+app.set('view engine', 'ejs');
+app.set('views', __dirname+'/views');
+
+  var firebaseConfig = {
   credential: firebase.credential.cert({
     "private_key": process.env.Firebase_privatekey.replace(/\\n/g, '\n'),
     "client_email": process.env.Firebase_clientemail,
     "project_id": process.env.Firebase_projectID,
   }),
   databaseURL: "https://sandarbot.firebaseio.com"
- });
+ };
+
+firebase.initializeApp(firebaseConfig);
 
 let db = firebase.firestore();
 
@@ -82,6 +93,15 @@ let sharepicAttachment = false;
 
 let userEnteredInfo = {};
 let userSendAttachment = {};
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+})
 
 
 // Sets server port and logs message on success
