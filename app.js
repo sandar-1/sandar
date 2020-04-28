@@ -702,8 +702,6 @@ function handlePostback(sender_psid, received_postback) {
   }else if (payload === 'yes_right') {
     askforevent (sender_psid);
   }else if (payload === 'WEDDING') {
-    userEnteredInfo.event = received_postback.title;
-    console.log('ok wedding')
     wedding_event (sender_psid);
   }else if (payload === 'OCCASION') {
     occasion_event (sender_psid);
@@ -1467,7 +1465,6 @@ function saveData(sender_psid) {
     id : sender_psid,
     name : userEnteredInfo.name,
     price : userEnteredInfo.price,
-    event : userEnteredInfo.event,
     cloth_design : userSendAttachment.designAttachment,
   }
   db.collection('order_information').add(order_info);
