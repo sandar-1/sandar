@@ -166,10 +166,12 @@ function handleMessage(sender_psid, received_message) {
   let response;
   if (received_message.text == "hi" || received_message.text == "Hi") {    
    greetUser (sender_psid);
-  }else if (received_message.text == "confirm" || received_message.text == "Confirm") {    
-   saveData (sender_psid);
-   response = { "text" : "OK :)"}
-  }else if (received_message.text == "change" || received_message.text == "Change") {
+  }
+  // else if (received_message.text == "confirm" || received_message.text == "Confirm") {    
+  //  saveData (sender_psid);
+  //  response = { "text" : "OK :)"}
+  // }
+  else if (received_message.text == "change" || received_message.text == "Change") {
    response = {
     "attachment":{
                       "type":"template",
