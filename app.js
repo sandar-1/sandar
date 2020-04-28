@@ -56,6 +56,8 @@ let userInfo = {
   ankle:false,
   price : false,
   cusFeedback : false,
+  event : false,
+
 };
 
 let changing = {
@@ -700,6 +702,8 @@ function handlePostback(sender_psid, received_postback) {
   }else if (payload === 'yes_right') {
     askforevent (sender_psid);
   }else if (payload === 'WEDDING') {
+    userEnteredInfo.event = received_postback.title;
+    console.log('ok')
     wedding_event (sender_psid);
   }else if (payload === 'OCCASION') {
     occasion_event (sender_psid);
