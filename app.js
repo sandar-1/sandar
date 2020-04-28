@@ -226,7 +226,7 @@ function handleMessage(sender_psid, received_message) {
    greetUser (sender_psid);
   }else if (received_message.text == "confirm" || received_message.text == "Confirm") {    
    saveData (sender_psid);
-   response = { "text" : "OK :)"}
+   response = { "text" : "OK :) :)"}
   }else if (received_message.text == "change" || received_message.text == "Change") {
    response = {
     "attachment":{
