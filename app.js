@@ -39,8 +39,7 @@ app.use(body_parser.json());
 app.use(body_parser.urlencoded());
 
 
-app.set('view engine', 'ejs');
-app.set('views', __dirname+'/views');
+
 
   firebase.initializeApp({
   credential: firebase.credential.cert({
