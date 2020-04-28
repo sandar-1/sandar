@@ -30,12 +30,7 @@ const
   firebase = require("firebase-admin"),
   ejs = require("ejs"),  
   fs = require('fs'),
-  multer  = require('multer'),  
   app = express().use(body_parser.json()); // creates express http server
-
-
-
-
 
   firebase.initializeApp({
   credential: firebase.credential.cert({
@@ -86,8 +81,6 @@ let sharepicAttachment = false;
 
 let userEnteredInfo = {};
 let userSendAttachment = {};
-
-
 
 
 // Sets server port and logs message on success
