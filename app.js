@@ -703,7 +703,7 @@ function handlePostback(sender_psid, received_postback) {
     askforevent (sender_psid);
   }else if (payload === 'WEDDING') {
     userEnteredInfo.event = received_postback.title;
-    console.log('ok')
+    console.log('ok wedding')
     wedding_event (sender_psid);
   }else if (payload === 'OCCASION') {
     occasion_event (sender_psid);
