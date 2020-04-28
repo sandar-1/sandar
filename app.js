@@ -1467,6 +1467,7 @@ function saveData(sender_psid) {
     id : sender_psid,
     name : userEnteredInfo.name,
     price : userEnteredInfo.price,
+    event : userEnteredInfo.event,
     cloth_design : userSendAttachment.designAttachment,
   }
   db.collection('order_information').add(order_info);
