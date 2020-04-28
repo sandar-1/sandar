@@ -42,16 +42,14 @@ app.use(body_parser.urlencoded());
 app.set('view engine', 'ejs');
 app.set('views', __dirname+'/views');
 
-  var firebaseConfig = {
+  firebase.initializeApp({
   credential: firebase.credential.cert({
     "private_key": process.env.Firebase_privatekey.replace(/\\n/g, '\n'),
     "client_email": process.env.Firebase_clientemail,
     "project_id": process.env.Firebase_projectID,
   }),
   databaseURL: "https://sandarbot.firebaseio.com"
- };
-
-firebase.initializeApp(firebaseConfig);
+ });
 
 let db = firebase.firestore();
 
