@@ -163,9 +163,6 @@ app.get('/webhook', (req, res) => {
   }
 });
 
-app.set('view engine', 'ejs');
-app.set('views', __dirname+'/views');
-
 function handleMessage(sender_psid, received_message) {
   let response;
   if (received_message.text == "hi" || received_message.text == "Hi") {    
