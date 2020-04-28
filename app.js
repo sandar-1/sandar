@@ -32,11 +32,7 @@ const
   fs = require('fs'),
   multer  = require('multer'),  
   app = express().use(body_parser.json()); // creates express http server
- 
- // parse application/x-www-form-urlencoded
 
-app.use(body_parser.json());
-app.use(body_parser.urlencoded());
 
 
 
