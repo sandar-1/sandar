@@ -56,7 +56,6 @@ let userInfo = {
   ankle:false,
   price : false,
   cusFeedback : false,
-  event : false,
 
 };
 
