@@ -28,9 +28,6 @@ const
   express = require('express'),
   body_parser = require('body-parser'),
   firebase = require("firebase-admin"),
-  ejs = require("ejs"),  
-  fs = require('fs'),
-  multer  = require('multer'),
   app = express().use(body_parser.json()); // creates express http server
 
   firebase.initializeApp({
@@ -42,30 +39,7 @@ const
   databaseURL: "https://sandarbot.firebaseio.com"
  });
 
-firebase.initializeApp(firebaseConfig);
-
 let db = firebase.firestore();
-
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/')
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  }
-})
-
-const upload = multer({ storage: storage });
-
-// parse application/x-www-form-urlencoded
-
-app.use(body_parser.json());
-app.use(body_parser.urlencoded());
-
-
-app.set('view engine', 'ejs');
-app.set('views', __dirname+'/views');
-
 
 let userInfo = {
   name : false,
@@ -98,6 +72,7 @@ let changing = {
   ankle:false,
 };
 
+
 let designAttachment = false;
 let bdesignAttachment = false;
 let sharepicAttachment = false;
@@ -115,24 +90,24 @@ app.post('/webhook', (req, res) => {
   // Parse the request body from the POST
   let body = req.body;
 
+  // Check the webhook event is from a Page subscription
   if (body.object === 'page') {
-   body.entry.forEach(function(entry) {
 
+    body.entry.forEach(function(entry) {
+
+      // Gets the body of the webhook event
       let webhook_event = entry.messaging[0];
       console.log(webhook_event);
 
+      // Get the sender PSID
       let sender_psid = webhook_event.sender.id;
       console.log('Sender ID: ' + sender_psid);   
 
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
       if (webhook_event.message) {
-        if(webhook_event.message.quick_reply){
-            handleQuickReply(sender_psid, webhook_event.message.quick_reply.payload);
-          }else{
-            handleMessage(sender_psid, webhook_event.message);                       
-          }                
-      } else if (webhook_event.postback) {        
+        handleMessage(sender_psid, webhook_event.message);        
+      } else if (webhook_event.postback) {
         handlePostback(sender_psid, webhook_event.postback);
       }
       
@@ -185,39 +160,6 @@ app.get('/webhook', (req, res) => {
       res.sendStatus(403);      
     }
   }
-});
-
-//whitelist domains
-//eg https://shwesu.herokuapp.com/whitelists
-app.get('/whitelists',function(req,res){    
-    whitelistDomains(res);
-});
-
-//webview test
-app.get('/webview/:sender_id',function(req,res){
-    const sender_id = req.params.sender_id;
-    res.render('webview.ejs',{title:"Hello!! from WebView", sender_id:sender_id});
-});
-
-app.post('/webview',upload.single('file'),function(req,res){
-       
-      let name  = req.body.name;
-      let email = req.body.email;
-      let img_url = APP_URL + "/" + req.file.path;
-      let sender = req.body.sender;    
-
-      
-      
-      db.collection('webview').add({
-            name: name,
-            email: email,
-            image: img_url
-          }).then(success => {   
-             console.log("DATA SAVED")
-             thankyouReply(sender, name, img_url);    
-          }).catch(error => {
-            console.log(error);
-      });        
 });
 
 function handleMessage(sender_psid, received_message) {
@@ -747,32 +689,6 @@ function handleMessage(sender_psid, received_message) {
   }
 /***********************************************************************************/
   callSendAPI(sender_psid, response);    
-}
-
-function webviewTest(sender_psid){
-  let response;
-  response = {
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "generic",
-          "elements": [{
-            "title": "Click to open webview?",                       
-            "buttons": [              
-              {
-                "type": "web_url",
-                "title": "webview",
-                "url":"https://shwesu.herokuapp.com/webview/"+sender_psid,
-                 "webview_height_ratio": "tall",
-                "messenger_extensions": true,          
-              },
-              
-            ],
-          }]
-        }
-      }
-    }
-  callSendAPI(sender_psid, response);
 }
 
 function handlePostback(sender_psid, received_postback) {
@@ -1667,29 +1583,3 @@ function removePersistentMenu(res){
             }
         });
     } 
-
-/***********************************
-FUNCTION TO ADD WHITELIST DOMAIN
-************************************/
-
-const whitelistDomains = (res) => {
-  var messageData = {
-          "whitelisted_domains": [
-             "https://shwesu.herokuapp.com" , 
-             "https://herokuapp.com"                           
-          ]               
-  };  
-  request({
-      url: 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token='+ PAGE_ACCESS_TOKEN,
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      form: messageData
-  },
-  function (error, response, body) {
-      if (!error && response.statusCode == 200) {          
-          res.send(body);
-      } else {           
-          res.send(body);
-      }
-  });
-} 
