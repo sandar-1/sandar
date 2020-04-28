@@ -87,14 +87,7 @@ let sharepicAttachment = false;
 let userEnteredInfo = {};
 let userSendAttachment = {};
 
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/')
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  }
-})
+
 
 
 // Sets server port and logs message on success
