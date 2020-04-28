@@ -1438,35 +1438,35 @@ async function showAllDataToCus(sender_psid) {
       });
 }
 
-// /*function function save data to firebase*/
-// function saveData(sender_psid) {
-//   const info = {
-//     id : sender_psid,
-//     name : userEnteredInfo.name,
-//     chest : userEnteredInfo.chest,
-//     upperArm : userEnteredInfo.upperArm,
-//     sleevelength : userEnteredInfo.sleevelength,
-//     waist : userEnteredInfo.waist,
-//     hips : userEnteredInfo.hips,
-//     thigh : userEnteredInfo.thigh,
-//     inseam : userEnteredInfo.inseam,
-//     htameintype : userEnteredInfo.htameintype,
-//     htameinfold : userEnteredInfo.htameinfold,
-//     khar : userEnteredInfo.khar,
-//     ankle : userEnteredInfo.ankle,
-//     price : userEnteredInfo.price,
-//     cloth_design : userSendAttachment.designAttachment,
-//   }
-//   db.collection('user_information').add(info);
+/*function function save data to firebase*/
+function saveData(sender_psid) {
+  const info = {
+    id : sender_psid,
+    name : userEnteredInfo.name,
+    chest : userEnteredInfo.chest,
+    upperArm : userEnteredInfo.upperArm,
+    sleevelength : userEnteredInfo.sleevelength,
+    waist : userEnteredInfo.waist,
+    hips : userEnteredInfo.hips,
+    thigh : userEnteredInfo.thigh,
+    inseam : userEnteredInfo.inseam,
+    htameintype : userEnteredInfo.htameintype,
+    htameinfold : userEnteredInfo.htameinfold,
+    khar : userEnteredInfo.khar,
+    ankle : userEnteredInfo.ankle,
+    price : userEnteredInfo.price,
+    cloth_design : userSendAttachment.designAttachment,
+  }
+  db.collection('user_information').add(info);
 
-//     const order_info = {
-//     id : sender_psid,
-//     name : userEnteredInfo.name,
-//     price : userEnteredInfo.price,
-//     cloth_design : userSendAttachment.designAttachment,
-//   }
-//   db.collection('order_information').add(order_info);
-// }
+    const order_info = {
+    id : sender_psid,
+    name : userEnteredInfo.name,
+    price : userEnteredInfo.price,
+    cloth_design : userSendAttachment.designAttachment,
+  }
+  db.collection('order_information').add(order_info);
+}
 
 function callSendAPI(sender_psid, response) {
   // Construct the message body
