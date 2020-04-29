@@ -158,7 +158,7 @@ function handleMessage(sender_psid, received_message) {
   callSendAPI(sender_psid, response);    
 }
 
-function handlePostback(sender_psid, received_postback) {
+function handlePostback(sender_psid, received_postback) => {
   let payload = received_postback.payload;
   console.log('ok')
 
