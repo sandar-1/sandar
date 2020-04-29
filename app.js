@@ -158,13 +158,16 @@ function handleMessage(sender_psid, received_message) {
   callSendAPI(sender_psid, response);    
 }
 
-function handlePostback(sender_psid, received_postback) => {
+const handlePostback = (sender_psid, received_postback) => {
   let payload = received_postback.payload;
   console.log('ok')
 
   switch (payload) {
     case "get_started":
       greeting(sender_psid);
+      break;
+    case "order_comfirm":
+      orderComfirm(sender_psid);
       break;
     default:
       defaultReply(sender_psid);
@@ -217,7 +220,7 @@ async function greeting (sender_psid){
               {
                 "type": "postback",
                 "title": "View order.",
-                "payload": "VO",
+                "payload": "order_comfirm",
               }
             ],
           }]
@@ -231,6 +234,66 @@ async function greeting (sender_psid){
         });
       });
     });
+}
+
+const orderComfirm = (sender_psid) => {
+  response = {
+                  "attachment":{
+                  "type":"template",
+                  "payload":{
+                    "template_type":"receipt",
+                    "recipient_name":"Stephane Crozatier",
+                    "order_number":"12345678902",
+                    "currency":"USD",
+                    "payment_method":"Visa 2345",        
+                    "order_url":"http://petersapparel.parseapp.com/order?order_id=123456",
+                    "timestamp":"1428444852",         
+                    "address":{
+                      "street_1":"1 Hacker Way",
+                      "street_2":"",
+                      "city":"Menlo Park",
+                      "postal_code":"94025",
+                      "state":"CA",
+                      "country":"US"
+                    },
+                    "summary":{
+                      "subtotal":75.00,
+                      "shipping_cost":4.95,
+                      "total_tax":6.19,
+                      "total_cost":56.14
+                    },
+                    "adjustments":[
+                      {
+                        "name":"New Customer Discount",
+                        "amount":20
+                      },
+                      {
+                        "name":"$10 Off Coupon",
+                        "amount":10
+                      }
+                    ],
+                    "elements":[
+                      {
+                        "title":"Classic White T-Shirt",
+                        "subtitle":"100% Soft and Luxurious Cotton",
+                        "quantity":2,
+                        "price":50,
+                        "currency":"USD",
+                        "image_url":"http://petersapparel.parseapp.com/img/whiteshirt.png"
+                      },
+                      {
+                        "title":"Classic Gray T-Shirt",
+                        "subtitle":"100% Soft and Luxurious Cotton",
+                        "quantity":1,
+                        "price":25,
+                        "currency":"USD",
+                        "image_url":"http://petersapparel.parseapp.com/img/grayshirt.png"
+                      }
+                    ]
+                  }
+                }
+    }
+  callSendAPI(sender_psid, response);
 }
 
 /*function function save data to firebase*/
