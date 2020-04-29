@@ -166,6 +166,8 @@ function handlePostback(sender_psid, received_postback) {
     case "get_started":
       greeting(sender_psid);
       break;
+    default:
+      defaultReply(sender_psid);
   }
   callSendAPI(sender_psid, response);
 }
@@ -191,7 +193,7 @@ async function greeting (sender_psid){
                     },{
                       "type": "postback",
                       "title": "Share pictures",
-                      "payload": "SP",
+                      "payload": "share_pic",
                     },
                     {
                       "type": "postback",
