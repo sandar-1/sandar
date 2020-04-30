@@ -180,7 +180,7 @@ function handleMessage(sender_psid, received_message) {
     });   
  }else if (received_message.text == "Yes! share it.") {    
    response = {"text": "write a caption to share with the picture."}
-   useInfo.cuscaption = true;
+   userInfo.cuscaption = true;
   }
  callSendAPI(sender_psid, response); 
 }
