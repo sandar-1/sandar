@@ -149,7 +149,7 @@ let userSendAttachment = [];
 function handleMessage(sender_psid, received_message) {
   let response;
   if (received_message.text && userInfo.name == true) {   
-    userEnteredInfo.name = received_message;
+    userEnteredInfo.name = received_message.text;
     greeting (sender_psid);
     userInfo.name = false;
   }else if (received_message.attachments && sharepicAttachment == true) {
