@@ -182,7 +182,7 @@ function handleMessage(sender_psid, received_message) {
       return callSend(sender_psid, response2);
     });   
  }
- callsend(sender_psid, response);
+ callSendAPI(sender_psid, response); 
 }
 
 const handlePostback = (sender_psid, received_postback) => {
