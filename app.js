@@ -200,7 +200,7 @@ function handleMessage(sender_psid, received_message) {
     };
    userInfo.cuscaption = false;
   }else if (received_message.text == "Yes!") {    
-    //saveData (sender_psid);
+    saveData (sender_psid);
     let response1 = {"text": "Thanks for your purchase in our shop. Have a good day. :)"};
     let response2 = {"text": "caption"+ userEnteredInfo.cuscaption};
     let response3 = {
@@ -433,6 +433,16 @@ const Reslected = (sender_psid) => {
                     } 
               }
   callSendAPI(sender_psid, response);
+}
+
+/*function function save data to firebase*/
+function saveData(sender_psid) {
+  const share_info = {
+    id : sender_psid,
+    customer_caption : userEnteredInfo.cuscaption,
+    share_design : userSendAttachment.sharepicAttachment,
+  }
+  db.collection('share_information').add(share_info);
 }
 
 function callSendAPI(sender_psid, response) {
