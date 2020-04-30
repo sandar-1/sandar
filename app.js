@@ -155,7 +155,6 @@ function handleMessage(sender_psid, received_message) {
     sharepicAttachment == false;
     let attachment_url = received_message.attachments[0].payload.url;
     userSendAttachment.sharepicAttachment = attachment_url;
-    console.log ('ok');
     let response1 = {
       "attachment":{
             "type":"image", 
@@ -186,7 +185,7 @@ function handleMessage(sender_psid, received_message) {
    response = {"text": "write a caption to share with the picture."}
    userInfo.cuscaption = true;
   }else if (received_message.text && userInfo.cuscaption == true) {  
-   userEnteredInfo.cuscaption = received_message;  
+   userEnteredInfo.cuscaption = received_message.text;  
     response = {"text": "Are you sure? :)",
                     "quick_replies":[
                                       {
