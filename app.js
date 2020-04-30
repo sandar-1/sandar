@@ -200,7 +200,7 @@ function handleMessage(sender_psid, received_message) {
     };
    userInfo.cuscaption = false;
   }else if (received_message.text == "Yes!") {    
-    saveData (sender_psid);
+    //saveData (sender_psid);
     response = {"text": "Thanks for your purchase in our shop. Have a good day. :)"}
   }
  callSendAPI(sender_psid, response); 
@@ -416,45 +416,6 @@ const Reslected = (sender_psid) => {
                     } 
               }
   callSendAPI(sender_psid, response);
-}
-
-/*function function save data to firebase*/
-function saveData(sender_psid) {
-  // const info = {
-  //   id : sender_psid,
-  //   name : userEnteredInfo.name,
-  //   chest : userEnteredInfo.chest,
-  //   upperArm : userEnteredInfo.upperArm,
-  //   sleevelength : userEnteredInfo.sleevelength,
-  //   waist : userEnteredInfo.waist,
-  //   hips : userEnteredInfo.hips,
-  //   thigh : userEnteredInfo.thigh,
-  //   inseam : userEnteredInfo.inseam,
-  //   htameintype : userEnteredInfo.htameintype,
-  //   htameinfold : userEnteredInfo.htameinfold,
-  //   khar : userEnteredInfo.khar,
-  //   ankle : userEnteredInfo.ankle,
-  //   price : userEnteredInfo.price,
-  //   customer_caption : userEnteredInfo.cuscaption,
-  //   cloth_design : userSendAttachment.designAttachment,
-  // }
-  // db.collection('user_information').add(info);
-
-  //   const order_info = {
-  //   id : sender_psid,
-  //   name : userEnteredInfo.name,
-  //   price : userEnteredInfo.price,
-  //   cloth_design : userSendAttachment.designAttachment,
-  // }
-  // db.collection('order_information').add(order_info);
-
-    const sharing_info = {
-    id : sender_psid,
-   // name : userEnteredInfo.name,
-    customer_caption : userEnteredInfo.cuscaption,
-   // share_picture : userSendAttachment.sharepicAttachment,
-  }
-  db.collection('sharing_information').add(sharing_info);
 }
 
 function callSendAPI(sender_psid, response) {
