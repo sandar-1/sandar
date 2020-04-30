@@ -153,13 +153,13 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.attachments && sharepicAttachment == true) {
     console.log('meta data',received_message);
     sharepicAttachment == false;
-    let attachment_url = received_message.attachments[0].payload.url;
-    userSendAttachment.sharepicAttachment = attachment_url;
+    let attachment_url1 = received_message.attachments[0].payload.url;
+    userSendAttachment.sharepicAttachment = attachment_url1;
     let response1 = {
       "attachment":{
             "type":"image", 
             "payload":{
-              "url":attachment_url, 
+              "url":attachment_url1, 
               "is_reusable":true
             }
           }
@@ -201,7 +201,20 @@ function handleMessage(sender_psid, received_message) {
    userInfo.cuscaption = false;
   }else if (received_message.text == "Yes!") {    
     //saveData (sender_psid);
-    response = {"text": "Thanks for your purchase in our shop. Have a good day. :)"}
+    let response1 = {"text": "Thanks for your purchase in our shop. Have a good day. :)"};
+    let response2 = {"text": "caption"+ userEnteredInfo.cuscaption};
+    let response3 = {
+      "attachment":{
+            "type":"image", 
+            "payload":{
+              "url":userSendAttachment.designAttachment, 
+              "is_reusable":true
+            }
+          }
+    };
+    callSend(sender_psid,response1).then(()=>{
+        return callSend(sender_psid,response2).then(()=>{
+          return callSend(sender_psid,response3);
   }
  callSendAPI(sender_psid, response); 
 }
