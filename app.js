@@ -181,6 +181,8 @@ function handleMessage(sender_psid, received_message) {
  }else if (received_message.text == "Yes! share it.") {    
    response = {"text": "write a caption to share with the picture."}
    userInfo.cuscaption = true;
+  }else if (received_message.text == "No..") {    
+    Reslected (sender_psid);
   }
  callSendAPI(sender_psid, response); 
 }
@@ -364,6 +366,42 @@ const orderComfirm = (sender_psid) => {
                   }
                 }
     }
+  callSendAPI(sender_psid, response);
+}
+
+const Reslected = (sender_psid) => {
+  let response;
+  response = {"attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"Please select below to start again.",
+                        "buttons":[
+                          {
+                            "type": "postback",
+                            "title": "I want to sew 👗",
+                            "payload": "SEW",
+                          },{
+                            "type": "postback",
+                            "title": "Share pictures",
+                            "payload": "share_pic",
+                          },
+                          {
+                            "type": "web_url",
+                            "title": "Pictures of others",
+                            "url": "https://qph.fs.quoracdn.net/main-qimg-9e8cb835ef77635c3233c1ee716728db.webp",
+                            "webview_height_ratio": "tall",
+                          },
+                          {
+                            "type": "postback",
+                            "title": "View order.",
+                            "payload": "order_comfirm",
+                          }
+
+                        ]
+                      }
+                    } 
+              }
   callSendAPI(sender_psid, response);
 }
 
