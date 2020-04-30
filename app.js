@@ -200,7 +200,7 @@ function handleMessage(sender_psid, received_message) {
     };
    userInfo.cuscaption = false;
   }else if (received_message.text == "Yes!") {    
-    saveData (sender_psid);
+    //saveData (sender_psid);
     response = {"text": "Thanks for your purchase in our shop. Have a good day. :)"}
   }
  callSendAPI(sender_psid, response); 
