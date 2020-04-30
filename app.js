@@ -225,6 +225,12 @@ const handlePostback = (sender_psid, received_postback) => {
         break;
       default:
         defaultReply(sender_psid);
+    }else{
+      if (payload === 'inShop') {
+         response = {"text": "Please tell me your name. :) "}
+        // userInfo.name = true;
+      } 
+     callSendAPI(sender_psid, response);
     }
 }
 
@@ -296,7 +302,7 @@ const askFabric = (sender_psid) => {
                       "type":"template",
                       "payload":{
                         "template_type":"button",
-                        "text":"Is your piece of fabric in our shop? or buy some fabric from us? or delivery?",
+                        "text":"Is your piece of fabric in our shop? or delivery?",
                         "buttons":[
                           {
                             "type":"postback",
@@ -307,12 +313,7 @@ const askFabric = (sender_psid) => {
                             "type":"postback",
                             "payload":"willDeliver",
                             "title":"Will be delivered"
-                          },
-                          {
-                            "type":"postback",
-                            "payload":"showingFabric",
-                            "title":"Show me some fabric. "
-                          },
+                          }
                         ]
                       }
                     } 
