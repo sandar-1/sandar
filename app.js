@@ -170,12 +170,12 @@ function handleMessage(sender_psid, received_message) {
                     "quick_replies":[
                                       {
                                         "content_type":"text",
-                                        "title":"Left fold",
-                                        "payload":"lf"
+                                        "title":"Yes! share it.",
+                                        "payload":"shareYes"
                                       },{
                                         "content_type":"text",
-                                        "title":"Right fold",
-                                        "payload":"rf"
+                                        "title":"No..",
+                                        "payload":"shareNo"
                                       }]
  };
   callSend(sender_psid, response1).then(()=>{
