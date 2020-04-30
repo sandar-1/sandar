@@ -28,6 +28,7 @@ const
   express = require('express'),
   body_parser = require('body-parser'),
   firebase = require("firebase-admin"),
+  ejs = require("ejs"),  
   app = express().use(body_parser.json()); // creates express http server
 
   firebase.initializeApp({
@@ -197,9 +198,9 @@ async function greeting (sender_psid){
                       "payload": "share_pic",
                     },
                     {
-                      "type": "postback",
+                      "type": "web_url",
                       "title": "Pictures of others",
-                      "payload": "POO",
+                      "url": "https://shwesu.herokuapp.com/webview/"+ sender_psid,
                     }
                   ],
                 }]
