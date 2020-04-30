@@ -207,7 +207,7 @@ function handleMessage(sender_psid, received_message) {
       "attachment":{
             "type":"image", 
             "payload":{
-              "url":userSendAttachment.designAttachment, 
+              "url":userSendAttachment.sharepicAttachment, 
               "is_reusable":true
             }
           }
