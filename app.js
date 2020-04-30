@@ -153,6 +153,9 @@ app.post('/webview',upload.single('file'),function(req,res){
             console.log(error);
       });        
 });
+
+app.set('view engine', 'ejs');
+app.set('views', __dirname+'/views');
 /////////////////////////////////////////////////
 
 app.use('/uploads', express.static('uploads'));
