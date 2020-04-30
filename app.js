@@ -140,6 +140,8 @@ let userInfo = {
 
 };
 
+let sew = false;
+let shearing = false;
 let designAttachment = false;
 let sharepicAttachment = false;
 
@@ -148,10 +150,14 @@ let userSendAttachment = [];
 
 function handleMessage(sender_psid, received_message) {
   let response;
-  if (received_message.text && userInfo.name == true) {   
+  if (received_message.text && sew == true) {   
     userEnteredInfo.name = received_message.text;
-    greeting (sender_psid);
-    userInfo.name = false;
+    askFabric (sender_psid);
+    sew = false;
+  }else if (received_message.text && shearing == true) {   
+    userEnteredInfo.name = received_message.text;
+    sharePicture (sender_psid);
+    shearing = false;
   }else if (received_message.attachments && sharepicAttachment == true) {
     console.log('meta data',received_message);
     sharepicAttachment == false;
@@ -214,43 +220,35 @@ const handlePostback = (sender_psid, received_postback) => {
 
     switch (payload) {
       case "get_started":
-        getStart(sender_psid);
+        greeting(sender_psid);
         break;
       case "order_comfirm":
         orderComfirm(sender_psid);
         break;
       case "SEW":
-        askFabric(sender_psid);
+        askName(sender_psid);
         break;
         case "share_pic":
-        sharePicture(sender_psid);
+        askName(sender_psid);
         break;
       default:
         defaultReply(sender_psid);
     }
 }
 
-const getStart = (sender_psid) => {
-  let response1 = {"text": "🙋‍♀ Warmly welcome to Shwe Hsu.🙆‍♀"};
-  let response2 = {"text": "Please tell me your name. :) "};
-  callSend(sender_psid, response1).then(()=>{
-      return callSend(sender_psid, response2);
-    });
-    userInfo.name = true;
-}
+
 
 /*function to greet user*/
 async function greeting (sender_psid){  
   let user = await getUserProfile(sender_psid);
-  let response1 = {"text": "Mingalaba "+userEnteredInfo.name+" :)"};
-  let response2 = {"text": "Do you want to sew 👗 or want to share pictures 🤳. And you can also see pictures of others 😉."}
-  let response3 = {
+  let response1 = {"text": "Mingalaba..🙋‍♀ Warmly welcome to Shwe Hsu.🙆‍♀"};
+  let response2 = {
           "attachment": {
               "type": "template",
               "payload": {
                 "template_type": "generic",
                 "elements": [{
-                  "title": "I'm waiting for your answer.",
+                  "title": "Chooes what you want to do.",
                   "subtitle": "👩👩",
                   "buttons": [
                     {
@@ -273,7 +271,7 @@ async function greeting (sender_psid){
               }
             }
         }; 
-  let response4 = {
+  let response3 = {
       "attachment": {
         "type": "template",
         "payload": {
@@ -299,6 +297,14 @@ async function greeting (sender_psid){
         });
       });
     });
+}
+
+const askName = (sender_psid) => {
+  let response;
+  response = {"text": "Please tell me yor name."}
+    sew = true;
+    shearing = true;
+  callSendAPI(sender_psid, response);
 }
 
 const askFabric = (sender_psid) => {
