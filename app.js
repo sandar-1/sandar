@@ -239,6 +239,7 @@ async function greeting (sender_psid){
 }
 
 const askFabric = (sender_psid) => {
+  let response;
   response = {"attachment":{
                       "type":"template",
                       "payload":{
