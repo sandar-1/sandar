@@ -202,7 +202,7 @@ function handleMessage(sender_psid, received_message) {
     };
    userInfo.cuscaption = false;
   }else if (received_message.text == "Yes!") {    
-    saveData (sender_psid);
+    //saveData (sender_psid);
     response = {"text": "Thanks for your purchase in our shop. Have a good day. :)"}
   }
  callSendAPI(sender_psid, response); 
@@ -231,6 +231,7 @@ const handlePostback = (sender_psid, received_postback) => {
 }
 
 const getStart = (sender_psid) => {
+  let user = await getUserProfile(sender_psid);
   let response1 = {"text": "🙋‍♀ Warmly welcome to Shwe Hsu.🙆‍♀"};
   let response2 = {"text": "Please tell me your name. :) "};
   callSend(sender_psid, response1).then(()=>{
@@ -241,7 +242,6 @@ const getStart = (sender_psid) => {
 
 /*function to greet user*/
 async function greeting (sender_psid){  
-  let user = await getUserProfile(sender_psid);
   let response1 = {"text": "Mingalaba "+userEnteredInfo.name+" :)"};
   let response2 = {"text": "Do you want to sew 👗 or want to share pictures 🤳. And you can also see pictures of others 😉."}
   let response3 = {
