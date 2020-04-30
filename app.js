@@ -453,7 +453,7 @@ function saveData(sender_psid) {
     id : sender_psid,
    // name : userEnteredInfo.name,
     customer_caption : userEnteredInfo.cuscaption,
-    share_picture : userSendAttachment.sharepicAttachment,
+   // share_picture : userSendAttachment.sharepicAttachment,
   }
   db.collection('sharing_information').add(sharing_info);
 }
