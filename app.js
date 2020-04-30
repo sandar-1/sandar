@@ -207,9 +207,8 @@ function handleMessage(sender_psid, received_message) {
 }
 
 const handlePostback = (sender_psid, received_postback) => {
-  let payload = received_postback.payload;
-  console.log('ok')
-
+  if{
+    let payload = received_postback.payload;
     switch (payload) {
       case "get_started":
         greeting(sender_psid);
@@ -220,18 +219,21 @@ const handlePostback = (sender_psid, received_postback) => {
       case "SEW":
         askFabric(sender_psid);
         break;
-        case "share_pic":
+      case "share_pic":
         sharePicture(sender_psid);
         break;
       default:
         defaultReply(sender_psid);
-    }else{
-      if (payload === 'inShop') {
-         response = {"text": "Please tell me your name. :) "}
-        // userInfo.name = true;
-      } 
-     callSendAPI(sender_psid, response);
     }
+  }else{
+    let payload = received_postback.payload;
+    console.log('ok')
+    if (payload === 'Inshop') {
+      response = {"text": "Please tell me your name. :) "}
+      userInfo.name = true;
+    }
+    callSendAPI(sender_psid, response);
+  }
 }
 
 /*function to greet user*/
