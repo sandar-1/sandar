@@ -225,7 +225,7 @@ const handlePostback = (sender_psid, received_postback) => {
       default:
         defaultReply(sender_psid);
     }
-  }else{
+  }else if{
     let payload = received_postback.payload;
     console.log('ok')
     if (payload === 'Inshop') {
