@@ -157,33 +157,32 @@ function handleMessage(sender_psid, received_message) {
     console.log('meta data',received_message);
     sharepicAttachment == false;
     let attachment_url = received_message.attachments[0].payload.url;
-    response = {
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "generic",
-          "elements": [{
-            "title": "Is tis one? very nice.",
-            "subtitle": ":)",
-            "image_url": attachment_url,
-            "buttons": [
-              {
-                "type": "postback",
-                "title": "Yes!",
-                "payload": "yes_sp",
-              },
-              {
-                "type": "postback",
-                "title": "No!",
-                "payload": "no_sp",
-              }
-            ],
-          }]
-        }
-      }
-    }
-  }
-  callSendAPI(sender_psid, response);    
+    let response1 = {
+      "attachment":{
+            "type":"image", 
+            "payload":{
+              "url":"attachment_url", 
+              "is_reusable":true
+            }
+          }
+   };
+   let response2 = {"text": "Is this picture you want to share? By the way it's look good on you. :)",
+                    "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Left fold",
+                                        "payload":"lf"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Right fold",
+                                        "payload":"rf"
+                                      }]
+ };
+  callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });   
+ }
+ callsend(sender_psid, response);
 }
 
 const handlePostback = (sender_psid, received_postback) => {
