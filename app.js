@@ -148,9 +148,10 @@ let userSendAttachment = [];
 
 function handleMessage(sender_psid, received_message) {
   let response;
-  if (received_message.text && userInfo.name == true) {    
-   greeting (sender_psid);
-   userInfo.name = false;
+  if (received_message.text && userInfo.name == true) {   
+    userEnteredInfo.name = received_message;
+    greeting (sender_psid);
+    userInfo.name = false;
   }else if (received_message.attachments && sharepicAttachment == true) {
     console.log('meta data',received_message);
     sharepicAttachment == false;
