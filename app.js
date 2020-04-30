@@ -161,7 +161,7 @@ function handleMessage(sender_psid, received_message) {
       "attachment":{
             "type":"image", 
             "payload":{
-              "url":"attachment_url", 
+              "url":attachment_url, 
               "is_reusable":true
             }
           }
@@ -181,17 +181,11 @@ function handleMessage(sender_psid, received_message) {
   callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });   
- }
- callSendAPI(sender_psid, response); 
-}
-
-function handleQuickReply(sender_psid, received_message) {
-  let response;
-  if (received_message.text == "Yes! share it.") {    
+ }else if (received_message.text == "Yes! share it.") {    
    response = {"text": "write a caption to share with the picture."}
    useInfo.cuscaption = true;
   }
-  callSendAPI(sender_psid, response);
+ callSendAPI(sender_psid, response); 
 }
 
 const handlePostback = (sender_psid, received_postback) => {
