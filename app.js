@@ -28,7 +28,6 @@ const
   express = require('express'),
   body_parser = require('body-parser'),
   firebase = require("firebase-admin"),
-  ejs = require("ejs"),  
   app = express().use(body_parser.json()); // creates express http server
 
   firebase.initializeApp({
@@ -127,39 +126,6 @@ app.get('/webhook', (req, res) => {
   }
 });
 
-//webview test
-app.get('/webview/:sender_id',function(req,res){
-    const sender_id = req.params.sender_id;
-    res.render('webview.ejs',{title:"Hello!! from WebView", sender_id:sender_id});
-});
-
-app.post('/webview',upload.single('file'),function(req,res){
-       
-      let name  = req.body.name;
-      let email = req.body.email;
-      let img_url = APP_URL + "/" + req.file.path;
-      let sender = req.body.sender;    
-
-      
-      
-      db.collection('webview').add({
-            name: name,
-            email: email,
-            image: img_url
-          }).then(success => {   
-             console.log("DATA SAVED")
-             thankyouReply(sender, name, img_url);    
-          }).catch(error => {
-            console.log(error);
-      });        
-});
-
-app.set('view engine', 'ejs');
-app.set('views', __dirname+'/views');
-/////////////////////////////////////////////////
-
-app.use('/uploads', express.static('uploads'));
-
 let userInfo = {
   name : false,
   chest:false,
@@ -233,7 +199,8 @@ async function greeting (sender_psid){
                     {
                       "type": "web_url",
                       "title": "Pictures of others",
-                      "url": "https://shwesu.herokuapp.com/webview/"+ sender_psid,
+                      "url": "https://qph.fs.quoracdn.net/main-qimg-9e8cb835ef77635c3233c1ee716728db.webp",
+                      "webview_height_ratio": "tall",
                     }
                   ],
                 }]
