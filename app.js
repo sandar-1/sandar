@@ -185,6 +185,15 @@ function handleMessage(sender_psid, received_message) {
  callSendAPI(sender_psid, response); 
 }
 
+function handleQuickReply(sender_psid, received_message) {
+  let response;
+  if (received_message.text == "Yes! share it.") {    
+   response = {"text": "write a caption to share with the picture."}
+   useInfo.cuscaption = true;
+  }
+  callSendAPI(sender_psid, response);
+}
+
 const handlePostback = (sender_psid, received_postback) => {
   let payload = received_postback.payload;
   console.log('ok')
