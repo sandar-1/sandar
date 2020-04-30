@@ -208,7 +208,6 @@ const handlePostback = (sender_psid, received_postback) => {
         defaultReply(sender_psid);
     }
   }
-  callSendAPI(sender_psid, response);
 }
 
 /*function to greet user*/
