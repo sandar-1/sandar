@@ -201,24 +201,7 @@ function handleMessage(sender_psid, received_message) {
    userInfo.cuscaption = false;
   }else if (received_message.text == "Yes!") {    
     saveData (sender_psid);
-    let response1 = {"text": "Thanks for your purchase in our shop. Have a good day. :)"};
-    let response2 = {"text": "caption"+ userEnteredInfo.cuscaption};
-    let response3 = {
-      "attachment":{
-            "type":"image", 
-            "payload":{
-              "url":userSendAttachment.sharepicAttachment, 
-              "is_reusable":true
-            }
-          }
-    };
-    callSend(sender_psid, response1).then(()=>{
-      return callSend(sender_psid, response2).then(()=>{
-        return callSend(sender_psid, response3).then(()=>{
-          return callSend(sender_psid, response4);
-        });
-      });
-    });
+    response = {"text": "Thanks for your purchase in our shop. Have a good day. :)"}
   }
  callSendAPI(sender_psid, response); 
 }
