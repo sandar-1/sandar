@@ -136,6 +136,7 @@ let userInfo = {
   khar:false,
   ankle:false,
   price : false,
+  cuscaption : false,
 
 };
 
