@@ -229,7 +229,7 @@ const handlePostback = (sender_psid, received_postback) => {
         askName(sender_psid);
         break;
         case "share_pic":
-        askName(sender_psid);
+        askNameShare(sender_psid);
         break;
       default:
         defaultReply(sender_psid);
@@ -299,11 +299,10 @@ async function greeting (sender_psid){
     });
 }
 
-const askName = (sender_psid) => {
+const askNameSEW = (sender_psid) => {
   let response;
   response = {"text": "Please tell me yor name."}
     sew = true;
-    shearing = true;
   callSendAPI(sender_psid, response);
 }
 
@@ -329,6 +328,13 @@ const askFabric = (sender_psid) => {
                       }
                     } 
   }
+  callSendAPI(sender_psid, response);
+}
+
+const askNameShare = (sender_psid) => {
+  let response;
+  response = {"text": "Please tell me yor name."}
+    shearing = true;
   callSendAPI(sender_psid, response);
 }
 
