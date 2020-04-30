@@ -155,6 +155,7 @@ function handleMessage(sender_psid, received_message) {
     sharepicAttachment == false;
     let attachment_url = received_message.attachments[0].payload.url;
     userSendAttachment.sharepicAttachment = attachment_url;
+    console.log ('ok');
     let response1 = {
       "attachment":{
             "type":"image", 
