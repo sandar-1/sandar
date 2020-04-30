@@ -212,9 +212,13 @@ function handleMessage(sender_psid, received_message) {
             }
           }
     };
-    callSend(sender_psid,response1).then(()=>{
-        return callSend(sender_psid,response2).then(()=>{
-          return callSend(sender_psid,response3);
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3).then(()=>{
+          return callSend(sender_psid, response4);
+        });
+      });
+    });
   }
  callSendAPI(sender_psid, response); 
 }
