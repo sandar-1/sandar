@@ -153,6 +153,35 @@ function handleMessage(sender_psid, received_message) {
   let response;
   if (received_message.text == "hi" || received_message.text == "Hi") {    
    greeting (sender_psid);
+  }else if (received_message.attachments && sharepicAttachment == true) {
+    console.log('meta data',received_message);
+    sharepicAttachment == false;
+    let attachment_url = received_message.attachments[0].payload.url;
+    response = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "Is tis one? very nice.",
+            "subtitle": ":)",
+            "image_url": attachment_url,
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "Yes!",
+                "payload": "yes_sp",
+              },
+              {
+                "type": "postback",
+                "title": "No!",
+                "payload": "no_sp",
+              }
+            ],
+          }]
+        }
+      }
+    }
   }
   callSendAPI(sender_psid, response);    
 }
@@ -161,19 +190,25 @@ const handlePostback = (sender_psid, received_postback) => {
   let payload = received_postback.payload;
   console.log('ok')
 
-  switch (payload) {
-    case "get_started":
-      greeting(sender_psid);
-      break;
-    case "order_comfirm":
-      orderComfirm(sender_psid);
-      break;
-    case "SEW":
-      askFabric(sender_psid);
-      break;
-    default:
-      defaultReply(sender_psid);
+  if (payload === 'share_pic') {
+    response = {"text": "Let's take a look at the most beautiful images of you with wearing the cloth sewn by Shwe Hsu."}
+    sharepicAttachment = true;
+  }else {
+    switch (payload) {
+      case "get_started":
+        greeting(sender_psid);
+        break;
+      case "order_comfirm":
+        orderComfirm(sender_psid);
+        break;
+      case "SEW":
+        askFabric(sender_psid);
+        break;
+      default:
+        defaultReply(sender_psid);
+    }
   }
+  callSendAPI(sender_psid, response);
 }
 
 /*function to greet user*/
