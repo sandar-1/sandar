@@ -144,7 +144,7 @@ let designAttachment = false;
 let sharepicAttachment = false;
 
 let userEnteredInfo = {};
-let userSendAttachment = {};
+let userSendAttachment = [];
 
 function handleMessage(sender_psid, received_message) {
   let response;
