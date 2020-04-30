@@ -179,7 +179,7 @@ function handleMessage(sender_psid, received_message) {
   callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });   
- }else if (received_message.text == "No..") {    
+  }else if (received_message.text == "No..") {    
     Reslected (sender_psid);
   }else if (received_message.text == "Yes! share it." || received_message.text == "No.") {    
    response = {"text": "write a caption to share with the picture."}
@@ -231,7 +231,7 @@ const handlePostback = (sender_psid, received_postback) => {
 /*function to greet user*/
 async function greeting (sender_psid){  
   let user = await getUserProfile(sender_psid);
-  let response1 = {"text": "🙋‍♀ Hi. "+user.first_name+" "+user.last_name+". Warmly welcome to Shwe Hsu.🙆‍♀"};
+  let response1 = {"text": "🙋‍♀ Hi. Warmly welcome to Shwe Hsu.🙆‍♀"};
   let response2 = {"text": "Do you want to sew 👗 or want to share pictures 🤳. And you can also see pictures of others 😉."}
   let response3 = {
           "attachment": {
