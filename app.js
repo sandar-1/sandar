@@ -168,6 +168,9 @@ const handlePostback = (sender_psid, received_postback) => {
     case "order_comfirm":
       orderComfirm(sender_psid);
       break;
+    case "SEW":
+      askFabric(sender_psid);
+      break;
     default:
       defaultReply(sender_psid);
   }
@@ -176,7 +179,7 @@ const handlePostback = (sender_psid, received_postback) => {
 /*function to greet user*/
 async function greeting (sender_psid){  
   let user = await getUserProfile(sender_psid);
-  let response1 = {"text": "🙋‍♀ Hi. "+user.first_name+" "+user.last_name+". Warmly welcome to SH.🙆‍♀"};
+  let response1 = {"text": "🙋‍♀ Hi. "+user.first_name+" "+user.last_name+". Warmly welcome to Shwe Hsu.🙆‍♀"};
   let response2 = {"text": "Do you want to sew 👗 or want to share pictures 🤳. And you can also see pictures of others 😉."}
   let response3 = {
           "attachment": {
@@ -233,6 +236,35 @@ async function greeting (sender_psid){
         });
       });
     });
+}
+
+const askFabric = (sender_psid) => {
+  response = {"attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"Is your piece of fabric in our shop? or buy some fabric from us? or delivery?",
+                        "buttons":[
+                          {
+                            "type":"postback",
+                            "payload":"inShop",
+                            "title":"Is in your shop."
+                          },
+                          {
+                            "type":"postback",
+                            "payload":"willDeliver",
+                            "title":"Will be delivered"
+                          },
+                          {
+                            "type":"postback",
+                            "payload":"showingFabric",
+                            "title":"Show me some fabric. "
+                          },
+                        ]
+                      }
+                    } 
+  }
+  callSendAPI(sender_psid, response);
 }
 
 const orderComfirm = (sender_psid) => {
