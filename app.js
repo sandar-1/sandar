@@ -242,7 +242,7 @@ const getStart = (sender_psid) => {
 /*function to greet user*/
 async function greeting (sender_psid){  
   let user = await getUserProfile(sender_psid);
-  let response1 = {"text": "Mingalaba "+userEnteredInfo.name+" Shint :)"};
+  let response1 = {"text": "Mingalaba "+userEnteredInfo.name+" :)"};
   let response2 = {"text": "Do you want to sew 👗 or want to share pictures 🤳. And you can also see pictures of others 😉."}
   let response3 = {
           "attachment": {
@@ -428,6 +428,7 @@ const Reslected = (sender_psid) => {
 function saveData(sender_psid) {
   const share_info = {
     id : sender_psid,
+    name : userEnteredInfo.name,
     customer_caption : userEnteredInfo.cuscaption,
     share_design : userSendAttachment.sharepicAttachment,
   }
