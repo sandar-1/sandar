@@ -162,8 +162,8 @@ function handleMessage(sender_psid, received_message) {
               "is_reusable":true
             }
           }
-   };
-   let response2 = {"text": "Is this picture you want to share? By the way it's look good on you. :)",
+    };
+    let response2 = {"text": "Is this picture you want to share? By the way it's look good on you. :)",
                     "quick_replies":[
                                       {
                                         "content_type":"text",
@@ -174,7 +174,7 @@ function handleMessage(sender_psid, received_message) {
                                         "title":"No..",
                                         "payload":"shareNo"
                                       }]
- };
+  };
   callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });   
