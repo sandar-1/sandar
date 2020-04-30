@@ -178,11 +178,28 @@ function handleMessage(sender_psid, received_message) {
   callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });   
- }else if (received_message.text == "Yes! share it.") {    
+ }else if (received_message.text == "No..") {    
+    Reslected (sender_psid);
+  }else if (received_message.text == "Yes! share it." || received_message.text == "No.") {    
    response = {"text": "write a caption to share with the picture."}
    userInfo.cuscaption = true;
-  }else if (received_message.text == "No..") {    
-    Reslected (sender_psid);
+  }else if (received_message.text && userInfo.cuscaption == true) {  
+   userEnteredInfo.cuscaption = received_message;  
+    response = {"text": "Are you sure? :)",
+                    "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Yes!",
+                                        "payload":"captionYes"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"No.",
+                                        "payload":"captionNo"
+                                      }]
+    };
+   userInfo.cuscaption = false;
+  }else if (received_message.text == "Yes!") {    
+    saveData (sender_psid);
   }
  callSendAPI(sender_psid, response); 
 }
@@ -401,32 +418,41 @@ const Reslected = (sender_psid) => {
 
 /*function function save data to firebase*/
 function saveData(sender_psid) {
-  const info = {
-    id : sender_psid,
-    name : userEnteredInfo.name,
-    chest : userEnteredInfo.chest,
-    upperArm : userEnteredInfo.upperArm,
-    sleevelength : userEnteredInfo.sleevelength,
-    waist : userEnteredInfo.waist,
-    hips : userEnteredInfo.hips,
-    thigh : userEnteredInfo.thigh,
-    inseam : userEnteredInfo.inseam,
-    htameintype : userEnteredInfo.htameintype,
-    htameinfold : userEnteredInfo.htameinfold,
-    khar : userEnteredInfo.khar,
-    ankle : userEnteredInfo.ankle,
-    price : userEnteredInfo.price,
-    cloth_design : userSendAttachment.designAttachment,
-  }
-  db.collection('user_information').add(info);
+  // const info = {
+  //   id : sender_psid,
+  //   name : userEnteredInfo.name,
+  //   chest : userEnteredInfo.chest,
+  //   upperArm : userEnteredInfo.upperArm,
+  //   sleevelength : userEnteredInfo.sleevelength,
+  //   waist : userEnteredInfo.waist,
+  //   hips : userEnteredInfo.hips,
+  //   thigh : userEnteredInfo.thigh,
+  //   inseam : userEnteredInfo.inseam,
+  //   htameintype : userEnteredInfo.htameintype,
+  //   htameinfold : userEnteredInfo.htameinfold,
+  //   khar : userEnteredInfo.khar,
+  //   ankle : userEnteredInfo.ankle,
+  //   price : userEnteredInfo.price,
+  //   customer_caption : userEnteredInfo.cuscaption,
+  //   cloth_design : userSendAttachment.designAttachment,
+  // }
+  // db.collection('user_information').add(info);
 
-    const order_info = {
+  //   const order_info = {
+  //   id : sender_psid,
+  //   name : userEnteredInfo.name,
+  //   price : userEnteredInfo.price,
+  //   cloth_design : userSendAttachment.designAttachment,
+  // }
+  // db.collection('order_information').add(order_info);
+
+    const sharing_info = {
     id : sender_psid,
-    name : userEnteredInfo.name,
-    price : userEnteredInfo.price,
-    cloth_design : userSendAttachment.designAttachment,
+   // name : userEnteredInfo.name,
+    customer_caption : userEnteredInfo.cuscaption,
+    share_picture : userSendAttachment.sharepicAttachment,
   }
-  db.collection('order_information').add(order_info);
+  db.collection('sharing_information').add(order_info);
 }
 
 function callSendAPI(sender_psid, response) {
