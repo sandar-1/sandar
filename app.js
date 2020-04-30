@@ -148,8 +148,9 @@ let userSendAttachment = [];
 
 function handleMessage(sender_psid, received_message) {
   let response;
-  if (received_message.text == "hi" || received_message.text == "Hi") {    
+  if (received_message.text && userInfo.name == true) {    
    greeting (sender_psid);
+   userInfo.name = false;
   }else if (received_message.attachments && sharepicAttachment == true) {
     console.log('meta data',received_message);
     sharepicAttachment == false;
@@ -212,7 +213,7 @@ const handlePostback = (sender_psid, received_postback) => {
 
     switch (payload) {
       case "get_started":
-        greeting(sender_psid);
+        getStart(sender_psid);
         break;
       case "order_comfirm":
         orderComfirm(sender_psid);
@@ -228,10 +229,19 @@ const handlePostback = (sender_psid, received_postback) => {
     }
 }
 
+const getStart = (sender_psid) => {
+  let response1 = {"text": "🙋‍♀ Warmly welcome to Shwe Hsu.🙆‍♀"};
+  let response2 = {"text": "Please tell me your name. :) "};
+  callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+    userInfo.name = true;
+}
+
 /*function to greet user*/
 async function greeting (sender_psid){  
   let user = await getUserProfile(sender_psid);
-  let response1 = {"text": "🙋‍♀ Hi. Warmly welcome to Shwe Hsu.🙆‍♀"};
+  let response1 = {"text": "Mingalaba "+userEnteredInfo.name+" Shint :)"};
   let response2 = {"text": "Do you want to sew 👗 or want to share pictures 🤳. And you can also see pictures of others 😉."}
   let response3 = {
           "attachment": {
