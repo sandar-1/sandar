@@ -292,8 +292,8 @@ function handleMessage(sender_psid, received_message) {
     userInfo.khar = false;
     userInfo.ankle = true;
   }else if (received_message.text && userInfo.ankle == true) { 
-    userEnteredInfo.ankle = received_message.text;   
-    response ={"text": "OK!"}
+    userEnteredInfo.ankle = received_message.text;
+    askforevent(sender_psid);
     userInfo.ankle = false;
   }else if (received_message.attachments && sharepicAttachment == true) {
     console.log('meta data',received_message);
@@ -376,6 +376,9 @@ const handlePostback = (sender_psid, received_postback) => {
         break;
       case "customizeYes":
         customize(sender_psid);
+        break;
+      case "customizeNo":
+        askforevents(sender_psid);
         break;
       case "continue":
         bodyMeasuring(sender_psid);
@@ -501,7 +504,7 @@ const cuswillDeli = (sender_psid) => {
                             "type":"template",
                             "payload":{
                               "template_type":"button",
-                              "text":"OK.." +userEnteredInfo.name +", it can be any bus stop from Tatkone. Send with this Contact 0912345678. Click the button to continue.",
+                              "text":"OK.." +userEnteredInfo.name +", it can be any bus stop from Tatkone. Send with this Contact 0912345678. Click the button to continue/leave.",
                               "buttons":[
                                 {
                                   "type": "postback",
@@ -564,6 +567,94 @@ const customize = (sender_psid) => {
       });
     });
     userInfo.htameintype = true;
+}
+
+const askforevent = (sender_psid) => {
+  let response1 = {"text":"For what kind of event?"};
+  let response2 = {"text":"These are the kinds of sewing we do in our shop."};
+  let response3 = {
+       "attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"generic",
+        "elements":[
+           {
+            "title":"Wedding?",
+            "image_url":"https://www.gomyanmartours.com/wp-content/uploads/2014/11/Rituals-in-Myanmar-Wedding-Ceremony.jpg",
+            "subtitle":"👰",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://www.gomyanmartours.com/wp-content/uploads/2014/11/Rituals-in-Myanmar-Wedding-Ceremony.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"Wedding.",
+                "payload":"WEDDING"
+              }              
+            ]      
+          },
+          {
+            "title":"Occasion?",
+            "image_url":"https://www.exoticvoyages.com/uploads/images/userfiles/2015/09/Unidentify-Myanmar-women-in-Festival-Procession-near-Heritage-Site-in-BaganMyanmar.jpg",
+            "subtitle":"💃",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://www.exoticvoyages.com/uploads/images/userfiles/2015/09/Unidentify-Myanmar-women-in-Festival-Procession-near-Heritage-Site-in-BaganMyanmar.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"Occasion.",
+                "payload":"OCCASION"
+              }              
+            ]      
+          },
+          {
+            "title":"For a Convocation?",
+            "image_url":"https://www.tic.edu.mm/wp-content/uploads/2018/05/31311065_776695719183162_6949008994670709342_o-1024x680.jpg",
+            "subtitle":"👩‍🎓 ",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://www.tic.edu.mm/wp-content/uploads/2018/05/31311065_776695719183162_6949008994670709342_o-1024x680.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"Convocation.",
+                "payload":"ABD"
+              }              
+            ]      
+          },
+          {
+            "title":"Casual?",
+            "image_url":"https://www.mmtimes.com/sites/mmtimes.com/files/styles/mmtimes_ratio_d_feature_detail/public/images/mte/2017/educentre/jan-2017/7-failed-system.jpg?itok=PPR9BjOg",
+            "subtitle":"🤷",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://www.mmtimes.com/sites/mmtimes.com/files/styles/mmtimes_ratio_d_feature_detail/public/images/mte/2017/educentre/jan-2017/7-failed-system.jpg?itok=PPR9BjOg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"Casual.",
+                "payload":"CASUAL"
+              }              
+            ]      
+          }
+        ]
+      }
+    }
+  };
+  callSend(sender_psid,response1).then(()=>{
+    return callSend(sender_psid,response2).then(()=>{
+      return callSend(sender_psid,response3);
+    });
+  });
 }
 
 const orderComfirm = (sender_psid) => {
