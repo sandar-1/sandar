@@ -202,8 +202,99 @@ function handleMessage(sender_psid, received_message) {
     userInfo.inseam = true;
   }else if (received_message.text && userInfo.inseam == true) {   
     userEnteredInfo.inseam = received_message.text; 
-    response ={"text": "Tell me how you wnat to wear."}
+    response = {
+      "attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"Do you wnat to customize, how long htamein/ khar/ which fold. ",
+                        "buttons":[
+                          {
+                            "type":"postback",
+                            "payload":"customizeYes",
+                            "title":"Yes"
+                          },
+                          {
+                            "type":"postback",
+                            "payload":"customizeNo",
+                            "title":"No"
+                          }
+                        ]
+                      }
+                    } 
+    }
     userInfo.inseam = false;
+  }else if (received_message.text && userInfo.htameintype == true) { 
+    userEnteredInfo.htameintype = received_message.text;   
+    let response1 = {"text": `which way you want to fold?`};
+    let response2 = {"text" : "Left fold/Right fold.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Left fold",
+                                        "payload":"lf"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Right fold",
+                                        "payload":"rf"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+    userInfo.htameintype = false;
+    userInfo.htameinfold = true;
+  }else if (received_message.text && userInfo.htameinfold == true) { 
+    userEnteredInfo.htameinfold = received_message.text;
+    let response1 = {"text": "Khar to (end exactly with the waist),"};
+    let response2 = {"text" : "Khar tin (ends at the hips) or"};
+    let response3 = {"text" : "khar shay (ends below the hips)",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Khar To",
+                                        "payload":"kto"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Khar Tin",
+                                        "payload":"ktin"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Khar Shay",
+                                        "payload":"kshay"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
+    });
+    userInfo.htameinfold = false;
+    userInfo.khar = true;
+  }else if (received_message.text && userInfo.khar == true) { 
+    userEnteredInfo.khar = received_message.text;   
+    let response1 = {"text": `Would you like to cover ankle or not?`};
+    let response2 = {"text" : "Upper ankle/cover ankle.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Upper Ankle",
+                                        "payload":"ua"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Cover Ankle",
+                                        "payload":"ca"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+    userInfo.khar = false;
+    userInfo.ankle = true;
+  }else if (received_message.text && userInfo.ankle == true) { 
+    userEnteredInfo.ankle = received_message.text;   
+    response ={"text": "OK!"}
+    userInfo.ankle = false;
   }else if (received_message.attachments && sharepicAttachment == true) {
     console.log('meta data',received_message);
     sharepicAttachment == false;
@@ -274,11 +365,14 @@ const handlePostback = (sender_psid, received_postback) => {
       case "SEW":
         askNameSEW (sender_psid);
         break;
-        case "share_pic":
+      case "share_pic":
         askNameShare(sender_psid);
         break;
-        case "inShop":
+      case "inShop":
         bodyMeasuring(sender_psid);
+        break;
+      case "customizeYes":
+        customize(sender_psid);
         break;
       default:
         defaultReply(sender_psid);
@@ -410,6 +504,33 @@ const bodyMeasuring = (sender_psid) => {
       });
     });
     userInfo.chest = true;
+}
+
+const customize = (sender_psid) => {
+  let response1 = {"text": "Tell me how you wnat to wear."};    
+   let response2 = {"text" : "which type of htamein? "};
+    let response3 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Cheik",
+                                        "payload":"c"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Hpi",
+                                        "payload":"hpi"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Simple",
+                                        "payload":"s"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
+    });
+    userInfo.htameintype = true;
 }
 
 const orderComfirm = (sender_psid) => {
