@@ -374,6 +374,12 @@ const handlePostback = (sender_psid, received_postback) => {
       case "customizeYes":
         customize(sender_psid);
         break;
+      case "continue":
+        bodyMeasuring(sender_psid);
+        break;
+      case "leaving":
+        leaving(sender_psid);
+        break;
       default:
         defaultReply(sender_psid);
     }
@@ -484,6 +490,30 @@ const sharePicture = (sender_psid) => {
   response = {"text": "Let's take a look at the most beautiful images of you with wearing the cloth sewn by Shwe Hsu."}
     sharepicAttachment = true;
   callSendAPI(sender_psid, response);
+}
+
+const cuswillDeli = (sender_psid) => {
+    let response;
+        response = {"attachment":{
+                            "type":"template",
+                            "payload":{
+                              "template_type":"button",
+                              "text":"OK.." +userEnteredInfo.name +", it can be any bus stop from Tatkone. Send with this Contact 0912345678. Click the button to continue.",
+                              "buttons":[
+                                {
+                                  "type": "postback",
+                                  "title": "Continue",
+                                  "payload": "continue",
+                                },{
+                                  "type": "postback",
+                                  "title": "Sorry, I want to leave",
+                                  "payload": "leaving",
+                                }
+                              ]
+                            }
+                          } 
+                    }
+        callSendAPI(sender_psid, response);
 }
 
 const bodyMeasuring = (sender_psid) => {
@@ -621,6 +651,12 @@ const Reslected = (sender_psid) => {
                       }
                     } 
               }
+  callSendAPI(sender_psid, response);
+}
+
+const leaving = (sender_psid) => {
+  let response;
+  response = {"text": "Thank you for your times."}
   callSendAPI(sender_psid, response);
 }
 
