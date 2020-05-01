@@ -506,6 +506,7 @@ const Reslected = (sender_psid) => {
 function saveData(sender_psid) {
   const share_info = {
     id : sender_psid,
+    name : userEnteredInfo.name,
     customer_caption : userEnteredInfo.cuscaption,
     share_design : userSendAttachment.sharepicAttachment,
   }
