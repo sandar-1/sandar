@@ -272,7 +272,7 @@ const handlePostback = (sender_psid, received_postback) => {
         orderComfirm(sender_psid);
         break;
       case "SEW":
-        askName(sender_psid);
+        askNameSEW (sender_psid);
         break;
         case "share_pic":
         askNameShare(sender_psid);
