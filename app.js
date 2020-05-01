@@ -523,7 +523,7 @@ const cuswillDeli = (sender_psid) => {
 }
 
 const bodyMeasuring = (sender_psid) => {
-  let response1 = {"text":"OK.." +userEnteredInfo.name +"Let's get your body measurement. Here are ways to measure your body. Hopefully that will be useful. :)"};    
+  let response1 = {"text":"OK.." +userEnteredInfo.name +" Let's get your body measurement. Here are ways to measure your body. Hopefully that will be useful. :)"};    
      let response2 = {
       "attachment":{
             "type":"image", 
