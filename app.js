@@ -202,7 +202,7 @@ function handleMessage(sender_psid, received_message) {
     userInfo.inseam = true;
   }else if (received_message.text && userInfo.inseam == true) {   
     userEnteredInfo.inseam = received_message.text; 
-    bodymeasure(sender_psid);
+    response ={"text": "Tell me how you wnat to wear."}
     userInfo.inseam = false;
   }else if (received_message.attachments && sharepicAttachment == true) {
     console.log('meta data',received_message);
@@ -277,12 +277,13 @@ const handlePostback = (sender_psid, received_postback) => {
         case "share_pic":
         askNameShare(sender_psid);
         break;
+        case "inShop":
+        bodyMeasuring(sender_psid);
+        break;
       default:
         defaultReply(sender_psid);
     }
 }
-
-
 
 /*function to greet user*/
 async function greeting (sender_psid){  
