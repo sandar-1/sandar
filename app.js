@@ -158,6 +158,52 @@ function handleMessage(sender_psid, received_message) {
     userEnteredInfo.name = received_message.text;
     sharePicture (sender_psid);
     shearing = false;
+  }else if (received_message.text && userInfo.chest == true) {   
+    userEnteredInfo.chest =  received_message.text;
+    response = {
+      "text": `Now Upper arm.`
+    }
+    userInfo.chest = false;
+    userInfo.upperArm = true;
+  }else if (received_message.text && userInfo.upperArm == true) { 
+    userEnteredInfo.upperArm = received_message.text; 
+    response = {
+      "text": `Let's measure Sleeve length.`
+    }
+    userInfo.upperArm = false;
+    userInfo.sleevelength = true;
+  }else if (received_message.text && userInfo.sleevelength == true) { 
+    userEnteredInfo.sleevelength = received_message.text;   
+    response = {
+      "text": `And measure your Waist.`
+    }
+    userInfo.sleevelength = false;
+    userInfo.waist = true;
+  }else if (received_message.text && userInfo.waist == true) {
+    userEnteredInfo.waist = received_message.text;    
+    response = {
+      "text": `Now your Hips.`
+    }
+    userInfo.waist = false;
+    userInfo.hips = true;
+  }else if (received_message.text && userInfo.hips == true) { 
+    userEnteredInfo.hips = received_message.text;   
+    response = {
+      "text": `Measure your Thigh.`
+    }
+    userInfo.hips = false;
+    userInfo.thigh = true;
+  }else if (received_message.text && userInfo.thigh == true) {   
+    userEnteredInfo.thigh = received_message.text; 
+    response = {
+      "text": `Finally! your Inseam.`
+    }
+    userInfo.thigh = false;
+    userInfo.inseam = true;
+  }else if (received_message.text && userInfo.inseam == true) {   
+    userEnteredInfo.inseam = received_message.text; 
+    bodymeasure(sender_psid);
+    userInfo.inseam = false;
   }else if (received_message.attachments && sharepicAttachment == true) {
     console.log('meta data',received_message);
     sharepicAttachment == false;
@@ -343,6 +389,26 @@ const sharePicture = (sender_psid) => {
   response = {"text": "Let's take a look at the most beautiful images of you with wearing the cloth sewn by Shwe Hsu."}
     sharepicAttachment = true;
   callSendAPI(sender_psid, response);
+}
+
+const bodyMeasuring = (sender_psid) => {
+  let response1 = {"text": "Let's get your body measurement. Here are ways to measure your body. Hopefully that will be useful. :)"};    
+     let response2 = {
+      "attachment":{
+            "type":"image", 
+            "payload":{
+              "url":"https://www.dummies.com/wp-content/uploads/how-to-get-your-body-measurements.jpg", 
+              "is_reusable":true
+            }
+          }
+    };
+    let response3 = {"text" : "Well.. let's measure Chest first."}
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
+    });
+    userInfo.chest = true;
 }
 
 const orderComfirm = (sender_psid) => {
