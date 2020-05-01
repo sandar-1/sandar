@@ -453,7 +453,7 @@ const askFabric = (sender_psid) => {
                       "type":"template",
                       "payload":{
                         "template_type":"button",
-                        "text":"Is your piece of fabric in our shop? or delivery?",
+                        "text":userEnteredInfo.name+"...Is your piece of fabric in our shop? or delivery?",
                         "buttons":[
                           {
                             "type":"postback",
