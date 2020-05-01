@@ -418,7 +418,6 @@ async function greeting (sender_psid){
                       "title": "Pictures of others",
                       "url": "https://qph.fs.quoracdn.net/main-qimg-9e8cb835ef77635c3233c1ee716728db.webp",
                       "webview_height_ratio": "tall",
-                        "messenger_extensions": true,
                     }
                   ],
                 }]
