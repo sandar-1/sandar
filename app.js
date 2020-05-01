@@ -371,6 +371,9 @@ const handlePostback = (sender_psid, received_postback) => {
       case "inShop":
         bodyMeasuring(sender_psid);
         break;
+      case "willDeliver":
+        cuswillDeli(sender_psid);
+        break;
       case "customizeYes":
         customize(sender_psid);
         break;
