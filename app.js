@@ -378,7 +378,7 @@ const handlePostback = (sender_psid, received_postback) => {
         customize(sender_psid);
         break;
       case "customizeNo":
-        askforevents(sender_psid);
+        askforevent(sender_psid);
         break;
       case "continue":
         bodyMeasuring(sender_psid);
