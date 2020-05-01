@@ -207,7 +207,7 @@ function handleMessage(sender_psid, received_message) {
                       "type":"template",
                       "payload":{
                         "template_type":"button",
-                        "text":"Do you wnat to customize, how long htamein/ khar/ which fold. ",
+                        "text":"OK.."+userEnteredInfo.name+", Do you wnat to customize, how long htamein/ khar/ which fold. ",
                         "buttons":[
                           {
                             "type":"postback",
@@ -487,7 +487,7 @@ const sharePicture = (sender_psid) => {
 }
 
 const bodyMeasuring = (sender_psid) => {
-  let response1 = {"text": "Let's get your body measurement. Here are ways to measure your body. Hopefully that will be useful. :)"};    
+  let response1 = {"text":"OK.." +userEnteredInfo.name +"Let's get your body measurement. Here are ways to measure your body. Hopefully that will be useful. :)"};    
      let response2 = {
       "attachment":{
             "type":"image", 
@@ -507,7 +507,7 @@ const bodyMeasuring = (sender_psid) => {
 }
 
 const customize = (sender_psid) => {
-  let response1 = {"text": "Tell me how you wnat to wear."};    
+  let response1 = {"text": "Well "+ userEnteredInfo.name};    
    let response2 = {"text" : "which type of htamein? "};
     let response3 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein.",
                       "quick_replies":[
