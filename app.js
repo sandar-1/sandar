@@ -405,10 +405,8 @@ async function greeting (sender_psid){
           "attachment": {
               "type": "template",
               "payload": {
-                "template_type": "generic",
-                "elements": [{
-                  "title": "Chooes what you want to do.",
-                  "subtitle": "👩👩",
+                "template_type": "button",
+                 "text":"Chooes what you want to do."
                   "buttons": [
                     {
                       "type": "postback",
