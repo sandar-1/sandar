@@ -28,6 +28,7 @@ const
   express = require('express'),
   body_parser = require('body-parser'),
   firebase = require("firebase-admin"),
+  ejs = require("ejs"),  
   app = express().use(body_parser.json()); // creates express http server
 
   firebase.initializeApp({
@@ -396,34 +397,32 @@ async function greeting (sender_psid){
   let user = await getUserProfile(sender_psid);
   let response1 = {"text": "Mingalaba..🙋‍♀ Warmly welcome to Shwe Hsu.🙆‍♀"};
   let response2 = {
-          "attachment": {
-              "type": "template",
-              "payload": {
-                "template_type": "generic",
-                "elements": [{
-                  "title": "Chooes what you want to do.",
-                  "subtitle": "👩👩",
-                  "buttons": [
-                    {
-                      "type": "postback",
-                      "title": "I want to sew 👗",
-                      "payload": "SEW",
-                    },{
-                      "type": "postback",
-                      "title": "Share pictures",
-                      "payload": "share_pic",
-                    },
-                    {
-                      "type": "web_url",
-                      "title": "Pictures of others",
-                      "url": "https://qph.fs.quoracdn.net/main-qimg-9e8cb835ef77635c3233c1ee716728db.webp",
-                      "webview_height_ratio": "tall",
-                    }
-                  ],
-                }]
-              }
-            }
-        }; 
+      "attachment":{
+                    "type":"template",
+                    "payload":{
+                      "template_type":"button",
+                      "text":"Chooes what you want to do.",
+                      "buttons":[
+                                  {
+                                    "type": "postback",
+                                    "title": "I want to sew 👗",
+                                    "payload": "SEW",
+                                  },{
+                                    "type": "postback",
+                                    "title": "Share pictures",
+                                    "payload": "share_pic",
+                                  },
+                                  {
+                                    "type": "web_url",
+                                    "title": "Pictures of others",
+                                    "url": "https://qph.fs.quoracdn.net/main-qimg-9e8cb835ef77635c3233c1ee716728db.webp",
+                                    "webview_height_ratio": "tall",
+                                    "messenger_extensions": true,          
+                                  }
+                               ]
+                           }
+                    } 
+                   }; 
   let response3 = {
       "attachment": {
         "type": "template",
