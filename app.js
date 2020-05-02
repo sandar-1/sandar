@@ -249,7 +249,7 @@ function handleMessage(sender_psid, received_message) {
       "text": `And measure your Waist.`
     }
     userInfo.sleevelength = false;
-    userInfo.waist = true
+    userInfo.waist = true;
     upperwaist = true;
   }else if (received_message.text && upperwaist == true) {
     userEnteredInfo.waist = received_message.text;    
