@@ -168,6 +168,9 @@ let userInfo = {
 
 };
 
+let upperchest = false;
+let upperupperArm = false;
+let uppersleevelength = false;
 let upperwaist = false;
 let lowerwaist = false;
 let designAttachment = false;
@@ -229,6 +232,33 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text == "Yes!") {    
     saveData (sender_psid);
     response = {"text": "Thanks for your purchase in our shop. Have a good day. :)"}
+  }else if (received_message.text && upperchest == true) {   
+    userEnteredInfo.chest =  received_message.text;
+    response = {
+      "text": `Now Upper arm.`
+    }
+    upperchest = false;
+    upperupperArm = true;
+  }else if (received_message.text && upperupperArm == true) { 
+    userEnteredInfo.upperArm = received_message.text; 
+    response = {
+      "text": `Let's measure Sleeve length.`
+    }
+    upperupperArm = false;
+    uppersleevelength = true;
+  }else if (received_message.text && uppersleevelength == true) { 
+    userEnteredInfo.sleevelength = received_message.text;   
+    response = {
+      "text": `And measure your Waist.`
+    }
+    uppersleevelength = false;
+    upperwaist = true;
+  }else if (received_message.text && upperwaist == true) {
+    userEnteredInfo.waist = received_message.text;    
+    response = {
+      "text": `OK`
+    }
+    upperwaist = false;
   }else if (received_message.text && userInfo.chest == true) {   
     userEnteredInfo.chest =  received_message.text;
     response = {
@@ -557,6 +587,7 @@ const yinphoneMeasuring = (sender_psid) => {
         return callSend(sender_psid, response3);
       });
     });
+    upperchest = true;
 }
 
 const htameinMeasuring = (sender_psid) => {
