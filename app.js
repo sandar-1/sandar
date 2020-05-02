@@ -557,7 +557,6 @@ const yinphoneMeasuring = (sender_psid) => {
         return callSend(sender_psid, response3);
       });
     });
-    userInfo.chest = true;
 }
 
 const htameinMeasuring = (sender_psid) => {
