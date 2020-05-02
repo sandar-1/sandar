@@ -137,7 +137,6 @@ app.get('/webview/:sender_id/',function(req,res){
             let img = {};
             img.share_design = doc.data().share_design;
             img.customer_caption = doc.data().customer_caption;
-            img.name = doc.data().name;
 
             data.push(img);                      
 
@@ -154,7 +153,6 @@ app.get('/webview/:sender_id/',function(req,res){
 });
 
 let userInfo = {
-  name : false,
   chest:false,
   upperArm:false,
   sleevelength:false,
@@ -181,14 +179,57 @@ let userSendAttachment = [];
 
 function handleMessage(sender_psid, received_message) {
   let response;
-  if (received_message.text && sew == true) {   
-    userEnteredInfo.name = received_message.text;
-    askFabric (sender_psid);
-    sew = false;
-  }else if (received_message.text && shearing == true) {   
-    userEnteredInfo.name = received_message.text;
-    sharePicture (sender_psid);
-    shearing = false;
+  if (received_message.attachments && sharepicAttachment == true) {
+    console.log('meta data',received_message);
+    sharepicAttachment == false;
+    let attachment_url1 = received_message.attachments[0].payload.url;
+    userSendAttachment.sharepicAttachment = attachment_url1;
+    let response1 = {
+                    "attachment":{
+                          "type":"image", 
+                          "payload":{
+                            "url":attachment_url1, 
+                            "is_reusable":true
+                          }
+                        }
+                    };
+    let response2 = {"text": "Is this picture you want to share? By the way it's look good on you. :)",
+                    "quick_replies":[{
+                                        "content_type":"text",
+                                        "title":"Yes! share it.",
+                                        "payload":"shareYes"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"No..",
+                                        "payload":"shareNo"
+                                      }]
+                    };
+      callSend(sender_psid, response1).then(()=>{
+          return callSend(sender_psid, response2);
+        });   
+  }else if (received_message.text == "No..") {    
+    Reslected (sender_psid);
+  }else if (received_message.text == "Yes! share it." || received_message.text == "No.") {    
+   response = {"text": "write a caption to share with the picture."}
+   userInfo.cuscaption = true;
+  }else if (received_message.text && userInfo.cuscaption == true) {  
+   userEnteredInfo.cuscaption = received_message.text;  
+    response = {"text": "Are you sure? :)",
+                    "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Yes!",
+                                        "payload":"captionYes"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"No.",
+                                        "payload":"captionNo"
+                                      }]
+    };
+   userInfo.cuscaption = false;
+  }else if (received_message.text == "Yes!") {    
+    saveData (sender_psid);
+    response = {"text": "Thanks for your purchase in our shop. Have a good day. :)"}
   }else if (received_message.text && userInfo.chest == true) {   
     userEnteredInfo.chest =  received_message.text;
     response = {
@@ -326,58 +367,6 @@ function handleMessage(sender_psid, received_message) {
     userEnteredInfo.ankle = received_message.text;
     askforevent(sender_psid);
     userInfo.ankle = false;
-  }else if (received_message.attachments && sharepicAttachment == true) {
-    console.log('meta data',received_message);
-    sharepicAttachment == false;
-    let attachment_url1 = received_message.attachments[0].payload.url;
-    userSendAttachment.sharepicAttachment = attachment_url1;
-    let response1 = {
-      "attachment":{
-            "type":"image", 
-            "payload":{
-              "url":attachment_url1, 
-              "is_reusable":true
-            }
-          }
-    };
-    let response2 = {"text": "Is this picture you want to share? By the way it's look good on you. :)",
-                    "quick_replies":[
-                                      {
-                                        "content_type":"text",
-                                        "title":"Yes! share it.",
-                                        "payload":"shareYes"
-                                      },{
-                                        "content_type":"text",
-                                        "title":"No..",
-                                        "payload":"shareNo"
-                                      }]
-  };
-  callSend(sender_psid, response1).then(()=>{
-      return callSend(sender_psid, response2);
-    });   
-  }else if (received_message.text == "No..") {    
-    Reslected (sender_psid);
-  }else if (received_message.text == "Yes! share it." || received_message.text == "No.") {    
-   response = {"text": "write a caption to share with the picture."}
-   userInfo.cuscaption = true;
-  }else if (received_message.text && userInfo.cuscaption == true) {  
-   userEnteredInfo.cuscaption = received_message.text;  
-    response = {"text": "Are you sure? :)",
-                    "quick_replies":[
-                                      {
-                                        "content_type":"text",
-                                        "title":"Yes!",
-                                        "payload":"captionYes"
-                                      },{
-                                        "content_type":"text",
-                                        "title":"No.",
-                                        "payload":"captionNo"
-                                      }]
-    };
-   userInfo.cuscaption = false;
-  }else if (received_message.text == "Yes!") {    
-    saveData (sender_psid);
-    response = {"text": "Thanks for your purchase in our shop. Have a good day. :)"}
   }
  callSendAPI(sender_psid, response); 
 }
@@ -393,26 +382,8 @@ const handlePostback = (sender_psid, received_postback) => {
       case "order_comfirm":
         orderComfirm(sender_psid);
         break;
-      case "SEW":
-        askNameSEW (sender_psid);
-        break;
       case "share_pic":
-        askNameShare(sender_psid);
-        break;
-      case "inShop":
-        bodyMeasuring(sender_psid);
-        break;
-      case "willDeliver":
-        cuswillDeli(sender_psid);
-        break;
-      case "customizeYes":
-        customize(sender_psid);
-        break;
-      case "customizeNo":
-        askforevent(sender_psid);
-        break;
-      case "continue":
-        bodyMeasuring(sender_psid);
+        sharePicture(sender_psid);
         break;
       case "leaving":
         leaving(sender_psid);
@@ -481,10 +452,10 @@ async function greeting (sender_psid){
     });
 }
 
-const askNameSEW = (sender_psid) => {
+const sharePicture = (sender_psid) => {
   let response;
-  response = {"text": "Please tell me yor name."}
-    sew = true;
+  response = {"text": "Let's take a look at the most beautiful images of you with wearing the cloth sewn by Shwe Hsu."}
+    sharepicAttachment = true;
   callSendAPI(sender_psid, response);
 }
 
@@ -510,20 +481,6 @@ const askFabric = (sender_psid) => {
                       }
                     } 
   }
-  callSendAPI(sender_psid, response);
-}
-
-const askNameShare = (sender_psid) => {
-  let response;
-  response = {"text": "Please tell me yor name."}
-    shearing = true;
-  callSendAPI(sender_psid, response);
-}
-
-const sharePicture = (sender_psid) => {
-  let response;
-  response = {"text": "Let's take a look at the most beautiful images of you with wearing the cloth sewn by Shwe Hsu."}
-    sharepicAttachment = true;
   callSendAPI(sender_psid, response);
 }
 
@@ -787,7 +744,6 @@ const leaving = (sender_psid) => {
 function saveData(sender_psid) {
   const share_info = {
     id : sender_psid,
-    name : userEnteredInfo.name,
     customer_caption : userEnteredInfo.cuscaption,
     share_design : userSendAttachment.sharepicAttachment,
   }
