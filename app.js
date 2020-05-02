@@ -28,6 +28,7 @@ const
   express = require('express'),
   body_parser = require('body-parser'),
   firebase = require("firebase-admin"),
+  ejs = require("ejs"), 
   app = express().use(body_parser.json()); // creates express http server
 
   firebase.initializeApp({
@@ -121,6 +122,11 @@ app.get('/webhook', (req, res) => {
     }
   }
 });
+
+app.set('view engine', 'ejs');
+app.set('views', __dirname+'/views');
+
+
 
 let userInfo = {
   name : false,
@@ -418,6 +424,7 @@ async function greeting (sender_psid){
                       "title": "Pictures of others",
                       "url": "https://qph.fs.quoracdn.net/main-qimg-9e8cb835ef77635c3233c1ee716728db.webp",
                       "webview_height_ratio": "tall",
+                      "messenger_extensions": true,
                     }
                   ],
                 }]
