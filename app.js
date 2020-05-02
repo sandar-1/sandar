@@ -565,7 +565,7 @@ const yinphoneMeasuring = (sender_psid) => {
       "attachment":{
             "type":"image", 
             "payload":{
-              "url":"https://imgur.com/Gp8IdLm", 
+              "url":"https://i.imgur.com/Gp8IdLm.jpg", 
               "is_reusable":true
             }
           }
@@ -584,7 +584,7 @@ const htameinMeasuring = (sender_psid) => {
       "attachment":{
             "type":"image", 
             "payload":{
-              "url":"https://imgur.com/Gp8IdLm", 
+              "url":"https://i.imgur.com/q9tAoaL.jpg", 
               "is_reusable":true
             }
           }
@@ -603,7 +603,7 @@ const wholeMeasuring = (sender_psid) => {
       "attachment":{
             "type":"image", 
             "payload":{
-              "url":"https://www.dummies.com/wp-content/uploads/how-to-get-your-body-measurements.jpg", 
+              "url":"https://i.imgur.com/OZHccJk.jpg", 
               "is_reusable":true
             }
           }
