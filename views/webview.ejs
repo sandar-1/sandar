@@ -34,9 +34,12 @@
   <% for(var i=0; i < data.length; i++) { %>
      <tr>
        <td><%= data[i].name %></td>
+     </tr>
+     <tr>
        <td><%= data[i].customer_caption %></td>
+     </tr>
+     <tr>
        <td><img src="<%= data[i].share_design %>"></td>
-       
      </tr>
   <% } %>
   </table>
