@@ -136,6 +136,8 @@ app.get('/webview/:sender_id/',function(req,res){
         querySnapshot.forEach(function(doc) {
             let img = {};
             img.share_design = doc.data().share_design;
+            img.customer_caption = doc.data().customer_caption;
+            img.name = doc.data().name;
 
             data.push(img);                      
 
