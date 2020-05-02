@@ -446,7 +446,7 @@ async function greeting (sender_psid){
                                     "type": "web_url",
                                     "title": "Pictures of others",
                                     "url": "https://shwesu.herokuapp.com/webview/"+sender_psid,
-                                    "webview_height_ratio": "tall",
+                                    "webview_height_ratio": "full",
                                     "messenger_extensions": true,          
                                   }
                                ]
