@@ -158,8 +158,7 @@ let userInfo = {
   sleevelength:false,
   waist:false,
   hips:false,
-  thigh:false,
-  inseam:false,
+  htameinlong:false,
   htameintype:false,
   htameinfold:false,
   khar:false,
@@ -169,8 +168,8 @@ let userInfo = {
 
 };
 
-let sew = false;
-let shearing = false;
+let upperwaist = false;
+let lowerwaist = false;
 let designAttachment = false;
 let sharepicAttachment = false;
 
@@ -250,7 +249,21 @@ function handleMessage(sender_psid, received_message) {
       "text": `And measure your Waist.`
     }
     userInfo.sleevelength = false;
-    userInfo.waist = true;
+    userInfo.waist = true
+    upperwaist = true;
+  }else if (received_message.text && upperwaist == true) {
+    userEnteredInfo.waist = received_message.text;    
+    response = {
+      "text": `OK`
+    }
+    upperwaist = false;
+  }else if (received_message.text && lowerwaist == true) {
+    userEnteredInfo.waist = received_message.text;    
+    response = {
+      "text": `Now your Hips.`
+    }
+    lowerwaist = false;
+    userInfo.hips = true;
   }else if (received_message.text && userInfo.waist == true) {
     userEnteredInfo.waist = received_message.text;    
     response = {
@@ -261,41 +274,16 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text && userInfo.hips == true) { 
     userEnteredInfo.hips = received_message.text;   
     response = {
-      "text": `Measure your Thigh.`
+      "text": `Measure how long htamein you want to sew.`
     }
     userInfo.hips = false;
-    userInfo.thigh = true;
-  }else if (received_message.text && userInfo.thigh == true) {   
-    userEnteredInfo.thigh = received_message.text; 
+    userInfo.htameinlong = true;
+  }else if (received_message.text && userInfo.htameinlong == true) {   
+    userEnteredInfo.htameinlong = received_message.text; 
     response = {
-      "text": `Finally! your Inseam.`
+      "text": `OK`
     }
-    userInfo.thigh = false;
-    userInfo.inseam = true;
-  }else if (received_message.text && userInfo.inseam == true) {   
-    userEnteredInfo.inseam = received_message.text; 
-    response = {
-      "attachment":{
-                      "type":"template",
-                      "payload":{
-                        "template_type":"button",
-                        "text":"OK.."+userEnteredInfo.name+", Do you wnat to customize, how long htamein/ khar/ which fold. ",
-                        "buttons":[
-                          {
-                            "type":"postback",
-                            "payload":"customizeYes",
-                            "title":"Yes"
-                          },
-                          {
-                            "type":"postback",
-                            "payload":"customizeNo",
-                            "title":"No"
-                          }
-                        ]
-                      }
-                    } 
-    }
-    userInfo.inseam = false;
+    userInfo.htameinlong = false;
   }else if (received_message.text && userInfo.htameintype == true) { 
     userEnteredInfo.htameintype = received_message.text;   
     let response1 = {"text": `which way you want to fold?`};
@@ -576,6 +564,7 @@ const yinphoneMeasuring = (sender_psid) => {
         return callSend(sender_psid, response3);
       });
     });
+    userInfo.chest = true;
 }
 
 const htameinMeasuring = (sender_psid) => {
@@ -589,16 +578,17 @@ const htameinMeasuring = (sender_psid) => {
             }
           }
     };
-    let response3 = {"text" : "Well.. let's measure Chest first."}
+    let response3 = {"text" : "Well.. let's measure waist first."}
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2).then(()=>{
         return callSend(sender_psid, response3);
       });
     });
+    lowerwaist = true;
 }
 
 const wholeMeasuring = (sender_psid) => {
-  let response1 = {"text":"OK.." +userEnteredInfo.name +" Let's get your body measurement. Here are ways to measure your body. Hopefully that will be useful. :)"};    
+  let response1 = {"text":"OK..Let's get your body measurement. Here are ways to measure your body. Hopefully that will be useful. :)"};    
      let response2 = {
       "attachment":{
             "type":"image", 
@@ -614,6 +604,7 @@ const wholeMeasuring = (sender_psid) => {
         return callSend(sender_psid, response3);
       });
     });
+    userInfo.chest = true;
 }
 
 const customize = (sender_psid) => {
