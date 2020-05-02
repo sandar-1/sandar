@@ -389,6 +389,15 @@ const handlePostback = (sender_psid, received_postback) => {
         leaving(sender_psid);
         break;
       case "SEW":
+        askFabric(sender_psid);
+        break;
+      case "inShop":
+        chooesClothPart(sender_psid);
+        break;
+      case "willDeliver":
+        cuswillDeli(sender_psid);
+        break;
+      case "continue":
         chooesClothPart(sender_psid);
         break;
       default:
@@ -462,6 +471,55 @@ const sharePicture = (sender_psid) => {
   callSendAPI(sender_psid, response);
 }
 
+const askFabric = (sender_psid) => {
+  let response;
+  response = {"attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"Is your piece of fabric in our shop? or delivery?",
+                        "buttons":[
+                          {
+                            "type":"postback",
+                            "payload":"inShop",
+                            "title":"Is in your shop."
+                          },
+                          {
+                            "type":"postback",
+                            "payload":"willDeliver",
+                            "title":"Will be delivered"
+                          }
+                        ]
+                      }
+                    } 
+  }
+  callSendAPI(sender_psid, response);
+}
+
+const cuswillDeli = (sender_psid) => {
+    let response;
+        response = {"attachment":{
+                            "type":"template",
+                            "payload":{
+                              "template_type":"button",
+                              "text":"OK.., it can be any bus stop from Tatkone. Send with this Contact 0912345678. Click the button to continue/leave.",
+                              "buttons":[
+                                {
+                                  "type": "postback",
+                                  "title": "Continue",
+                                  "payload": "continue",
+                                },{
+                                  "type": "postback",
+                                  "title": "Sorry, I want to leave",
+                                  "payload": "leaving",
+                                }
+                              ]
+                            }
+                          } 
+                    }
+        callSendAPI(sender_psid, response);
+}
+
 const chooesClothPart = (sender_psid) => {
   let response;
   response = {"attachment":{
@@ -490,55 +548,6 @@ const chooesClothPart = (sender_psid) => {
                     } 
   }
   callSendAPI(sender_psid, response);
-}
-
-const askFabric = (sender_psid) => {
-  let response;
-  response = {"attachment":{
-                      "type":"template",
-                      "payload":{
-                        "template_type":"button",
-                        "text":userEnteredInfo.name+"...Is your piece of fabric in our shop? or delivery?",
-                        "buttons":[
-                          {
-                            "type":"postback",
-                            "payload":"inShop",
-                            "title":"Is in your shop."
-                          },
-                          {
-                            "type":"postback",
-                            "payload":"willDeliver",
-                            "title":"Will be delivered"
-                          }
-                        ]
-                      }
-                    } 
-  }
-  callSendAPI(sender_psid, response);
-}
-
-const cuswillDeli = (sender_psid) => {
-    let response;
-        response = {"attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"button",
-                              "text":"OK.." +userEnteredInfo.name +", it can be any bus stop from Tatkone. Send with this Contact 0912345678. Click the button to continue/leave.",
-                              "buttons":[
-                                {
-                                  "type": "postback",
-                                  "title": "Continue",
-                                  "payload": "continue",
-                                },{
-                                  "type": "postback",
-                                  "title": "Sorry, I want to leave",
-                                  "payload": "leaving",
-                                }
-                              ]
-                            }
-                          } 
-                    }
-        callSendAPI(sender_psid, response);
 }
 
 const bodyMeasuring = (sender_psid) => {
