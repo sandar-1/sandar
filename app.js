@@ -400,6 +400,15 @@ const handlePostback = (sender_psid, received_postback) => {
       case "continue":
         chooesClothPart(sender_psid);
         break;
+      case "yinphone":
+        yinphoneMeasuring(sender_psid);
+        break;
+      case "htamein":
+        htameinMeasuring(sender_psid);
+        break;
+      case "both_part":
+        wholeMeasuring(sender_psid);
+        break;
       default:
         defaultReply(sender_psid);
     }
@@ -550,7 +559,45 @@ const chooesClothPart = (sender_psid) => {
   callSendAPI(sender_psid, response);
 }
 
-const bodyMeasuring = (sender_psid) => {
+const yinphoneMeasuring = (sender_psid) => {
+  let response1 = {"text":"OK..Let's get your upper body measurement. Here are ways to measure your body. Hopefully that will be useful. :)"};    
+     let response2 = {
+      "attachment":{
+            "type":"image", 
+            "payload":{
+              "url":"https://imgur.com/Gp8IdLm", 
+              "is_reusable":true
+            }
+          }
+    };
+    let response3 = {"text" : "Well.. let's measure Chest first."}
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
+    });
+}
+
+const htameinMeasuring = (sender_psid) => {
+  let response1 = {"text":"OK..Let's get your lower body measurement. Here are ways to measure your body. Hopefully that will be useful. :)"};    
+     let response2 = {
+      "attachment":{
+            "type":"image", 
+            "payload":{
+              "url":"https://imgur.com/Gp8IdLm", 
+              "is_reusable":true
+            }
+          }
+    };
+    let response3 = {"text" : "Well.. let's measure Chest first."}
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
+    });
+}
+
+const wholeMeasuring = (sender_psid) => {
   let response1 = {"text":"OK.." +userEnteredInfo.name +" Let's get your body measurement. Here are ways to measure your body. Hopefully that will be useful. :)"};    
      let response2 = {
       "attachment":{
@@ -567,7 +614,6 @@ const bodyMeasuring = (sender_psid) => {
         return callSend(sender_psid, response3);
       });
     });
-    userInfo.chest = true;
 }
 
 const customize = (sender_psid) => {
