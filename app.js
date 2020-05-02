@@ -87,7 +87,7 @@ app.get('/clear',function(req,res){
 });
 
 //whitelist domains
-//eg https://newhope-grocery-store.herokuapp.com/whitelists
+//eg https://shwesu.herokuapp.com/whitelists
 app.get('/whitelists', function (req, res) {
   whitelistDomains(res);
 });
@@ -121,6 +121,34 @@ app.get('/webhook', (req, res) => {
       res.sendStatus(403);
     }
   }
+});
+
+app.set('view engine', 'ejs');
+app.set('views', __dirname+'/views');
+
+app.get('/webview/:sender_id/',function(req,res){
+    const sender_id = req.params.sender_id;
+
+    let data = [];
+
+    db.collection("share_information").limit(20).get()
+    .then(  function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            let img = {};
+            img.share_design = doc.data().share_design;
+
+            data.push(img);                      
+
+        });
+        console.log("DATA", data);
+        res.render('webview.ejs',{data:data, sender_id:sender_id}); 
+
+    }
+    
+    )
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });    
 });
 
 let userInfo = {
@@ -415,7 +443,7 @@ async function greeting (sender_psid){
                                   {
                                     "type": "web_url",
                                     "title": "Pictures of others",
-                                    "url": "https://qph.fs.quoracdn.net/main-qimg-9e8cb835ef77635c3233c1ee716728db.webp",
+                                    "url": "https://shwesu.herokuapp.com/webview/"+sender_psid,
                                     "webview_height_ratio": "tall",
                                     "messenger_extensions": true,          
                                   }
