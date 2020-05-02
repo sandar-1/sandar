@@ -249,13 +249,7 @@ function handleMessage(sender_psid, received_message) {
       "text": `And measure your Waist.`
     }
     userInfo.sleevelength = false;
-    userInfo.waist = true else upperwaist = true;
-  }else if (received_message.text && upperwaist == true) {
-    userEnteredInfo.waist = received_message.text;    
-    response = {
-      "text": `OK`
-    }
-    upperwaist = false;
+    userInfo.waist = true;
   }else if (received_message.text && lowerwaist == true) {
     userEnteredInfo.waist = received_message.text;    
     response = {
@@ -266,7 +260,7 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text && userInfo.waist == true) {
     userEnteredInfo.waist = received_message.text;    
     response = {
-      "text": `Now your Hips.`
+      "text": `Now your Hips..`
     }
     userInfo.waist = false;
     userInfo.hips = true;
