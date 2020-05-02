@@ -388,6 +388,9 @@ const handlePostback = (sender_psid, received_postback) => {
       case "leaving":
         leaving(sender_psid);
         break;
+      case "SEW":
+        chooesClothPart(sender_psid);
+        break;
       default:
         defaultReply(sender_psid);
     }
@@ -456,6 +459,36 @@ const sharePicture = (sender_psid) => {
   let response;
   response = {"text": "Let's take a look at the most beautiful images of you with wearing the cloth sewn by Shwe Hsu."}
     sharepicAttachment = true;
+  callSendAPI(sender_psid, response);
+}
+
+const chooesClothPart = (sender_psid) => {
+  let response;
+  response = {"attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"Which part do you want to sew on? Up part (Yinphone)/ bottom part (Htamein) or both",
+                        "buttons":[
+                          {
+                            "type":"postback",
+                            "payload":"yinphone",
+                            "title":"Yinphone"
+                          },
+                          {
+                            "type":"postback",
+                            "payload":"htamein",
+                            "title":"Htamein"
+                          },
+                          {
+                            "type":"postback",
+                            "payload":"both_part",
+                            "title":"Both"
+                          }
+                        ]
+                      }
+                    } 
+  }
   callSendAPI(sender_psid, response);
 }
 
