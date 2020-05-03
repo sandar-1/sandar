@@ -279,9 +279,26 @@ function handleMessage(sender_psid, received_message) {
     upperwaist = true;
   }else if (received_message.text && upperwaist == true) {
     userEnteredInfo.waist = received_message.text;    
-    response = {
-      "text": `OK`
-    }
+    response = {"attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"Would you like to customize type of cloth? eg. which fold.",
+                        "buttons":[
+                          {
+                            "type":"postback",
+                            "payload":"customize_yp",
+                            "title":"Yes"
+                          },
+                          {
+                            "type":"postback",
+                            "payload":"notcustomize_yp",
+                            "title":"No, thanks."
+                          }
+                        ]
+                      }
+                    }
+                  }
     upperwaist = false;
   }else if (received_message.text && userInfo.chest == true) {   
     userEnteredInfo.chest =  received_message.text;
@@ -327,9 +344,26 @@ function handleMessage(sender_psid, received_message) {
     userInfo.htameinlong = true;
   }else if (received_message.text && userInfo.htameinlong == true) {   
     userEnteredInfo.htameinlong = received_message.text; 
-    response = {
-      "text": `OK`
-    }
+    response = {"attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"Would you like to customize type of cloth? eg. which fold.",
+                        "buttons":[
+                          {
+                            "type":"postback",
+                            "payload":"customize_hm",
+                            "title":"Yes"
+                          },
+                          {
+                            "type":"postback",
+                            "payload":"notcustomize_hm",
+                            "title":"No, thanks."
+                          }
+                        ]
+                      }
+                    }
+                  }
     userInfo.htameinlong = false;
   }else if (received_message.text && userInfo.htameintype == true) { 
     userEnteredInfo.htameintype = received_message.text;   
@@ -377,7 +411,11 @@ function handleMessage(sender_psid, received_message) {
       });
     });
     userInfo.htameinfold = false;
-    userInfo.khar = true;
+    userInfo.anklr = true;
+  }else if (received_message.text && userInfo.ankle == true) { 
+    userEnteredInfo.ankle = received_message.text;
+    askforevent(sender_psid);
+    userInfo.ankle = false;
   }else if (received_message.text && userInfo.khar == true) { 
     userEnteredInfo.khar = received_message.text;   
     let response1 = {"text": `Would you like to cover ankle or not?`};
@@ -398,10 +436,6 @@ function handleMessage(sender_psid, received_message) {
     });
     userInfo.khar = false;
     userInfo.ankle = true;
-  }else if (received_message.text && userInfo.ankle == true) { 
-    userEnteredInfo.ankle = received_message.text;
-    askforevent(sender_psid);
-    userInfo.ankle = false;
   }
  callSendAPI(sender_psid, response); 
 }
@@ -455,6 +489,15 @@ const handlePostback = (sender_psid, received_postback) => {
         break;
       case "both_part":
         wholeMeasuring(sender_psid);
+        break;
+      case "customize_hm":
+        customizeHtamein(sender_psid);
+        break;
+      case "notcustomize_hm":
+        askforevent(sender_psid);
+        break;
+      case "notcustomize_yp":
+        askforevent(sender_psid);
         break;
       default:
         defaultReply(sender_psid);
@@ -714,7 +757,7 @@ const wholeMeasuring = (sender_psid) => {
     userInfo.chest = true;
 }
 
-const customize = (sender_psid) => {
+const customizeHtamein = (sender_psid) => {
   let response1 = {"text": "Well "+ userEnteredInfo.name};    
    let response2 = {"text" : "which type of htamein? "};
     let response3 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein.",
