@@ -243,12 +243,12 @@ function handleMessage(sender_psid, received_message) {
                         "buttons":[
                           {
                             "type":"postback",
-                            "payload":"appointmentdatepriceYes",
+                            "payload":"ap_priceYes",
                             "title":"Yes"
                           },
                           {
                             "type":"postback",
-                            "payload":"appointmentdatepriceNo",
+                            "payload":"ap_priceNo",
                             "title":"No, thanks."
                           }
                         ]
@@ -427,12 +427,6 @@ const handlePostback = (sender_psid, received_postback) => {
         break;
       case "appointmentdateYes":
         appointmentdateYes(sender_psid);
-        break;
-      case "appointmentdatepriceYes":
-        askFabric(sender_psid);
-        break;
-      case "appointmentdatepriceNo":
-        Reslected(sender_psid);
         break;
       case "appointmentdateNo":
         askFabric(sender_psid);
