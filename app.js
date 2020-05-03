@@ -152,6 +152,7 @@ app.get('/webview/:sender_id/',function(req,res){
     });    
 });
 
+
 let userInfo = {
   chest:false,
   upperArm:false,
@@ -179,6 +180,49 @@ let sharepicAttachment = false;
 
 let userEnteredInfo = {};
 let userSendAttachment = [];
+
+
+
+app.get('/privatetour/:sender_id/',function(req,res){
+    const sender_id = req.params.sender_id;
+    res.render('ypmeasuring.ejs',{title:"Upper body Measuring", sender_id:sender_id});
+});
+app.post('/privatetour',function(req,res){
+      
+      
+      let destination= req.body.destination;
+      let activities = req.body.activities;
+      let guests = req.body.guests;
+      let travel_mode = req.body.travel_mode;
+      let travel_option = req.body.travel_option;
+      let hotel = req.body.hotel;
+      let restaurent= req.body.restaurent;
+      let name  = req.body.name;
+      let mobile = req.body.mobile;
+      let sender = req.body.sender;  
+
+     let booking_number = generateRandom(5);    
+
+      db.collection('Pagodas Booking').add({
+           
+            destination:destination,
+            activities:activities,
+            guests:guests,
+            travel_mode:travel_mode,
+            travel_option:travel_option,
+            hotel:hotel,
+            restaurent:restaurent,            
+            name:name,
+            mobile:mobile,
+            booking_number:booking_number,
+          }).then(success => {             
+             showBookingNumber(sender, booking_number);   
+          }).catch(error => {
+            console.log(error);
+      });        
+});
+
+
 
 function handleMessage(sender_psid, received_message) {
   let response;
@@ -210,7 +254,28 @@ function handleMessage(sender_psid, received_message) {
       callSend(sender_psid, response1).then(()=>{
           return callSend(sender_psid, response2);
         });   
-  }else if (received_message.text == "No..") {    
+  }
+
+else if (received_message.text == "test") {    
+    response = {"attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"testing",
+                        "buttons":[
+                          {
+                            "type":"web_url",
+                            "url":"https://shwesu.herokuapp.com/privatetour/"+sender_psid,
+                            "title":"test"
+                          }
+                        ]
+                      }
+                    }
+                  }
+  }
+
+
+  else if (received_message.text == "No..") {    
     Reslected (sender_psid);
   }else if (received_message.text == "Yes! share it." || received_message.text == "No.") {    
    response = {"text": "write a caption to share with the picture."}
@@ -387,37 +452,6 @@ function handleMessage(sender_psid, received_message) {
     userInfo.htameinfold = true;
   }else if (received_message.text && userInfo.htameinfold == true) { 
     userEnteredInfo.htameinfold = received_message.text;
-    let response1 = {"text": "Khar to (end exactly with the waist),"};
-    let response2 = {"text" : "Khar tin (ends at the hips) or"};
-    let response3 = {"text" : "khar shay (ends below the hips)",
-                      "quick_replies":[
-                                      {
-                                        "content_type":"text",
-                                        "title":"Khar To",
-                                        "payload":"kto"
-                                      },{
-                                        "content_type":"text",
-                                        "title":"Khar Tin",
-                                        "payload":"ktin"
-                                      },{
-                                        "content_type":"text",
-                                        "title":"Khar Shay",
-                                        "payload":"kshay"
-                                      }]
-                    };
-    callSend(sender_psid, response1).then(()=>{
-      return callSend(sender_psid, response2).then(()=>{
-        return callSend(sender_psid, response3);
-      });
-    });
-    userInfo.htameinfold = false;
-    userInfo.anklr = true;
-  }else if (received_message.text && userInfo.ankle == true) { 
-    userEnteredInfo.ankle = received_message.text;
-    askforevent(sender_psid);
-    userInfo.ankle = false;
-  }else if (received_message.text && userInfo.khar == true) { 
-    userEnteredInfo.khar = received_message.text;   
     let response1 = {"text": `Would you like to cover ankle or not?`};
     let response2 = {"text" : "Upper ankle/cover ankle.",
                       "quick_replies":[
@@ -434,8 +468,12 @@ function handleMessage(sender_psid, received_message) {
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });
-    userInfo.khar = false;
-    userInfo.ankle = true;
+    userInfo.htameinfold = false;
+    userInfo.anklr = true;
+  }else if (received_message.text && userInfo.ankle == true) { 
+    userEnteredInfo.ankle = received_message.text;
+    response = {"text": "OK"}
+    userInfo.ankle = false;
   }
  callSendAPI(sender_psid, response); 
 }
