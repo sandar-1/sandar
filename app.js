@@ -165,6 +165,7 @@ let userInfo = {
   ankle:false,
   price : false,
   cuscaption : false,
+  appointmentdate : false,
 
 };
 
@@ -232,6 +233,12 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text == "Yes!") {    
     saveData (sender_psid);
     response = {"text": "Thanks for your purchase in our shop. Have a good day. :)"}
+  }else if (received_message.text && userInfo.appointmentdate == true) {   
+    userEnteredInfo.appointmentdate =  received_message.text;
+    response = {
+      "text": `Now Upper arm.`
+    }
+    userInfo.appointmentdate = false;
   }else if (received_message.text && upperchest == true) {   
     userEnteredInfo.chest =  received_message.text;
     response = {
@@ -541,6 +548,7 @@ const appointmentdateYes = (sender_psid) => {
                                   }
                                 ]
               }
+              userInfo.appointmentdate = true;
   callSendAPI(sender_psid, response);
 }
 
