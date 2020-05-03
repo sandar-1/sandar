@@ -183,31 +183,45 @@ let userSendAttachment = [];
 
 
 
-app.get('/webview/:sender_id',function(req,res){
+app.get('/privatetour/:sender_id/',function(req,res){
     const sender_id = req.params.sender_id;
-    res.render('ypmeasuring.ejs',{title:"Hello!! from WebView", sender_id:sender_id});
+    res.render('ypmeasuring.ejs',{title:"Upper body Measuring", sender_id:sender_id});
 });
-
-app.post('/webview',upload.single('file'),function(req,res){
-       
+app.post('/privatetour',function(req,res){
+      
+      
+      let destination= req.body.destination;
+      let activities = req.body.activities;
+      let guests = req.body.guests;
+      let travel_mode = req.body.travel_mode;
+      let travel_option = req.body.travel_option;
+      let hotel = req.body.hotel;
+      let restaurent= req.body.restaurent;
       let name  = req.body.name;
-      let email = req.body.email;
-      let img_url = APP_URL + "/" + req.file.path;
-      let sender = req.body.sender;    
+      let mobile = req.body.mobile;
+      let sender = req.body.sender;  
 
-      
-      
-      db.collection('webview').add({
-            name: name,
-            email: email,
-            image: img_url
-          }).then(success => {   
-             console.log("DATA SAVED")
-             thankyouReply(sender, name, img_url);    
+     let booking_number = generateRandom(5);    
+
+      db.collection('Pagodas Booking').add({
+           
+            destination:destination,
+            activities:activities,
+            guests:guests,
+            travel_mode:travel_mode,
+            travel_option:travel_option,
+            hotel:hotel,
+            restaurent:restaurent,            
+            name:name,
+            mobile:mobile,
+            booking_number:booking_number,
+          }).then(success => {             
+             showBookingNumber(sender, booking_number);   
           }).catch(error => {
             console.log(error);
       });        
 });
+
 
 
 function handleMessage(sender_psid, received_message) {
@@ -251,7 +265,7 @@ else if (received_message.text == "test") {
                         "buttons":[
                           {
                             "type":"web_url",
-                            "url":"https://shwesu.herokuapp.com/webview/"+sender_psid,
+                            "url":"https://shwesu.herokuapp.com/privatetour/"+sender_psid,
                             "title":"test",
                             "webview_height_ratio": "tall",
                             "messenger_extensions": true, 
