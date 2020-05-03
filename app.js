@@ -152,7 +152,6 @@ app.get('/webview/:sender_id/',function(req,res){
     });    
 });
 
-
 let userInfo = {
   chest:false,
   upperArm:false,
@@ -180,49 +179,6 @@ let sharepicAttachment = false;
 
 let userEnteredInfo = {};
 let userSendAttachment = [];
-
-
-
-app.get('/privatetour/:sender_id/',function(req,res){
-    const sender_id = req.params.sender_id;
-    res.render('ypmeasuring.ejs',{title:"Upper body Measuring", sender_id:sender_id});
-});
-app.post('/privatetour',function(req,res){
-      
-      
-      let destination= req.body.destination;
-      let activities = req.body.activities;
-      let guests = req.body.guests;
-      let travel_mode = req.body.travel_mode;
-      let travel_option = req.body.travel_option;
-      let hotel = req.body.hotel;
-      let restaurent= req.body.restaurent;
-      let name  = req.body.name;
-      let mobile = req.body.mobile;
-      let sender = req.body.sender;  
-
-     let booking_number = generateRandom(5);    
-
-      db.collection('Pagodas Booking').add({
-           
-            destination:destination,
-            activities:activities,
-            guests:guests,
-            travel_mode:travel_mode,
-            travel_option:travel_option,
-            hotel:hotel,
-            restaurent:restaurent,            
-            name:name,
-            mobile:mobile,
-            booking_number:booking_number,
-          }).then(success => {             
-             showBookingNumber(sender, booking_number);   
-          }).catch(error => {
-            console.log(error);
-      });        
-});
-
-
 
 function handleMessage(sender_psid, received_message) {
   let response;
@@ -254,30 +210,7 @@ function handleMessage(sender_psid, received_message) {
       callSend(sender_psid, response1).then(()=>{
           return callSend(sender_psid, response2);
         });   
-  }
-
-else if (received_message.text == "test") {    
-    response = {"attachment":{
-                      "type":"template",
-                      "payload":{
-                        "template_type":"button",
-                        "text":"testing",
-                        "buttons":[
-                          {
-                            "type":"web_url",
-                            "url":"https://shwesu.herokuapp.com/privatetour/"+sender_psid,
-                            "title":"test",
-                            "webview_height_ratio": "tall",
-                            "messenger_extensions": true, 
-                          }
-                        ]
-                      }
-                    }
-                  }
-  }
-
-
-  else if (received_message.text == "No..") {    
+  }else if (received_message.text == "No..") {    
     Reslected (sender_psid);
   }else if (received_message.text == "Yes! share it." || received_message.text == "No.") {    
    response = {"text": "write a caption to share with the picture."}
