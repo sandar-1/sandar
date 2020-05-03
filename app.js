@@ -239,7 +239,7 @@ function handleMessage(sender_psid, received_message) {
                       "type":"template",
                       "payload":{
                         "template_type":"button",
-                        "text":"Will extra amount 20000 to the current price.",
+                        "text":"Will add an extra amount 20000 to the current price.",
                         "buttons":[
                           {
                             "type":"postback",
@@ -428,6 +428,12 @@ const handlePostback = (sender_psid, received_postback) => {
         break;
       case "appointmentdateYes":
         appointmentdateYes(sender_psid);
+        break;
+      case "ap_priceYes":
+        askFabric(sender_psid);
+        break;
+      case "ap_priceNo":
+        Reslected(sender_psid);
         break;
       case "appointmentdateNo":
         askFabric(sender_psid);
