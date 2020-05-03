@@ -266,7 +266,9 @@ else if (received_message.text == "test") {
                           {
                             "type":"web_url",
                             "url":"https://shwesu.herokuapp.com/privatetour/"+sender_psid,
-                            "title":"test"
+                            "title":"test",
+                            "webview_height_ratio": "tall",
+                            "messenger_extensions": true, 
                           }
                         ]
                       }
