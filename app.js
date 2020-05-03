@@ -400,6 +400,12 @@ const handlePostback = (sender_psid, received_postback) => {
         leaving(sender_psid);
         break;
       case "SEW":
+        askAppointmentdate(sender_psid);
+        break;
+      case "appointmentdateYes":
+        appointmentdateYes(sender_psid);
+        break;
+      case "appointmentdateNo":
         askFabric(sender_psid);
         break;
       case "inShop":
@@ -488,6 +494,53 @@ const sharePicture = (sender_psid) => {
   let response;
   response = {"text": "Let's take a look at the most beautiful images of you with wearing the cloth sewn by Shwe Hsu."}
     sharepicAttachment = true;
+  callSendAPI(sender_psid, response);
+}
+
+const askAppointmentdate = (sender_psid) => {
+  let response;
+  response = {"attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"It usually takes about a month to complete the cloth. Are you in hurry?",
+                        "buttons":[
+                          {
+                            "type":"postback",
+                            "payload":"appointmentdateYes",
+                            "title":"Yes"
+                          },
+                          {
+                            "type":"postback",
+                            "payload":"appointmentdateNo",
+                            "title":"Will be delivered"
+                          }
+                        ]
+                      }
+                    } 
+  }
+  callSendAPI(sender_psid, response);
+}
+
+const appointmentdateYes = (sender_psid) => {
+  let response;
+  response = { "text": "well... you can get in 2days/ 4days and 6days. It has to pay more than the existing price.",
+                "quick_replies":[
+                                  {
+                                   "content_type":"text",
+                                   "title":"in 2days",
+                                   "payload":"2"
+                                  },{
+                                   "content_type":"text",
+                                   "title":"in 4days",
+                                   "payload":"4"
+                                  },{
+                                   "content_type":"text",
+                                   "title":"in 6days",
+                                   "payload":"6"
+                                  }
+                                ]
+              }
   callSendAPI(sender_psid, response);
 }
 
