@@ -165,7 +165,6 @@ let userInfo = {
   ankle:false,
   price : false,
   cuscaption : false,
-  appointmentdate : false,
 
 };
 
@@ -233,29 +232,6 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text == "Yes!") {    
     saveData (sender_psid);
     response = {"text": "Thanks for your purchase in our shop. Have a good day. :)"}
-  }else if (received_message.text && userInfo.appointmentdate == true) {   
-    userEnteredInfo.appointmentdate =  received_message.text;
-    response = {
-      "attachment":{
-                      "type":"template",
-                      "payload":{
-                        "template_type":"button",
-                        "text":"Will be added 20000 to the current price.",
-                        "buttons":[
-                          {
-                            "type":"postback",
-                            "payload":"appointmentdatepriceYes",
-                            "title":"Yes"
-                          },
-                          {
-                            "type":"postback",
-                            "payload":"appointmentdatepriceNo",
-                            "title":"No, thanks."
-                          }
-                        ]
-                      }
-    }
-    userInfo.appointmentdate = false;
   }else if (received_message.text && upperchest == true) {   
     userEnteredInfo.chest =  received_message.text;
     response = {
@@ -429,12 +405,6 @@ const handlePostback = (sender_psid, received_postback) => {
       case "appointmentdateYes":
         appointmentdateYes(sender_psid);
         break;
-      case "appointmentdatepriceYes":
-        askFabric(sender_psid);
-        break;
-      case "appointmentdatepriceNo":
-        Reslected(sender_psid);
-        break;
       case "appointmentdateNo":
         askFabric(sender_psid);
         break;
@@ -571,7 +541,6 @@ const appointmentdateYes = (sender_psid) => {
                                   }
                                 ]
               }
-              userInfo.appointmentdate = true;
   callSendAPI(sender_psid, response);
 }
 
