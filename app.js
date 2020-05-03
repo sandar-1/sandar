@@ -254,6 +254,7 @@ function handleMessage(sender_psid, received_message) {
                         ]
                       }
                     }
+                  }
     userInfo.appointmentdate = false;
   }else if (received_message.text && upperchest == true) {   
     userEnteredInfo.chest =  received_message.text;
