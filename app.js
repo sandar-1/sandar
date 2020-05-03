@@ -165,7 +165,7 @@ let userInfo = {
   ankle:false,
   price : false,
   cuscaption : false,
-  appointmentdate : false;
+  appointmentdate : false,
 
 };
 
