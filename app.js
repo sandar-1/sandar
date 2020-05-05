@@ -572,6 +572,10 @@ function handleMessage(sender_psid, received_message) {
     userEnteredInfo.ankle = received_message.text;
     askforevent(sender_psid);
    lowerankle = false;
+  }else if (received_message.text && userInfo.price == true) { 
+    userEnteredInfo.price = received_message.text;   
+    response = {"text" : "OK"}
+    userInfo.price = false;
   }
  callSendAPI(sender_psid, response); 
 }
@@ -649,6 +653,18 @@ const handlePostback = (sender_psid, received_postback) => {
         break;
       case "CASUAL":
         casual_event(sender_psid);
+        break;
+      case "choose_wedding":
+        wedding_price(sender_psid);
+        break;
+      case "choose_occasion":
+        occasion_price(sender_psid);
+        break;
+      case "choose_convocation":
+        convocation_price(sender_psid);
+        break;
+      case "choose_casual":
+        casual_price(sender_psid);
         break;
       default:
         defaultReply(sender_psid);
@@ -1083,7 +1099,6 @@ const askforevent = (sender_psid) => {
   });
 }
 
-/*function for Wedding event*/
 const wedding_event = (sender_psid) => {
   let response1 = {"text" : "For a wedding dress there are two prices around 200000 Ks and 300000 Ks. "};
     let response2 = { "attachment":{
@@ -1135,7 +1150,24 @@ const wedding_event = (sender_psid) => {
     });
 }
 
-/*function for Occasion event*/
+const wedding_price = (sender_psid) => {
+ let response;
+  response = {"text" : "To make sure your decision please send us price.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"300000 Ks",
+                                        "payload":"wedding_price"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"200000 Ks",
+                                        "payload":"wedding_price"
+                                      }]
+                    };
+                    userInfo.price = true;
+  callSendAPI(sender_psid, response);
+}
+
 const occasion_event = (sender_psid) => {
   let response1 = {"text" : "For a Occasion dress there are two prices around 20000 Ks and 15000 Ks. "};
     let response2 = { "attachment":{
@@ -1187,7 +1219,24 @@ const occasion_event = (sender_psid) => {
     });
 }
 
-/*function for Convocation event*/
+const occasion_price = (sender_psid) => {
+ let response;
+  response = {"text" : "To make sure your decision please send us price.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"20000 Ks",
+                                        "payload":"wedding_price"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"15000 Ks",
+                                        "payload":"wedding_price"
+                                      }]
+                    };
+                    userInfo.price = true;
+  callSendAPI(sender_psid, response);
+}
+
 const convocation_event = (sender_psid) => {
   let response1 = {"text" : "For a Convocation dress there are two prices around 30000 Ks and 20000 Ks. Same as occasion dress but little fancy. :)  "};
     let response2 = { "attachment":{
@@ -1239,7 +1288,24 @@ const convocation_event = (sender_psid) => {
     });
 }
 
-/*function for Casual event*/
+const convocation_price = (sender_psid) => {
+ let response;
+  response = {"text" : "To make sure your decision please send us price.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"30000 Ks",
+                                        "payload":"wedding_price"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"20000 Ks",
+                                        "payload":"wedding_price"
+                                      }]
+                    };
+                    userInfo.price = true;
+  callSendAPI(sender_psid, response);
+}
+
 const casual_event = (sender_psid) => {
   let response1 = {"text" : "For a Casual dress there are two prices around 10000 Ks and 8000 Ks. Same as occasion dress but little fancy. :)  "};
     let response2 = { "attachment":{
@@ -1289,6 +1355,24 @@ const casual_event = (sender_psid) => {
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });
+}
+
+const casual_price = (sender_psid) => {
+ let response;
+  response = {"text" : "To make sure your decision please send us price.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"10000 Ks",
+                                        "payload":"wedding_price"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"8000 Ks",
+                                        "payload":"wedding_price"
+                                      }]
+                    };
+                    userInfo.price = true;
+  callSendAPI(sender_psid, response);
 }
 
 const orderComfirm = (sender_psid) => {
