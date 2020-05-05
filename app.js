@@ -768,11 +768,11 @@ const askforevent = (sender_psid) => {
         "elements":[
            {
             "title":"Wedding?",
-            "image_url":"https://www.gomyanmartours.com/wp-content/uploads/2014/11/Rituals-in-Myanmar-Wedding-Ceremony.jpg",
+            "image_url":"https://i.imgur.com/SjMKwkM.jpg",
             "subtitle":"👰",
             "default_action": {
               "type": "web_url",
-              "url": "https://www.gomyanmartours.com/wp-content/uploads/2014/11/Rituals-in-Myanmar-Wedding-Ceremony.jpg",
+              "url": "https://i.imgur.com/SjMKwkM.jpg",
               "webview_height_ratio": "tall",
             },
             "buttons":[
@@ -785,11 +785,11 @@ const askforevent = (sender_psid) => {
           },
           {
             "title":"Occasion?",
-            "image_url":"https://www.exoticvoyages.com/uploads/images/userfiles/2015/09/Unidentify-Myanmar-women-in-Festival-Procession-near-Heritage-Site-in-BaganMyanmar.jpg",
+            "image_url":"https://i.imgur.com/X5Xfu2Y.jpg",
             "subtitle":"💃",
             "default_action": {
               "type": "web_url",
-              "url": "https://www.exoticvoyages.com/uploads/images/userfiles/2015/09/Unidentify-Myanmar-women-in-Festival-Procession-near-Heritage-Site-in-BaganMyanmar.jpg",
+              "url": "https://i.imgur.com/X5Xfu2Y.jpg",
               "webview_height_ratio": "tall",
             },
             "buttons":[
@@ -802,11 +802,11 @@ const askforevent = (sender_psid) => {
           },
           {
             "title":"For a Convocation?",
-            "image_url":"https://www.tic.edu.mm/wp-content/uploads/2018/05/31311065_776695719183162_6949008994670709342_o-1024x680.jpg",
+            "image_url":"https://i.imgur.com/YJrUEOQ.jpg",
             "subtitle":"👩‍🎓 ",
             "default_action": {
               "type": "web_url",
-              "url": "https://www.tic.edu.mm/wp-content/uploads/2018/05/31311065_776695719183162_6949008994670709342_o-1024x680.jpg",
+              "url": "https://i.imgur.com/YJrUEOQ.jpg",
               "webview_height_ratio": "tall",
             },
             "buttons":[
@@ -819,11 +819,11 @@ const askforevent = (sender_psid) => {
           },
           {
             "title":"Casual?",
-            "image_url":"https://www.mmtimes.com/sites/mmtimes.com/files/styles/mmtimes_ratio_d_feature_detail/public/images/mte/2017/educentre/jan-2017/7-failed-system.jpg?itok=PPR9BjOg",
+            "image_url":"https://i.imgur.com/vt8aPXr.jpg",
             "subtitle":"🤷",
             "default_action": {
               "type": "web_url",
-              "url": "https://www.mmtimes.com/sites/mmtimes.com/files/styles/mmtimes_ratio_d_feature_detail/public/images/mte/2017/educentre/jan-2017/7-failed-system.jpg?itok=PPR9BjOg",
+              "url": "https://i.imgur.com/vt8aPXr.jpg",
               "webview_height_ratio": "tall",
             },
             "buttons":[
