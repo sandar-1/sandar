@@ -492,7 +492,7 @@ function handleMessage(sender_psid, received_message) {
     userInfo.khar = true;
   }else if (received_message.text && userInfo.khar == true) { 
     userEnteredInfo.khar = received_message.text;   
-    let response = {"text" : "OK"}
+    response = {"text" : "OK"}
     userInfo.khar = false;
   }
   else if (received_message.text && lowerwaist == true) {
@@ -532,6 +532,50 @@ function handleMessage(sender_psid, received_message) {
                     }
                   }
     lowerhmlong = false;
+  }else if (received_message.text && lowerhmtype == true) { 
+    userEnteredInfo.htameintype = received_message.text;   
+    let response1 = {"text": `which way you want to fold?`};
+    let response2 = {"text" : "Left fold/Right fold.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Left fold",
+                                        "payload":"lf"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Right fold",
+                                        "payload":"rf"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+    lowerhmtype = false;
+    lowerhmfold = true;
+  }else if (received_message.text && lowerhmfold == true) { 
+    userEnteredInfo.htameinfold = received_message.text;
+    let response1 = {"text": `Would you like to cover ankle or not?`};
+    let response2 = {"text" : "Upper ankle/cover ankle.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Upper Ankle",
+                                        "payload":"ua"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Cover Ankle",
+                                        "payload":"ca"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+    lowerhmfold = false;
+    lowerankle = true;
+  }else if (received_message.text && lowerankle == true) { 
+    userEnteredInfo.ankle = received_message.text;
+    response = {"text" : "OK"}
+   lowerankle = false;
   }
  callSendAPI(sender_psid, response); 
 }
@@ -588,6 +632,9 @@ const handlePostback = (sender_psid, received_postback) => {
         break;
       case "customize_wh":
         customizewhole(sender_psid);
+        break;
+      case "customize_hm":
+        customizeHtamein(sender_psid);
         break;
       case "customize_yp":
         customizeYinhpone(sender_psid);
