@@ -1085,7 +1085,7 @@ const askforevent = (sender_psid) => {
 
 /*function for Wedding event*/
 const wedding_event = (sender_psid) => {
-  let response1 = {"text" : "For a wedding dress there are two prices at 150000 Ks and 300000 Ks. "};
+  let response1 = {"text" : "For a wedding dress there are two prices around 200000 Ks and 300000 Ks. "};
     let response2 = { "attachment":{
                         "type":"template",
                         "payload":{
@@ -1120,7 +1120,7 @@ const wedding_event = (sender_psid) => {
                               "buttons":[
                                {
                                   "type":"postback",
-                                  "title":"I choose 150000 Ks.",
+                                  "title":"I choose 200000 Ks.",
                                   "payload":"choose_wedding"
                                 }              
                               ]      
@@ -1137,7 +1137,7 @@ const wedding_event = (sender_psid) => {
 
 /*function for Occasion event*/
 const occasion_event = (sender_psid) => {
-  let response1 = {"text" : "For a Occasion dress there are two prices at 20000 Ks and 10000 Ks. "};
+  let response1 = {"text" : "For a Occasion dress there are two prices around 20000 Ks and 15000 Ks. "};
     let response2 = { "attachment":{
                         "type":"template",
                         "payload":{
@@ -1172,7 +1172,7 @@ const occasion_event = (sender_psid) => {
                               "buttons":[
                                {
                                   "type":"postback",
-                                  "title":"I choose 10000 Ks.",
+                                  "title":"I choose 15000 Ks.",
                                   "payload":"choose_occasion"
                                 }              
                               ]      
@@ -1189,7 +1189,7 @@ const occasion_event = (sender_psid) => {
 
 /*function for Convocation event*/
 const convocation_event = (sender_psid) => {
-  let response1 = {"text" : "For a Convocation dress there are two prices at 30000 Ks and 20000 Ks. Same as occasion dress but little fancy. :)  "};
+  let response1 = {"text" : "For a Convocation dress there are two prices around 30000 Ks and 20000 Ks. Same as occasion dress but little fancy. :)  "};
     let response2 = { "attachment":{
                         "type":"template",
                         "payload":{
@@ -1241,7 +1241,7 @@ const convocation_event = (sender_psid) => {
 
 /*function for Casual event*/
 const casual_event = (sender_psid) => {
-  let response1 = {"text" : "For a Casual dress there are two prices at 10000 Ks and 8000 Ks. Same as occasion dress but little fancy. :)  "};
+  let response1 = {"text" : "For a Casual dress there are two prices around 10000 Ks and 8000 Ks. Same as occasion dress but little fancy. :)  "};
     let response2 = { "attachment":{
                         "type":"template",
                         "payload":{
