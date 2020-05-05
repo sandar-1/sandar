@@ -159,9 +159,11 @@ let userInfo = {
   waist:false,
   hips:false,
   htameinlong:false,
+  yinphonetype:false,
+  sleevetype:false,
+  khar:false,
   htameintype:false,
   htameinfold:false,
-  khar:false,
   ankle:false,
   price : false,
   cuscaption : false,
@@ -173,6 +175,9 @@ let upperchest = false;
 let upperupperArm = false;
 let uppersleevelength = false;
 let upperwaist = false;
+let upperyptype = false;
+let uppersleevetype = false;
+let upperkhar = false;
 let lowerwaist = false;
 let lowerhips = false;
 let lowerhmlong = false;
@@ -297,7 +302,7 @@ function handleMessage(sender_psid, received_message) {
                           },
                           {
                             "type":"postback",
-                            "payload":"notcustomize_yp",
+                            "payload":"notcustomize",
                             "title":"No, thanks."
                           }
                         ]
@@ -350,12 +355,12 @@ function handleMessage(sender_psid, received_message) {
                         "buttons":[
                           {
                             "type":"postback",
-                            "payload":"customize_hm",
+                            "payload":"customize_wh",
                             "title":"Yes"
                           },
                           {
                             "type":"postback",
-                            "payload":"notcustomize_hm",
+                            "payload":"notcustomize",
                             "title":"No, thanks."
                           }
                         ]
@@ -405,9 +410,92 @@ function handleMessage(sender_psid, received_message) {
     userInfo.ankle = true;
   }else if (received_message.text && userInfo.ankle == true) { 
     userEnteredInfo.ankle = received_message.text;
-    response = {"text": "OK"}
+    let response1 = {"text" : "which type of yinphone? "};
+    let response2 = {
+        "attachment":{
+            "type":"image", 
+            "payload":{
+              "url":"https://i.imgur.com/nWjNZpT.jpg", 
+              "is_reusable":true
+            }
+          }
+    };
+    let response3 = {"text" : "Yin ci/Yinphone/Back zip.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Yin ci",
+                                        "payload":"yc"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Yinphone",
+                                        "payload":"yp"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Back zip",
+                                        "payload":"bz"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
+    });
     userInfo.ankle = false;
-  }else if (received_message.text && lowerwaist == true) {
+    userInfo.yinphonetype = true;
+  }else if (received_message.text && userInfo.yinphonetype == true) { 
+    userEnteredInfo.yinphonetype = received_message.text;   
+    let response1 = {"text": `How much sleeve length you want?`};
+    let response2 = {"text" : "Short sleeve/Long sleeve.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Short sleeve",
+                                        "payload":"SSL"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Long sleeve",
+                                        "payload":"LSL"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+    userInfo.yinphonetype = false;
+    userInfo.sleevetype = true;
+  }else if (received_message.text && userInfo.sleevetype == true) { 
+    userEnteredInfo.sleevetype = received_message.text;
+    let response1 = {"text": "Khar to (end exactly with the waist),"};
+    let response2 = {"text" : "Khar tin (ends at the hips) or"};
+    let response3 = {"text" : "khar shay (ends below the hips)",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Khar To",
+                                        "payload":"kto"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Khar Tin",
+                                        "payload":"ktin"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Khar Shay",
+                                        "payload":"kshay"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
+    });
+    userInfo.sleevetype = false;
+    userInfo.khar = true;
+  }else if (received_message.text && userInfo.khar == true) { 
+    userEnteredInfo.khar = received_message.text;   
+    let response = {"text" : "OK"}
+    userInfo.khar = false;
+  }
+  else if (received_message.text && lowerwaist == true) {
     userEnteredInfo.waist = received_message.text;    
     response = {
       "text": `Now your Hips.`
@@ -436,7 +524,7 @@ function handleMessage(sender_psid, received_message) {
                           },
                           {
                             "type":"postback",
-                            "payload":"notcustomize_hm",
+                            "payload":"notcustomize",
                             "title":"No, thanks."
                           }
                         ]
@@ -444,50 +532,6 @@ function handleMessage(sender_psid, received_message) {
                     }
                   }
     lowerhmlong = false;
-  }else if (received_message.text && lowerhmtype == true) { 
-    userEnteredInfo.htameintype = received_message.text;   
-    let response1 = {"text": `which way you want to fold?`};
-    let response2 = {"text" : "Left fold/Right fold.",
-                      "quick_replies":[
-                                      {
-                                        "content_type":"text",
-                                        "title":"Left fold",
-                                        "payload":"lf"
-                                      },{
-                                        "content_type":"text",
-                                        "title":"Right fold",
-                                        "payload":"rf"
-                                      }]
-                    };
-    callSend(sender_psid, response1).then(()=>{
-      return callSend(sender_psid, response2);
-    });
-    lowerhmtype = false;
-    lowerhmfold = true;
-  }else if (received_message.text && lowerhmfold == true) { 
-    userEnteredInfo.htameinfold = received_message.text;
-    let response1 = {"text": `Would you like to cover ankle or not?`};
-    let response2 = {"text" : "Upper ankle/cover ankle.",
-                      "quick_replies":[
-                                      {
-                                        "content_type":"text",
-                                        "title":"Upper Ankle",
-                                        "payload":"ua"
-                                      },{
-                                        "content_type":"text",
-                                        "title":"Cover Ankle",
-                                        "payload":"ca"
-                                      }]
-                    };
-    callSend(sender_psid, response1).then(()=>{
-      return callSend(sender_psid, response2);
-    });
-    lowerhmfold = false;
-    lowerankle = true;
-  }else if (received_message.text && lowerankle == true) { 
-    userEnteredInfo.ankle = received_message.text;
-    response = {"text": "OK"}
-    lowerankle = false;
   }
  callSendAPI(sender_psid, response); 
 }
@@ -542,13 +586,13 @@ const handlePostback = (sender_psid, received_postback) => {
       case "both_part":
         wholeMeasuring(sender_psid);
         break;
-      case "customize_hm":
-        customizeHtamein(sender_psid);
+      case "customize_wh":
+        customizewhole(sender_psid);
         break;
-      case "notcustomize_hm":
-        askforevent(sender_psid);
+      case "customize_yp":
+        customizeYinhpone(sender_psid);
         break;
-      case "notcustomize_yp":
+      case "notcustomize":
         askforevent(sender_psid);
         break;
       default:
@@ -809,10 +853,35 @@ const wholeMeasuring = (sender_psid) => {
     userInfo.chest = true;
 }
 
-const customizeHtamein = (sender_psid) => {
-  let response1 = {"text": "Well "+ userEnteredInfo.name};    
-   let response2 = {"text" : "which type of htamein? "};
-    let response3 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein.",
+const customizeHtamein = (sender_psid) => {   
+   let response1 = {"text" : "which type of htamein? "};
+    let response2 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Cheik",
+                                        "payload":"c"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Hpi",
+                                        "payload":"hpi"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Simple",
+                                        "payload":"s"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
+    });
+    lowerhmtype = true;
+}
+
+const customizewhole = (sender_psid) => {   
+   let response1 = {"text" : "which type of htamein? "};
+    let response2 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein.",
                       "quick_replies":[
                                       {
                                         "content_type":"text",
@@ -834,6 +903,41 @@ const customizeHtamein = (sender_psid) => {
       });
     });
     userInfo.htameintype = true;
+}
+
+const customizeYinhpone = (sender_psid) => {   
+   let response1 = {"text" : "which type of yinphone? "};
+    let response2 = {
+        "attachment":{
+            "type":"image", 
+            "payload":{
+              "url":"https://i.imgur.com/nWjNZpT.jpg", 
+              "is_reusable":true
+            }
+          }
+    };
+    let response3 = {"text" : "Yin ci/Yinphone/Back zip.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Yin ci",
+                                        "payload":"yc"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Yinphone",
+                                        "payload":"yp"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Back zip",
+                                        "payload":"bz"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
+    });
+    userInfo.yinphonetype = true;
 }
 
 const askforevent = (sender_psid) => {
