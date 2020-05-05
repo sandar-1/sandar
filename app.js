@@ -175,9 +175,6 @@ let upperchest = false;
 let upperupperArm = false;
 let uppersleevelength = false;
 let upperwaist = false;
-let upperyptype = false;
-let uppersleevetype = false;
-let upperkhar = false;
 let lowerwaist = false;
 let lowerhips = false;
 let lowerhmlong = false;
@@ -491,11 +488,10 @@ function handleMessage(sender_psid, received_message) {
     userInfo.sleevetype = false;
     userInfo.khar = true;
   }else if (received_message.text && userInfo.khar == true) { 
-    userEnteredInfo.khar = received_message.text;   
-    response = {"text" : "OK"}
+    userEnteredInfo.khar = received_message.text;  
+    askforevent(sender_psid);
     userInfo.khar = false;
-  }
-  else if (received_message.text && lowerwaist == true) {
+  }else if (received_message.text && lowerwaist == true) {
     userEnteredInfo.waist = received_message.text;    
     response = {
       "text": `Now your Hips.`
@@ -574,7 +570,7 @@ function handleMessage(sender_psid, received_message) {
     lowerankle = true;
   }else if (received_message.text && lowerankle == true) { 
     userEnteredInfo.ankle = received_message.text;
-    response = {"text" : "OK"}
+    askforevent(sender_psid);
    lowerankle = false;
   }
  callSendAPI(sender_psid, response); 
