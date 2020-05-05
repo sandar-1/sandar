@@ -1093,11 +1093,11 @@ const wedding_event = (sender_psid) => {
                           "elements":[
                              {
                               "title":"Wedding dress with htamein saim.",
-                              "image_url":"https://i.pinimg.com/originals/30/5b/7e/305b7e837297d439044f8f5519f505f0.jpg",
+                              "image_url":"https://i.imgur.com/inWnMz4.jpg",
                               "subtitle":"Will include much beaded embroidery design and that will look like an ancient princess dress.",
                               "default_action": {
                                 "type": "web_url",
-                                "url": "https://i.pinimg.com/originals/30/5b/7e/305b7e837297d439044f8f5519f505f0.jpg",
+                                "url": "https://i.imgur.com/inWnMz4.jpg",
                                 "webview_height_ratio": "tall",
                               },
                               "buttons":[
@@ -1110,11 +1110,11 @@ const wedding_event = (sender_psid) => {
                             },
                             {
                               "title":"Simple wedding dress?",
-                              "image_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTLpF_QJWgoY4cHy1pZsxDfQc3Q8YuvTXIjC3oc7Jpbqv3KoX63&usqp=CAU",
+                              "image_url":"https://i.imgur.com/dYyYWvX.jpg",
                               "subtitle":"will not include much beaded embroidery design and longer htamein saim.",
                               "default_action": {
                                 "type": "web_url",
-                                "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTLpF_QJWgoY4cHy1pZsxDfQc3Q8YuvTXIjC3oc7Jpbqv3KoX63&usqp=CAU",
+                                "url": "https://i.imgur.com/dYyYWvX.jpg",
                                 "webview_height_ratio": "tall",
                               },
                               "buttons":[
@@ -1145,11 +1145,11 @@ const occasion_event = (sender_psid) => {
                           "elements":[
                              {
                               "title":"Occasion dress with beaded embroidery.",
-                              "image_url":"https://i.pinimg.com/originals/19/e5/92/19e59201981b2ec2b0e74535507411d4.jpg",
+                              "image_url":"https://i.imgur.com/Tw7b2I0.jpg",
                               "subtitle":"Will include beaded embroidery.",
                               "default_action": {
                                 "type": "web_url",
-                                "url": "https://i.pinimg.com/originals/19/e5/92/19e59201981b2ec2b0e74535507411d4.jpg",
+                                "url": "https://i.imgur.com/Tw7b2I0.jpg",
                                 "webview_height_ratio": "tall",
                               },
                               "buttons":[
@@ -1162,11 +1162,11 @@ const occasion_event = (sender_psid) => {
                             },
                             {
                               "title":"Simple occasion dress.",
-                              "image_url":"https://i.pinimg.com/originals/b4/ba/d8/b4bad8617c6ef7f2e1dba80a8a21e70a.jpg",
+                              "image_url":"https://i.imgur.com/eerHAYn.jpg",
                               "subtitle":"will not include beaded embroidery.",
                               "default_action": {
                                 "type": "web_url",
-                                "url": "https://i.pinimg.com/originals/b4/ba/d8/b4bad8617c6ef7f2e1dba80a8a21e70a.jpg",
+                                "url": "https://i.imgur.com/eerHAYn.jpg",
                                 "webview_height_ratio": "tall",
                               },
                               "buttons":[
@@ -1197,11 +1197,11 @@ const convocation_event = (sender_psid) => {
                           "elements":[
                              {
                               "title":"Convocation dress with beaded embroidery.",
-                              "image_url":"https://www.textiledirectory.com.mm/images/hsuyeehtet/8.1/3.jpg",
+                              "image_url":"https://i.imgur.com/jF2f9nZ.jpg",
                               "subtitle":"Will include much beaded embroidery and more fancy.",
                               "default_action": {
                                 "type": "web_url",
-                                "url": "https://www.textiledirectory.com.mm/images/hsuyeehtet/8.1/3.jpg",
+                                "url": "https://i.imgur.com/jF2f9nZ.jpg",
                                 "webview_height_ratio": "tall",
                               },
                               "buttons":[
@@ -1214,11 +1214,11 @@ const convocation_event = (sender_psid) => {
                             },
                             {
                               "title":"Simple Convocation dress.",
-                              "image_url":"https://qph.fs.quoracdn.net/main-qimg-9e8cb835ef77635c3233c1ee716728db.webp",
+                              "image_url":"https://i.imgur.com/D7Gtsu7.jpg",
                               "subtitle":"will not much beaded embroidery.",
                               "default_action": {
                                 "type": "web_url",
-                                "url": "https://qph.fs.quoracdn.net/main-qimg-9e8cb835ef77635c3233c1ee716728db.webp",
+                                "url": "https://i.imgur.com/D7Gtsu7.jpg",
                                 "webview_height_ratio": "tall",
                               },
                               "buttons":[
@@ -1249,11 +1249,11 @@ const casual_event = (sender_psid) => {
                           "elements":[
                              {
                               "title":"Fancy Casual dress.",
-                              "image_url":"https://i.pinimg.com/736x/1d/cd/88/1dcd88d9fb72287be584e4ab12168d1f.jpg",
+                              "image_url":"https://i.imgur.com/SHcBq7h.jpg",
                               "subtitle":"Will be fancy and uptodate design.",
                               "default_action": {
                                 "type": "web_url",
-                                "url": "https://i.pinimg.com/736x/1d/cd/88/1dcd88d9fb72287be584e4ab12168d1f.jpg",
+                                "url": "https://i.imgur.com/SHcBq7h.jpg",
                                 "webview_height_ratio": "tall",
                               },
                               "buttons":[
@@ -1266,11 +1266,11 @@ const casual_event = (sender_psid) => {
                             },
                             {
                               "title":"Simple Casual dress.",
-                              "image_url":"https://scontent-yyz1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/c0.179.1440.1440a/s640x640/62401071_2331144570297641_8473543770910940542_n.jpg?_nc_ht=scontent-yyz1-1.cdninstagram.com&_nc_cat=105&_nc_ohc=GRfCBd9gmBMAX8hvJMG&oh=9a51ee59ed6a84cb822fa59c6a4abf71&oe=5ECE844A",
+                              "image_url":"https://i.imgur.com/rT7LMi6.jpg",
                               "subtitle":"Just a simple.",
                               "default_action": {
                                 "type": "web_url",
-                                "url": "https://scontent-yyz1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/c0.179.1440.1440a/s640x640/62401071_2331144570297641_8473543770910940542_n.jpg?_nc_ht=scontent-yyz1-1.cdninstagram.com&_nc_cat=105&_nc_ohc=GRfCBd9gmBMAX8hvJMG&oh=9a51ee59ed6a84cb822fa59c6a4abf71&oe=5ECE844A",
+                                "url": "https://i.imgur.com/rT7LMi6.jpg",
                                 "webview_height_ratio": "tall",
                               },
                               "buttons":[
