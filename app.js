@@ -975,6 +975,7 @@ const yinphoneMeasuring = (sender_psid) => {
       });
     });
     upperchest = true;
+    userInfo.sewpart = false;
 }
 
 const htameinMeasuring = (sender_psid) => {
@@ -995,6 +996,7 @@ const htameinMeasuring = (sender_psid) => {
       });
     });
     lowerwaist = true;
+    userInfo.sewpart = false;
 }
 
 const wholeMeasuring = (sender_psid) => {
@@ -1015,6 +1017,7 @@ const wholeMeasuring = (sender_psid) => {
       });
     });
     userInfo.chest = true;
+    userInfo.sewpart = false;
 }
 
 const customizewhole = (sender_psid) => {   
