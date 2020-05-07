@@ -168,6 +168,7 @@ let userInfo = {
   price : false,
   cuscaption : false,
   appointmentdate : false,
+  earlyAPprice :false,
 
 };
 
@@ -249,9 +250,10 @@ function handleMessage(sender_psid, received_message) {
                         "text":"Will add an extra amount 20000 to the current price.",
                         "buttons":[
                           {
-                            "type":"postback",
+                            "type":"text",
                             "payload":"ap_priceYes",
                             "title":"Yes"
+                           userInfo.earlyAPprice = true;
                           },
                           {
                             "type":"postback",
@@ -671,7 +673,6 @@ const handlePostback = (sender_psid, received_postback) => {
     }
 }
 
-/*function to greet user*/
 async function greeting (sender_psid){  
   let user = await getUserProfile(sender_psid);
   let response1 = {"text": "Mingalaba..🙋‍♀ Warmly welcome to Shwe Hsu.🙆‍♀"};
