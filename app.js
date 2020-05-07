@@ -178,7 +178,7 @@ app.get('/adchoices/:sender_id/',function(req,res){
 });
 
 let userInfo = {
-  sewpart:false;
+  sewpart:false,
   chest:false,
   upperArm:false,
   sleevelength:false,
