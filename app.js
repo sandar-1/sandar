@@ -252,8 +252,7 @@ function handleMessage(sender_psid, received_message) {
                           {
                             "type":"postback",
                             "payload":"ap_priceYes",
-                            "title":"Yes",
-    userInfo.earlyAPprice = true;
+                            "title":"Yes"
                           },
                           {
                             "type":"postback",
@@ -265,6 +264,7 @@ function handleMessage(sender_psid, received_message) {
                     }
                   }
     userInfo.appointmentdate = false;
+    userInfo.earlyAPprice = true;
   }else if (received_message.text && upperchest == true) {   
     userEnteredInfo.chest =  received_message.text;
     response = {
@@ -787,6 +787,8 @@ const appointmentdateYes = (sender_psid) => {
 }
 
 const askFabric = (sender_psid) => {
+  If (earlyAppointment == true) then userInfo.earlyAPprice = 20000;
+  console.log ('priceSave');
   let response;
   response = {"attachment":{
                       "type":"template",
