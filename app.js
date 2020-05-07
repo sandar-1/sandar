@@ -655,7 +655,7 @@ function handleMessage(sender_psid, received_message) {
 
   else if (received_message.text == "test") {    
     response = {
-      "text" : "part"+ userEnteredInfo.sewpart;
+      "text" : "part"+ userEnteredInfo.sewpart
     }
   }
  callSendAPI(sender_psid, response); 
