@@ -182,6 +182,8 @@ let lowerhmlong = false;
 let lowerhmtype = false;
 let lowerhmfold = false;
 let lowerankle = false;
+let wedding = false;
+let occasion = false;
 let designAttachment = false;
 let sharepicAttachment = false;
 
@@ -609,8 +611,10 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text == "No.") {    
     response = {"text" : "Please send me again"}
     designAttachment == true;
-  }else if (received_message.text == "Yes.") {    
-    response = {"text" : "Please send me again"}
+  }else if (received_message.text == "Yes." && wedding == true) {    
+    wedding_event(sender_psid);
+  }else if (received_message.text == "Yes." && occasion == true) {    
+    occasion_event(sender_psid);
   }
 
   else if (received_message.text == "test") {    
@@ -691,9 +695,11 @@ const handlePostback = (sender_psid, received_postback) => {
         break;
       case "WEDDING":
         asking_cus_design(sender_psid);
+        wedding = true;
         break;
       case "OCCASION":
         asking_cus_design(sender_psid);
+        occasion = true;
         break;
       case "CONVO":
         asking_cus_design(sender_psid);
