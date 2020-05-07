@@ -1130,6 +1130,32 @@ const asking_cus_design = (sender_psid) => {
     designAttachment = true;
 }
 
+const adchoices = (sender_psid) => {
+  let response1 = {
+                    "attachment":{
+                          "type":"image", 
+                          "payload":{
+                            "url":attachment_url, 
+                            "is_reusable":true
+                          }
+                        }
+                    };
+    let response2 = {"text": "Is this the design you want to sew and look alike?",
+                    "quick_replies":[{
+                                        "content_type":"text",
+                                        "title":"Yes.",
+                                        "payload":"designYes"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"No.",
+                                        "payload":"designNo"
+                                      }]
+                    };
+      callSend(sender_psid, response1).then(()=>{
+          return callSend(sender_psid, response2);
+        }); 
+}
+
 const askforevent = (sender_psid) => {
   let response1 = {"text":"For what kind of event?"};
   let response2 = {"text":"These are the kinds of sewing we do in our shop."};
