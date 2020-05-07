@@ -578,6 +578,8 @@ function handleMessage(sender_psid, received_message) {
     userEnteredInfo.price = received_message.text;   
     response = {"text" : "OK"}
     userInfo.price = false;
+  }else if (received_message.text == "test") {    
+    response = {"text": "earlyAPprice"+userEnteredInfo.earlyAPprice;}
   }
  callSendAPI(sender_psid, response); 
 }
@@ -607,8 +609,8 @@ const handlePostback = (sender_psid, received_postback) => {
         break;
       case "ap_priceYes":
         askFabric(sender_psid);
-if (userInfo.earlyAPprice == true) { userEnteredInfo.earlyAPprice = 20000;
-  console.log ('priceSave');};
+        if (userInfo.earlyAPprice == true) { userEnteredInfo.earlyAPprice = 20000;
+          console.log ('priceSave');};
         break;
       case "ap_priceNo":
         Reslected(sender_psid);
