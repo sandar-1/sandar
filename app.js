@@ -607,6 +607,9 @@ const handlePostback = (sender_psid, received_postback) => {
         break;
       case "ap_priceYes":
         askFabric(sender_psid);
+        
+  If (userInfo.earlyAPprice == true) then userEnteredInfo.earlyAPprice = 20000;
+  console.log ('priceSave');
         break;
       case "ap_priceNo":
         Reslected(sender_psid);
@@ -810,8 +813,6 @@ const askFabric = (sender_psid) => {
   }
   callSendAPI(sender_psid, response);
 }
-  If (userInfo.earlyAPprice == true) then userEnteredInfo.earlyAPprice = 20000;
-  console.log ('priceSave');
 
 const cuswillDeli = (sender_psid) => {
     let response;
