@@ -578,14 +578,15 @@ function handleMessage(sender_psid, received_message) {
     userEnteredInfo.price = received_message.text;   
     response = {"text" : "OK"}
     userInfo.price = false;
-  }else if (userInfo.earlyAPprice == true) { userEnteredInfo.earlyAPprice = 20000;
-  console.log ('priceSave');}
+  }
  callSendAPI(sender_psid, response); 
 }
 
 const handlePostback = (sender_psid, received_postback) => {
   let payload = received_postback.payload;
   console.log('ok')
+if (userInfo.earlyAPprice == true) { userEnteredInfo.earlyAPprice = 20000;
+  console.log ('priceSave');};
 
     switch (payload) {
       case "get_started":
