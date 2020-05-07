@@ -620,10 +620,10 @@ function handleMessage(sender_psid, received_message) {
     occasion_event(sender_psid);
     occasion = false;
   }else if (received_message.text == "Yes." && convo == true) {    
-    wedding_event(sender_psid);
+    convocation_event(sender_psid);
     convo = false;
   }else if (received_message.text == "Yes." && casual == true) {    
-    wedding_event(sender_psid);
+    casual_event(sender_psid);
     casual = false;
   }
 
