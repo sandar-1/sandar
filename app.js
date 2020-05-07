@@ -614,7 +614,13 @@ function handleMessage(sender_psid, received_message) {
   }
 
   else if (received_message.text == "test") {    
-    response = {"text": "earlyAPprice"+userSendAttachment.designAttachment}
+    response = {"attachment":{
+                          "type":"image", 
+                          "payload":{
+                            "url":userSendAttachment.designAttachment, 
+                            "is_reusable":true
+                          }
+                        }}
   }
  callSendAPI(sender_psid, response); 
 }
