@@ -579,7 +579,7 @@ function handleMessage(sender_psid, received_message) {
     response = {"text" : "OK"}
     userInfo.price = false;
   }else if (received_message.text == "test") {    
-    response = {"text": "earlyAPprice"+userEnteredInfo.earlyAPprice;}
+    response = {"text": "earlyAPprice"+userEnteredInfo.earlyAPprice}
   }
  callSendAPI(sender_psid, response); 
 }
