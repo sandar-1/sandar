@@ -152,6 +152,31 @@ app.get('/webview/:sender_id/',function(req,res){
     });    
 });
 
+app.get('/adchoices/:sender_id/',function(req,res){
+    const sender_id = req.params.sender_id;
+
+    let data = [];
+
+    db.collection("wedding").limit(20).get()
+    .then(  function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            let img = {};
+            img.weddingPic = doc.data().weddingPic;
+
+            data.push(img);                      
+
+        });
+        console.log("DATA", data);
+        res.render('wedding.ejs',{data:data, sender_id:sender_id}); 
+
+    }
+    
+    )
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });    
+});
+
 let userInfo = {
   chest:false,
   upperArm:false,
@@ -578,11 +603,7 @@ function handleMessage(sender_psid, received_message) {
     userEnteredInfo.ankle = received_message.text;
     askforevent(sender_psid);
    lowerankle = false;
-  }else if (received_message.text && userInfo.price == true) { 
-    userEnteredInfo.price = received_message.text;   
-    response = {"text" : "OK"}
-    userInfo.price = false;
-  }if (received_message.attachments && designAttachment == true) {
+  }else if (received_message.attachments && designAttachment == true) {
     console.log('meta data',received_message);
     designAttachment == false;
     let attachment_url = received_message.attachments[0].payload.url;
@@ -625,6 +646,10 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text == "Yes." && casual == true) {    
     casual_event(sender_psid);
     casual = false;
+  }else if (received_message.text && userInfo.price == true) { 
+    userEnteredInfo.price = received_message.text;   
+    response = {"text" : "OK"}
+    userInfo.price = false;
   }
 
   else if (received_message.text == "test") {    
@@ -1088,7 +1113,10 @@ const asking_cus_design = (sender_psid) => {
                           {
                             "type":"web_url",
                             "url":"https://www.messenger.com",
-                            "title":"Admin chocies"
+                            "title":"Admin chocies",
+                            "url": "https://shwesu.herokuapp.com/adchoices/"+sender_psid,
+                            "webview_height_ratio": "tall",
+                            "messenger_extensions": true,  
                           }
                         ]
                       }
@@ -1355,7 +1383,7 @@ const convocation_event = (sender_psid) => {
                             {
                               "title":"Simple Convocation dress.",
                               "image_url":"https://i.imgur.com/D7Gtsu7.jpg",
-                              "subtitle":"will not much beaded embroidery.",
+                              "subtitle":"will not include much beaded embroidery.",
                               "default_action": {
                                 "type": "web_url",
                                 "url": "https://i.imgur.com/D7Gtsu7.jpg",
@@ -1563,7 +1591,6 @@ const leaving = (sender_psid) => {
   callSendAPI(sender_psid, response);
 }
 
-/*function function save data to firebase*/
 function saveData(sender_psid) {
   const share_info = {
     id : sender_psid,
