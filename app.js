@@ -177,17 +177,8 @@ app.get('/adchoices/:sender_id/',function(req,res){
     });    
 });
 
-app.get('/test',function(req,res){    
-    res.render('test.ejs');
-});
-
-app.post('/test',function(req,res){
-    const sender_psid = req.body.sender_id;     
-    let response = {"text": "You  click delete button"};
-    callSend(sender_psid, response);
-});
-
 let userInfo = {
+  sewpart:false;
   chest:false,
   upperArm:false,
   sleevelength:false,
@@ -664,25 +655,9 @@ function handleMessage(sender_psid, received_message) {
 
   else if (received_message.text == "test") {    
     response = {
-      "attachment":{
-                    "type":"template",
-                    "payload":{
-                      "template_type":"button",
-                      "text":"testing",
-                      "buttons":[
-                                  {
-                                    "type": "web_url",
-                                    "title": "Pictures of others",
-                                    "url": "https://shwesu.herokuapp.com/test/"+sender_psid,
-                                    "webview_height_ratio": "tall",
-                                    "messenger_extensions": true,          
-                                  }
-                               ]
-                           }
-                    } 
+      "text" : "part"+ userEnteredInfo.sewpart
     }
   }
-  
  callSendAPI(sender_psid, response); 
 }
 
@@ -731,12 +706,18 @@ const handlePostback = (sender_psid, received_postback) => {
         break;
       case "yinphone":
         yinphoneMeasuring(sender_psid);
+        if (userInfo.sewpart == true) { userEnteredInfo.sewpart = Yinphone;
+          console.log ('priceSave');};
         break;
       case "htamein":
         htameinMeasuring(sender_psid);
+        if (userInfo.sewpart == true) { userEnteredInfo.sewpart = Htamein;
+          console.log ('priceSave');};
         break;
       case "both_part":
         wholeMeasuring(sender_psid);
+        if (userInfo.sewpart == true) { userEnteredInfo.sewpart = Both;
+          console.log ('priceSave');};
         break;
       case "customize_wh":
         customizewhole(sender_psid);
@@ -972,6 +953,7 @@ const chooesClothPart = (sender_psid) => {
                       }
                     } 
   }
+  userInfo.sewpart = true;
   callSendAPI(sender_psid, response);
 }
 
@@ -1150,32 +1132,6 @@ const asking_cus_design = (sender_psid) => {
       });
     });
     designAttachment = true;
-}
-
-const adchoices = (sender_psid) => {
-  let response1 = {
-                    "attachment":{
-                          "type":"image", 
-                          "payload":{
-                            "url":attachment_url, 
-                            "is_reusable":true
-                          }
-                        }
-                    };
-    let response2 = {"text": "Is this the design you want to sew and look alike?",
-                    "quick_replies":[{
-                                        "content_type":"text",
-                                        "title":"Yes.",
-                                        "payload":"designYes"
-                                      },{
-                                        "content_type":"text",
-                                        "title":"No.",
-                                        "payload":"designNo"
-                                      }]
-                    };
-      callSend(sender_psid, response1).then(()=>{
-          return callSend(sender_psid, response2);
-        }); 
 }
 
 const askforevent = (sender_psid) => {
