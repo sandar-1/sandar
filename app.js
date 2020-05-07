@@ -592,7 +592,7 @@ function handleMessage(sender_psid, received_message) {
                           }
                         }
                     };
-    let response2 = {"text": "Is this the design you want to sew?",
+    let response2 = {"text": "Is this the design you want to sew and look alike?",
                     "quick_replies":[{
                                         "content_type":"text",
                                         "title":"Yes!",
@@ -606,7 +606,7 @@ function handleMessage(sender_psid, received_message) {
       callSend(sender_psid, response1).then(()=>{
           return callSend(sender_psid, response2);
         });   
-  }else if (received_message.text == "No..") {    
+  }else if (received_message.text == "No.") {    
     response = {"text" : "Please send me again"}
     designAttachment == true;
   }
