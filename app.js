@@ -578,7 +578,40 @@ function handleMessage(sender_psid, received_message) {
     userEnteredInfo.price = received_message.text;   
     response = {"text" : "OK"}
     userInfo.price = false;
-  }else if (received_message.text == "test") {    
+  }if (received_message.attachments && designAttachment == true) {
+    console.log('meta data',received_message);
+    designAttachment == false;
+    let attachment_url = received_message.attachments[0].payload.url;
+    userSendAttachment.sharepicAttachment = attachment_url;
+    let response1 = {
+                    "attachment":{
+                          "type":"image", 
+                          "payload":{
+                            "url":attachment_url, 
+                            "is_reusable":true
+                          }
+                        }
+                    };
+    let response2 = {"text": "Is this the design you want to sew?",
+                    "quick_replies":[{
+                                        "content_type":"text",
+                                        "title":"Yes!",
+                                        "payload":"designYes"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"No.",
+                                        "payload":"designNo"
+                                      }]
+                    };
+      callSend(sender_psid, response1).then(()=>{
+          return callSend(sender_psid, response2);
+        });   
+  }else if (received_message.text == "No..") {    
+    response = {"text" : "Please send me again"}
+    designAttachment == true;
+  }
+
+  else if (received_message.text == "test") {    
     response = {"text": "earlyAPprice"+userEnteredInfo.earlyAPprice}
   }
  callSendAPI(sender_psid, response); 
@@ -649,16 +682,16 @@ const handlePostback = (sender_psid, received_postback) => {
         askforevent(sender_psid);
         break;
       case "WEDDING":
-        wedding_event(sender_psid);
+        asking_cus_design(sender_psid);
         break;
       case "OCCASION":
-        occasion_event(sender_psid);
+        asking_cus_design(sender_psid);
         break;
       case "CONVO":
-        convocation_event(sender_psid);
+        asking_cus_design(sender_psid);
         break;
       case "CASUAL":
-        casual_event(sender_psid);
+        asking_cus_design(sender_psid);
         break;
       case "choose_wedding":
         wedding_price(sender_psid);
@@ -1014,6 +1047,33 @@ const customizeYinhpone = (sender_psid) => {
       });
     });
     userInfo.yinphonetype = true;
+}
+
+const asking_cus_design = (sender_psid) => {
+  let response1 = {"text":"Well...."};
+  let response2 = {"text":"Send me the design you want to sew. If not you can get some idea from viewing admin chocies."};
+  let response3 = {
+                    "attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"Send if you have one. :)",
+                        "buttons":[
+                          {
+                            "type":"web_url",
+                            "url":"https://www.messenger.com",
+                            "title":"Admin chocies"
+                          }
+                        ]
+                      }
+                    }
+  };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
+    });
+    designAttachment = true;
 }
 
 const askforevent = (sender_psid) => {
