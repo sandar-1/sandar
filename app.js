@@ -609,10 +609,12 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text == "No.") {    
     response = {"text" : "Please send me again"}
     designAttachment == true;
+  }else if (received_message.text == "Yes!") {    
+    response = {"text" : "Please send me again"}
   }
 
   else if (received_message.text == "test") {    
-    response = {"text": "earlyAPprice"+userEnteredInfo.earlyAPprice}
+    response = {"text": "earlyAPprice"+userSendAttachment.designAttachment}
   }
  callSendAPI(sender_psid, response); 
 }
