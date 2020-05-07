@@ -787,7 +787,7 @@ const appointmentdateYes = (sender_psid) => {
 }
 
 const askFabric = (sender_psid) => {
-  If (earlyAppointment == true) then userInfo.earlyAPprice = 20000;
+  If (userInfo.earlyAPprice == true) then userEnteredInfo.earlyAPprice = 20000;
   console.log ('priceSave');
   let response;
   response = {"attachment":{
