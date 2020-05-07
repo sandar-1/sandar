@@ -50,19 +50,7 @@
         xhr.open("POST", url , true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify(data)); 
-      } 
-      
-   
-      const windowShut = () => {
-        MessengerExtensions.requestCloseBrowser(function success() {
-          console.log("success");   
-          send();       
-        }, function error(err) {
-          console.log(err);
-        });
-      }
-      
-      document.getElementById("btn-del").addEventListener("click", windowShut);       
+      }     
      
       
      
