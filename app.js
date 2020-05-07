@@ -252,7 +252,8 @@ function handleMessage(sender_psid, received_message) {
                           {
                             "type":"postback",
                             "payload":"ap_priceYes",
-                            "title":"Yes"
+                            "title":"Yes",
+                            userInfo.earlyAPprice = true;
                           },
                           {
                             "type":"postback",
@@ -264,7 +265,6 @@ function handleMessage(sender_psid, received_message) {
                     }
                   }
     userInfo.appointmentdate = false;
-    userInfo.earlyAPprice = true;
   }else if (received_message.text && upperchest == true) {   
     userEnteredInfo.chest =  received_message.text;
     response = {
