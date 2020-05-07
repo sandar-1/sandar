@@ -250,7 +250,7 @@ function handleMessage(sender_psid, received_message) {
                         "text":"Will add an extra amount 20000 to the current price.",
                         "buttons":[
                           {
-                            "type":"text",
+                            "type":"postback",
                             "payload":"ap_priceYes",
                             "title":"Yes"
                           },
