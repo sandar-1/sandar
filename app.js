@@ -615,12 +615,16 @@ function handleMessage(sender_psid, received_message) {
     designAttachment == true;
   }else if (received_message.text == "Yes." && wedding == true) {    
     wedding_event(sender_psid);
+    wedding = false;
   }else if (received_message.text == "Yes." && occasion == true) {    
     occasion_event(sender_psid);
+    occasion = false;
   }else if (received_message.text == "Yes." && convo == true) {    
     wedding_event(sender_psid);
+    convo = false;
   }else if (received_message.text == "Yes." && casual == true) {    
     wedding_event(sender_psid);
+    casual = false;
   }
 
   else if (received_message.text == "test") {    
