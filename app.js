@@ -582,7 +582,7 @@ function handleMessage(sender_psid, received_message) {
     console.log('meta data',received_message);
     designAttachment == false;
     let attachment_url = received_message.attachments[0].payload.url;
-    userSendAttachment.sharepicAttachment = attachment_url;
+    userSendAttachment.designAttachment = attachment_url;
     let response1 = {
                     "attachment":{
                           "type":"image", 
@@ -595,7 +595,7 @@ function handleMessage(sender_psid, received_message) {
     let response2 = {"text": "Is this the design you want to sew and look alike?",
                     "quick_replies":[{
                                         "content_type":"text",
-                                        "title":"Yes!",
+                                        "title":"Yes.",
                                         "payload":"designYes"
                                       },{
                                         "content_type":"text",
@@ -609,7 +609,7 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text == "No.") {    
     response = {"text" : "Please send me again"}
     designAttachment == true;
-  }else if (received_message.text == "Yes!") {    
+  }else if (received_message.text == "Yes.") {    
     response = {"text" : "Please send me again"}
   }
 
