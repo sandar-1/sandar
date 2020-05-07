@@ -253,8 +253,7 @@ function handleMessage(sender_psid, received_message) {
                             "type":"postback",
                             "payload":"ap_priceYes",
                             "title":"Yes"
-                          }
-    userInfo.earlyAPprice = true;,
+                          },
                           {
                             "type":"postback",
                             "payload":"ap_priceNo",
@@ -265,6 +264,7 @@ function handleMessage(sender_psid, received_message) {
                     }
                   }
     userInfo.appointmentdate = false;
+    userInfo.earlyAPprice = true;
   }else if (received_message.text && upperchest == true) {   
     userEnteredInfo.chest =  received_message.text;
     response = {
@@ -585,8 +585,6 @@ function handleMessage(sender_psid, received_message) {
 const handlePostback = (sender_psid, received_postback) => {
   let payload = received_postback.payload;
   console.log('ok')
-if (userInfo.earlyAPprice == true) { userEnteredInfo.earlyAPprice = 20000;
-  console.log ('priceSave');};
 
     switch (payload) {
       case "get_started":
@@ -609,6 +607,8 @@ if (userInfo.earlyAPprice == true) { userEnteredInfo.earlyAPprice = 20000;
         break;
       case "ap_priceYes":
         askFabric(sender_psid);
+if (userInfo.earlyAPprice == true) { userEnteredInfo.earlyAPprice = 20000;
+  console.log ('priceSave');};
         break;
       case "ap_priceNo":
         Reslected(sender_psid);
