@@ -252,7 +252,8 @@ function handleMessage(sender_psid, received_message) {
                           {
                             "type":"postback",
                             "payload":"ap_priceYes",
-                            "title":"Yes"
+                            "title":"Yes",
+    userInfo.earlyAPprice = true;
                           },
                           {
                             "type":"postback",
