@@ -787,8 +787,6 @@ const appointmentdateYes = (sender_psid) => {
 }
 
 const askFabric = (sender_psid) => {
-  If (userInfo.earlyAPprice == true) then userEnteredInfo.earlyAPprice = 20000;
-  console.log ('priceSave');
   let response;
   response = {"attachment":{
                       "type":"template",
@@ -812,6 +810,8 @@ const askFabric = (sender_psid) => {
   }
   callSendAPI(sender_psid, response);
 }
+  If (userInfo.earlyAPprice == true) then userEnteredInfo.earlyAPprice = 20000;
+  console.log ('priceSave');
 
 const cuswillDeli = (sender_psid) => {
     let response;
