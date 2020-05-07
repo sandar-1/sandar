@@ -177,6 +177,16 @@ app.get('/adchoices/:sender_id/',function(req,res){
     });    
 });
 
+app.get('/test',function(req,res){    
+    res.render('test.ejs');
+});
+
+app.post('/test',function(req,res){
+    const sender_psid = req.body.sender_id;     
+    let response = {"text": "You  click delete button"};
+    callSend(sender_psid, response);
+});
+
 let userInfo = {
   chest:false,
   upperArm:false,
@@ -653,14 +663,26 @@ function handleMessage(sender_psid, received_message) {
   }
 
   else if (received_message.text == "test") {    
-    response = {"attachment":{
-                          "type":"image", 
-                          "payload":{
-                            "url":userSendAttachment.designAttachment, 
-                            "is_reusable":true
-                          }
-                        }}
+    response = {
+      "attachment":{
+                    "type":"template",
+                    "payload":{
+                      "template_type":"button",
+                      "text":"testing",
+                      "buttons":[
+                                  {
+                                    "type": "web_url",
+                                    "title": "Pictures of others",
+                                    "url": "https://shwesu.herokuapp.com/test/"+sender_psid,
+                                    "webview_height_ratio": "tall",
+                                    "messenger_extensions": true,          
+                                  }
+                               ]
+                           }
+                    } 
+    }
   }
+  
  callSendAPI(sender_psid, response); 
 }
 
