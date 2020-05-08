@@ -838,6 +838,9 @@ const handlePostback = (sender_psid, received_postback) => {
       case "hmRecord_right":
         saveData_HM(sender_psid);
         break;
+      case "hmRecord_no":
+        hmRecord_no(sender_psid);
+        break;
       case "choose_wedding":
         wedding_price(sender_psid);
         break;
@@ -1687,7 +1690,7 @@ const showHMrecord = (sender_psid) => {
                         {
                           "type": "postback",
                           "title": "No",
-                          "payload": "yes_right_measurment",
+                          "payload": "hmRecord_no",
                         }
                       ],
                     }]
@@ -1706,6 +1709,23 @@ const showHMrecord = (sender_psid) => {
           });
         });
       });
+    });
+}
+
+const hmRecord_no = (sender_psid) => {
+  let response1 = {"text" : "Please type the key word that you want to change."};
+    let response2 = { 
+       "attachment":{
+            "type":"image", 
+            "payload":{
+              "url":"https://i.imgur.com/XY0ktpT.png", 
+              "is_reusable":true
+            }
+          }
+         };
+    
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
     });
 }
 
