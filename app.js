@@ -827,12 +827,12 @@ const handlePostback = (sender_psid, received_postback) => {
         break;
       case "OCCASION_HM":
         showHMrecord(sender_psid);
-        if (yinphoneprice == true) { userEnteredInfo.price = 10000;
+        if (htameinprice == true) { userEnteredInfo.price = 10000;
           console.log ('priceSave');};
         break;
       case "CASUAL_HM":
         showHMrecord(sender_psid);
-        if (yinphoneprice == true) { userEnteredInfo.price = 5000;
+        if (htameinprice == true) { userEnteredInfo.price = 5000;
           console.log ('priceSave');};
         break;
       case "hmRecord_right":
