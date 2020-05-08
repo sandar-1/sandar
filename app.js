@@ -153,11 +153,10 @@ app.get('/webview/:sender_id/',function(req,res){
 });
 
 app.get('/adchoices/:sender_id/',function(req,res){
-    const sender_id = req.params.sender_id;
-
-    let data = [];
-
-    db.collection("wedding").limit(20).get()
+  const sender_id = req.params.sender_id;
+  let data = [];
+    if (wedding == true) {
+       db.collection("wedding").limit(20).get()
     .then(  function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
             let img = {};
@@ -168,17 +167,16 @@ app.get('/adchoices/:sender_id/',function(req,res){
         });
         console.log("DATA", data);
         res.render('wedding.ejs',{data:data, sender_id:sender_id}); 
-
+        }
+      )
     }
-    
-    )
+   
     .catch(function(error) {
         console.log("Error getting documents: ", error);
     });    
 });
 
 let userInfo = {
-  sewpart:false,
   chest:false,
   upperArm:false,
   sleevelength:false,
@@ -212,6 +210,9 @@ let wedding = false;
 let occasion = false;
 let convo = false;
 let casual = false;
+let yinphone = false;
+let htamein = false;
+let both = false;
 let designAttachment = false;
 let sharepicAttachment = false;
 
@@ -654,9 +655,13 @@ function handleMessage(sender_psid, received_message) {
   }
 
   else if (received_message.text == "test") {    
-    response = {
-      "text" : "part"+ userEnteredInfo.sewpart
-    }
+    response = {"attachment":{
+                          "type":"image", 
+                          "payload":{
+                            "url":userSendAttachment.designAttachment, 
+                            "is_reusable":true
+                          }
+                        }}
   }
  callSendAPI(sender_psid, response); 
 }
@@ -706,18 +711,15 @@ const handlePostback = (sender_psid, received_postback) => {
         break;
       case "yinphone":
         yinphoneMeasuring(sender_psid);
-        if (userInfo.sewpart == true) { userEnteredInfo.sewpart = Yinphone;
-          console.log ('priceSave');};
+        yinphone = true;
         break;
       case "htamein":
         htameinMeasuring(sender_psid);
-        if (userInfo.sewpart == true) { userEnteredInfo.sewpart = Htamein;
-          console.log ('priceSave');};
+        htamein = true;
         break;
       case "both_part":
         wholeMeasuring(sender_psid);
-        if (userInfo.sewpart == true) { userEnteredInfo.sewpart = Both;
-          console.log ('priceSave');};
+        both = true;
         break;
       case "customize_wh":
         customizewhole(sender_psid);
@@ -953,7 +955,6 @@ const chooesClothPart = (sender_psid) => {
                       }
                     } 
   }
-  userInfo.sewpart = true;
   callSendAPI(sender_psid, response);
 }
 
@@ -975,7 +976,6 @@ const yinphoneMeasuring = (sender_psid) => {
       });
     });
     upperchest = true;
-    userInfo.sewpart = false;
 }
 
 const htameinMeasuring = (sender_psid) => {
@@ -996,7 +996,6 @@ const htameinMeasuring = (sender_psid) => {
       });
     });
     lowerwaist = true;
-    userInfo.sewpart = false;
 }
 
 const wholeMeasuring = (sender_psid) => {
@@ -1017,7 +1016,6 @@ const wholeMeasuring = (sender_psid) => {
       });
     });
     userInfo.chest = true;
-    userInfo.sewpart = false;
 }
 
 const customizewhole = (sender_psid) => {   
