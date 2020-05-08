@@ -217,6 +217,8 @@ let casual = false;
 let yinphone = false;
 let htamein = false;
 let both = false;
+let yinphoneprice = false;
+let htameinprice = false;
 let designAttachment = false;
 let sharepicAttachment = false;
 
@@ -813,6 +815,26 @@ const handlePostback = (sender_psid, received_postback) => {
         asking_cus_design(sender_psid);
         casual = true;
         break;
+      case "OCCASION_YP":
+        asking_cus_design_YP(sender_psid);
+        if (yinphoneprice == true) { userEnteredInfo.price = 10000;
+          console.log ('priceSave');};
+        break;
+      case "CASUAL_YP":
+        asking_cus_design_YP(sender_psid);
+        if (yinphoneprice == true) { userEnteredInfo.price = 5000;
+          console.log ('priceSave');};
+        break;
+      case "OCCASION_HM":
+        asking_cus_design(sender_psid);
+        if (yinphoneprice == true) { userEnteredInfo.price = 10000;
+          console.log ('priceSave');};
+        break;
+      case "CASUAL_HM":
+        asking_cus_design(sender_psid);
+        if (yinphoneprice == true) { userEnteredInfo.price = 5000;
+          console.log ('priceSave');};
+        break;
       case "choose_wedding":
         wedding_price(sender_psid);
         break;
@@ -1108,36 +1130,6 @@ const customizewhole = (sender_psid) => {
     userInfo.htameintype = true;
 }
 
-const asking_cus_design = (sender_psid) => {
-  let response1 = {"text":"Well...."};
-  let response2 = {"text":"Send me the design you want to sew. If not you can get some idea from viewing admin chocies."};
-  let response3 = {
-                    "attachment":{
-                      "type":"template",
-                      "payload":{
-                        "template_type":"button",
-                        "text":"Send if you have one. :)",
-                        "buttons":[
-                          {
-                            "type":"web_url",
-                            "url":"https://www.messenger.com",
-                            "title":"Admin chocies",
-                            "url": "https://shwesu.herokuapp.com/adchoices/"+sender_psid,
-                            "webview_height_ratio": "tall",
-                            "messenger_extensions": true,  
-                          }
-                        ]
-                      }
-                    }
-  };
-    callSend(sender_psid, response1).then(()=>{
-      return callSend(sender_psid, response2).then(()=>{
-        return callSend(sender_psid, response3);
-      });
-    });
-    designAttachment = true;
-}
-
 const askforevent = (sender_psid) => {
   let response1 = {"text":"For what kind of event?"};
   let response2 = {"text":"These are the kinds of sewing we do in our shop."};
@@ -1278,6 +1270,7 @@ const askforeventYP = (sender_psid) => {
       return callSend(sender_psid,response3);
     });
   });
+  yinphoneprice = true;
 }
 
 const askforeventHM = (sender_psid) => {
@@ -1332,6 +1325,64 @@ const askforeventHM = (sender_psid) => {
       return callSend(sender_psid,response3);
     });
   });
+  htameinprice = true;
+}
+
+const asking_cus_design_YP = (sender_psid) => {
+  let response1 = {"text":"Well...."};
+  let response2 = {"text":"Send me the design you want to sew. If not you can get some idea from viewing admin chocies."};
+  let response3 = {
+                    "attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"Send if you have one. :)",
+                        "buttons":[
+                          {
+                            "type":"web_url",
+                            "url":"https://www.messenger.com",
+                            "title":"Admin chocies"
+                          }
+                        ]
+                      }
+                    }
+  };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
+    });
+    designAttachment = true;
+}
+
+const asking_cus_design = (sender_psid) => {
+  let response1 = {"text":"Well...."};
+  let response2 = {"text":"Send me the design you want to sew. If not you can get some idea from viewing admin chocies."};
+  let response3 = {
+                    "attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"Send if you have one. :)",
+                        "buttons":[
+                          {
+                            "type":"web_url",
+                            "url":"https://www.messenger.com",
+                            "title":"Admin chocies",
+                            "url": "https://shwesu.herokuapp.com/adchoices/"+sender_psid,
+                            "webview_height_ratio": "tall",
+                            "messenger_extensions": true,  
+                          }
+                        ]
+                      }
+                    }
+  };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
+    });
+    designAttachment = true;
 }
 
 const wedding_event = (sender_psid) => {
