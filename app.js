@@ -403,9 +403,9 @@ function handleMessage(sender_psid, received_message) {
     });
     uppersltype = false;
     upperkhar = true;
-  }else if (received_message.text && userInfo.khar == true) { 
+  }else if (received_message.text && upperkhar == true) { 
     userEnteredInfo.khar = received_message.text;  
-    askforevent(sender_psid);
+    askforeventYP(sender_psid);
     userInfo.khar = false;
   }else if (received_message.text && userInfo.chest == true) {   
     userEnteredInfo.chest =  received_message.text;
@@ -673,7 +673,7 @@ function handleMessage(sender_psid, received_message) {
     lowerankle = true;
   }else if (received_message.text && lowerankle == true) { 
     userEnteredInfo.ankle = received_message.text;
-    askforevent(sender_psid);
+    askforeventHM(sender_psid);
    lowerankle = false;
   }else if (received_message.attachments && designAttachment == true) {
     console.log('meta data',received_message);
@@ -1212,6 +1212,114 @@ const askforevent = (sender_psid) => {
                 "type":"postback",
                 "title":"Casual.",
                 "payload":"CASUAL"
+              }              
+            ]      
+          }
+        ]
+      }
+    }
+  };
+  callSend(sender_psid,response1).then(()=>{
+    return callSend(sender_psid,response2).then(()=>{
+      return callSend(sender_psid,response3);
+    });
+  });
+}
+
+const askforeventYP = (sender_psid) => {
+  let response1 = {"text":"For what kind of event?"};
+  let response2 = {"text":"These are the kinds of sewing we do in our shop for Yinphone."};
+  let response3 = {
+       "attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"generic",
+        "elements":[
+           {
+            "title":"Occasion?",
+            "image_url":"https://i.imgur.com/X5Xfu2Y.jpg",
+            "subtitle":"💃 the price is around 10000",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.imgur.com/X5Xfu2Y.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"Occasion.",
+                "payload":"OCCASION_YP"
+              }              
+            ]      
+          },
+          {
+            "title":"Casual?",
+            "image_url":"https://i.imgur.com/vt8aPXr.jpg",
+            "subtitle":"🤷 The price is around 5000 ",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.imgur.com/vt8aPXr.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"Casual.",
+                "payload":"CASUAL_YP"
+              }              
+            ]      
+          }
+        ]
+      }
+    }
+  };
+  callSend(sender_psid,response1).then(()=>{
+    return callSend(sender_psid,response2).then(()=>{
+      return callSend(sender_psid,response3);
+    });
+  });
+}
+
+const askforeventHM = (sender_psid) => {
+  let response1 = {"text":"For what kind of event?"};
+  let response2 = {"text":"These are the kinds of sewing we do in our shop for Htamein."};
+  let response3 = {
+       "attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"generic",
+        "elements":[
+           {
+            "title":"Occasion?",
+            "image_url":"https://i.imgur.com/X5Xfu2Y.jpg",
+            "subtitle":"💃 the price is around 10000",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.imgur.com/X5Xfu2Y.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"Occasion.",
+                "payload":"OCCASION_HM"
+              }              
+            ]      
+          },
+          {
+            "title":"Casual?",
+            "image_url":"https://i.imgur.com/vt8aPXr.jpg",
+            "subtitle":"🤷 the price is around 5000",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.imgur.com/vt8aPXr.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"Casual.",
+                "payload":"CASUAL_HM"
               }              
             ]      
           }
