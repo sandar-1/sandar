@@ -153,10 +153,11 @@ app.get('/webview/:sender_id/',function(req,res){
 });
 
 app.get('/adchoices/:sender_id/',function(req,res){
-  const sender_id = req.params.sender_id;
-  let data = [];
-    if (wedding == true) {
-       db.collection("wedding").limit(20).get()
+    const sender_id = req.params.sender_id;
+
+    let data = [];
+
+    db.collection("wedding").limit(20).get()
     .then(  function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
             let img = {};
@@ -167,10 +168,10 @@ app.get('/adchoices/:sender_id/',function(req,res){
         });
         console.log("DATA", data);
         res.render('wedding.ejs',{data:data, sender_id:sender_id}); 
-        }
-      )
+
     }
-   
+    
+    )
     .catch(function(error) {
         console.log("Error getting documents: ", error);
     });    
