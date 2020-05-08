@@ -276,7 +276,7 @@ function handleMessage(sender_psid, received_message) {
     };
    userInfo.cuscaption = false;
   }else if (received_message.text == "Yes!") {    
-    saveData (sender_psid);
+    saveData_SP (sender_psid);
     response = {"text": "Thanks for your purchase in our shop. Have a good day. :)"}
   }else if (received_message.text && userInfo.appointmentdate == true) {   
     userEnteredInfo.appointmentdate =  received_message.text;
@@ -826,12 +826,12 @@ const handlePostback = (sender_psid, received_postback) => {
           console.log ('priceSave');};
         break;
       case "OCCASION_HM":
-        asking_cus_design(sender_psid);
+        showHMrecord(sender_psid);
         if (yinphoneprice == true) { userEnteredInfo.price = 10000;
           console.log ('priceSave');};
         break;
       case "CASUAL_HM":
-        asking_cus_design(sender_psid);
+        showHMrecord(sender_psid);
         if (yinphoneprice == true) { userEnteredInfo.price = 5000;
           console.log ('priceSave');};
         break;
@@ -1661,6 +1661,51 @@ const casual_price = (sender_psid) => {
   callSendAPI(sender_psid, response);
 }
 
+const showHMrecord = (sender_psid) => {
+  let response1 = {"text" : "Waist       :" + userEnteredInfo.ankle};
+  let response2 = {"text" : "Hips        :" + userEnteredInfo.ankle};
+  let response3 = {"text" : "Htamein long:" + userEnteredInfo.ankle};
+  let response4 = {"text" : "Htamein Type:" + userEnteredInfo.htameintype};
+  let response5 = {"text" : "Htamein Fold:" + userEnteredInfo.htameinfold};
+  let response6 = {"text" : "Ankle       :" + userEnteredInfo.ankle};
+  let response7 = {
+      "attachment": {
+                  "type": "template",
+                  "payload": {
+                    "template_type": "generic",
+                    "elements": [{
+                      "title": "Is this right?",
+                      "buttons": [
+                        {
+                          "type": "postback",
+                          "title": "Yes",
+                          "payload": "yes_right",
+                        },
+                        {
+                          "type": "postback",
+                          "title": "No",
+                          "payload": "yes_right_measurment",
+                        }
+                      ],
+                    }]
+                  }
+                }
+    };
+  callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3).then(()=>{
+          return callSend(sender_psid, response4).then(()=>{
+            return callSend(sender_psid, response5).then(()=>{
+              return callSend(sender_psid, response6).then(()=>{
+                return callSend(sender_psid, response7);
+              });
+            });
+          });
+        });
+      });
+    });
+}
+
 const orderComfirm = (sender_psid) => {
   let response;
   response = {
@@ -1758,13 +1803,27 @@ const leaving = (sender_psid) => {
   callSendAPI(sender_psid, response);
 }
 
-function saveData(sender_psid) {
+function saveData_SP(sender_psid) {
   const share_info = {
     id : sender_psid,
     customer_caption : userEnteredInfo.cuscaption,
     share_design : userSendAttachment.sharepicAttachment,
   }
   db.collection('share_information').add(share_info);
+}
+
+function saveData_HM(sender_psid) {
+  const hm_info = {
+    id : sender_psid,
+    Waist : userEnteredInfo.waist,
+    Hips : userEnteredInfo.hips,
+    Htamein_long : userEnteredInfo.htameinlong,
+    Htamein_type : userEnteredInfo.htameintype,
+    Htamein_fold : userEnteredInfo.htameinfold,
+    Ankle : userEnteredInfo.ankle,
+    Price : userEnteredInfo.price,
+  }
+  db.collection('Htamein_order').add(hm_info);
 }
 
 function callSendAPI(sender_psid, response) {
