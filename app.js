@@ -835,6 +835,9 @@ const handlePostback = (sender_psid, received_postback) => {
         if (yinphoneprice == true) { userEnteredInfo.price = 5000;
           console.log ('priceSave');};
         break;
+      case "hmRecord_right":
+        saveData_HM(sender_psid);
+        break;
       case "choose_wedding":
         wedding_price(sender_psid);
         break;
@@ -1662,9 +1665,9 @@ const casual_price = (sender_psid) => {
 }
 
 const showHMrecord = (sender_psid) => {
-  let response1 = {"text" : "Waist       :" + userEnteredInfo.ankle};
-  let response2 = {"text" : "Hips        :" + userEnteredInfo.ankle};
-  let response3 = {"text" : "Htamein long:" + userEnteredInfo.ankle};
+  let response1 = {"text" : "Waist       :" + userEnteredInfo.waist};
+  let response2 = {"text" : "Hips        :" + userEnteredInfo.hips};
+  let response3 = {"text" : "Htamein long:" + userEnteredInfo.htameinlong};
   let response4 = {"text" : "Htamein Type:" + userEnteredInfo.htameintype};
   let response5 = {"text" : "Htamein Fold:" + userEnteredInfo.htameinfold};
   let response6 = {"text" : "Ankle       :" + userEnteredInfo.ankle};
@@ -1679,7 +1682,7 @@ const showHMrecord = (sender_psid) => {
                         {
                           "type": "postback",
                           "title": "Yes",
-                          "payload": "yes_right",
+                          "payload": "hmRecord_right",
                         },
                         {
                           "type": "postback",
