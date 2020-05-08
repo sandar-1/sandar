@@ -408,7 +408,7 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text && upperkhar == true) { 
     userEnteredInfo.khar = received_message.text;  
     askforeventYP(sender_psid);
-    userInfo.khar = false;
+    upperkhar = false;
   }else if (received_message.text && userInfo.chest == true) {   
     userEnteredInfo.chest =  received_message.text;
     response = {
