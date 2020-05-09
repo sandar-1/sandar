@@ -189,7 +189,7 @@ app.post('/imagepick',function(req,res){
     if (!doc.exists) {
       console.log('No such document!');
     } else {
-      const image_url = doc.data().url;
+      const image_url = doc.data().weddingPic;
 
       console.log('IMG URL:', image_url);
 
