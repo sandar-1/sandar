@@ -189,9 +189,9 @@ app.post('/imagepick',function(req,res){
     if (!doc.exists) {
       console.log('No such document!');
     } else {
-      const weddingPic = doc.data().weddingPic;
+      const image_url = doc.data().weddingPic;
 
-      console.log('IMG URL:', weddingPic);
+      console.log('IMG URL:', image_url);
 
       let response = {
       "attachment": {
@@ -244,6 +244,21 @@ let userInfo = {
   appointmentdate : false,
   earlyAPprice :false,
 
+};
+
+let changing = {
+  chest:false,
+  upperArm:false,
+  sleevelength:false,
+  waist:false,
+  hips:false,
+  htameinlong:false,
+  yinphonetype:false,
+  sleevetype:false,
+  khar:false,
+  htameintype:false,
+  htameinfold:false,
+  ankle:false,
 };
 
 let upperchest = false;
@@ -774,7 +789,53 @@ function handleMessage(sender_psid, received_message) {
     response = {"text" : "OK"}
     userInfo.price = false;
   }
+/*changing*/
 
+else if (received_message.text == "Chest" || received_message.text == "chest" || received_message.text == "No") {
+   response = { "text" : "Send me chest update measurement. :)"}
+   changing.chest = true;
+  }else if (received_message.text && changing.chest == true) {   
+    userEnteredInfo.chest =  received_message.text;
+    askCusSure(sender_psid);
+    changing.chest = false;
+  }else if (received_message.text == "Arm" || received_message.text == "arm" || received_message.text == "No") {
+   response = { "text" : "Send me upper arm update measurement. :)"}
+   changing.upperArm = true;
+  }else if (received_message.text && changing.upperArm == true) {   
+    userEnteredInfo.upperArm =  received_message.text;
+    askCusSure(sender_psid);
+    changing.upperArm = false;
+  }else if (received_message.text == "Sleeve" || received_message.text == "sleeve" || received_message.text == "No") {
+   response = { "text" : "Send me update sleevelength measurement. :)"}
+   changing.sleevelength = true;
+  }else if (received_message.text && changing.sleevelength == true) {   
+    userEnteredInfo.sleevelength =  received_message.text;
+    askCusSure(sender_psid);
+    changing.sleevelength = false;
+  }else if (received_message.text == "waist" || received_message.text == "Waist" || received_message.text == "No") {
+   response = { "text" : "Send me update waist measurement. :)"}
+   changing.waist = true;
+  }else if (received_message.text && changing.waist == true) {   
+    userEnteredInfo.waist =  received_message.text;
+    askCusSure(sender_psid);
+    changing.waist = false;
+  }else if (received_message.text == "hips" || received_message.text == "Hips" || received_message.text == "No") {
+   response = { "text" : "Send me update hips measurement. :)"}
+   changing.hips = true;
+  }else if (received_message.text && changing.hips == true) {   
+    userEnteredInfo.hips =  received_message.text;
+    askCusSure(sender_psid);
+    changing.hips = false;
+  }else if (received_message.text == "hmlong" || received_message.text == "Hmlong" || received_message.text == "No") {
+   response = { "text" : "Send me update Htamein long measurement. :)"}
+   changing.htameinlong = true;
+  }else if (received_message.text && changing.htameinlong == true) {   
+    userEnteredInfo.htameinlong =  received_message.text;
+    askCusSure(sender_psid);
+    changing.htameinlong = false;
+  }
+
+/********************************************/
   else if (received_message.text == "test") {    
     response = {"attachment":{
                           "type":"image", 
@@ -785,6 +846,24 @@ function handleMessage(sender_psid, received_message) {
                         }}
   }
  callSendAPI(sender_psid, response); 
+}
+
+const askCusSure = (sender_psid) => {
+ let response;
+  response = {
+      "text": `Are you sure?`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"No",
+                        "payload":"change_measurement"
+                        }]
+    }
+  callSendAPI(sender_psid, response);
 }
 
 const handlePostback = (sender_psid, received_postback) => {
