@@ -1145,19 +1145,13 @@ function handleMessage(sender_psid, received_message) {
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });
-  }else if (received_message.text == "done" || received_message.text == "Done" ) {
-    showAllDataToCus (sender_psid);
+  }else if (received_message.text == "done" || received_message.text == "Done" && htameinRC == true) {
+    showHMrecord (sender_psid);
   }
 
 /********************************************/
-  else if (received_message.text == "test") {    
-    response = {"attachment":{
-                          "type":"image", 
-                          "payload":{
-                            "url":userSendAttachment.designAttachment, 
-                            "is_reusable":true
-                          }
-                        }}
+  else if (received_message.text == "Done") {    
+    response = {"text": "kddddkkd"}
   }
  callSendAPI(sender_psid, response); 
 }
@@ -1264,6 +1258,7 @@ const handlePostback = (sender_psid, received_postback) => {
         break;
       case "hmRecord_no":
         hmRecord_no(sender_psid);
+        htameinRC = true;
         break;
       case "choose_wedding":
         wedding_price(sender_psid);
