@@ -791,7 +791,7 @@ function handleMessage(sender_psid, received_message) {
   }
 /*changing*/
 
-else if (received_message.text == "Chest" || received_message.text == "chest") {
+  else if (received_message.text == "Chest" || received_message.text == "chest") {
    response = { "text" : "Send me chest update measurement. :)"}
    changing.chest = true;
   }else if (received_message.text && changing.chest == true) {   
@@ -905,6 +905,153 @@ else if (received_message.text == "Chest" || received_message.text == "chest") {
                         }]
     }
     changing.htameinlong = false;
+  }else if (received_message.text == "hmtype" || received_message.text == "Hmtype") {
+   let response1 = {"text" : "which type of htamein? "};
+    let response2 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Cheik",
+                                        "payload":"c"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Hpi",
+                                        "payload":"hpi"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Simple",
+                                        "payload":"s"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+   changing.htameintype = true;
+  }else if (received_message.text && changing.htameintype == true) {   
+    userEnteredInfo.htameintype =  received_message.text;
+    response = {
+      "text": `Are you sure? If not click on key word to measure again.`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"Hmtype",
+                        "payload":"change_measurement"
+                        }]
+    }
+    changing.htameintype = false;
+  }else if (received_message.text == "hmfold" || received_message.text == "Hmfold") {
+   let response1 = {"text": `which way you want to fold?`};
+    let response2 = {"text" : "Left fold/Right fold.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Left fold",
+                                        "payload":"lf"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Right fold",
+                                        "payload":"rf"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+   changing.fold = true;
+  }else if (received_message.text && changing.fold == true) {   
+    userEnteredInfo.fold =  received_message.text;
+    response = {
+      "text": `Are you sure? If not click on key word to measure again.`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"Hmfold",
+                        "payload":"change_measurement"
+                        }]
+    }
+    changing.fold = false;
+  }else if (received_message.text == "khar" || received_message.text == "Khar") {
+    let response1 = {"text": "Khar to (end exactly with the waist),"};
+    let response2 = {"text" : "Khar tin (ends at the hips) or"};
+    let response3 = {"text" : "khar shay (ends below the hips)",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Khar To",
+                                        "payload":"kto"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Khar Tin",
+                                        "payload":"ktin"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Khar Shay",
+                                        "payload":"kshay"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
+    });
+   changing.khar = true;
+  }else if (received_message.text && changing.khar == true) {   
+    userEnteredInfo.khar =  received_message.text;
+    response = {
+      "text": `Are you sure? If not click on key word to measure again.`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"Khar",
+                        "payload":"change_measurement"
+                        }]
+    }
+    changing.khar = false;
+  }else if (received_message.text == "Ankle" || received_message.text == "ankle") {
+    let response1 = {"text": `Would you like to cover ankle or not?`};
+    let response2 = {"text" : "Upper ankle/cover ankle.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Upper Ankle",
+                                        "payload":"ua"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Cover Ankle",
+                                        "payload":"ca"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+   changing.ankle = true;
+  }else if (received_message.text && changing.ankle == true) {   
+    userEnteredInfo.ankle =  received_message.text;
+    response = {
+      "text": `Are you sure? If not click on key word to measure again.`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"Ankle",
+                        "payload":"change_measurement"
+                        }]
+    }
+    changing.ankle = false;
   }
 
 /********************************************/
