@@ -791,47 +791,119 @@ function handleMessage(sender_psid, received_message) {
   }
 /*changing*/
 
-else if (received_message.text == "Chest" || received_message.text == "chest" || received_message.text == "No") {
+else if (received_message.text == "Chest" || received_message.text == "chest") {
    response = { "text" : "Send me chest update measurement. :)"}
    changing.chest = true;
   }else if (received_message.text && changing.chest == true) {   
     userEnteredInfo.chest =  received_message.text;
-    askCusSure(sender_psid);
+    response = {
+      "text": `Are you sure? If not click on key word to measure again.`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"Chest",
+                        "payload":"change_measurement"
+                        }]
+    }
     changing.chest = false;
-  }else if (received_message.text == "Arm" || received_message.text == "arm" || received_message.text == "No") {
+  }else if (received_message.text == "Arm" || received_message.text == "arm") {
    response = { "text" : "Send me upper arm update measurement. :)"}
    changing.upperArm = true;
   }else if (received_message.text && changing.upperArm == true) {   
     userEnteredInfo.upperArm =  received_message.text;
-    askCusSure(sender_psid);
+    response = {
+      "text": `Are you sure? If not click on key word to measure again.`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"Arm",
+                        "payload":"change_measurement"
+                        }]
+    }
     changing.upperArm = false;
-  }else if (received_message.text == "Sleeve" || received_message.text == "sleeve" || received_message.text == "No") {
+  }else if (received_message.text == "Sleeve" || received_message.text == "sleeve") {
    response = { "text" : "Send me update sleevelength measurement. :)"}
    changing.sleevelength = true;
   }else if (received_message.text && changing.sleevelength == true) {   
     userEnteredInfo.sleevelength =  received_message.text;
-    askCusSure(sender_psid);
+    response = {
+      "text": `Are you sure? If not click on key word to measure again.`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"Sleeve",
+                        "payload":"change_measurement"
+                        }]
+    }
     changing.sleevelength = false;
-  }else if (received_message.text == "waist" || received_message.text == "Waist" || received_message.text == "No") {
+  }else if (received_message.text == "waist" || received_message.text == "Waist") {
    response = { "text" : "Send me update waist measurement. :)"}
    changing.waist = true;
   }else if (received_message.text && changing.waist == true) {   
     userEnteredInfo.waist =  received_message.text;
-    askCusSure(sender_psid);
+    response = {
+      "text": `Are you sure? If not click on key word to measure again.`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"Waist",
+                        "payload":"change_measurement"
+                        }]
+    }
     changing.waist = false;
-  }else if (received_message.text == "hips" || received_message.text == "Hips" || received_message.text == "No") {
+  }else if (received_message.text == "hips" || received_message.text == "Hips") {
    response = { "text" : "Send me update hips measurement. :)"}
    changing.hips = true;
   }else if (received_message.text && changing.hips == true) {   
     userEnteredInfo.hips =  received_message.text;
-    askCusSure(sender_psid);
+    response = {
+      "text": `Are you sure? If not click on key word to measure again.`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"Hips",
+                        "payload":"change_measurement"
+                        }]
+    }
     changing.hips = false;
-  }else if (received_message.text == "hmlong" || received_message.text == "Hmlong" || received_message.text == "No") {
+  }else if (received_message.text == "hmlong" || received_message.text == "Hmlong") {
    response = { "text" : "Send me update Htamein long measurement. :)"}
    changing.htameinlong = true;
   }else if (received_message.text && changing.htameinlong == true) {   
     userEnteredInfo.htameinlong =  received_message.text;
-    askCusSure(sender_psid);
+    response = {
+      "text": `Are you sure? If not click on key word to measure again.`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"Hmlong",
+                        "payload":"change_measurement"
+                        }]
+    }
     changing.htameinlong = false;
   }
 
@@ -850,8 +922,8 @@ else if (received_message.text == "Chest" || received_message.text == "chest" ||
 
 const askCusSure = (sender_psid) => {
  let response;
-  response = {
-      "text": `Are you sure?`,
+ response = {
+      "text": `Are you sure? If not click on key word to measure again.`,
       "quick_replies":[
                         {
                         "content_type":"text",
