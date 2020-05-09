@@ -36,11 +36,47 @@
        <td><img src="<%= data[i].weddingPic %>" width="380"></td>
      </tr>
      <tr>
-       <td><button type="submic" formmethod="post" >This one</button></td>
+       <td><button class="pick" data-id="<%= data[i].id %>" >This one</button></td>
      </tr>
       
   <% } %>
   </table>
+   <script>
+    function  windowClose() {
+        MessengerExtensions.requestCloseBrowser(function success() {
+          console.log("success");   
+          send();       
+        }, function error(err) {
+          console.log(err);
+        });
+      }
+
+    function myFunction () {
+    const doc_id = this.getAttribute('data-id')
+    let xhr;
+      if (window.XMLHttpRequest) {   
+      xhr = new XMLHttpRequest();
+    } else {      
+      xhr = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    const data = {
+      "sender_id":senderID,
+      "doc_id": doc_id
+    }
+    const url = "https://shwesu.herokuapp.com/imagepick/";    
+         
+    xhr.open("POST", url , true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(data));
+    windowClose();
+    }
+
+    let oPick = document.getElementsByClassName("pick");
+
+    for(let i=0;i < oPick.length;i++){
+     oPick[i].addEventListener("click", myFunction);
+    }
+  </script>
 
   </body>
 

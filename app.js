@@ -177,6 +177,55 @@ app.get('/adchoices/:sender_id/',function(req,res){
     });    
 });
 
+app.post('/imagepick',function(req,res){
+      
+  const sender_id = req.body.sender_id;
+  const doc_id = req.body.doc_id;
+
+  console.log('DOC ID:', doc_id); 
+
+  db.collection('weddingPic').doc(doc_id).get()
+  .then(doc => {
+    if (!doc.exists) {
+      console.log('No such document!');
+    } else {
+      const image_url = doc.data().url;
+
+      console.log('IMG URL:', image_url);
+
+      let response = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "Is this the image you like?",
+            "image_url":image_url,                       
+            "buttons": [
+                {
+                  "type": "postback",
+                  "title": "Yes!",
+                  "payload": "yes",
+                },
+                {
+                  "type": "postback",
+                  "title": "No!",
+                  "payload": "no",
+                }
+              ],
+          }]
+        }
+      }
+    }
+  callSendAPI(sender_psid, response);
+    }
+  })
+  .catch(err => {
+    console.log('Error getting document', err);
+  });
+      
+});
+
 let userInfo = {
   chest:false,
   upperArm:false,
