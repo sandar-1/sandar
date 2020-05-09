@@ -283,6 +283,10 @@ let htamein = false;
 let both = false;
 let yinphoneprice = false;
 let htameinprice = false;
+let htameinRC = false;
+let yinphoneRC = false;
+let bothRC = false;
+
 let designAttachment = false;
 let sharepicAttachment = false;
 
@@ -1135,6 +1139,14 @@ function handleMessage(sender_psid, received_message) {
                         }]
     }
     changing.khar = false;
+  }else if (received_message.text == "Sure") {    
+    let response1 = {"text": "Ok... is there anything you want to change then type the key word that you want to change. :) "};
+    let response2 = {"text" : " If there is nothing to change write 'Done' to view update record. :)"}
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+  }else if (received_message.text == "done" || received_message.text == "Done" ) {
+    showAllDataToCus (sender_psid);
   }
 
 /********************************************/
@@ -1148,24 +1160,6 @@ function handleMessage(sender_psid, received_message) {
                         }}
   }
  callSendAPI(sender_psid, response); 
-}
-
-const askCusSure = (sender_psid) => {
- let response;
- response = {
-      "text": `Are you sure? If not click on key word to measure again.`,
-      "quick_replies":[
-                        {
-                        "content_type":"text",
-                        "title":"Sure",
-                        "payload":"change_sure"
-                        },{
-                        "content_type":"text",
-                        "title":"No",
-                        "payload":"change_measurement"
-                        }]
-    }
-  callSendAPI(sender_psid, response);
 }
 
 const handlePostback = (sender_psid, received_postback) => {
