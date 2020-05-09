@@ -977,6 +977,123 @@ function handleMessage(sender_psid, received_message) {
                         }]
     }
     changing.fold = false;
+  }else if (received_message.text == "Ankle" || received_message.text == "ankle") {
+    let response1 = {"text": `Would you like to cover ankle or not?`};
+    let response2 = {"text" : "Upper ankle/cover ankle.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Upper Ankle",
+                                        "payload":"ua"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Cover Ankle",
+                                        "payload":"ca"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+   changing.ankle = true;
+  }else if (received_message.text && changing.ankle == true) {   
+    userEnteredInfo.ankle =  received_message.text;
+    response = {
+      "text": `Are you sure? If not click on key word to measure again.`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"Ankle",
+                        "payload":"change_measurement"
+                        }]
+    }
+    changing.ankle = false;
+  }else if (received_message.text == "yptype" || received_message.text == "Yptype") {
+    let response1 = {"text" : "which type of yinphone? "};
+    let response2 = {
+                      "attachment":{
+                          "type":"image", 
+                          "payload":{
+                            "url":"https://i.imgur.com/nWjNZpT.jpg", 
+                            "is_reusable":true
+                          }
+                        }
+                  };
+    let response3 = {"text" : "Yin ci/Yinphone/Back zip.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Yin ci",
+                                        "payload":"yc"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Yinphone",
+                                        "payload":"yp"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Back zip",
+                                        "payload":"bz"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
+    });
+   changing.yinphonetype = true;
+  }else if (received_message.text && changing.yinphonetype == true) {   
+    userEnteredInfo.yinphonetype =  received_message.text;
+    response = {
+      "text": `Are you sure? If not click on key word to measure again.`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"Yptype",
+                        "payload":"change_measurement"
+                        }]
+    }
+    changing.yinphonetype = false;
+  }else if (received_message.text == "sleevetype" || received_message.text == "Sleevetype") {
+    let response1 = {"text": `How much sleeve length you want?`};
+    let response2 = {"text" : "Short sleeve/Long sleeve.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Short sleeve",
+                                        "payload":"SSL"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Long sleeve",
+                                        "payload":"LSL"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+   changing.sleevetype = true;
+  }else if (received_message.text && changing.sleevetype == true) {   
+    userEnteredInfo.yinphonetype =  received_message.text;
+    response = {
+      "text": `Are you sure? If not click on key word to measure again.`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"Sleevetype",
+                        "payload":"change_measurement"
+                        }]
+    }
+    changing.Sleevetype = false;
   }else if (received_message.text == "khar" || received_message.text == "Khar") {
     let response1 = {"text": "Khar to (end exactly with the waist),"};
     let response2 = {"text" : "Khar tin (ends at the hips) or"};
@@ -1018,40 +1135,6 @@ function handleMessage(sender_psid, received_message) {
                         }]
     }
     changing.khar = false;
-  }else if (received_message.text == "Ankle" || received_message.text == "ankle") {
-    let response1 = {"text": `Would you like to cover ankle or not?`};
-    let response2 = {"text" : "Upper ankle/cover ankle.",
-                      "quick_replies":[
-                                      {
-                                        "content_type":"text",
-                                        "title":"Upper Ankle",
-                                        "payload":"ua"
-                                      },{
-                                        "content_type":"text",
-                                        "title":"Cover Ankle",
-                                        "payload":"ca"
-                                      }]
-                    };
-    callSend(sender_psid, response1).then(()=>{
-      return callSend(sender_psid, response2);
-    });
-   changing.ankle = true;
-  }else if (received_message.text && changing.ankle == true) {   
-    userEnteredInfo.ankle =  received_message.text;
-    response = {
-      "text": `Are you sure? If not click on key word to measure again.`,
-      "quick_replies":[
-                        {
-                        "content_type":"text",
-                        "title":"Sure",
-                        "payload":"change_sure"
-                        },{
-                        "content_type":"text",
-                        "title":"Ankle",
-                        "payload":"change_measurement"
-                        }]
-    }
-    changing.ankle = false;
   }
 
 /********************************************/
