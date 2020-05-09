@@ -184,7 +184,7 @@ app.post('/imagepick',function(req,res){
 
   console.log('DOC ID:', doc_id); 
 
-  db.collection('weddingPic').doc(doc_id).get()
+  db.collection('wedding').doc(doc_id).get()
   .then(doc => {
     if (!doc.exists) {
       console.log('No such document!');
