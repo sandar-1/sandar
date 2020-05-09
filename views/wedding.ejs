@@ -33,10 +33,10 @@
   <table>
   <% for(var i=0; i < data.length; i++) { %>
      <tr>
-       <td><img src="<%= data[i].weddingPic %>" width="380"></td>
+       <td><img src="<%= data[i].weddingPic %>" width="380"></br><button class="pick" data-id="<%= data[i].id %>" >This one</button></td>
      </tr>
      <tr>
-       <td><button class="pick" data-id="<%= data[i].id %>" >This one</button></td>
+       <td></td>
      </tr>
       
   <% } %>
