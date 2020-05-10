@@ -518,27 +518,30 @@ function handleMessage(sender_psid, received_message) {
     userInfo.htameinlong = true;
   }else if (received_message.text && userInfo.htameinlong == true) {   
     userEnteredInfo.htameinlong = received_message.text; 
-    response = {"attachment":{
-                      "type":"template",
-                      "payload":{
-                        "template_type":"button",
-                        "text":"Would you like to customize type of cloth? eg. which fold.",
-                        "buttons":[
-                          {
-                            "type":"postback",
-                            "payload":"customize_wh",
-                            "title":"Yes"
-                          },
-                          {
-                            "type":"postback",
-                            "payload":"notcustomize",
-                            "title":"No, thanks."
-                          }
-                        ]
-                      }
-                    }
-                  }
+    let response1 = {"text" : "which type of htamein? "};
+    let response2 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Cheik",
+                                        "payload":"c"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Hpi",
+                                        "payload":"hpi"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Simple",
+                                        "payload":"s"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
+    });
     userInfo.htameinlong = false;
+    userInfo.htameintype = true;
   }else if (received_message.text && userInfo.htameintype == true) { 
     userEnteredInfo.htameintype = received_message.text;   
     let response1 = {"text": `which way you want to fold?`};
@@ -1298,17 +1301,8 @@ const handlePostback = (sender_psid, received_postback) => {
       case "both_part":
         wholeMeasuring(sender_psid);
         break;
-      case "customize_wh":
-        customizewhole(sender_psid);
-        break;
-      case "notcustomize":
-        showBOTHrecord(sender_psid);
-        break;
       case "bothallRecord_no":
         bothallRecord_no(sender_psid);
-        break;
-      case "bothRecord_no":
-        bothRecord_no(sender_psid);
         break;
       case "bothRecord_right":
         askforevent(sender_psid);
@@ -1619,32 +1613,6 @@ const wholeMeasuring = (sender_psid) => {
       });
     });
     userInfo.chest = true;
-}
-
-const customizewhole = (sender_psid) => {   
-   let response1 = {"text" : "which type of htamein? "};
-    let response2 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein.",
-                      "quick_replies":[
-                                      {
-                                        "content_type":"text",
-                                        "title":"Cheik",
-                                        "payload":"c"
-                                      },{
-                                        "content_type":"text",
-                                        "title":"Hpi",
-                                        "payload":"hpi"
-                                      },{
-                                        "content_type":"text",
-                                        "title":"Simple",
-                                        "payload":"s"
-                                      }]
-                    };
-    callSend(sender_psid, response1).then(()=>{
-      return callSend(sender_psid, response2).then(()=>{
-        return callSend(sender_psid, response3);
-      });
-    });
-    userInfo.htameintype = true;
 }
 
 const askforevent = (sender_psid) => {
@@ -2373,83 +2341,6 @@ const orderComfirmYP = (sender_psid) => {
                     } 
   }
   callSendAPI(sender_psid, response);
-}
-
-const showBOTHrecord = (sender_psid) => {
-  let response1 = {"text" : "Chest        : " + userEnteredInfo.chest};
-  let response2 = {"text" : "Upper arm    : " + userEnteredInfo.upperArm};
-  let response3 = {"text" : "Sleeve length: " + userEnteredInfo.sleevelength};
-  let response4 = {"text" : "Waist        : " + userEnteredInfo.waist};
-  let response5 = {"text" : "Waist       :" + userEnteredInfo.waist};
-  let response6 = {"text" : "Hips        :" + userEnteredInfo.hips};
-  let response7 = {"text" : "Htamein long:" + userEnteredInfo.htameinlong};
-  let response8 = {
-                    "attachment":{
-                            "type":"image", 
-                            "payload":{
-                              "url":userSendAttachment.designAttachment, 
-                              "is_reusable":true
-                            }
-                          }
-                  };
-  let response9 = {
-      "attachment": {
-                  "type": "template",
-                  "payload": {
-                    "template_type": "generic",
-                    "elements": [{
-                      "title": "Is this right?",
-                      "buttons": [
-                        {
-                          "type": "postback",
-                          "title": "Yes",
-                          "payload": "bothRecord_right",
-                        },
-                        {
-                          "type": "postback",
-                          "title": "No",
-                          "payload": "bothRecord_no",
-                        }
-                      ],
-                    }]
-                  }
-                }
-    };
-  callSend(sender_psid, response1).then(()=>{
-      return callSend(sender_psid, response2).then(()=>{
-        return callSend(sender_psid, response3).then(()=>{
-          return callSend(sender_psid, response4).then(()=>{
-            return callSend(sender_psid, response5).then(()=>{
-              return callSend(sender_psid, response6).then(()=>{
-                return callSend(sender_psid, response7).then(()=>{
-                  return callSend(sender_psid, response8).then(()=>{
-                    return callSend(sender_psid, response9);
-                  });
-                });
-              });
-            });
-          });
-        });
-      });
-    });
-}
-
-const bothRecord_no = (sender_psid) => {
-  let response1 = {"text" : "Please type the key word that you want to change."};
-    let response2 = { 
-       "attachment":{
-            "type":"image", 
-            "payload":{
-              "url":"https://i.imgur.com/tvGYR4M.png", 
-              "is_reusable":true
-            }
-          }
-         };
-    
-    callSend(sender_psid, response1).then(()=>{
-      return callSend(sender_psid, response2);
-    });
-    bothRC = true;
 }
 
 const showBOTHallrecord = (sender_psid) => {
