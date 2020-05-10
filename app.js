@@ -2128,6 +2128,7 @@ const showHMrecord = (sender_psid) => {
         });
       });
     });
+  htameinRC = true;
 }
 
 const hmRecord_no = (sender_psid) => {
@@ -2236,6 +2237,7 @@ const showYPrecord = (sender_psid) => {
         });
       });
     });
+  yinphoneRC = true;
 }
 
 const ypRecord_no = (sender_psid) => {
