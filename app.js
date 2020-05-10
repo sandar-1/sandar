@@ -1339,9 +1339,6 @@ const handlePostback = (sender_psid, received_postback) => {
       case "choose_casual":
         casual_price(sender_psid);
         break;
-      case "yesorder":
-        yesorder(sender_psid);
-        break;
       default:
         defaultReply(sender_psid);
     }
