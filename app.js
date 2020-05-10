@@ -283,6 +283,7 @@ let htameinprice = false;
 let htameinRC = false;
 let yinphoneRC = false;
 let bothRC = false;
+let bothallRC = false;
 
 let designAttachment = false;
 let sharepicAttachment = false;
@@ -657,7 +658,7 @@ function handleMessage(sender_psid, received_message) {
     userInfo.khar = true;
   }else if (received_message.text && userInfo.khar == true) { 
     userEnteredInfo.khar = received_message.text;  
-    askforevent(sender_psid);
+    showBOTHallrecord(sender_psid);
     userInfo.khar = false;
   }else if (received_message.text && lowerwaist == true) {
     userEnteredInfo.waist = received_message.text;    
@@ -1153,6 +1154,9 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text == "done" || received_message.text == "Done" && bothRC == true) {
     showBOTHrecord (sender_psid);
     bothRC = false;
+  }else if (received_message.text == "done" || received_message.text == "Done" && bothallRC == true) {
+    showBOTHallrecord (sender_psid);
+    bothallRC = false;
   }
 /********************************************/
   else if (received_message.text == "Done") {    
@@ -1218,6 +1222,9 @@ const handlePostback = (sender_psid, received_postback) => {
         break;
       case "notcustomize":
         showBOTHrecord(sender_psid);
+        break;
+        case "bothallRecord_no":
+        bothallRecord_no(sender_psid);
         break;
         case "bothRecord_no":
         bothRecord_no(sender_psid);
@@ -2366,6 +2373,100 @@ const bothRecord_no = (sender_psid) => {
       return callSend(sender_psid, response2);
     });
     bothRC = true;
+}
+
+const showBOTHallrecord = (sender_psid) => {
+  let response1 = {"text" : "Chest        : " + userEnteredInfo.chest};
+  let response2 = {"text" : "Upper arm    : " + userEnteredInfo.upperArm};
+  let response3 = {"text" : "Sleeve length: " + userEnteredInfo.sleevelength};
+  let response4 = {"text" : "Waist        : " + userEnteredInfo.waist};
+  let response5 = {"text" : "Waist       :" + userEnteredInfo.waist};
+  let response6 = {"text" : "Hips        :" + userEnteredInfo.hips};
+  let response7 = {"text" : "Htamein long:" + userEnteredInfo.htameinlong};
+  let response8 = {"text" : "Htamein Type:" + userEnteredInfo.htameintype};
+  let response9 = {"text" : "Htamein Fold:" + userEnteredInfo.htameinfold};
+  let response10 = {"text" : "Ankle       :" + userEnteredInfo.ankle};
+  let response11= {"text" : "Yinphone type: " + userEnteredInfo.yinphonetype};
+  let response12= {"text" : "Sleeve type  : " + userEnteredInfo.sleevetype};
+  let response13= {"text" : "Khar         : " + userEnteredInfo.khar};
+  let response14= {
+      "attachment": {
+                  "type": "template",
+                  "payload": {
+                    "template_type": "generic",
+                    "elements": [{
+                      "title": "Is this right?",
+                      "buttons": [
+                        {
+                          "type": "postback",
+                          "title": "Yes",
+                          "payload": "bothRecord_right",
+                        },
+                        {
+                          "type": "postback",
+                          "title": "No",
+                          "payload": "bothallRecord_no",
+                        }
+                      ],
+                    }]
+                  }
+                }
+    };
+  callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3).then(()=>{
+          return callSend(sender_psid, response4).then(()=>{
+            return callSend(sender_psid, response5).then(()=>{
+              return callSend(sender_psid, response6).then(()=>{
+                return callSend(sender_psid, response7).then(()=>{
+                  return callSend(sender_psid, response8).then(()=>{
+                    return callSend(sender_psid, response9).then(()=>{
+                      return callSend(sender_psid, response10).then(()=>{
+                        return callSend(sender_psid, response11).then(()=>{
+                          return callSend(sender_psid, response12).then(()=>{
+                            return callSend(sender_psid, response13).then(()=>{
+                              return callSend(sender_psid, response14);
+                            });
+                          });
+                        });
+                      });
+                    });
+                  });
+                });
+              });
+            });
+          });
+        });
+      });
+    });
+}
+
+const bothallRecord_no = (sender_psid) => {
+  let response1 = {"text" : "Please type the key word that you want to change."};
+    let response2 = { 
+       "attachment":{
+            "type":"image", 
+            "payload":{
+              "url":"https://i.imgur.com/tvGYR4M.png", 
+              "is_reusable":true
+            }
+          }
+         };
+         let response3 = { 
+           "attachment":{
+                "type":"image", 
+                "payload":{
+                  "url":"https://i.imgur.com/A2ReVY6.png", 
+                  "is_reusable":true
+                }
+              }
+             };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
+    });
+    bothallRC = true;
 }
 
 const Reslected = (sender_psid) => {
