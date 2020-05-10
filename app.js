@@ -1241,13 +1241,13 @@ const handlePostback = (sender_psid, received_postback) => {
       case "notcustomize":
         showBOTHrecord(sender_psid);
         break;
-        case "bothallRecord_no":
+      case "bothallRecord_no":
         bothallRecord_no(sender_psid);
         break;
-        case "bothRecord_no":
+      case "bothRecord_no":
         bothRecord_no(sender_psid);
         break;
-        case "bothRecord_right":
+      case "bothRecord_right":
         askforevent(sender_psid);
         break;
       case "WEDDING":
@@ -1295,7 +1295,7 @@ const handlePostback = (sender_psid, received_postback) => {
       case "order_comfirm_HM":
         saveData_HM(sender_psid);
         break;
-        case "ypRecord_no":
+      case "ypRecord_no":
         ypRecord_no(sender_psid);
         break;
       case "ypRecord_right":
@@ -2488,7 +2488,6 @@ const yesorder = (sender_psid) => {
         });
       });
     });
-    paidAttachment = true;
 }
 
 const Reslected = (sender_psid) => {
