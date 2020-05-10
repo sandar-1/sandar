@@ -1339,9 +1339,7 @@ const handlePostback = (sender_psid, received_postback) => {
           console.log ('priceSave');};
         break;
       case "ap_priceNo":
-        if (userInfo.earlyAPprice == true) { userEnteredInfo.earlyAPprice = 0;
-          console.log ('priceSave');};
-        leaving(sender_psid);
+        askFabric_noAP(sender_psid);
         break;
       case "appointmentdateNo":
         askFabric_noAP(sender_psid);
