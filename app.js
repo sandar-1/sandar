@@ -850,6 +850,7 @@ function handleMessage(sender_psid, received_message) {
     paidAttachment == true;
   }else if (received_message.text == "Yes 🤗 ") {    
     saveData_both(sender_psid);
+    paidAttachment = false;
   }
 /*changing*/
   else if (received_message.text == "Chest" || received_message.text == "chest") {
