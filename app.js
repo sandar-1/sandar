@@ -1319,6 +1319,9 @@ const handlePostback = (sender_psid, received_postback) => {
       case "choose_casual":
         casual_price(sender_psid);
         break;
+      case "yesorder":
+        yesorder(sender_psid);
+        break;
       default:
         defaultReply(sender_psid);
     }
@@ -2471,6 +2474,19 @@ const bothallRecord_no = (sender_psid) => {
       });
     });
     bothallRC = true;
+}
+
+const yesorder = (sender_psid) => {   
+   let response1 = {"text" : "You can transfer money from this..."};
+    let response2 = {"text" : "Cb bank acc : 1623 1237 5464 423"};
+     let response3 = {"text" : "Transfer to this ph no 0912345678 via Wavemoney."}
+      let response4 = {"text" : "And send the screenshot of the transferred money message to comfirm"}
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
+    });
+    paidAttachment = true;
 }
 
 const Reslected = (sender_psid) => {
