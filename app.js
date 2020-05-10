@@ -1150,6 +1150,9 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text == "done" || received_message.text == "Done" && yinphoneRC == true) {
     showYPrecord (sender_psid);
     yinphoneRC = false;
+  }else if (received_message.text == "done" || received_message.text == "Done" && bothRC == true) {
+    showBOTHrecord (sender_psid);
+    bothRC = false;
   }
 /********************************************/
   else if (received_message.text == "Done") {    
