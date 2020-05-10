@@ -244,6 +244,7 @@ let userInfo = {
   appointmentdate : false,
   earlyAPprice :false,
   phoneNo : false,
+  inshop : false,
 
 };
 
@@ -1323,9 +1324,13 @@ const handlePostback = (sender_psid, received_postback) => {
         break;
       case "inShop":
         chooesClothPart(sender_psid);
+        if (userInfo.inShop == true) { userEnteredInfo.inShop = Yes;
+          console.log ('saveINSHOP');};
         break;
       case "willDeliver":
         cuswillDeli(sender_psid);
+        if (userInfo.inShop == true) { userEnteredInfo.inShop = No;
+          console.log ('saveINSHOP');};
         break;
       case "continue":
         chooesClothPart(sender_psid);
@@ -1539,6 +1544,7 @@ const askFabric = (sender_psid) => {
                       }
                     } 
   }
+  userInfo.inShop = true;
   callSendAPI(sender_psid, response);
 }
 
