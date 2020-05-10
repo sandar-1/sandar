@@ -835,21 +835,21 @@ function handleMessage(sender_psid, received_message) {
     let response2 = {"text": "Is this the right screenshot?",
                     "quick_replies":[{
                                         "content_type":"text",
-                                        "title":"Yes 🤗 ",
+                                        "title":"Yes",
                                         "payload":"paidYes"
                                       },{
                                         "content_type":"text",
-                                        "title":"Opps..No! 😬 ",
+                                        "title":"Opps..No!",
                                         "payload":"paidNo"
                                       }]
                     };
       callSend(sender_psid, response1).then(()=>{
           return callSend(sender_psid, response2);
         });   
-  }else if (received_message.text == "Opps..No! 😬 ") {    
+  }else if (received_message.text == "Opps..No!") {    
     response = {"text" : "Please send me again"}
     paidAttachment == true;
-  }else if (received_message.text == "Yes 🤗 ") {    
+  }else if (received_message.text == "Yes") {    
     saveData_both(sender_psid);
     paidAttachment = false;
   }
