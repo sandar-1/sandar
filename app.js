@@ -286,6 +286,7 @@ let yinphoneRC = false;
 let bothallRC = false;
 let ypSave = false;
 let hmSave = false;
+let bothSave = false;
 
 
 let designAttachment = false;
@@ -860,7 +861,7 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text == "Opps..No!") {    
     response = {"text" : "Please send me again"}
     paidAttachment == true;
-  }else if (received_message.text == "Yes") {    
+  }else if (received_message.text == "Yes" && bothSave == true) {    
    // saveData_both(sender_psid);
     response = {"attachment":{
                       "type":"template",
@@ -878,6 +879,7 @@ function handleMessage(sender_psid, received_message) {
                     }
                   }
     paidAttachment = false;
+    bothSave = false;
   }else if (received_message.text == "Yes" && ypSave == true) {    
    // saveData_YP(sender_psid);
     response = {"attachment":{
@@ -1416,6 +1418,7 @@ const handlePostback = (sender_psid, received_postback) => {
         break;
       case "yesorder":
         yesorder(sender_psid);
+        bothSave = true;
         break;
       default:
         defaultReply(sender_psid);
