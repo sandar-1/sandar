@@ -2533,6 +2533,64 @@ const leaving = (sender_psid) => {
   let response;
   response = {"text": "Thank you for your times."}
   callSendAPI(sender_psid, response);
+  userInfo.chest=false;
+  userInfo.upperArm=false;
+  userInfo.sleevelength=false;
+  userInfo.waist=false;
+  userInfo.hips=false;
+  userInfo.htameinlong=false;
+  userInfo.yinphonetype=false;
+  userInfo.sleevetype=false;
+  userInfo.khar=false;
+  userInfo.htameintype=false;
+  userInfo.htameinfold=false;
+  userInfo.ankle=false;
+  userInfo.price =false;
+  userInfo.cuscaption =false;
+  userInfo.appointmentdate =false;
+  userInfo.earlyAPprice =false;,
+  userInfo.phoneNo =false;
+  userInfo.inshop =false;
+  changing.chest=false;
+  changing.upperArm=false;
+  changing.sleevelength=false;
+  changing.waist=false;
+  changing.hips=false;
+  changing.htameinlong=false;
+  changing.yinphonetype=false;
+  changing.sleevetype=false;
+  changing.khar=false;
+  changing.htameintype=false;
+  changing.htameinfold=false;
+  changing.ankle=false;
+  upperchest = false;
+  upperupperArm = false;
+  uppersleevelength = false;
+  upperwaist = false;
+  upperyptype = false;
+  uppersltype = false;
+  upperkhar = false;
+  lowerwaist = false;
+  lowerhips = false;
+  lowerhmlong = false;
+  lowerhmtype = false;
+  lowerhmfold = false;
+  lowerankle = false;
+  wedding = false;
+  occasion = false;
+  convo = false;
+  casual = false;
+  yinphoneprice = false;
+  htameinprice = false;
+  htameinRC = false;
+  yinphoneRC = false;
+  bothallRC = false;
+  ypSave = false;
+  hmSave = false;
+  bothSave = false;
+  designAttachment = false;
+  sharepicAttachment = false;
+  paidAttachment = false;
 }
 
 const saveData_SP = (sender_psid) => {
