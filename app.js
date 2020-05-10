@@ -289,6 +289,7 @@ let bothRC = false;
 
 let designAttachment = false;
 let sharepicAttachment = false;
+let cuspaidAttachment = false;
 
 let userEnteredInfo = {};
 let userSendAttachment = [];
@@ -788,6 +789,9 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text == "Yes." && casual == true) {    
     casual_event(sender_psid);
     casual = false;
+  }else if (received_message.text == "Yes." && yinphone == true) {    
+    showYPrecord(sender_psid);
+    yinphone = false;
   }else if (received_message.text && userInfo.price == true) { 
     userEnteredInfo.price = received_message.text;   
     response = {"text" : "OK"}
@@ -2116,6 +2120,65 @@ const showHMrecord = (sender_psid) => {
     });
 }
 
+const showYPrecord = (sender_psid) => {
+  let response1 = {"text" : "Chest        : " + userEnteredInfo.chest};
+  let response2 = {"text" : "Upper arm    : " + userEnteredInfo.upperArm};
+  let response3 = {"text" : "Sleeve length: " + userEnteredInfo.sleevelength};
+  let response4 = {"text" : "Waist        : " + userEnteredInfo.waist};
+  let response5 = {"text" : "Yinphone type: " + userEnteredInfo.yinphonetype};
+  let response6 = {"text" : "Sleeve type  : " + userEnteredInfo.sleevetype};
+  let response7 = {"text" : "Khar         : " + userEnteredInfo.khar};
+  let response8 = {
+                    "attachment":{
+                            "type":"image", 
+                            "payload":{
+                              "url":userSendAttachment.designAttachment, 
+                              "is_reusable":true
+                            }
+                          }
+                  };
+  let response9 = {
+      "attachment": {
+                  "type": "template",
+                  "payload": {
+                    "template_type": "generic",
+                    "elements": [{
+                      "title": "Is this right?",
+                      "buttons": [
+                        {
+                          "type": "postback",
+                          "title": "Yes",
+                          "payload": "ypRecord_right",
+                        },
+                        {
+                          "type": "postback",
+                          "title": "No",
+                          "payload": "yoRecord_no",
+                        }
+                      ],
+                    }]
+                  }
+                }
+    };
+  callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3).then(()=>{
+          return callSend(sender_psid, response4).then(()=>{
+            return callSend(sender_psid, response5).then(()=>{
+              return callSend(sender_psid, response6).then(()=>{
+                return callSend(sender_psid, response7).then(()=>{
+                  return callSend(sender_psid, response8).then(()=>{
+                    return callSend(sender_psid, response9);
+                  });
+                });
+              });
+            });
+          });
+        });
+      });
+    });
+}
+
 const hmRecord_no = (sender_psid) => {
   let response1 = {"text" : "Please type the key word that you want to change."};
     let response2 = { 
@@ -2154,7 +2217,7 @@ const orderComfirmHM = (sender_psid) => {
                           {
                             "type":"web_url",
                             "url":"https://www.messenger.com",
-                            "title":"Admin chocies",
+                            "title":"View order",
                             "webview_height_ratio": "tall",
                           }
 
