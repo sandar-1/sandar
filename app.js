@@ -861,7 +861,7 @@ function handleMessage(sender_psid, received_message) {
     response = {"text" : "Please send me again"}
     paidAttachment == true;
   }else if (received_message.text == "Yes") {    
-    saveData_both(sender_psid);
+   // saveData_both(sender_psid);
     response = {"attachment":{
                       "type":"template",
                       "payload":{
@@ -879,12 +879,12 @@ function handleMessage(sender_psid, received_message) {
                   }
     paidAttachment = false;
   }else if (received_message.text == "Yes" && ypSave == true) {    
-    saveData_YP(sender_psid);
+   // saveData_YP(sender_psid);
     response = {"attachment":{
                       "type":"template",
                       "payload":{
                         "template_type":"button",
-                        "text":"Thank you. :)",
+                        "text":"Thank you. :) :)",
                         "buttons":[
                           {
                             "type":"web_url",
@@ -898,7 +898,7 @@ function handleMessage(sender_psid, received_message) {
     paidAttachment = false;
     ypSave = false
   }else if (received_message.text == "Yes" && hmSave == true) {    
-    saveData_HM(sender_psid);
+   // saveData_HM(sender_psid);
     response = {"attachment":{
                       "type":"template",
                       "payload":{
