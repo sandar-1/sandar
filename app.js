@@ -287,11 +287,10 @@ let bothallRC = false;
 
 let designAttachment = false;
 let sharepicAttachment = false;
-let paidAttachment = false;
+let cuspaidAttachment = false;
 
 let userEnteredInfo = {};
 let userSendAttachment = [];
-let userpaidAttachment = [];
 
 function handleMessage(sender_psid, received_message) {
   let response;
@@ -812,12 +811,6 @@ function handleMessage(sender_psid, received_message) {
                           } 
                     }
     userInfo.price = false;
-  }else if (received_message.attachments && paidAttachment == true) {
-    console.log('meta data',received_message);
-    paidAttachment == false;
-    let attachment_url = received_message.attachments[0].payload.url;
-    userpaidAttachment.paidAttachment = attachment_url;
-    response = {"text"}
   }
 /*changing*/
   else if (received_message.text == "Chest" || received_message.text == "chest") {
@@ -1325,9 +1318,6 @@ const handlePostback = (sender_psid, received_postback) => {
         break;
       case "choose_casual":
         casual_price(sender_psid);
-        break;
-      case "yesorder":
-        yesorder(sender_psid);
         break;
       default:
         defaultReply(sender_psid);
@@ -2486,14 +2476,13 @@ const bothallRecord_no = (sender_psid) => {
 const yesorder = (sender_psid) => {   
    let response1 = {"text" : "You can transfer money from this..."};
     let response2 = {"text" : "Cb bank acc : 1623 1237 5464 423"};
-     let response3 = {"text" : "Transfer to this ph no 0912345678 via Wavemoney."}
-      let response4 = {"text" : "And send the screenshot of the transferred money message to comfirm."}
+     let response3 = {"text" : "Transfer to this ph no 0912345678 via Wave"}
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2).then(()=>{
         return callSend(sender_psid, response3);
       });
     });
-    paidAttachment = true;
+    userInfo.htameintype = true;
 }
 
 const Reslected = (sender_psid) => {
