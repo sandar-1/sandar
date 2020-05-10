@@ -1204,15 +1204,12 @@ const handlePostback = (sender_psid, received_postback) => {
         break;
       case "yinphone":
         yinphoneMeasuring(sender_psid);
-        yinphone = true;
         break;
       case "htamein":
         htameinMeasuring(sender_psid);
-        htamein = true;
         break;
       case "both_part":
         wholeMeasuring(sender_psid);
-        both = true;
         break;
       case "customize_wh":
         customizewhole(sender_psid);
