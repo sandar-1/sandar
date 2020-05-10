@@ -287,10 +287,11 @@ let bothallRC = false;
 
 let designAttachment = false;
 let sharepicAttachment = false;
-let cuspaidAttachment = false;
+let paidAttachment = false;
 
 let userEnteredInfo = {};
 let userSendAttachment = [];
+let userpaidAttachment = [];
 
 function handleMessage(sender_psid, received_message) {
   let response;
@@ -791,8 +792,45 @@ function handleMessage(sender_psid, received_message) {
     showYPrecord(sender_psid);
   }else if (received_message.text && userInfo.price == true) { 
     userEnteredInfo.price = received_message.text;   
-    response = {"text" : "OK"}
+    response = {"attachment":{
+                            "type":"template",
+                            "payload":{
+                              "template_type":"button",
+                              "text":"It would take about a month to sew. And you must to pay a third of the price. Is it okay?",
+                              "buttons":[
+                                {
+                                  "type": "postback",
+                                  "title": "Yes",
+                                  "payload": "yesorder",
+                                },{
+                                  "type": "postback",
+                                  "title": "Sorry, I'm not insterested.",
+                                  "payload": "leaving",
+                                }
+                              ]
+                            }
+                          } 
+                    }
     userInfo.price = false;
+  }else if (received_message.attachments && paidAttachment == true) {
+    console.log('meta data',received_message);
+    paidAttachment == false;
+    let attachment_url = received_message.attachments[0].payload.url;
+    userpaidAttachment.paidAttachment = attachment_url;
+    response = {"attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"Thank you. :) you can see your order by clicking on view order.",
+                        "buttons":[
+                          {
+                            "type":"web_url",
+                            "url":"https://www.messenger.com",
+                            "title":"View order",
+                          }
+                        ]
+                      }
+                    } 
   }
 /*changing*/
   else if (received_message.text == "Chest" || received_message.text == "chest") {
@@ -1286,7 +1324,7 @@ const handlePostback = (sender_psid, received_postback) => {
       case "order_comfirm_YP":
         saveData_YP(sender_psid);
         break;
-      case "cancle_order":
+      case "cancel_order":
         leaving(sender_psid);
         break;
       case "choose_wedding":
@@ -1300,6 +1338,9 @@ const handlePostback = (sender_psid, received_postback) => {
         break;
       case "choose_casual":
         casual_price(sender_psid);
+        break;
+      case "yesorder":
+        yesorder(sender_psid);
         break;
       default:
         defaultReply(sender_psid);
@@ -2163,7 +2204,7 @@ const orderComfirmHM = (sender_psid) => {
                       "type":"template",
                       "payload":{
                         "template_type":"button",
-                        "text":"Are you sure? Click on view order to see order details.",
+                        "text":"If you don't want to order anymore you can cancel.",
                         "buttons":[
                           {
                             "type": "postback",
@@ -2172,16 +2213,9 @@ const orderComfirmHM = (sender_psid) => {
                           },
                           {
                             "type": "postback",
-                            "title": "Cancle.",
-                            "payload": "cancle_order",
-                          },
-                          {
-                            "type":"web_url",
-                            "url":"https://www.messenger.com",
-                            "title":"View order",
-                            "webview_height_ratio": "tall",
+                            "title": "Cancel.",
+                            "payload": "cancel_order",
                           }
-
                         ]
                       }
                     } 
@@ -2272,7 +2306,7 @@ const orderComfirmYP = (sender_psid) => {
                       "type":"template",
                       "payload":{
                         "template_type":"button",
-                        "text":"Are you sure? Click on view order to see order details.",
+                        "text":"If you don't want to order anymore you can cancel.",
                         "buttons":[
                           {
                             "type": "postback",
@@ -2281,16 +2315,9 @@ const orderComfirmYP = (sender_psid) => {
                           },
                           {
                             "type": "postback",
-                            "title": "Cancle.",
-                            "payload": "cancle_order",
-                          },
-                          {
-                            "type":"web_url",
-                            "url":"https://www.messenger.com",
-                            "title":"View order",
-                            "webview_height_ratio": "tall",
+                            "title": "cancel.",
+                            "payload": "cancel_order",
                           }
-
                         ]
                       }
                     } 
@@ -2469,6 +2496,19 @@ const bothallRecord_no = (sender_psid) => {
     bothallRC = true;
 }
 
+const yesorder = (sender_psid) => {   
+   let response1 = {"text" : "You can transfer money from this..."};
+    let response2 = {"text" : "Cb bank acc : 1623 1237 5464 423"};
+     let response3 = {"text" : "Transfer to this ph no 0912345678 via Wavemoney."}
+      let response4 = {"text" : "And send the screenshot of the transferred money message to comfirm order."}
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
+    });
+    paidAttachment = true;
+}
+
 const Reslected = (sender_psid) => {
   let response;
   response = {"attachment":{
@@ -2618,7 +2658,7 @@ function setupGetStartedButton(res){
                 res.send(body);
             }
         });
-    } 
+} 
 
 function setupPersistentMenu(res){
         var messageData = { 
@@ -2673,7 +2713,7 @@ function setupPersistentMenu(res){
                 res.send(body);
             }
         });
-    } 
+} 
 
 function removePersistentMenu(res){
         var messageData = {
@@ -2699,7 +2739,7 @@ function removePersistentMenu(res){
                 res.send(body);
             }
         });
-    } 
+} 
 
 function getUserProfile(sender_psid) {
   return new Promise(resolve => {
