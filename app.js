@@ -2483,7 +2483,9 @@ const yesorder = (sender_psid) => {
       let response4 = {"text" : "And send the screenshot of the transferred money message to comfirm"}
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2).then(()=>{
-        return callSend(sender_psid, response3);
+        return callSend(sender_psid, response3).then(()=>{
+          return callSend(sender_psid, response4);
+        });
       });
     });
     paidAttachment = true;
