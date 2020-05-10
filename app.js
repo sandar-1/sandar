@@ -287,10 +287,11 @@ let bothallRC = false;
 
 let designAttachment = false;
 let sharepicAttachment = false;
-let cuspaidAttachment = false;
+let paidAttachment = false;
 
 let userEnteredInfo = {};
 let userSendAttachment = [];
+let userpaidAttachment = [];
 
 function handleMessage(sender_psid, received_message) {
   let response;
@@ -811,6 +812,34 @@ function handleMessage(sender_psid, received_message) {
                           } 
                     }
     userInfo.price = false;
+  }else if (received_message.attachments && paidAttachment == true) {
+    console.log('meta data',received_message);
+    paidAttachment == false;
+    let attachment_url = received_message.attachments[0].payload.url;
+    userpaidAttachment.paidAttachment = attachment_url;
+    let response1 = {
+                    "attachment":{
+                          "type":"image", 
+                          "payload":{
+                            "url":attachment_url, 
+                            "is_reusable":true
+                          }
+                        }
+                    };
+    let response2 = {"text": "Is this the right screenshot?",
+                    "quick_replies":[{
+                                        "content_type":"text",
+                                        "title":"Yes 🤗 ",
+                                        "payload":"paidYes"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Opps..No! 😬 ",
+                                        "payload":"paidNo"
+                                      }]
+                    };
+      callSend(sender_psid, response1).then(()=>{
+          return callSend(sender_psid, response2);
+        });   
   }
 /*changing*/
   else if (received_message.text == "Chest" || received_message.text == "chest") {
