@@ -1264,6 +1264,10 @@ const handlePostback = (sender_psid, received_postback) => {
         hmRecord_no(sender_psid);
         htameinRC = true;
         break;
+        case "ypRecord_no":
+        ypRecord_no(sender_psid);
+        yinphoneRC = true;
+        break;
       case "order_comfirm_HM":
         saveData_HM(sender_psid);
         break;
@@ -2120,6 +2124,23 @@ const showHMrecord = (sender_psid) => {
     });
 }
 
+const hmRecord_no = (sender_psid) => {
+  let response1 = {"text" : "Please type the key word that you want to change."};
+    let response2 = { 
+       "attachment":{
+            "type":"image", 
+            "payload":{
+              "url":"https://i.imgur.com/XY0ktpT.png", 
+              "is_reusable":true
+            }
+          }
+         };
+    
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+}
+
 const showYPrecord = (sender_psid) => {
   let response1 = {"text" : "Chest        : " + userEnteredInfo.chest};
   let response2 = {"text" : "Upper arm    : " + userEnteredInfo.upperArm};
@@ -2179,13 +2200,13 @@ const showYPrecord = (sender_psid) => {
     });
 }
 
-const hmRecord_no = (sender_psid) => {
+const ypRecord_no = (sender_psid) => {
   let response1 = {"text" : "Please type the key word that you want to change."};
     let response2 = { 
        "attachment":{
             "type":"image", 
             "payload":{
-              "url":"https://i.imgur.com/XY0ktpT.png", 
+              "url":"https://i.imgur.com/u8RmemC.png", 
               "is_reusable":true
             }
           }
