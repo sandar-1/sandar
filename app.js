@@ -2133,36 +2133,31 @@ const hmRecord_no = (sender_psid) => {
     });
 }
 
-
-
 const orderComfirmHM = (sender_psid) => {
   let response;
   response = {
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "generic",
-          "elements": [{
-            "title": "Are you sure you will order? click on veiw order to see order detail.",
-            "subtitle": "You can see the order here. 💁🏽‍♀",
-            "buttons": [
-              {
-                "type": "url",
-                "title": "View order.",
-                "url": "",
-              },{
-                "type": "postback",
-                "title": "Order Comfirm",
-                "payload": "order_comfirm_HM",
-              },{
-                "type": "postback",
-                "title": "Cancle.",
-                "payload": "cancle_order",
+      "attachment":{
+        "type":"template",
+        "payload":{
+        "template_type":"button",
+        "text":"Are you sure? Click on view order to see order details.",
+        "buttons": [
+                    {
+                      "type": "url",
+                      "title": "View order.",
+                      "url": "",
+                    },{
+                      "type": "postback",
+                      "title": "Order Comfirm",
+                      "payload": "order_comfirm_HM",
+                    },{
+                      "type": "postback",
+                      "title": "Cancle.",
+                      "payload": "cancle_order",
+                    }
+                  ]
               }
-            ],
-          }]
-        }
-      }
+            }
     };
   callSendAPI(sender_psid, response);
 }
