@@ -1478,6 +1478,36 @@ const handlePostback = (sender_psid, received_postback) => {
     }
 }
 
+const add_ADchocies = (sender_psid) => {
+  let response;
+  response = {"text" : "Which one?",
+              "quick_replies":[
+                                {
+                                 "content_type":"text",
+                                 "title":"Wedding",
+                                 "payload":"W"
+                                },{
+                                 "content_type":"text",
+                                 "title":"Occasion",
+                                 "payload":"O"
+                                },{
+                                 "content_type":"text",
+                                 "title":"Convocation",
+                                 "payload":"CO"
+                                },{
+                                 "content_type":"text",
+                                 "title":"Casual",
+                                 "payload":"CA"
+                                },{
+                                 "content_type":"text",
+                                 "title":"Yinphone",
+                                 "payload":"Y"
+                                }
+                              ]
+  }
+  callSendAPI(sender_psid, response);
+}
+
 async function greeting (sender_psid){  
   let user = await getUserProfile(sender_psid);
   let response1 = {"text": "Mingalaba..🙋‍♀ Warmly welcome to Shwe Hsu.🙆‍♀"};
