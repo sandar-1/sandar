@@ -2134,32 +2134,28 @@ const hmRecord_no = (sender_psid) => {
 }
 
 const orderComfirmHM = (sender_psid) => {
-  let response;
-  response = {
-      "attachment":{
-        "type":"template",
-        "payload":{
-        "template_type":"button",
-        "text":"Are you sure? Click on view order to see order details.",
-        "buttons": [
-                    {
-                      "type": "url",
-                      "title": "View order.",
-                      "url":"https://www.messenger.com",
-                      "webview_height_ratio": "tall",
-                    },{
-                      "type": "postback",
-                      "title": "Order Comfirm",
-                      "payload": "order_comfirm_HM",
-                    },{
-                      "type": "postback",
-                      "title": "Cancle.",
-                      "payload": "cancle_order",
-                    }
-                  ]
-              }
-            }
-    };
+ let response;
+  response = {"attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"Are you sure? Click on view order to see order details.",
+                        "buttons":[
+                          {
+                            "type": "postback",
+                            "title": "Order Comfirm",
+                            "payload": "order_comfirm_HM",
+                          },
+                          {
+                            "type": "postback",
+                            "title": "Cancle.",
+                            "payload": "cancle_order",
+                          },
+
+                        ]
+                      }
+                    } 
+  }
   callSendAPI(sender_psid, response);
 }
 
