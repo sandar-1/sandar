@@ -1324,12 +1324,12 @@ const handlePostback = (sender_psid, received_postback) => {
         break;
       case "inShop":
         chooesClothPart(sender_psid);
-        if (userInfo.inShop == true) { userEnteredInfo.inShop = Yes;
+        if (userInfo.inShop == true) { userEnteredInfo.inShop = 1;
           console.log ('saveINSHOP');};
         break;
       case "willDeliver":
         cuswillDeli(sender_psid);
-        if (userInfo.inShop == true) { userEnteredInfo.inShop = No;
+        if (userInfo.inShop == true) { userEnteredInfo.inShop = 0;
           console.log ('saveINSHOP');};
         break;
       case "continue":
