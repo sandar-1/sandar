@@ -243,6 +243,7 @@ let userInfo = {
   cuscaption : false,
   appointmentdate : false,
   earlyAPprice :false,
+  dresstype : false,
 
 };
 
@@ -278,9 +279,6 @@ let wedding = false;
 let occasion = false;
 let convo = false;
 let casual = false;
-let yinphone = false;
-let htamein = false;
-let both = false;
 let yinphoneprice = false;
 let htameinprice = false;
 let htameinRC = false;
@@ -767,7 +765,7 @@ function handleMessage(sender_psid, received_message) {
                                         "payload":"designYes"
                                       },{
                                         "content_type":"text",
-                                        "title":"N0!",
+                                        "title":"No!",
                                         "payload":"designNo"
                                       }]
                     };
@@ -778,26 +776,29 @@ function handleMessage(sender_psid, received_message) {
     response = {"text" : "Please send me again"}
     designAttachment == true;
   }else if (received_message.text == "Yes." && wedding == true) {    
+    userEnteredInfo.dresstype = Wedding;
     wedding_event(sender_psid);
     wedding = false;
-  }else if (received_message.text == "Yes." && occasion == true) {    
+  }else if (received_message.text == "Yes." && occasion == true) {  
+    userEnteredInfo.dresstype = Occasion;  
     occasion_event(sender_psid);
     occasion = false;
-  }else if (received_message.text == "Yes." && convo == true) {    
+  }else if (received_message.text == "Yes." && convo == true) { 
+    userEnteredInfo.dresstype = Convocation;   
     convocation_event(sender_psid);
     convo = false;
-  }else if (received_message.text == "Yes." && casual == true) {    
+  }else if (received_message.text == "Yes." && casual == true) { 
+    userEnteredInfo.dresstype = Casual;   
     casual_event(sender_psid);
     casual = false;
   }else if (received_message.text == "Yes.") {    
     showYPrecord(sender_psid);
   }else if (received_message.text && userInfo.price == true) { 
     userEnteredInfo.price = received_message.text;   
-    response = {"text" : "OK"}
+    showBOTHrecord(sender_psid);
     userInfo.price = false;
   }
 /*changing*/
-
   else if (received_message.text == "Chest" || received_message.text == "chest") {
    response = { "text" : "Send me chest update measurement. :)"}
    changing.chest = true;
@@ -1155,10 +1156,9 @@ function handleMessage(sender_psid, received_message) {
     showYPrecord (sender_psid);
     yinphoneRC = false;
   }
-
 /********************************************/
   else if (received_message.text == "Done") {    
-    response = {"text": "kddddkkd"}
+    response = {"text": "kddddkkd"+userEnteredInfo.dresstype }
   }
  callSendAPI(sender_psid, response); 
 }
@@ -2285,6 +2285,65 @@ const orderComfirmYP = (sender_psid) => {
                     } 
   }
   callSendAPI(sender_psid, response);
+}
+
+const showBOTHrecord = (sender_psid) => {
+  let response1 = {"text" : "Chest        : " + userEnteredInfo.chest};
+  let response2 = {"text" : "Upper arm    : " + userEnteredInfo.upperArm};
+  let response3 = {"text" : "Sleeve length: " + userEnteredInfo.sleevelength};
+  let response4 = {"text" : "Waist        : " + userEnteredInfo.waist};
+  let response5 = {"text" : "Waist       :" + userEnteredInfo.waist};
+  let response6 = {"text" : "Hips        :" + userEnteredInfo.hips};
+  let response7 = {"text" : "Htamein long:" + userEnteredInfo.htameinlong};
+  let response8 = {
+                    "attachment":{
+                            "type":"image", 
+                            "payload":{
+                              "url":userSendAttachment.designAttachment, 
+                              "is_reusable":true
+                            }
+                          }
+                  };
+  let response9 = {
+      "attachment": {
+                  "type": "template",
+                  "payload": {
+                    "template_type": "generic",
+                    "elements": [{
+                      "title": "Is this right?",
+                      "buttons": [
+                        {
+                          "type": "postback",
+                          "title": "Yes",
+                          "payload": "bothRecord_right",
+                        },
+                        {
+                          "type": "postback",
+                          "title": "No",
+                          "payload": "bothRecord_no",
+                        }
+                      ],
+                    }]
+                  }
+                }
+    };
+  callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3).then(()=>{
+          return callSend(sender_psid, response4).then(()=>{
+            return callSend(sender_psid, response5).then(()=>{
+              return callSend(sender_psid, response6).then(()=>{
+                return callSend(sender_psid, response7).then(()=>{
+                  return callSend(sender_psid, response8).then(()=>{
+                    return callSend(sender_psid, response9);
+                  });
+                });
+              });
+            });
+          });
+        });
+      });
+    });
 }
 
 const Reslected = (sender_psid) => {
