@@ -767,14 +767,14 @@ function handleMessage(sender_psid, received_message) {
                                         "payload":"designYes"
                                       },{
                                         "content_type":"text",
-                                        "title":"No.",
+                                        "title":"N0!",
                                         "payload":"designNo"
                                       }]
                     };
       callSend(sender_psid, response1).then(()=>{
           return callSend(sender_psid, response2);
         });   
-  }else if (received_message.text == "No.") {    
+  }else if (received_message.text == "No!") {    
     response = {"text" : "Please send me again"}
     designAttachment == true;
   }else if (received_message.text == "Yes." && wedding == true) {    
