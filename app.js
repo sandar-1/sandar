@@ -817,20 +817,7 @@ function handleMessage(sender_psid, received_message) {
     paidAttachment == false;
     let attachment_url = received_message.attachments[0].payload.url;
     userpaidAttachment.paidAttachment = attachment_url;
-    response = {"attachment":{
-                      "type":"template",
-                      "payload":{
-                        "template_type":"button",
-                        "text":"Thank you. :) you can see your order by clicking on view order.",
-                        "buttons":[
-                          {
-                            "type":"web_url",
-                            "url":"https://www.messenger.com",
-                            "title":"View order",
-                          }
-                        ]
-                      }
-                    } 
+    response = {"text"}
   }
 /*changing*/
   else if (received_message.text == "Chest" || received_message.text == "chest") {
@@ -1338,6 +1325,9 @@ const handlePostback = (sender_psid, received_postback) => {
         break;
       case "choose_casual":
         casual_price(sender_psid);
+        break;
+      case "yesorder":
+        yesorder(sender_psid);
         break;
       default:
         defaultReply(sender_psid);
@@ -2497,7 +2487,7 @@ const yesorder = (sender_psid) => {
    let response1 = {"text" : "You can transfer money from this..."};
     let response2 = {"text" : "Cb bank acc : 1623 1237 5464 423"};
      let response3 = {"text" : "Transfer to this ph no 0912345678 via Wavemoney."}
-      let response4 = {"text" : "And send the screenshot of the transferred money message to comfirm order."}
+      let response4 = {"text" : "And send the screenshot of the transferred money message to comfirm."}
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2).then(()=>{
         return callSend(sender_psid, response3);
