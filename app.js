@@ -1344,7 +1344,7 @@ const handlePostback = (sender_psid, received_postback) => {
         leaving(sender_psid);
         break;
       case "appointmentdateNo":
-        askFabric(sender_psid);
+        askFabric_noAP(sender_psid);
         break;
       case "inShop":
         chooesClothPart(sender_psid);
@@ -1546,10 +1546,36 @@ const appointmentdateYes = (sender_psid) => {
   callSendAPI(sender_psid, response);
 }
 
-const askFabric = (sender_psid) => {
+const askFabric_noAP = (sender_psid) => {
   userEnteredInfo.appointmentdate = 0;
   userEnteredInfo.earlyAPprice = 0;
   console.log ('dateSave');
+  let response;
+  response = {"attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"Is your piece of fabric in our shop? or delivery?",
+                        "buttons":[
+                          {
+                            "type":"postback",
+                            "payload":"inShop",
+                            "title":"Is in your shop."
+                          },
+                          {
+                            "type":"postback",
+                            "payload":"willDeliver",
+                            "title":"Will be delivered"
+                          }
+                        ]
+                      }
+                    } 
+  }
+  userInfo.inShop = true;
+  callSendAPI(sender_psid, response);
+}
+
+const askFabric = (sender_psid) => {
   let response;
   response = {"attachment":{
                       "type":"template",
