@@ -1264,12 +1264,18 @@ const handlePostback = (sender_psid, received_postback) => {
         hmRecord_no(sender_psid);
         htameinRC = true;
         break;
+      case "order_comfirm_HM":
+        saveData_HM(sender_psid);
+        break;
         case "ypRecord_no":
         ypRecord_no(sender_psid);
         yinphoneRC = true;
         break;
-      case "order_comfirm_HM":
-        saveData_HM(sender_psid);
+      case "ypRecord_right":
+        orderComfirmYP(sender_psid);
+        break;
+      case "order_comfirm_YP":
+        saveData_YP(sender_psid);
         break;
       case "cancle_order":
         leaving(sender_psid);
@@ -2141,6 +2147,38 @@ const hmRecord_no = (sender_psid) => {
     });
 }
 
+const orderComfirmHM = (sender_psid) => {
+ let response;
+  response = {"attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"Are you sure? Click on view order to see order details.",
+                        "buttons":[
+                          {
+                            "type": "postback",
+                            "title": "Order Comfirm",
+                            "payload": "order_comfirm_HM",
+                          },
+                          {
+                            "type": "postback",
+                            "title": "Cancle.",
+                            "payload": "cancle_order",
+                          },
+                          {
+                            "type":"web_url",
+                            "url":"https://www.messenger.com",
+                            "title":"View order",
+                            "webview_height_ratio": "tall",
+                          }
+
+                        ]
+                      }
+                    } 
+  }
+  callSendAPI(sender_psid, response);
+}
+
 const showYPrecord = (sender_psid) => {
   let response1 = {"text" : "Chest        : " + userEnteredInfo.chest};
   let response2 = {"text" : "Upper arm    : " + userEnteredInfo.upperArm};
@@ -2174,7 +2212,7 @@ const showYPrecord = (sender_psid) => {
                         {
                           "type": "postback",
                           "title": "No",
-                          "payload": "yoRecord_no",
+                          "payload": "ypRecord_no",
                         }
                       ],
                     }]
@@ -2217,7 +2255,7 @@ const ypRecord_no = (sender_psid) => {
     });
 }
 
-const orderComfirmHM = (sender_psid) => {
+const orderComfirmYP = (sender_psid) => {
  let response;
   response = {"attachment":{
                       "type":"template",
@@ -2228,7 +2266,7 @@ const orderComfirmHM = (sender_psid) => {
                           {
                             "type": "postback",
                             "title": "Order Comfirm",
-                            "payload": "order_comfirm_HM",
+                            "payload": "order_comfirm_YP",
                           },
                           {
                             "type": "postback",
@@ -2285,7 +2323,7 @@ const leaving = (sender_psid) => {
   callSendAPI(sender_psid, response);
 }
 
-function saveData_SP(sender_psid) {
+const saveData_SP = (sender_psid) => {
   const share_info = {
     id : sender_psid,
     customer_caption : userEnteredInfo.cuscaption,
@@ -2294,7 +2332,7 @@ function saveData_SP(sender_psid) {
   db.collection('share_information').add(share_info);
 }
 
-function saveData_HM(sender_psid) {
+const saveData_HM = (sender_psid) => {
   const hm_info = {
     id : sender_psid,
     Waist : userEnteredInfo.waist,
@@ -2306,6 +2344,22 @@ function saveData_HM(sender_psid) {
     Price : userEnteredInfo.price,
   }
   db.collection('Htamein_order').add(hm_info);
+}
+
+const saveData_YP = (sender_psid) => {
+  const yp_info = {
+    id : sender_psid,
+    Chest : userEnteredInfo.chest,
+    upperArm : userEnteredInfo.upperArm,
+    sleevelength : userEnteredInfo.sleevelength,
+    Waist : userEnteredInfo.waist,
+    Yinphone_type : userEnteredInfo.yinphonetype,
+    sleevetype : userEnteredInfo.sleevetype,
+    khar : userEnteredInfo.khar,
+    Design : userSendAttachment. designAttachment,
+    Price : userEnteredInfo.price,
+  }
+  db.collection('Yinphone_order').add(yp_info);
 }
 
 function callSendAPI(sender_psid, response) {
