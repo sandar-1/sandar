@@ -243,6 +243,7 @@ let userInfo = {
   cuscaption : false,
   appointmentdate : false,
   earlyAPprice :false,
+  phoneNo : false,
 
 };
 
@@ -284,6 +285,7 @@ let htameinRC = false;
 let yinphoneRC = false;
 let bothRC = false;
 let bothallRC = false;
+
 
 let designAttachment = false;
 let sharepicAttachment = false;
@@ -819,6 +821,10 @@ function handleMessage(sender_psid, received_message) {
                           } 
                     }
     userInfo.price = false;
+  }else if (received_message.text && userInfo.phoneNo == true) { 
+    userEnteredInfo.phoneNo = received_message.text;   
+    givebankACC(sender_psid);
+    userInfo.phoneNo = false;
   }else if (received_message.attachments && paidAttachment == true) {
     console.log('meta data',received_message);
     paidAttachment == false;
@@ -851,7 +857,7 @@ function handleMessage(sender_psid, received_message) {
     response = {"text" : "Please send me again"}
     paidAttachment == true;
   }else if (received_message.text == "Yes") {    
-    //saveData_both(sender_psid);
+    saveData_both(sender_psid);
     response = {"attachment":{
                       "type":"template",
                       "payload":{
@@ -861,7 +867,7 @@ function handleMessage(sender_psid, received_message) {
                           {
                             "type":"web_url",
                             "url":"https://www.messenger.com",
-                            "title":"Admin chocies",
+                            "title":"View order",
                           }                        
                         ]
                       }
@@ -1350,7 +1356,7 @@ const handlePostback = (sender_psid, received_postback) => {
         hmRecord_no(sender_psid);
         break;
       case "order_comfirm_HM":
-        saveData_HM(sender_psid);
+        yesorder(sender_psid);
         break;
       case "ypRecord_no":
         ypRecord_no(sender_psid);
@@ -1359,7 +1365,7 @@ const handlePostback = (sender_psid, received_postback) => {
         orderComfirmYP(sender_psid);
         break;
       case "order_comfirm_YP":
-        saveData_YP(sender_psid);
+        yesorder(sender_psid);
         break;
       case "cancel_order":
         leaving(sender_psid);
@@ -1839,6 +1845,13 @@ const askforeventHM = (sender_psid) => {
   htameinprice = true;
 }
 
+const yesorder = (sender_psid) => {
+ let response;
+  response = {"text" : "Give me yor phone number to contact you when the cloth is finish."};
+                    userInfo.phoneNo = true;
+  callSendAPI(sender_psid, response);
+}
+
 const asking_cus_design_YP = (sender_psid) => {
   let response1 = {"text":"Well...."};
   let response2 = {"text":"Send me the design you want to sew. If not you can get some idea from viewing admin chocies."};
@@ -2241,7 +2254,7 @@ const orderComfirmHM = (sender_psid) => {
                       "type":"template",
                       "payload":{
                         "template_type":"button",
-                        "text":"If you don't want to order anymore you can cancel.",
+                        "text":"It would take about a month to sew. And you must to pay a third of the price. Is it okay?",
                         "buttons":[
                           {
                             "type": "postback",
@@ -2343,7 +2356,7 @@ const orderComfirmYP = (sender_psid) => {
                       "type":"template",
                       "payload":{
                         "template_type":"button",
-                        "text":"If you don't want to order anymore you can cancel.",
+                        "text":"It would take about a month to sew. And you must to pay a third of the price. Is it okay?",
                         "buttons":[
                           {
                             "type": "postback",
@@ -2533,7 +2546,7 @@ const bothallRecord_no = (sender_psid) => {
     bothallRC = true;
 }
 
-const yesorder = (sender_psid) => {   
+const givebankACC = (sender_psid) => {   
    let response1 = {"text" : "You can transfer money from this..."};
     let response2 = {"text" : "Cb bank acc : 1623 1237 5464 423"};
      let response3 = {"text" : "Transfer to this ph no 0912345678 via Wavemoney."};
