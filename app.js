@@ -2507,6 +2507,7 @@ const saveData_HM = (sender_psid) => {
     Htamein_fold : userEnteredInfo.htameinfold,
     Ankle : userEnteredInfo.ankle,
     Price : userEnteredInfo.price,
+    PhoneNo : userEnteredInfo.phoneNo,
   }
   db.collection('Htamein_order').add(hm_info);
 }
@@ -2523,6 +2524,7 @@ const saveData_YP = (sender_psid) => {
     khar : userEnteredInfo.khar,
     Design : userSendAttachment. designAttachment,
     Price : userEnteredInfo.price,
+    PhoneNo : userEnteredInfo.phoneNo,
   }
   db.collection('Yinphone_order').add(yp_info);
 }
@@ -2545,6 +2547,7 @@ const saveData_both = (sender_psid) => {
     Design : userSendAttachment. designAttachment,
     paid : userpaidAttachment.paidAttachment,
     Price : userEnteredInfo.price,
+    PhoneNo : userEnteredInfo.phoneNo,
   }
   db.collection('Both_order').add(both_info);
 }
