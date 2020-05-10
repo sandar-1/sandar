@@ -392,7 +392,9 @@ function handleMessage(sender_psid, received_message) {
                   }
     userInfo.appointmentdate = false;
     userInfo.earlyAPprice = true;
-  }else if (received_message.text && upperchest == true) {   
+  }
+/***********measuring**********/
+  else if (received_message.text && upperchest == true) {   
     userEnteredInfo.chest =  received_message.text;
     response = {
       "text": `Now Upper arm.`
@@ -770,7 +772,9 @@ function handleMessage(sender_psid, received_message) {
     userEnteredInfo.ankle = received_message.text;
     askforeventHM(sender_psid);
    lowerankle = false;
-  }else if (received_message.attachments && designAttachment == true) {
+  }
+/******************************/
+  else if (received_message.attachments && designAttachment == true) {
     console.log('meta data',received_message);
     designAttachment == false;
     let attachment_url = received_message.attachments[0].payload.url;
@@ -935,7 +939,7 @@ function handleMessage(sender_psid, received_message) {
     paidAttachment = false;
     hmSave = false;
   }
-/*changing*/
+/***************changing******************/
   else if (received_message.text == "Chest" || received_message.text == "chest") {
    response = { "text" : "Send me chest update measurement. :)"}
    changing.chest = true;
@@ -1296,7 +1300,7 @@ function handleMessage(sender_psid, received_message) {
     showBOTHallrecord (sender_psid);
     bothallRC = false;
   }
-/********************************************/
+/*****************************************/
   else if (received_message.text == "Done") {    
     response = {"text": "kddddkkd"}
   }
@@ -1335,9 +1339,14 @@ const handlePostback = (sender_psid, received_postback) => {
           console.log ('priceSave');};
         break;
       case "ap_priceNo":
+        if (userInfo.earlyAPprice == true) { userEnteredInfo.earlyAPprice = 0;
+          console.log ('priceSave');};
         leaving(sender_psid);
         break;
       case "appointmentdateNo":
+        if (userInfo.appointmentdate == true) { userEnteredInfo.earlyAPprice = 0;
+          userInfo.appointmentdate = 0;
+          console.log ('DateSave');};
         askFabric(sender_psid);
         break;
       case "inShop":
