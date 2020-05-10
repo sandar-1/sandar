@@ -2145,7 +2145,7 @@ const orderComfirmHM = (sender_psid) => {
                     {
                       "type": "url",
                       "title": "View order.",
-                      "url": "",
+                      "url": "https://imgur.com/gallery/vjvJAqe",
                     },{
                       "type": "postback",
                       "title": "Order Comfirm",
