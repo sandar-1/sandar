@@ -773,7 +773,7 @@ function handleMessage(sender_psid, received_message) {
     askforeventHM(sender_psid);
    lowerankle = false;
   }
-/******************************/
+/************attachment**************/
   else if (received_message.attachments && designAttachment == true) {
     console.log('meta data',received_message);
     designAttachment == false;
@@ -1300,7 +1300,33 @@ function handleMessage(sender_psid, received_message) {
     showBOTHallrecord (sender_psid);
     bothallRC = false;
   }
-/*****************************************/
+/*****************Admin*******************/
+  else if (received_message.text == "Admin" || received_message.text == "admin") {   
+    response = {"text" : "Enter password"}
+  }else if (received_message.text == "***shwesu***") {   
+    response = {
+      "attachment":{
+                    "type":"template",
+                    "payload":{
+                      "template_type":"button",
+                      "text":"Hello.. Dear Mo Mo. How would you like to improve your bot.",
+                      "buttons":[
+                                  {
+                                    "type": "postback",
+                                    "title": "Add admin chocies",
+                                    "payload": "add_ADchocies",        
+                                  },
+                                  {
+                                    "type": "postback",
+                                    "title": "View orders",
+                                    "payload": "add_ADchocies",        
+                                  }                        
+                                ]
+                              }
+                    }
+                }
+  }
+
   else if (received_message.text == "Done") {    
     response = {"text": "kddddkkd"}
   }
