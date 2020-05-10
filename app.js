@@ -789,9 +789,8 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text == "Yes." && casual == true) {    
     casual_event(sender_psid);
     casual = false;
-  }else if (received_message.text == "Yes." && yinphone == true) {    
+  }else if (received_message.text == "Yes.") {    
     showYPrecord(sender_psid);
-    yinphone = false;
   }else if (received_message.text && userInfo.price == true) { 
     userEnteredInfo.price = received_message.text;   
     response = {"text" : "OK"}
