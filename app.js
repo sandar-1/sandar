@@ -2611,6 +2611,8 @@ const saveData_HM = (sender_psid) => {
     Price : userEnteredInfo.price,
     PhoneNo : userEnteredInfo.phoneNo,
     Inshop : userEnteredInfo.inShop,
+    earlyAPdate : userEnteredInfo.appointmentdate,
+    earlyAPprice : userEnteredInfo.earlyAPprice,
   }
   db.collection('Htamein_order').add(hm_info);
 }
@@ -2629,6 +2631,8 @@ const saveData_YP = (sender_psid) => {
     Price : userEnteredInfo.price,
     PhoneNo : userEnteredInfo.phoneNo,
     Inshop : userEnteredInfo.inShop,
+    earlyAPdate : userEnteredInfo.appointmentdate,
+    earlyAPprice : userEnteredInfo.earlyAPprice,
   }
   db.collection('Yinphone_order').add(yp_info);
 }
@@ -2653,6 +2657,8 @@ const saveData_both = (sender_psid) => {
     Price : userEnteredInfo.price,
     PhoneNo : userEnteredInfo.phoneNo,
     Inshop : userEnteredInfo.inShop,
+    earlyAPdate : userEnteredInfo.appointmentdate,
+    earlyAPprice : userEnteredInfo.earlyAPprice,
   }
   db.collection('Both_order').add(both_info);
 }
