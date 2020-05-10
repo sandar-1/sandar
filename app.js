@@ -152,7 +152,7 @@ app.get('/webview/:sender_id/',function(req,res){
     });    
 });
 
-app.get('/adchoices/:sender_id/',function(req,res){
+app.get('/wedding/:sender_id/',function(req,res){
     const sender_id = req.params.sender_id;
 
     let data = [];
@@ -245,7 +245,6 @@ let userInfo = {
   earlyAPprice :false,
   phoneNo : false,
   inshop : false,
-
 };
 
 let changing = {
@@ -1927,7 +1926,7 @@ const asking_cus_design = (sender_psid) => {
                             "type":"web_url",
                             "url":"https://www.messenger.com",
                             "title":"Admin chocies",
-                            "url": "https://shwesu.herokuapp.com/adchoices/"+sender_psid,
+                            "url": "https://shwesu.herokuapp.com/wedding/"+sender_psid,
                             "webview_height_ratio": "tall",
                             "messenger_extensions": true,  
                           }
