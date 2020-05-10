@@ -1270,6 +1270,7 @@ const handlePostback = (sender_psid, received_postback) => {
         case "ypRecord_no":
         ypRecord_no(sender_psid);
         yinphoneRC = true;
+        htameinRC = false;
         break;
       case "ypRecord_right":
         orderComfirmYP(sender_psid);
