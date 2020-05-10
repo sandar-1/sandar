@@ -1152,7 +1152,7 @@ function handleMessage(sender_psid, received_message) {
     showHMrecord (sender_psid);
     htameinRC = false;
   }else if (received_message.text == "done" || received_message.text == "Done" && yinphoneRC == true) {
-    showHMrecord (sender_psid);
+    showYPrecord (sender_psid);
     yinphoneRC = false;
   }
 
