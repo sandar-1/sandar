@@ -344,7 +344,7 @@ function handleMessage(sender_psid, received_message) {
     };
    userInfo.cuscaption = false;
   }else if (received_message.text == "Yes!") {    
-    saveData_SP (sender_psid);
+    //saveData_SP (sender_psid);
     response = {"text": "Thanks for your purchase in our shop. Have a good day. :)"}
   }else if (received_message.text && userInfo.appointmentdate == true) {   
     userEnteredInfo.appointmentdate =  received_message.text;
