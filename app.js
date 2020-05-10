@@ -283,8 +283,9 @@ let yinphoneprice = false;
 let htameinprice = false;
 let htameinRC = false;
 let yinphoneRC = false;
-let bothRC = false;
 let bothallRC = false;
+let ypSave = false;
+let hmSave = false;
 
 
 let designAttachment = false;
@@ -877,6 +878,44 @@ function handleMessage(sender_psid, received_message) {
                     }
                   }
     paidAttachment = false;
+  }else if (received_message.text == "Yes" && ypSave == true) {    
+    saveData_YP(sender_psid);
+    response = {"attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"Thank you. :)",
+                        "buttons":[
+                          {
+                            "type":"web_url",
+                            "url":"https://www.messenger.com",
+                            "title":"View order",
+                          }                        
+                        ]
+                      }
+                    }
+                  }
+    paidAttachment = false;
+    ypSave = false
+  }else if (received_message.text == "Yes" && hmSave == true) {    
+    saveData_HM(sender_psid);
+    response = {"attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"Thank you. :)",
+                        "buttons":[
+                          {
+                            "type":"web_url",
+                            "url":"https://www.messenger.com",
+                            "title":"View order",
+                          }                        
+                        ]
+                      }
+                    }
+                  }
+    paidAttachment = false;
+    hmSave = false;
   }
 /*changing*/
   else if (received_message.text == "Chest" || received_message.text == "chest") {
@@ -1235,9 +1274,6 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text == "done" || received_message.text == "Done" && yinphoneRC == true) {
     showYPrecord (sender_psid);
     yinphoneRC = false;
-  }else if (received_message.text == "done" || received_message.text == "Done" && bothRC == true) {
-    showBOTHrecord (sender_psid);
-    bothRC = false;
   }else if (received_message.text == "done" || received_message.text == "Done" && bothallRC == true) {
     showBOTHallrecord (sender_psid);
     bothallRC = false;
@@ -1351,6 +1387,7 @@ const handlePostback = (sender_psid, received_postback) => {
         break;
       case "order_comfirm_HM":
         yesorder(sender_psid);
+        hmSave = true;
         break;
       case "ypRecord_no":
         ypRecord_no(sender_psid);
@@ -1360,6 +1397,7 @@ const handlePostback = (sender_psid, received_postback) => {
         break;
       case "order_comfirm_YP":
         yesorder(sender_psid);
+        ypSave = true;
         break;
       case "cancel_order":
         leaving(sender_psid);
