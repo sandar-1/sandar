@@ -1254,11 +1254,17 @@ const handlePostback = (sender_psid, received_postback) => {
           console.log ('priceSave');};
         break;
       case "hmRecord_right":
-        saveData_HM(sender_psid);
+        orderComfirmHM(sender_psid);
         break;
       case "hmRecord_no":
         hmRecord_no(sender_psid);
         htameinRC = true;
+        break;
+      case "order_comfirm_HM":
+        saveData_HM(sender_psid);
+        break;
+      case "cancle_order":
+        leaving(sender_psid);
         break;
       case "choose_wedding":
         wedding_price(sender_psid);
@@ -1307,30 +1313,9 @@ async function greeting (sender_psid){
                            }
                     } 
                    }; 
-  let response3 = {
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "generic",
-          "elements": [{
-            "title": "Is it in order?",
-            "subtitle": "You can see the order here. 💁🏽‍♀",
-            "buttons": [
-              {
-                "type": "postback",
-                "title": "View order.",
-                "payload": "order_comfirm",
-              }
-            ],
-          }]
-        }
-      }
-    };
-    callSend(sender_psid, response1).then(()=>{
+     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2).then(()=>{
-        return callSend(sender_psid, response3).then(()=>{
-          return callSend(sender_psid, response4);
-        });
+        return callSend(sender_psid, response3);
       });
     });
 }
@@ -2148,64 +2133,37 @@ const hmRecord_no = (sender_psid) => {
     });
 }
 
-const orderComfirm = (sender_psid) => {
+
+
+const orderComfirmHM = (sender_psid) => {
   let response;
   response = {
-                  "attachment":{
-                  "type":"template",
-                  "payload":{
-                    "template_type":"receipt",
-                    "recipient_name":"Stephane Crozatier",
-                    "order_number":"12345678902",
-                    "currency":"USD",
-                    "payment_method":"Visa 2345",        
-                    "order_url":"http://petersapparel.parseapp.com/order?order_id=123456",
-                    "timestamp":"1428444852",         
-                    "address":{
-                      "street_1":"1 Hacker Way",
-                      "street_2":"",
-                      "city":"Menlo Park",
-                      "postal_code":"94025",
-                      "state":"CA",
-                      "country":"US"
-                    },
-                    "summary":{
-                      "subtotal":75.00,
-                      "shipping_cost":4.95,
-                      "total_tax":6.19,
-                      "total_cost":56.14
-                    },
-                    "adjustments":[
-                      {
-                        "name":"New Customer Discount",
-                        "amount":20
-                      },
-                      {
-                        "name":"$10 Off Coupon",
-                        "amount":10
-                      }
-                    ],
-                    "elements":[
-                      {
-                        "title":"Classic White T-Shirt",
-                        "subtitle":"100% Soft and Luxurious Cotton",
-                        "quantity":2,
-                        "price":50,
-                        "currency":"USD",
-                        "image_url":"http://petersapparel.parseapp.com/img/whiteshirt.png"
-                      },
-                      {
-                        "title":"Classic Gray T-Shirt",
-                        "subtitle":"100% Soft and Luxurious Cotton",
-                        "quantity":1,
-                        "price":25,
-                        "currency":"USD",
-                        "image_url":"http://petersapparel.parseapp.com/img/grayshirt.png"
-                      }
-                    ]
-                  }
-                }
-    }
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "Are you sure you will order? click on veiw order to see order detail.",
+            "subtitle": "You can see the order here. 💁🏽‍♀",
+            "buttons": [
+              {
+                "type": "url",
+                "title": "View order.",
+                "url": "",
+              },{
+                "type": "postback",
+                "title": "Order Comfirm",
+                "payload": "order_comfirm_HM",
+              },{
+                "type": "postback",
+                "title": "Cancle.",
+                "payload": "cancle_order",
+              }
+            ],
+          }]
+        }
+      }
+    };
   callSendAPI(sender_psid, response);
 }
 
