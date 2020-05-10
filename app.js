@@ -2537,7 +2537,7 @@ const leaving = (sender_psid) => {
   userInfo.price =false;
   userInfo.cuscaption =false;
   userInfo.appointmentdate =false;
-  userInfo.earlyAPprice =false;,
+  userInfo.earlyAPprice =false;
   userInfo.phoneNo =false;
   userInfo.inshop =false;
   changing.chest=false;
