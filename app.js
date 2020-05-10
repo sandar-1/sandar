@@ -288,6 +288,11 @@ let ypSave = false;
 let hmSave = false;
 let bothSave = false;
 
+let weddingAttach = false;
+let occasionAttach = false;
+let convoAttach = false;
+let casualAttach = false;
+let yinphoneAttach = false;
 
 let designAttachment = false;
 let sharepicAttachment = false;
@@ -296,79 +301,12 @@ let paidAttachment = false;
 let userEnteredInfo = {};
 let userSendAttachment = [];
 let userpaidAttachment = [];
+let adminSendAttachment =[];
 
 function handleMessage(sender_psid, received_message) {
   let response;
-  if (received_message.attachments && sharepicAttachment == true) {
-    console.log('meta data',received_message);
-    sharepicAttachment == false;
-    let attachment_url1 = received_message.attachments[0].payload.url;
-    userSendAttachment.sharepicAttachment = attachment_url1;
-    let response1 = {
-                    "attachment":{
-                          "type":"image", 
-                          "payload":{
-                            "url":attachment_url1, 
-                            "is_reusable":true
-                          }
-                        }
-                    };
-    let response2 = {"text": "Is this picture you want to share? By the way it's look good on you. :)",
-                    "quick_replies":[{
-                                        "content_type":"text",
-                                        "title":"Yes! share it.",
-                                        "payload":"shareYes"
-                                      },{
-                                        "content_type":"text",
-                                        "title":"No..",
-                                        "payload":"shareNo"
-                                      }]
-                    };
-      callSend(sender_psid, response1).then(()=>{
-          return callSend(sender_psid, response2);
-        });   
-  }else if (received_message.text == "No..") {    
-    leaving (sender_psid);
-  }else if (received_message.text == "Yes! share it." || received_message.text == "No.") {    
-   response = {"text": "write a caption to share with the picture."}
-   userInfo.cuscaption = true;
-   sharepicAttachment = false;
-  }else if (received_message.text && userInfo.cuscaption == true) {  
-   userEnteredInfo.cuscaption = received_message.text;  
-    response = {"text": "Are you sure? :)",
-                    "quick_replies":[
-                                      {
-                                        "content_type":"text",
-                                        "title":"Yes!",
-                                        "payload":"captionYes"
-                                      },{
-                                        "content_type":"text",
-                                        "title":"No.",
-                                        "payload":"captionNo"
-                                      }]
-    };
-   userInfo.cuscaption = false;
-  }else if (received_message.text == "Yes!") {    
-    saveData_SP (sender_psid);
-    response = {
-      "attachment":{
-                    "type":"template",
-                    "payload":{
-                      "template_type":"button",
-                      "text":"💗 🤗.Thank you.🤗 💗",
-                      "buttons":[
-                                  {
-                                    "type": "web_url",
-                                    "title": "Pictures of others",
-                                    "url": "https://shwesu.herokuapp.com/webview/"+sender_psid,
-                                    "webview_height_ratio": "tall",
-                                    "messenger_extensions": true,          
-                                  }                        
-                                ]
-                              }
-                    }
-                }
-  }else if (received_message.text && userInfo.appointmentdate == true) {   
+/***********measuring**********/
+  if (received_message.text && userInfo.appointmentdate == true) {   
     userEnteredInfo.appointmentdate =  received_message.text;
     response = {"attachment":{
                       "type":"template",
@@ -392,9 +330,7 @@ function handleMessage(sender_psid, received_message) {
                   }
     userInfo.appointmentdate = false;
     userInfo.earlyAPprice = true;
-  }
-/***********measuring**********/
-  else if (received_message.text && upperchest == true) {   
+  }else if (received_message.text && upperchest == true) {   
     userEnteredInfo.chest =  received_message.text;
     response = {
       "text": `Now Upper arm.`
@@ -772,9 +708,104 @@ function handleMessage(sender_psid, received_message) {
     userEnteredInfo.ankle = received_message.text;
     askforeventHM(sender_psid);
    lowerankle = false;
+  }else if (received_message.text && userInfo.price == true) { 
+    userEnteredInfo.price = received_message.text;   
+    response = {"attachment":{
+                            "type":"template",
+                            "payload":{
+                              "template_type":"button",
+                              "text":"It would take about a month to sew. And you must to pay a third of the price. Is it okay?",
+                              "buttons":[
+                                {
+                                  "type": "postback",
+                                  "title": "Yes",
+                                  "payload": "yesorder",
+                                },{
+                                  "type": "postback",
+                                  "title": "Sorry",
+                                  "payload": "leaving",
+                                }
+                              ]
+                            }
+                          } 
+                    }
+    userInfo.price = false;
+  }else if (received_message.text && userInfo.phoneNo == true) { 
+    userEnteredInfo.phoneNo = received_message.text;   
+    givebankACC(sender_psid);
+    userInfo.phoneNo = false;
   }
 /************attachment**************/
-  else if (received_message.attachments && designAttachment == true) {
+  else if (received_message.attachments && sharepicAttachment == true) {
+    console.log('meta data',received_message);
+    sharepicAttachment == false;
+    let attachment_url1 = received_message.attachments[0].payload.url;
+    userSendAttachment.sharepicAttachment = attachment_url1;
+    let response1 = {
+                    "attachment":{
+                          "type":"image", 
+                          "payload":{
+                            "url":attachment_url1, 
+                            "is_reusable":true
+                          }
+                        }
+                    };
+    let response2 = {"text": "Is this picture you want to share? By the way it's look good on you. :)",
+                    "quick_replies":[{
+                                        "content_type":"text",
+                                        "title":"Yes! share it.",
+                                        "payload":"shareYes"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"No..",
+                                        "payload":"shareNo"
+                                      }]
+                    };
+      callSend(sender_psid, response1).then(()=>{
+          return callSend(sender_psid, response2);
+        });   
+  }else if (received_message.text == "No..") {    
+    leaving (sender_psid);
+  }else if (received_message.text == "Yes! share it." || received_message.text == "No.") {    
+   response = {"text": "write a caption to share with the picture."}
+   userInfo.cuscaption = true;
+   sharepicAttachment = false;
+  }else if (received_message.text && userInfo.cuscaption == true) {  
+   userEnteredInfo.cuscaption = received_message.text;  
+    response = {"text": "Are you sure? :)",
+                    "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Yes!",
+                                        "payload":"captionYes"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"No.",
+                                        "payload":"captionNo"
+                                      }]
+    };
+   userInfo.cuscaption = false;
+  }else if (received_message.text == "Yes!") {    
+    saveData_SP (sender_psid);
+    response = {
+      "attachment":{
+                    "type":"template",
+                    "payload":{
+                      "template_type":"button",
+                      "text":"💗 🤗.Thank you.🤗 💗",
+                      "buttons":[
+                                  {
+                                    "type": "web_url",
+                                    "title": "Pictures of others",
+                                    "url": "https://shwesu.herokuapp.com/webview/"+sender_psid,
+                                    "webview_height_ratio": "tall",
+                                    "messenger_extensions": true,          
+                                  }                        
+                                ]
+                              }
+                    }
+                }
+  }else if (received_message.attachments && designAttachment == true) {
     console.log('meta data',received_message);
     designAttachment == false;
     let attachment_url = received_message.attachments[0].payload.url;
@@ -824,32 +855,6 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text == "Yes.") {    
     showYPrecord(sender_psid);
     designAttachment = false;
-  }else if (received_message.text && userInfo.price == true) { 
-    userEnteredInfo.price = received_message.text;   
-    response = {"attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"button",
-                              "text":"It would take about a month to sew. And you must to pay a third of the price. Is it okay?",
-                              "buttons":[
-                                {
-                                  "type": "postback",
-                                  "title": "Yes",
-                                  "payload": "yesorder",
-                                },{
-                                  "type": "postback",
-                                  "title": "Sorry",
-                                  "payload": "leaving",
-                                }
-                              ]
-                            }
-                          } 
-                    }
-    userInfo.price = false;
-  }else if (received_message.text && userInfo.phoneNo == true) { 
-    userEnteredInfo.phoneNo = received_message.text;   
-    givebankACC(sender_psid);
-    userInfo.phoneNo = false;
   }else if (received_message.attachments && paidAttachment == true) {
     console.log('meta data',received_message);
     paidAttachment == false;
@@ -1325,6 +1330,21 @@ function handleMessage(sender_psid, received_message) {
                               }
                     }
                 }
+  }else if (received_message.text == "Wedding") {   
+    response = {"text" : "Send your chocies."}
+    weddingAttach = true;
+  }else if (received_message.text == "Occasion") {   
+    response = {"text" : "Send your chocies."}
+    occasionAttach = true;
+  }else if (received_message.text == "Convocation") {   
+    response = {"text" : "Send your chocies."}
+    convoAttach = true;
+  }else if (received_message.text == "Casual") {   
+    response = {"text" : "Send your chocies."}
+    casualAttach = true;
+  }else if (received_message.text == "Yinphone") {   
+    response = {"text" : "Send your chocies."}
+    yinphoneAttach = true;
   }
 
   else if (received_message.text == "Done") {    
