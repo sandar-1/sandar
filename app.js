@@ -325,6 +325,7 @@ function handleMessage(sender_psid, received_message) {
         });   
   }else if (received_message.text == "No..") {    
     Reslected (sender_psid);
+    sharepicAttachment = false;
   }else if (received_message.text == "Yes! share it." || received_message.text == "No.") {    
    response = {"text": "write a caption to share with the picture."}
    userInfo.cuscaption = true;
