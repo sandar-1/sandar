@@ -803,7 +803,7 @@ function handleMessage(sender_psid, received_message) {
                                   "payload": "yesorder",
                                 },{
                                   "type": "postback",
-                                  "title": "Sorry, I'm not insterested.",
+                                  "title": "Sorry",
                                   "payload": "leaving",
                                 }
                               ]
@@ -2471,18 +2471,6 @@ const bothallRecord_no = (sender_psid) => {
       });
     });
     bothallRC = true;
-}
-
-const yesorder = (sender_psid) => {   
-   let response1 = {"text" : "You can transfer money from this..."};
-    let response2 = {"text" : "Cb bank acc : 1623 1237 5464 423"};
-     let response3 = {"text" : "Transfer to this ph no 0912345678 via Wave"}
-    callSend(sender_psid, response1).then(()=>{
-      return callSend(sender_psid, response2).then(()=>{
-        return callSend(sender_psid, response3);
-      });
-    });
-    userInfo.htameintype = true;
 }
 
 const Reslected = (sender_psid) => {
