@@ -2517,6 +2517,7 @@ const yesorder = (sender_psid) => {
         });
       });
     });
+     paidAttachment = true;
 }
 
 const Reslected = (sender_psid) => {
