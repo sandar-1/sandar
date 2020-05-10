@@ -1344,9 +1344,8 @@ const handlePostback = (sender_psid, received_postback) => {
         leaving(sender_psid);
         break;
       case "appointmentdateNo":
-        if (userInfo.appointmentdate == true) { userEnteredInfo.earlyAPprice = 0;
-          userInfo.appointmentdate = 0;
-          console.log ('DateSave');};
+        if (userInfo.appointmentdate == true) { userEnteredInfo.appointmentdate = 0;
+          console.log ('dateSave');};
         askFabric(sender_psid);
         break;
       case "inShop":
