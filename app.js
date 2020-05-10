@@ -1473,6 +1473,10 @@ const handlePostback = (sender_psid, received_postback) => {
         yesorder(sender_psid);
         bothSave = true;
         break;
+      case "add_ADchocies":
+        add_ADchocies(sender_psid);
+        bothSave = true;
+        break;
       default:
         defaultReply(sender_psid);
     }
