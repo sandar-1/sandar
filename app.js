@@ -1344,8 +1344,6 @@ const handlePostback = (sender_psid, received_postback) => {
         leaving(sender_psid);
         break;
       case "appointmentdateNo":
-        if (userInfo.appointmentdate == true) { userEnteredInfo.appointmentdate = 0;
-          console.log ('dateSave');};
         askFabric(sender_psid);
         break;
       case "inShop":
@@ -1549,6 +1547,9 @@ const appointmentdateYes = (sender_psid) => {
 }
 
 const askFabric = (sender_psid) => {
+  userEnteredInfo.appointmentdate = 0;
+  userEnteredInfo.earlyAPprice = 0;
+  console.log ('dateSave');
   let response;
   response = {"attachment":{
                       "type":"template",
