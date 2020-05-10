@@ -329,8 +329,7 @@ function handleMessage(sender_psid, received_message) {
           return callSend(sender_psid, response2);
         });   
   }else if (received_message.text == "No..") {    
-    Reslected (sender_psid);
-    sharepicAttachment = false;
+    leaving (sender_psid);
   }else if (received_message.text == "Yes! share it." || received_message.text == "No.") {    
    response = {"text": "write a caption to share with the picture."}
    userInfo.cuscaption = true;
@@ -352,7 +351,24 @@ function handleMessage(sender_psid, received_message) {
    userInfo.cuscaption = false;
   }else if (received_message.text == "Yes!") {    
     saveData_SP (sender_psid);
-    response = {"text": "Thanks for your purchase in our shop. Have a good day. :)"}
+    response = {
+      "attachment":{
+                    "type":"template",
+                    "payload":{
+                      "template_type":"button",
+                      "text":"💗 🤗.Thank you.🤗 💗",
+                      "buttons":[
+                                  {
+                                    "type": "web_url",
+                                    "title": "Pictures of others",
+                                    "url": "https://shwesu.herokuapp.com/webview/"+sender_psid,
+                                    "webview_height_ratio": "tall",
+                                    "messenger_extensions": true,          
+                                  }                        
+                                ]
+                              }
+                    }
+                }
   }else if (received_message.text && userInfo.appointmentdate == true) {   
     userEnteredInfo.appointmentdate =  received_message.text;
     response = {"attachment":{
@@ -1305,6 +1321,9 @@ const handlePostback = (sender_psid, received_postback) => {
       case "leaving":
         leaving(sender_psid);
         break;
+      case "POO":
+        picofOther(sender_psid);
+        break;
       case "SEW":
         askAppointmentdate(sender_psid);
         break;
@@ -1317,7 +1336,7 @@ const handlePostback = (sender_psid, received_postback) => {
           console.log ('priceSave');};
         break;
       case "ap_priceNo":
-        Reslected(sender_psid);
+        leaving(sender_psid);
         break;
       case "appointmentdateNo":
         askFabric(sender_psid);
@@ -2499,36 +2518,6 @@ const givebankACC = (sender_psid) => {
      paidAttachment = true;
 }
 
-const Reslected = (sender_psid) => {
-  let response;
-  response = {"attachment":{
-                      "type":"template",
-                      "payload":{
-                        "template_type":"button",
-                        "text":"Please select below to start again.",
-                        "buttons":[
-                          {
-                            "type": "postback",
-                            "title": "I want to sew 👗",
-                            "payload": "SEW",
-                          },{
-                            "type": "postback",
-                            "title": "Share pictures",
-                            "payload": "share_pic",
-                          },
-                          {
-                            "type": "web_url",
-                            "title": "Pictures of others",
-                            "url": "https://qph.fs.quoracdn.net/main-qimg-9e8cb835ef77635c3233c1ee716728db.webp",
-                            "webview_height_ratio": "tall",
-                          }
-                        ]
-                      }
-                    } 
-              }
-  callSendAPI(sender_psid, response);
-}
-
 const leaving = (sender_psid) => {
   let response;
   response = {"text": "Thank you for your times."}
@@ -2660,6 +2649,28 @@ const saveData_both = (sender_psid) => {
   db.collection('Both_order').add(both_info);
 }
 
+const picofOther = (sender_psid) => {
+  let response;
+  response = {"attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"Please select below to start again.",
+                        "buttons":[
+                                  {
+                                    "type": "web_url",
+                                    "title": "Pictures of others",
+                                    "url": "https://shwesu.herokuapp.com/webview/"+sender_psid,
+                                    "webview_height_ratio": "tall",
+                                    "messenger_extensions": true,
+                                  }
+                                  ]
+                                }
+                            } 
+              }
+  callSendAPI(sender_psid, response);
+}
+
 function callSendAPI(sender_psid, response) {
   // Construct the message body
   let request_body = {
@@ -2755,12 +2766,17 @@ function setupPersistentMenu(res){
                             {
                               "title":"Share pictures",
                               "type":"postback",
-                              "payload":"SP"
+                              "payload":"share_pic"
                             },
                             {
-                              "title":"View others pictures",
+                              "title":"Picture of others",
                               "type":"postback",
                               "payload":"POO"
+                            },
+                            {
+                              "title":"Leaving",
+                              "type":"postback",
+                              "payload":"leaving"
                             }
                         ]
                       },
