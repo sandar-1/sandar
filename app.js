@@ -851,7 +851,7 @@ function handleMessage(sender_psid, received_message) {
     response = {"text" : "Please send me again"}
     paidAttachment == true;
   }else if (received_message.text == "Yes") {    
-    saveData_both(sender_psid);
+    //saveData_both(sender_psid);
     response = {"attachment":{
                       "type":"template",
                       "payload":{
