@@ -776,19 +776,15 @@ function handleMessage(sender_psid, received_message) {
     response = {"text" : "Please send me again"}
     designAttachment == true;
   }else if (received_message.text == "Yes." && wedding == true) {    
-    userEnteredInfo.dresstype = Wedding;
     wedding_event(sender_psid);
     wedding = false;
-  }else if (received_message.text == "Yes." && occasion == true) {  
-    userEnteredInfo.dresstype = Occasion;  
+  }else if (received_message.text == "Yes." && occasion == true) {    
     occasion_event(sender_psid);
     occasion = false;
-  }else if (received_message.text == "Yes." && convo == true) { 
-    userEnteredInfo.dresstype = Convocation;   
+  }else if (received_message.text == "Yes." && convo == true) {    
     convocation_event(sender_psid);
     convo = false;
-  }else if (received_message.text == "Yes." && casual == true) { 
-    userEnteredInfo.dresstype = Casual;   
+  }else if (received_message.text == "Yes." && casual == true) {    
     casual_event(sender_psid);
     casual = false;
   }else if (received_message.text == "Yes.") {    
@@ -1158,7 +1154,7 @@ function handleMessage(sender_psid, received_message) {
   }
 /********************************************/
   else if (received_message.text == "Done") {    
-    response = {"text": "kddddkkd"+userEnteredInfo.dresstype }
+    response = {"text": "kddddkkd"}
   }
  callSendAPI(sender_psid, response); 
 }
