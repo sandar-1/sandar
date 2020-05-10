@@ -1262,15 +1262,12 @@ const handlePostback = (sender_psid, received_postback) => {
         break;
       case "hmRecord_no":
         hmRecord_no(sender_psid);
-        htameinRC = true;
         break;
       case "order_comfirm_HM":
         saveData_HM(sender_psid);
         break;
         case "ypRecord_no":
         ypRecord_no(sender_psid);
-        yinphoneRC = true;
-        htameinRC = false;
         break;
       case "ypRecord_right":
         orderComfirmYP(sender_psid);
@@ -2129,7 +2126,6 @@ const showHMrecord = (sender_psid) => {
         });
       });
     });
-  htameinRC = true;
 }
 
 const hmRecord_no = (sender_psid) => {
@@ -2147,6 +2143,7 @@ const hmRecord_no = (sender_psid) => {
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });
+    htameinRC = true;
 }
 
 const orderComfirmHM = (sender_psid) => {
@@ -2238,7 +2235,6 @@ const showYPrecord = (sender_psid) => {
         });
       });
     });
-  yinphoneRC = true;
 }
 
 const ypRecord_no = (sender_psid) => {
@@ -2256,6 +2252,7 @@ const ypRecord_no = (sender_psid) => {
     callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2);
     });
+    yinphoneRC = true;
 }
 
 const orderComfirmYP = (sender_psid) => {
