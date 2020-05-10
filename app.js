@@ -840,6 +840,11 @@ function handleMessage(sender_psid, received_message) {
       callSend(sender_psid, response1).then(()=>{
           return callSend(sender_psid, response2);
         });   
+  }else if (received_message.text == "Opps..No! 😬 ") {    
+    response = {"text" : "Please send me again"}
+    paidAttachment == true;
+  }else if (received_message.text == "Yes 🤗 ") {    
+    saveData_both(sender_psid);
   }
 /*changing*/
   else if (received_message.text == "Chest" || received_message.text == "chest") {
@@ -2593,6 +2598,28 @@ const saveData_YP = (sender_psid) => {
     Price : userEnteredInfo.price,
   }
   db.collection('Yinphone_order').add(yp_info);
+}
+
+const saveData_both = (sender_psid) => {
+  const both_info = {
+    id : sender_psid,
+    Chest : userEnteredInfo.chest,
+    upperArm : userEnteredInfo.upperArm,
+    sleevelength : userEnteredInfo.sleevelength,
+    Waist : userEnteredInfo.waist,
+    Yinphone_type : userEnteredInfo.yinphonetype,
+    sleevetype : userEnteredInfo.sleevetype,
+    khar : userEnteredInfo.khar,
+    Hips : userEnteredInfo.hips,
+    Htamein_long : userEnteredInfo.htameinlong,
+    Htamein_type : userEnteredInfo.htameintype,
+    Htamein_fold : userEnteredInfo.htameinfold,
+    Ankle : userEnteredInfo.ankle,
+    Design : userSendAttachment. designAttachment,
+    paid : userpaidAttachment.paidAttachment,
+    Price : userEnteredInfo.price,
+  }
+  db.collection('Both_order').add(both_info);
 }
 
 function callSendAPI(sender_psid, response) {
