@@ -243,7 +243,6 @@ let userInfo = {
   cuscaption : false,
   appointmentdate : false,
   earlyAPprice :false,
-  dresstype : false,
 
 };
 
@@ -791,7 +790,7 @@ function handleMessage(sender_psid, received_message) {
     showYPrecord(sender_psid);
   }else if (received_message.text && userInfo.price == true) { 
     userEnteredInfo.price = received_message.text;   
-    showBOTHrecord(sender_psid);
+    response = {"text" : "OK"}
     userInfo.price = false;
   }
 /*changing*/
@@ -1215,6 +1214,12 @@ const handlePostback = (sender_psid, received_postback) => {
         customizewhole(sender_psid);
         break;
       case "notcustomize":
+        showBOTHrecord(sender_psid);
+        break;
+        case "bothRecord_no":
+        bothRecord_no(sender_psid);
+        break;
+        case "bothRecord_right":
         askforevent(sender_psid);
         break;
       case "WEDDING":
@@ -2340,6 +2345,24 @@ const showBOTHrecord = (sender_psid) => {
         });
       });
     });
+}
+
+const bothRecord_no = (sender_psid) => {
+  let response1 = {"text" : "Please type the key word that you want to change."};
+    let response2 = { 
+       "attachment":{
+            "type":"image", 
+            "payload":{
+              "url":"https://i.imgur.com/tvGYR4M.png", 
+              "is_reusable":true
+            }
+          }
+         };
+    
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+    bothRC = true;
 }
 
 const Reslected = (sender_psid) => {
