@@ -852,6 +852,21 @@ function handleMessage(sender_psid, received_message) {
     paidAttachment == true;
   }else if (received_message.text == "Yes") {    
     saveData_both(sender_psid);
+    response = {"attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"Thank you. :)",
+                        "buttons":[
+                          {
+                            "type":"web_url",
+                            "url":"https://www.messenger.com",
+                            "title":"Admin chocies",
+                          }                        
+                        ]
+                      }
+                    }
+                  }
     paidAttachment = false;
   }
 /*changing*/
