@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Htamein orders</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ </head>
+
+  <body>
+  <script>
+      (function(d, s, id){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/messenger.Extensions.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'Messenger'));
+    const APP_ID = 181903259585064;    
+    var senderID = "";
+    
+    window.extAsyncInit = function() {
+        MessengerExtensions.getContext(APP_ID, 
+          function success(thread_context){
+           senderID = thread_context.psid;
+          },
+          function error(err){
+            console.log(err);
+          }
+        );        
+    };
+  </script>
+  
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+
+  <table>
+  <% for(var i=0; i < data.length; i++) { %>
+     <tr>
+       <th>Earlyapointment date</th>
+       <th>Earlyapointment price</th>
+       <th>Inshop or Not</th>
+       <th>Measurment</th>
+       <th>Type of yinphone</th>
+       <th>Cloth design</th>
+       <th>Estimate price</th>
+       <th>Phone number</th>
+       <th>Voucher</th>
+     </tr>
+     <tr>
+       <td> <%= data[i].earlyAPdate %></td>
+       <td> <%= data[i].earlyAPprice %></td>
+       <td> <%= data[i].Inshop %></td>
+       <td>-Waist = <%= data[i].Waist %><br>
+           -Hips = <%= data[i].Hips %><br>
+           -Htamein_long = <%= data[i].Htamein_long %><br>
+        </td>
+       <td >-<%= data[i].Htamein_type %><br>
+            -<%= data[i].Htamein_fold %><br>
+            -<%= data[i].Ankle %>
+       </td>
+       <td><%= data[i].Price %></td>
+       <td><%= data[i].PhoneNo %></td>
+       <td><img src = "<%= data[i].paid %>" width="90"></td>
+     </tr>
+  <% } %>
+  </table>
+
+  </body>
+
+</html>

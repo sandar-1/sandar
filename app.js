@@ -194,6 +194,42 @@ app.get('/yinphone/:sender_id/',function(req,res){
     });    
 });
 
+app.get('/htamein/:sender_id/',function(req,res){
+    const sender_id = req.params.sender_id;
+
+    let data = [];
+
+    db.collection("Htamein_order").get()
+    .then(  function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            let img = {};
+            img.earlyAPdate = doc.data().earlyAPdate;
+            img.earlyAPprice = doc.data().earlyAPprice;
+            img.Inshop = doc.data().Inshop;
+            img.Waist = doc.data().Waist;
+            img.Hips = doc.data().Hips;
+            img.Htamein_long = doc.data().Htamein_long;
+            img.Htamein_type = doc.data().Htamein_type;
+            img.Htamein_fold = doc.data().Htamein_fold;
+            img.Ankle = doc.data().Ankle;
+            img.Price = doc.data().Price;
+            img.PhoneNo = doc.data().PhoneNo;
+            img.paid = doc.data().paid;
+
+            data.push(img);                      
+
+        });
+        console.log("DATA", data);
+        res.render('htamein.ejs',{data:data, sender_id:sender_id}); 
+
+    }
+    
+    )
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });    
+});
+
   let userInfo = {
     chest:false,
     upperArm:false,
@@ -1711,9 +1747,11 @@ const ad_vieworder = (sender_psid) => {
                             "messenger_extensions": true,    
                           },
                           {
-                            "type":"postback",
-                            "payload":"dddd",
-                            "title":"Htamein order"
+                            "type":"web_url",
+                            "title":"Htamein order",
+                            "url": "https://shwesu.herokuapp.com/htamein/"+sender_psid,
+                            "webview_height_ratio": "tall",
+                            "messenger_extensions": true,  
                           },
                           {
                             "type":"postback",
