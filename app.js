@@ -280,6 +280,7 @@ app.get('/yinphone/:sender_id/',function(req,res){
             img.Price = doc.data().Price;
             img.PhoneNo = doc.data().PhoneNo;
             img.paid = doc.data().paid;
+            img.address = doc.data().address;
 
             data.push(img);                      
 
@@ -317,6 +318,7 @@ app.get('/htamein/:sender_id/',function(req,res){
             img.Price = doc.data().Price;
             img.PhoneNo = doc.data().PhoneNo;
             img.paid = doc.data().paid;
+            img.address = doc.data().address;
 
             data.push(img);                      
 
@@ -361,6 +363,7 @@ app.get('/both/:sender_id/',function(req,res){
             img.Price = doc.data().Price;
             img.PhoneNo = doc.data().PhoneNo;
             img.paid = doc.data().paid;
+            img.address = doc.data().address;
 
             data.push(img);                      
 
@@ -1076,7 +1079,7 @@ function handleMessage(sender_psid, received_message) {
                         "buttons":[
                           {
                             "type":"web_url",
-                            "url":"https://goo.gl/maps/rXWbW23t5qBMhUnQ9",
+                            "url":"https://goo.gl/maps/dDsx1vKFBLYEbREV8",
                             "title":"View map",
                           }                        
                         ]
