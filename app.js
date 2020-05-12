@@ -161,7 +161,7 @@ app.get('/wedding/:sender_id/',function(req,res){
     .then(  function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
             let img = {};
-            img.weddingPic = doc.data().weddingPic;
+            img.url = doc.data().url;
 
             data.push(img);                      
 
@@ -189,7 +189,7 @@ app.post('/imagepick',function(req,res){
     if (!doc.exists) {
       console.log('No such document!');
     } else {
-      const image_url = doc.data().weddingPic;
+      const image_url = doc.data().url;
 
       console.log('IMG URL:', image_url);
 
