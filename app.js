@@ -1364,11 +1364,11 @@ function handleMessage(sender_psid, received_message) {
                     "quick_replies":[{
                                         "content_type":"text",
                                         "title":"Ofcourse",
-                                        "payload":"shareYes"
+                                        "payload":"og"
                                       },{
                                         "content_type":"text",
                                         "title":"Opps not that.",
-                                        "payload":"Opps not that."
+                                        "payload":"opnt"
                                       }]
                     };
       callSend(sender_psid, response1).then(()=>{
@@ -1379,8 +1379,8 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text == "Ofcourse") {    
    response = {"text": "write a caption to share with the picture."}
    weddingAttach = false;
-  // let adc = {url: adminSendAttachment.weddingAttach}
- //  db.collection('wedding').doc().set(adc);
+  let adc = {url: adminSendAttachment.weddingAttach}
+  db.collection('wedding').doc().set(adc);
   }
 
   else if (received_message.text == "Done") {    
