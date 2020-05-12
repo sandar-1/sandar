@@ -1559,12 +1559,14 @@ function handleMessage(sender_psid, received_message) {
     add_ADchocies(sender_psid);    
     weddingAttach = false;
     occasionAttach = false;
+    convoAttach = false;
     casualAttach = false;
     yinphoneAttach = false;
   }else if (received_message.text == "Finish") {    
     response = {"text": "Done"}
     weddingAttach = false;
     occasionAttach = false;
+    convoAttach = false;
     casualAttach = false;
     yinphoneAttach = false;
   }
