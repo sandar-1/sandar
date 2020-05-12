@@ -2142,7 +2142,7 @@ const chooesClothPart = (sender_psid) => {
 }
 
 const yinphoneMeasuring = (sender_psid) => {
-  let response1 = {"text":"OK..Let's get your upper body measurement. Here are ways to measure your body. Hopefully that will be useful. :)"};    
+  let response1 = {"text":"OK..Let's get your upper body measurement. Here are ways to measure your body. Please measure in centimeters. Hopefully that will be useful. :)"};    
      let response2 = {
       "attachment":{
             "type":"image", 
@@ -2162,7 +2162,7 @@ const yinphoneMeasuring = (sender_psid) => {
 }
 
 const htameinMeasuring = (sender_psid) => {
-  let response1 = {"text":"OK..Let's get your lower body measurement. Here are ways to measure your body. Hopefully that will be useful. :)"};    
+  let response1 = {"text":"OK..Let's get your lower body measurement. Here are ways to measure your body. Please measure in centimeters. Hopefully that will be useful. :)"};    
      let response2 = {
       "attachment":{
             "type":"image", 
@@ -2182,7 +2182,7 @@ const htameinMeasuring = (sender_psid) => {
 }
 
 const wholeMeasuring = (sender_psid) => {
-  let response1 = {"text":"OK..Let's get your body measurement. Here are ways to measure your body. Hopefully that will be useful. :)"};    
+  let response1 = {"text":"OK..Let's get your body measurement. Here are ways to measure your body. Please measure in centimeters. Hopefully that will be useful. :)"};    
      let response2 = {
       "attachment":{
             "type":"image", 
@@ -2900,7 +2900,7 @@ const orderComfirmHM = (sender_psid) => {
                         "buttons":[
                           {
                             "type": "postback",
-                            "title": "Order Comfirm",
+                            "title": "Yes",
                             "payload": "order_comfirm_HM",
                           },
                           {
@@ -3002,7 +3002,7 @@ const orderComfirmYP = (sender_psid) => {
                         "buttons":[
                           {
                             "type": "postback",
-                            "title": "Order Comfirm",
+                            "title": "Yes",
                             "payload": "order_comfirm_YP",
                           },
                           {
