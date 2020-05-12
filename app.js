@@ -1402,7 +1402,7 @@ function handleMessage(sender_psid, received_message) {
       callSend(sender_psid, response1).then(()=>{
           return callSend(sender_psid, response2);
         });   
-  }else if (received_message.text == "Ofcourse" weddingAttach == true) {    
+  }else if (received_message.text == "Ofcourse" && weddingAttach == true) {    
    response = {"text": "If you wanna add more keep send your chocies.",
                     "quick_replies":[{
                                         "content_type":"text",
@@ -1416,7 +1416,7 @@ function handleMessage(sender_psid, received_message) {
                 }
   let adc = {url: adminSendAttachment.weddingAttach}
   db.collection('wedding').doc().set(adc);
-  }else if (received_message.text == "Ofcourse" occasionAttach == true) {    
+  }else if (received_message.text == "Ofcourse" && occasionAttach == true) {    
    response = {"text": "If you wanna add more keep send your chocies.",
                     "quick_replies":[{
                                         "content_type":"text",
