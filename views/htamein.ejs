@@ -60,6 +60,7 @@ tr:nth-child(even) {
        <th>Estimate price</th>
        <th>Phone number</th>
        <th>Voucher</th>
+       <th>Address</th>
      </tr>
      <tr>
        <td> <%= data[i].name %></td>
@@ -77,6 +78,7 @@ tr:nth-child(even) {
        <td><%= data[i].Price %></td>
        <td><%= data[i].PhoneNo %></td>
        <td><img src = "<%= data[i].paid %>" width="100"></td>
+       <td><%= data[i].address %></td>
      </tr>
   <% } %>
   </table>

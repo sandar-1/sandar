@@ -396,6 +396,7 @@ app.get('/both/:sender_id/',function(req,res){
     phoneNo : false,
     inshop : false,
     name : false,
+    address : false,
   };
 
   let changing = {
@@ -888,8 +889,31 @@ function handleMessage(sender_psid, received_message) {
     userInfo.name = true;
   }else if (received_message.text && userInfo.name == true) { 
     userEnteredInfo.name = received_message.text;   
-    givebankACC(sender_psid);
+    response = {"text" : "Will you pick up the order?",
+                "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"I will pick",
+                                        "payload":"p"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"I would not pick",
+                                        "payload":"wnp"
+                                      }]
+    };
     userInfo.name = false;
+  }else if (received_message.text == "I will pick") { 
+    userEnteredInfo.address = received_message.text;   
+    console.log('addressSave');
+    givebankACC(sender_psid);
+    userInfo.address = false;
+  }else if (received_message.text == "I would not pick") {    
+    response = {"Ok! send me address or name of bus stop and the city."}
+    userInfo.address = true;
+  }else if (received_message.text && userInfo.address == true) { 
+    userEnteredInfo.address = received_message.text;   
+    givebankACC(sender_psid);
+    userInfo.address = false;
   }
 /************attachment**************/
   else if (received_message.attachments && sharepicAttachment == true) {
@@ -3229,6 +3253,7 @@ const saveData_HM = (sender_psid) => {
     earlyAPdate : userEnteredInfo.appointmentdate,
     earlyAPprice : userEnteredInfo.earlyAPprice,
     paid : userpaidAttachment.paidAttachment,
+    address : userEnteredInfo.address,
   }
   db.collection('Htamein_order').add(hm_info);
 }
@@ -3251,6 +3276,7 @@ const saveData_YP = (sender_psid) => {
     Inshop : userEnteredInfo.inShop,
     earlyAPdate : userEnteredInfo.appointmentdate,
     earlyAPprice : userEnteredInfo.earlyAPprice,
+    address : userEnteredInfo.address,
   }
   db.collection('Yinphone_order').add(yp_info);
 }
@@ -3278,6 +3304,7 @@ const saveData_both = (sender_psid) => {
     Inshop : userEnteredInfo.inShop,
     earlyAPdate : userEnteredInfo.appointmentdate,
     earlyAPprice : userEnteredInfo.earlyAPprice,
+    address : userEnteredInfo.address,
   }
   db.collection('Both_order').add(both_info);
 }
