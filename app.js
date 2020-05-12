@@ -166,7 +166,18 @@ app.get('/yinphone/:sender_id/',function(req,res){
         querySnapshot.forEach(function(doc) {
             let img = {};
             img.earlyAPdate = doc.data().earlyAPdate;
-            
+            img.earlyAPprice = doc.data().earlyAPprice;
+            img.Inshop = doc.data().Inshop;
+            img.Chest = doc.data().Chest;
+            img.upperArm = doc.data().upperArm;
+            img.sleevelength = doc.data().sleevelength;
+            img.Waist = doc.data().Waist;
+            img.Yinphone_type = doc.data().Yinphone_type;
+            img.sleevetype = doc.data().sleevetype;
+            img.khar = doc.data().khar;
+            img.Design = doc.data().Design;
+            img.Price = doc.data().Price;
+            img.PhoneNo = doc.data().PhoneNo;
 
             data.push(img);                      
 
@@ -1692,7 +1703,7 @@ const ad_vieworder = (sender_psid) => {
                         "text":"Is your piece of fabric in our shop? or delivery?",
                         "buttons":[
                           {
-                            "type":"postback",
+                            "type":"web_url",
                             "title":"Yinphone order",
                             "url": "https://shwesu.herokuapp.com/yinphone/"+sender_psid,
                             "webview_height_ratio": "tall",
