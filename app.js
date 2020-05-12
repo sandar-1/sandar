@@ -230,6 +230,49 @@ app.get('/htamein/:sender_id/',function(req,res){
     });    
 });
 
+app.get('/both/:sender_id/',function(req,res){
+    const sender_id = req.params.sender_id;
+
+    let data = [];
+
+    db.collection("Both_order").get()
+    .then(  function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            let img = {};
+            img.earlyAPdate = doc.data().earlyAPdate;
+            img.earlyAPprice = doc.data().earlyAPprice;
+            img.Inshop = doc.data().Inshop;
+            img.Chest = doc.data().Chest;
+            img.upperArm = doc.data().upperArm;
+            img.sleevelength = doc.data().sleevelength;
+            img.Waist = doc.data().Waist;
+            img.Hips = doc.data().Hips;
+            img.Htamein_long = doc.data().Htamein_long;
+            img.Yinphone_type = doc.data().Yinphone_type;
+            img.sleevetype = doc.data().sleevetype;
+            img.khar = doc.data().khar;
+            img.Htamein_type = doc.data().Htamein_type;
+            img.Htamein_fold = doc.data().Htamein_fold;
+            img.Ankle = doc.data().Ankle;
+            img.Design = doc.data().Design;
+            img.Price = doc.data().Price;
+            img.PhoneNo = doc.data().PhoneNo;
+            img.paid = doc.data().paid;
+
+            data.push(img);                      
+
+        });
+        console.log("DATA", data);
+        res.render('both.ejs',{data:data, sender_id:sender_id}); 
+
+    }
+    
+    )
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });    
+});
+
   let userInfo = {
     chest:false,
     upperArm:false,
@@ -1754,9 +1797,11 @@ const ad_vieworder = (sender_psid) => {
                             "messenger_extensions": true,  
                           },
                           {
-                            "type":"postback",
-                            "payload":"ssss",
-                            "title":"Whole choth order"
+                            "type":"web_url",
+                            "title":"Whole choth order",
+                            "url": "https://shwesu.herokuapp.com/both/"+sender_psid,
+                            "webview_height_ratio": "tall",
+                            "messenger_extensions": true,  
                           }
                         ]
                       }

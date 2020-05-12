@@ -65,9 +65,9 @@ tr:nth-child(even) {
        <td> <%= data[i].earlyAPdate %></td>
        <td> <%= data[i].earlyAPprice %></td>
        <td> <%= data[i].Inshop %></td>
-       <td>-Waist = <%= data[i].Waist %><br>
-           -Hips = <%= data[i].Hips %><br>
-           -Htamein_long = <%= data[i].Htamein_long %><br>
+       <td>-Waist: <%= data[i].Waist %><br>
+           -Hips: <%= data[i].Hips %><br>
+           -Htamein_long: <%= data[i].Htamein_long %><br>
         </td>
        <td >-<%= data[i].Htamein_type %><br>
             -<%= data[i].Htamein_fold %><br>
@@ -75,7 +75,7 @@ tr:nth-child(even) {
        </td>
        <td><%= data[i].Price %></td>
        <td><%= data[i].PhoneNo %></td>
-       <td><img src = "<%= data[i].paid %>" width="90"></td>
+       <td><img src = "<%= data[i].paid %>" width="100"></td>
      </tr>
   <% } %>
   </table>
