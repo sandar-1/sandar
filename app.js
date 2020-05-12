@@ -1388,7 +1388,7 @@ function handleMessage(sender_psid, received_message) {
                           }
                         }
                     };
-    let response2 = {"text": "You want to add this design to wedding admin chocies?",
+    let response2 = {"text": "You want to add this design to occasion admin chocies?",
                     "quick_replies":[{
                                         "content_type":"text",
                                         "title":"Ofcourse",
