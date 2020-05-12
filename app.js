@@ -1374,13 +1374,35 @@ function handleMessage(sender_psid, received_message) {
       callSend(sender_psid, response1).then(()=>{
           return callSend(sender_psid, response2);
         });   
-  }else if (received_message.text == "Opps not that.") {    
-    leaving (sender_psid);
   }else if (received_message.text == "Ofcourse") {    
-   response = {"text": "Done."}
-   weddingAttach = false;
+   response = {"text": "If you wanna add more keep send your chocies.",
+                    "quick_replies":[{
+                                        "content_type":"text",
+                                        "title":"Finish",
+                                        "payload":"f"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Change Category",
+                                        "payload":"cc"
+                                      }]
+  }
+   weddingAttach = true;
   let adc = {url: adminSendAttachment.weddingAttach}
   db.collection('wedding').doc().set(adc);
+  }else if (received_message.text == "Opps not that.") {    
+    response = {"text": "Ok send again!"}
+  }else if (received_message.text == "Change Category") {    
+    add_ADchocies(sender_psid);    
+    weddingAttach = false;
+    occasionAttach = false;
+    casualAttach = false;
+    yinphoneAttach = false;
+  }else if (received_message.text == "Finish") {    
+    response = {"text": ""}
+    weddingAttach = false;
+    occasionAttach = false;
+    casualAttach = false;
+    yinphoneAttach = false;
   }
 
   else if (received_message.text == "Done") {    
