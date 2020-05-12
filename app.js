@@ -1350,7 +1350,7 @@ function handleMessage(sender_psid, received_message) {
     console.log('meta data',received_message);
     weddingAttach == false;
     let attachment_url1 = received_message.attachments[0].payload.url;
-    userSendAttachment.weddingAttach = attachment_url1;
+    adminSendAttachment.weddingAttach = attachment_url1;
     let response1 = {
                     "attachment":{
                           "type":"image", 
@@ -1377,14 +1377,14 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text == "Opps not that.") {    
     leaving (sender_psid);
   }else if (received_message.text == "Ofcourse") {    
-   response = {"text": "write a caption to share with the picture."}
+   response = {"text": "Done."}
    weddingAttach = false;
-  let adc = {url: adminSendAttachment.weddingAttach}
-  db.collection('wedding').doc().set(adc);
+// let adc = {url: adminSendAttachment.weddingAttach}
+  // db.collection('wedding').doc().set(adc);
   }
 
   else if (received_message.text == "Done") {    
-    response = {"text": "kddddkkd"}
+    response = {"text": adminSendAttachment.weddingAttach}
   }
  callSendAPI(sender_psid, response); 
 }
