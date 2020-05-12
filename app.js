@@ -903,7 +903,7 @@ function handleMessage(sender_psid, received_message) {
     };
     userInfo.name = false;
   }else if (received_message.text == "I will pick") { 
-    userEnteredInfo.address = will come and pick;   
+    userEnteredInfo.address = received_message.text;   
     console.log('addressSave');
     givebankACC(sender_psid);
     userInfo.address = false;
