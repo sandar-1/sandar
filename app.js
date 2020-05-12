@@ -1072,7 +1072,7 @@ function handleMessage(sender_psid, received_message) {
     paidAttachment = false;
     ypSave = false
   }else if (received_message.text == "Yes" && hmSave == true) {    
-  // saveData_HM(sender_psid);
+   saveData_HM(sender_psid);
     response = {"attachment":{
                       "type":"template",
                       "payload":{
