@@ -908,7 +908,7 @@ function handleMessage(sender_psid, received_message) {
     givebankACC(sender_psid);
     userInfo.address = false;
   }else if (received_message.text == "I would not pick") {    
-    response = {"Ok! send me address or name of bus stop and the city."}
+    response = {"Ok! send me address or name of bus stop and the city."};
     userInfo.address = true;
   }else if (received_message.text && userInfo.address == true) { 
     userEnteredInfo.address = received_message.text;   
