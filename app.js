@@ -161,7 +161,7 @@ app.get('/yinphone/:sender_id/',function(req,res){
 
     let data = [];
 
-    db.collection("Yinphone_order").limit(20).get()
+    db.collection("Yinphone_order").get()
     .then(  function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
             let img = {};
