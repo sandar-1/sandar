@@ -1439,7 +1439,7 @@ function handleMessage(sender_psid, received_message) {
     casualAttach = false;
     yinphoneAttach = false;
   }else if (received_message.text == "Finish") {    
-    response = {"text": ""}
+    response = {"text": "Done"}
     weddingAttach = false;
     occasionAttach = false;
     casualAttach = false;
