@@ -1,25 +1,4 @@
 
-/**
- * Copyright 2017-present, Facebook, Inc. All rights reserved.
- *
- * This source code is licensed under the license found in the
- * LICENSE file in the root directory of this source tree.
- *
- * Messenger Platform Quick Start Tutorial
- *
- * This is the completed code for the Messenger Platform quick start tutorial
- *
- * https://developers.facebook.com/docs/messenger-platform/getting-started/quick-start/
- *
- * To run this code, you must do the following:
- *
- * 1. Deploy this code to a server running Node.js
- * 2. Run `npm install`
- * 3. Update the VERIFY_TOKEN
- * 4. Add your PAGE_ACCESS_TOKEN to your environment vars
- *
- */
-
 'use strict';
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 // Imports dependencies and set up http server
@@ -222,87 +201,123 @@ app.post('/imagepick',function(req,res){
   })
   .catch(err => {
     console.log('Error getting document', err);
-  });
-      
+  }); 
 });
 
-let userInfo = {
-  chest:false,
-  upperArm:false,
-  sleevelength:false,
-  waist:false,
-  hips:false,
-  htameinlong:false,
-  yinphonetype:false,
-  sleevetype:false,
-  khar:false,
-  htameintype:false,
-  htameinfold:false,
-  ankle:false,
-  price : false,
-  cuscaption : false,
-  appointmentdate : false,
-  earlyAPprice :false,
-  phoneNo : false,
-  inshop : false,
-};
+app.get('/yinphone/:sender_id/',function(req,res){
+    const sender_id = req.params.sender_id;
 
-let changing = {
-  chest:false,
-  upperArm:false,
-  sleevelength:false,
-  waist:false,
-  hips:false,
-  htameinlong:false,
-  yinphonetype:false,
-  sleevetype:false,
-  khar:false,
-  htameintype:false,
-  htameinfold:false,
-  ankle:false,
-};
+    let data = [];
 
-let upperchest = false;
-let upperupperArm = false;
-let uppersleevelength = false;
-let upperwaist = false;
-let upperyptype = false;
-let uppersltype = false;
-let upperkhar = false;
-let lowerwaist = false;
-let lowerhips = false;
-let lowerhmlong = false;
-let lowerhmtype = false;
-let lowerhmfold = false;
-let lowerankle = false;
-let wedding = false;
-let occasion = false;
-let convo = false;
-let casual = false;
-let yinphoneprice = false;
-let htameinprice = false;
-let htameinRC = false;
-let yinphoneRC = false;
-let bothallRC = false;
-let ypSave = false;
-let hmSave = false;
-let bothSave = false;
+    db.collection("Yinphone_order").limit(20).get()
+    .then(  function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            let img = {};
+            img.earlyAPdate = doc.data().earlyAPdate;
+            img.earlyAPprice = doc.data().earlyAPprice;
+            img.Inshop = doc.data().Inshop;
+            img.Chest = doc.data().Chest;
+            img.upperArm = doc.data().upperArm;
+            img.sleevelength = doc.data().sleevelength;
+            img.Waist = doc.data().Waist;
+            img.Yinphone_type = doc.data().Yinphone_type;
+            img.sleevetype = doc.data().sleevetype;
+            img.khar = doc.data().khar;
+            img.Design = doc.data().Design;
+            img.Price = doc.data().Price;
+            img.PhoneNo = doc.data().PhoneNo;
 
-let weddingAttach = false;
-let occasionAttach = false;
-let convoAttach = false;
-let casualAttach = false;
-let yinphoneAttach = false;
+            data.push(img);                      
 
-let designAttachment = false;
-let sharepicAttachment = false;
-let paidAttachment = false;
+        });
+        console.log("DATA", data);
+        res.render('yinphone.ejs',{data:data, sender_id:sender_id}); 
 
-let userEnteredInfo = {};
-let userSendAttachment = [];
-let userpaidAttachment = [];
-let adminSendAttachment =[];
+    }
+    
+    )
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });    
+});
 
+  let userInfo = {
+    chest:false,
+    upperArm:false,
+    sleevelength:false,
+    waist:false,
+    hips:false,
+    htameinlong:false,
+    yinphonetype:false,
+    sleevetype:false,
+    khar:false,
+    htameintype:false,
+    htameinfold:false,
+    ankle:false,
+    price : false,
+    cuscaption : false,
+    appointmentdate : false,
+    earlyAPprice :false,
+    phoneNo : false,
+    inshop : false,
+  };
+
+  let changing = {
+    chest:false,
+    upperArm:false,
+    sleevelength:false,
+    waist:false,
+    hips:false,
+    htameinlong:false,
+    yinphonetype:false,
+    sleevetype:false,
+    khar:false,
+    htameintype:false,
+    htameinfold:false,
+    ankle:false,
+  };
+/**********************/
+  let upperchest = false;
+  let upperupperArm = false;
+  let uppersleevelength = false;
+  let upperwaist = false;
+  let upperyptype = false;
+  let uppersltype = false;
+  let upperkhar = false;
+  let lowerwaist = false;
+  let lowerhips = false;
+  let lowerhmlong = false;
+  let lowerhmtype = false;
+  let lowerhmfold = false;
+  let lowerankle = false;
+  let wedding = false;
+  let occasion = false;
+  let convo = false;
+  let casual = false;
+  let yinphoneprice = false;
+  let htameinprice = false;
+  let htameinRC = false;
+  let yinphoneRC = false;
+  let bothallRC = false;
+  let ypSave = false;
+  let hmSave = false;
+  let bothSave = false;
+
+  let weddingAttach = false;
+  let occasionAttach = false;
+  let convoAttach = false;
+  let casualAttach = false;
+  let yinphoneAttach = false;
+
+  let designAttachment = false;
+  let sharepicAttachment = false;
+  let paidAttachment = false;
+
+  let userEnteredInfo = {};
+  let userSendAttachment = [];
+  let userpaidAttachment = [];
+  let adminSendAttachment =[];
+/****/
 function handleMessage(sender_psid, received_message) {
   let response;
 /***********measuring**********/
@@ -1737,17 +1752,19 @@ const ad_vieworder = (sender_psid) => {
                         "buttons":[
                           {
                             "type":"postback",
-                            "payload":"inShop",
-                            "title":"Yinphone order"
+                            "title":"Yinphone order",
+                            "url": "https://shwesu.herokuapp.com/yinphone/"+sender_psid,
+                            "webview_height_ratio": "tall",
+                            "messenger_extensions": true,    
                           },
                           {
                             "type":"postback",
-                            "payload":"willDeliver",
+                            "payload":"dddd",
                             "title":"Htamein order"
                           },
                           {
                             "type":"postback",
-                            "payload":"willDeliver",
+                            "payload":"ssss",
                             "title":"Whole choth order"
                           }
                         ]
