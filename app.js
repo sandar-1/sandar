@@ -288,6 +288,7 @@ let ypSave = false;
 let hmSave = false;
 let bothSave = false;
 
+let addminAttach = false;
 let weddingAttach = false;
 let occasionAttach = false;
 let convoAttach = false;
@@ -1345,6 +1346,40 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text == "Yinphone") {   
     response = {"text" : "Send your chocies."}
     yinphoneAttach = true;
+  }else if (received_message.attachments && weddingAttach == true) {
+    console.log('meta data',received_message);
+    weddingAttach == false;
+    let attachment_url1 = received_message.attachments[0].payload.url;
+    userSendAttachment.weddingAttach = attachment_url1;
+    let response1 = {
+                    "attachment":{
+                          "type":"image", 
+                          "payload":{
+                            "url":attachment_url1, 
+                            "is_reusable":true
+                          }
+                        }
+                    };
+    let response2 = {"text": "You want to add this design to wedding admin chocies?",
+                    "quick_replies":[{
+                                        "content_type":"text",
+                                        "title":"Ofcourse",
+                                        "payload":"shareYes"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Opps not that.",
+                                        "payload":"Opps not that."
+                                      }]
+                    };
+      callSend(sender_psid, response1).then(()=>{
+          return callSend(sender_psid, response2);
+        });   
+  }else if (received_message.text == "Opps not that.") {    
+    leaving (sender_psid);
+  }else if (received_message.text == "Ofcourse") {    
+   response = {"text": "write a caption to share with the picture."}
+   weddingAttach = false;
+   db.collection('wedding').doc().set(weddingPic: adminSendAttachment.weddingAttach);
   }
 
   else if (received_message.text == "Done") {    
