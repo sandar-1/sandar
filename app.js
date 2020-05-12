@@ -156,6 +156,106 @@ app.get('/wedding/:sender_id/',function(req,res){
     });    
 });
 
+app.get('/occasion/:sender_id/',function(req,res){
+    const sender_id = req.params.sender_id;
+
+    let data = [];
+
+    db.collection("occasion").limit(20).get()
+    .then(  function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            let img = {};
+            img.url = doc.data().url;
+
+            data.push(img);                      
+
+        });
+        console.log("DATA", data);
+        res.render('wedding.ejs',{data:data, sender_id:sender_id}); 
+
+    }
+    
+    )
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });    
+});
+
+app.get('/convo/:sender_id/',function(req,res){
+    const sender_id = req.params.sender_id;
+
+    let data = [];
+
+    db.collection("convocation").limit(20).get()
+    .then(  function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            let img = {};
+            img.url = doc.data().url;
+
+            data.push(img);                      
+
+        });
+        console.log("DATA", data);
+        res.render('wedding.ejs',{data:data, sender_id:sender_id}); 
+
+    }
+    
+    )
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });    
+});
+
+app.get('/casual/:sender_id/',function(req,res){
+    const sender_id = req.params.sender_id;
+
+    let data = [];
+
+    db.collection("casual").limit(20).get()
+    .then(  function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            let img = {};
+            img.url = doc.data().url;
+
+            data.push(img);                      
+
+        });
+        console.log("DATA", data);
+        res.render('wedding.ejs',{data:data, sender_id:sender_id}); 
+
+    }
+    
+    )
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });    
+});
+
+app.get('/YP/:sender_id/',function(req,res){
+    const sender_id = req.params.sender_id;
+
+    let data = [];
+
+    db.collection("yinphone").limit(20).get()
+    .then(  function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            let img = {};
+            img.url = doc.data().url;
+
+            data.push(img);                      
+
+        });
+        console.log("DATA", data);
+        res.render('wedding.ejs',{data:data, sender_id:sender_id}); 
+
+    }
+    
+    )
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });    
+});
+
 app.get('/yinphone/:sender_id/',function(req,res){
     const sender_id = req.params.sender_id;
 
@@ -1689,19 +1789,19 @@ const handlePostback = (sender_psid, received_postback) => {
         askforevent(sender_psid);
         break;
       case "WEDDING":
-        asking_cus_design(sender_psid);
+        asking_cus_design_weddig(sender_psid);
         wedding = true;
         break;
       case "OCCASION":
-        asking_cus_design(sender_psid);
+        asking_cus_design_occasion(sender_psid);
         occasion = true;
         break;
       case "CONVO":
-        asking_cus_design(sender_psid);
+        asking_cus_design_convo(sender_psid);
         convo = true;
         break;
       case "CASUAL":
-        asking_cus_design(sender_psid);
+        asking_cus_design_casual(sender_psid);
         casual = true;
         break;
       case "OCCASION_YP":
@@ -2318,8 +2418,10 @@ const asking_cus_design_YP = (sender_psid) => {
                         "buttons":[
                           {
                             "type":"web_url",
-                            "url":"https://www.messenger.com",
-                            "title":"Admin chocies"
+                            "title":"Admin chocies",
+                            "url": "https://shwesu.herokuapp.com/YP/"+sender_psid,
+                            "webview_height_ratio": "tall",
+                            "messenger_extensions": true,  
                           }
                         ]
                       }
@@ -2333,7 +2435,7 @@ const asking_cus_design_YP = (sender_psid) => {
     designAttachment = true;
 }
 
-const asking_cus_design = (sender_psid) => {
+const asking_cus_design_weddig = (sender_psid) => {
   let response1 = {"text":"Well...."};
   let response2 = {"text":"Send me the design you want to sew. If not you can get some idea from viewing admin chocies."};
   let response3 = {
@@ -2345,9 +2447,95 @@ const asking_cus_design = (sender_psid) => {
                         "buttons":[
                           {
                             "type":"web_url",
-                            "url":"https://www.messenger.com",
                             "title":"Admin chocies",
                             "url": "https://shwesu.herokuapp.com/wedding/"+sender_psid,
+                            "webview_height_ratio": "tall",
+                            "messenger_extensions": true,  
+                          }
+                        ]
+                      }
+                    }
+  };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
+    });
+    designAttachment = true;
+}
+
+const asking_cus_design_occasion = (sender_psid) => {
+  let response1 = {"text":"Well...."};
+  let response2 = {"text":"Send me the design you want to sew. If not you can get some idea from viewing admin chocies."};
+  let response3 = {
+                    "attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"Send if you have one. :)",
+                        "buttons":[
+                          {
+                            "type":"web_url",
+                            "title":"Admin chocies",
+                            "url": "https://shwesu.herokuapp.com/occasion/"+sender_psid,
+                            "webview_height_ratio": "tall",
+                            "messenger_extensions": true,  
+                          }
+                        ]
+                      }
+                    }
+  };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
+    });
+    designAttachment = true;
+}
+
+const asking_cus_design_convo = (sender_psid) => {
+  let response1 = {"text":"Well...."};
+  let response2 = {"text":"Send me the design you want to sew. If not you can get some idea from viewing admin chocies."};
+  let response3 = {
+                    "attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"Send if you have one. :)",
+                        "buttons":[
+                          {
+                            "type":"web_url",
+                            "title":"Admin chocies",
+                            "url": "https://shwesu.herokuapp.com/convo/"+sender_psid,
+                            "webview_height_ratio": "tall",
+                            "messenger_extensions": true,  
+                          }
+                        ]
+                      }
+                    }
+  };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
+    });
+    designAttachment = true;
+}
+
+const asking_cus_design_casual = (sender_psid) => {
+  let response1 = {"text":"Well...."};
+  let response2 = {"text":"Send me the design you want to sew. If not you can get some idea from viewing admin chocies."};
+  let response3 = {
+                    "attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"Send if you have one. :)",
+                        "buttons":[
+                          {
+                            "type":"web_url",
+                            "title":"Admin chocies",
+                            "url": "https://shwesu.herokuapp.com/casual/"+sender_psid,
                             "webview_height_ratio": "tall",
                             "messenger_extensions": true,  
                           }
