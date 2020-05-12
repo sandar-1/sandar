@@ -82,8 +82,11 @@ app.get('/webhook', (req, res) => {
   let token = req.query['hub.verify_token'];
   let challenge = req.query['hub.challenge'];
 
+
+
   // Check if a token and mode were sent
   if (mode && token) {
+
 
     // Check the mode and token sent are correct
     if (mode === 'subscribe' && token === VERIFY_TOKEN) {
@@ -99,278 +102,277 @@ app.get('/webhook', (req, res) => {
   }
 });
 
-/*webviews*/
-  app.set('view engine', 'ejs');
-  app.set('views', __dirname+'/views');
+app.set('view engine', 'ejs');
+app.set('views', __dirname+'/views');
 
-  app.get('/webview/:sender_id/',function(req,res){
-      const sender_id = req.params.sender_id;
+app.get('/webview/:sender_id/',function(req,res){
+    const sender_id = req.params.sender_id;
 
-      let data = [];
+    let data = [];
 
-      db.collection("share_information").limit(20).get()
-      .then(  function(querySnapshot) {
-          querySnapshot.forEach(function(doc) {
-              let img = {};
-              img.share_design = doc.data().share_design;
-              img.customer_caption = doc.data().customer_caption;
+    db.collection("share_information").limit(20).get()
+    .then(  function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            let img = {};
+            img.share_design = doc.data().share_design;
+            img.customer_caption = doc.data().customer_caption;
 
-              data.push(img);                      
+            data.push(img);                      
 
-          });
-          console.log("DATA", data);
-          res.render('webview.ejs',{data:data, sender_id:sender_id}); 
+        });
+        console.log("DATA", data);
+        res.render('webview.ejs',{data:data, sender_id:sender_id}); 
 
-      }
-      
-      )
-      .catch(function(error) {
-          console.log("Error getting documents: ", error);
-      });    
-  });
+    }
+    
+    )
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });    
+});
 
-  app.get('/wedding/:sender_id/',function(req,res){
-      const sender_id = req.params.sender_id;
+app.get('/wedding/:sender_id/',function(req,res){
+    const sender_id = req.params.sender_id;
 
-      let data = [];
+    let data = [];
 
-      db.collection("wedding").limit(20).get()
-      .then(  function(querySnapshot) {
-          querySnapshot.forEach(function(doc) {
-              let img = {};
-              img.url = doc.data().url;
+    db.collection("wedding").limit(20).get()
+    .then(  function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            let img = {};
+            img.url = doc.data().url;
 
-              data.push(img);                      
+            data.push(img);                      
 
-          });
-          console.log("DATA", data);
-          res.render('wedding.ejs',{data:data, sender_id:sender_id}); 
+        });
+        console.log("DATA", data);
+        res.render('wedding.ejs',{data:data, sender_id:sender_id}); 
 
-      }
-      
-      )
-      .catch(function(error) {
-          console.log("Error getting documents: ", error);
-      });    
-  });
+    }
+    
+    )
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });    
+});
 
-  app.get('/occasion/:sender_id/',function(req,res){
-      const sender_id = req.params.sender_id;
+app.get('/occasion/:sender_id/',function(req,res){
+    const sender_id = req.params.sender_id;
 
-      let data = [];
+    let data = [];
 
-      db.collection("occasion").limit(20).get()
-      .then(  function(querySnapshot) {
-          querySnapshot.forEach(function(doc) {
-              let img = {};
-              img.url = doc.data().url;
+    db.collection("occasion").limit(20).get()
+    .then(  function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            let img = {};
+            img.url = doc.data().url;
 
-              data.push(img);                      
+            data.push(img);                      
 
-          });
-          console.log("DATA", data);
-          res.render('wedding.ejs',{data:data, sender_id:sender_id}); 
+        });
+        console.log("DATA", data);
+        res.render('wedding.ejs',{data:data, sender_id:sender_id}); 
 
-      }
-      
-      )
-      .catch(function(error) {
-          console.log("Error getting documents: ", error);
-      });    
-  });
+    }
+    
+    )
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });    
+});
 
-  app.get('/convo/:sender_id/',function(req,res){
-      const sender_id = req.params.sender_id;
+app.get('/convo/:sender_id/',function(req,res){
+    const sender_id = req.params.sender_id;
 
-      let data = [];
+    let data = [];
 
-      db.collection("convocation").limit(20).get()
-      .then(  function(querySnapshot) {
-          querySnapshot.forEach(function(doc) {
-              let img = {};
-              img.url = doc.data().url;
+    db.collection("convocation").limit(20).get()
+    .then(  function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            let img = {};
+            img.url = doc.data().url;
 
-              data.push(img);                      
+            data.push(img);                      
 
-          });
-          console.log("DATA", data);
-          res.render('wedding.ejs',{data:data, sender_id:sender_id}); 
+        });
+        console.log("DATA", data);
+        res.render('wedding.ejs',{data:data, sender_id:sender_id}); 
 
-      }
-      
-      )
-      .catch(function(error) {
-          console.log("Error getting documents: ", error);
-      });    
-  });
+    }
+    
+    )
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });    
+});
 
-  app.get('/casual/:sender_id/',function(req,res){
-      const sender_id = req.params.sender_id;
+app.get('/casual/:sender_id/',function(req,res){
+    const sender_id = req.params.sender_id;
 
-      let data = [];
+    let data = [];
 
-      db.collection("casual").limit(20).get()
-      .then(  function(querySnapshot) {
-          querySnapshot.forEach(function(doc) {
-              let img = {};
-              img.url = doc.data().url;
+    db.collection("casual").limit(20).get()
+    .then(  function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            let img = {};
+            img.url = doc.data().url;
 
-              data.push(img);                      
+            data.push(img);                      
 
-          });
-          console.log("DATA", data);
-          res.render('wedding.ejs',{data:data, sender_id:sender_id}); 
+        });
+        console.log("DATA", data);
+        res.render('wedding.ejs',{data:data, sender_id:sender_id}); 
 
-      }
-      
-      )
-      .catch(function(error) {
-          console.log("Error getting documents: ", error);
-      });    
-  });
+    }
+    
+    )
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });    
+});
 
-  app.get('/YP/:sender_id/',function(req,res){
-      const sender_id = req.params.sender_id;
+app.get('/YP/:sender_id/',function(req,res){
+    const sender_id = req.params.sender_id;
 
-      let data = [];
+    let data = [];
 
-      db.collection("yinphone").limit(20).get()
-      .then(  function(querySnapshot) {
-          querySnapshot.forEach(function(doc) {
-              let img = {};
-              img.url = doc.data().url;
+    db.collection("yinphone").limit(20).get()
+    .then(  function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            let img = {};
+            img.url = doc.data().url;
 
-              data.push(img);                      
+            data.push(img);                      
 
-          });
-          console.log("DATA", data);
-          res.render('wedding.ejs',{data:data, sender_id:sender_id}); 
+        });
+        console.log("DATA", data);
+        res.render('wedding.ejs',{data:data, sender_id:sender_id}); 
 
-      }
-      
-      )
-      .catch(function(error) {
-          console.log("Error getting documents: ", error);
-      });    
-  });
+    }
+    
+    )
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });    
+});
 
-  app.get('/yinphone/:sender_id/',function(req,res){
-      const sender_id = req.params.sender_id;
+app.get('/yinphone/:sender_id/',function(req,res){
+    const sender_id = req.params.sender_id;
 
-      let data = [];
+    let data = [];
 
-      db.collection("Yinphone_order").get()
-      .then(  function(querySnapshot) {
-          querySnapshot.forEach(function(doc) {
-              let img = {};
-              img.earlyAPdate = doc.data().earlyAPdate;
-              img.earlyAPprice = doc.data().earlyAPprice;
-              img.Inshop = doc.data().Inshop;
-              img.Chest = doc.data().Chest;
-              img.upperArm = doc.data().upperArm;
-              img.sleevelength = doc.data().sleevelength;
-              img.Waist = doc.data().Waist;
-              img.Yinphone_type = doc.data().Yinphone_type;
-              img.sleevetype = doc.data().sleevetype;
-              img.khar = doc.data().khar;
-              img.Design = doc.data().Design;
-              img.Price = doc.data().Price;
-              img.PhoneNo = doc.data().PhoneNo;
-              img.paid = doc.data().paid;
+    db.collection("Yinphone_order").get()
+    .then(  function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            let img = {};
+            img.earlyAPdate = doc.data().earlyAPdate;
+            img.earlyAPprice = doc.data().earlyAPprice;
+            img.Inshop = doc.data().Inshop;
+            img.Chest = doc.data().Chest;
+            img.upperArm = doc.data().upperArm;
+            img.sleevelength = doc.data().sleevelength;
+            img.Waist = doc.data().Waist;
+            img.Yinphone_type = doc.data().Yinphone_type;
+            img.sleevetype = doc.data().sleevetype;
+            img.khar = doc.data().khar;
+            img.Design = doc.data().Design;
+            img.Price = doc.data().Price;
+            img.PhoneNo = doc.data().PhoneNo;
+            img.paid = doc.data().paid;
 
-              data.push(img);                      
+            data.push(img);                      
 
-          });
-          console.log("DATA", data);
-          res.render('yinphone.ejs',{data:data, sender_id:sender_id}); 
+        });
+        console.log("DATA", data);
+        res.render('yinphone.ejs',{data:data, sender_id:sender_id}); 
 
-      }
-      
-      )
-      .catch(function(error) {
-          console.log("Error getting documents: ", error);
-      });    
-  });
+    }
+    
+    )
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });    
+});
 
-  app.get('/htamein/:sender_id/',function(req,res){
-      const sender_id = req.params.sender_id;
+app.get('/htamein/:sender_id/',function(req,res){
+    const sender_id = req.params.sender_id;
 
-      let data = [];
+    let data = [];
 
-      db.collection("Htamein_order").get()
-      .then(  function(querySnapshot) {
-          querySnapshot.forEach(function(doc) {
-              let img = {};
-              img.earlyAPdate = doc.data().earlyAPdate;
-              img.earlyAPprice = doc.data().earlyAPprice;
-              img.Inshop = doc.data().Inshop;
-              img.Waist = doc.data().Waist;
-              img.Hips = doc.data().Hips;
-              img.Htamein_long = doc.data().Htamein_long;
-              img.Htamein_type = doc.data().Htamein_type;
-              img.Htamein_fold = doc.data().Htamein_fold;
-              img.Ankle = doc.data().Ankle;
-              img.Price = doc.data().Price;
-              img.PhoneNo = doc.data().PhoneNo;
-              img.paid = doc.data().paid;
+    db.collection("Htamein_order").get()
+    .then(  function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            let img = {};
+            img.earlyAPdate = doc.data().earlyAPdate;
+            img.earlyAPprice = doc.data().earlyAPprice;
+            img.Inshop = doc.data().Inshop;
+            img.Waist = doc.data().Waist;
+            img.Hips = doc.data().Hips;
+            img.Htamein_long = doc.data().Htamein_long;
+            img.Htamein_type = doc.data().Htamein_type;
+            img.Htamein_fold = doc.data().Htamein_fold;
+            img.Ankle = doc.data().Ankle;
+            img.Price = doc.data().Price;
+            img.PhoneNo = doc.data().PhoneNo;
+            img.paid = doc.data().paid;
 
-              data.push(img);                      
+            data.push(img);                      
 
-          });
-          console.log("DATA", data);
-          res.render('htamein.ejs',{data:data, sender_id:sender_id}); 
+        });
+        console.log("DATA", data);
+        res.render('htamein.ejs',{data:data, sender_id:sender_id}); 
 
-      }
-      
-      )
-      .catch(function(error) {
-          console.log("Error getting documents: ", error);
-      });    
-  });
+    }
+    
+    )
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });    
+});
 
-  app.get('/both/:sender_id/',function(req,res){
-      const sender_id = req.params.sender_id;
+app.get('/both/:sender_id/',function(req,res){
+    const sender_id = req.params.sender_id;
 
-      let data = [];
+    let data = [];
 
-      db.collection("Both_order").get()
-      .then(  function(querySnapshot) {
-          querySnapshot.forEach(function(doc) {
-              let img = {};
-              img.earlyAPdate = doc.data().earlyAPdate;
-              img.earlyAPprice = doc.data().earlyAPprice;
-              img.Inshop = doc.data().Inshop;
-              img.Chest = doc.data().Chest;
-              img.upperArm = doc.data().upperArm;
-              img.sleevelength = doc.data().sleevelength;
-              img.Waist = doc.data().Waist;
-              img.Hips = doc.data().Hips;
-              img.Htamein_long = doc.data().Htamein_long;
-              img.Yinphone_type = doc.data().Yinphone_type;
-              img.sleevetype = doc.data().sleevetype;
-              img.khar = doc.data().khar;
-              img.Htamein_type = doc.data().Htamein_type;
-              img.Htamein_fold = doc.data().Htamein_fold;
-              img.Ankle = doc.data().Ankle;
-              img.Design = doc.data().Design;
-              img.Price = doc.data().Price;
-              img.PhoneNo = doc.data().PhoneNo;
-              img.paid = doc.data().paid;
+    db.collection("Both_order").get()
+    .then(  function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            let img = {};
+            img.earlyAPdate = doc.data().earlyAPdate;
+            img.earlyAPprice = doc.data().earlyAPprice;
+            img.Inshop = doc.data().Inshop;
+            img.Chest = doc.data().Chest;
+            img.upperArm = doc.data().upperArm;
+            img.sleevelength = doc.data().sleevelength;
+            img.Waist = doc.data().Waist;
+            img.Hips = doc.data().Hips;
+            img.Htamein_long = doc.data().Htamein_long;
+            img.Yinphone_type = doc.data().Yinphone_type;
+            img.sleevetype = doc.data().sleevetype;
+            img.khar = doc.data().khar;
+            img.Htamein_type = doc.data().Htamein_type;
+            img.Htamein_fold = doc.data().Htamein_fold;
+            img.Ankle = doc.data().Ankle;
+            img.Design = doc.data().Design;
+            img.Price = doc.data().Price;
+            img.PhoneNo = doc.data().PhoneNo;
+            img.paid = doc.data().paid;
 
-              data.push(img);                      
+            data.push(img);                      
 
-          });
-          console.log("DATA", data);
-          res.render('both.ejs',{data:data, sender_id:sender_id}); 
+        });
+        console.log("DATA", data);
+        res.render('both.ejs',{data:data, sender_id:sender_id}); 
 
-      }
-      
-      )
-      .catch(function(error) {
-          console.log("Error getting documents: ", error);
-      });    
-  });
-/**********************/
+    }
+    
+    )
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });    
+});
+
   let userInfo = {
     chest:false,
     upperArm:false,
@@ -406,7 +408,7 @@ app.get('/webhook', (req, res) => {
     htameinfold:false,
     ankle:false,
   };
-
+/**********************/
   let upperchest = false;
   let upperupperArm = false;
   let uppersleevelength = false;
@@ -447,1278 +449,1278 @@ app.get('/webhook', (req, res) => {
   let userSendAttachment = [];
   let userpaidAttachment = [];
   let adminSendAttachment =[];
-/**********************/
+/****/
 function handleMessage(sender_psid, received_message) {
   let response;
-  /***********measuring**********/
-    if (received_message.text && userInfo.appointmentdate == true) {   
-      userEnteredInfo.appointmentdate =  received_message.text;
-      response = {"attachment":{
-                        "type":"template",
-                        "payload":{
-                          "template_type":"button",
-                          "text":"Will add an extra amount 20000 to the current price.",
-                          "buttons":[
-                            {
-                              "type":"postback",
-                              "payload":"ap_priceYes",
-                              "title":"Yes"
-                            },
-                            {
-                              "type":"postback",
-                              "payload":"ap_priceNo",
-                              "title":"No, thanks."
-                            }
-                          ]
-                        }
+/***********measuring**********/
+  if (received_message.text && userInfo.appointmentdate == true) {   
+    userEnteredInfo.appointmentdate =  received_message.text;
+    response = {"attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"Will add an extra amount 20000 to the current price.",
+                        "buttons":[
+                          {
+                            "type":"postback",
+                            "payload":"ap_priceYes",
+                            "title":"Yes"
+                          },
+                          {
+                            "type":"postback",
+                            "payload":"ap_priceNo",
+                            "title":"No, thanks."
+                          }
+                        ]
                       }
                     }
-      userInfo.appointmentdate = false;
-      userInfo.earlyAPprice = true;
-    }else if (received_message.text && upperchest == true) {   
-      userEnteredInfo.chest =  received_message.text;
-      response = {
-        "text": `Now Upper arm.`
-      }
-      upperchest = false;
-      upperupperArm = true;
-    }else if (received_message.text && upperupperArm == true) { 
-      userEnteredInfo.upperArm = received_message.text; 
-      response = {
-        "text": `Let's measure Sleeve length.`
-      }
-      upperupperArm = false;
-      uppersleevelength = true;
-    }else if (received_message.text && uppersleevelength == true) { 
-      userEnteredInfo.sleevelength = received_message.text;   
-      response = {
-        "text": `Finally measure your Waist.`
-      }
-      uppersleevelength = false;
-      upperwaist = true;
-    }else if (received_message.text && upperwaist == true) {
-      userEnteredInfo.waist = received_message.text;    
-      let response1 = {"text" : "which type of yinphone? "};
-      let response2 = {
-          "attachment":{
-              "type":"image", 
-              "payload":{
-                "url":"https://i.imgur.com/nWjNZpT.jpg", 
-                "is_reusable":true
-              }
+                  }
+    userInfo.appointmentdate = false;
+    userInfo.earlyAPprice = true;
+  }else if (received_message.text && upperchest == true) {   
+    userEnteredInfo.chest =  received_message.text;
+    response = {
+      "text": `Now Upper arm.`
+    }
+    upperchest = false;
+    upperupperArm = true;
+  }else if (received_message.text && upperupperArm == true) { 
+    userEnteredInfo.upperArm = received_message.text; 
+    response = {
+      "text": `Let's measure Sleeve length.`
+    }
+    upperupperArm = false;
+    uppersleevelength = true;
+  }else if (received_message.text && uppersleevelength == true) { 
+    userEnteredInfo.sleevelength = received_message.text;   
+    response = {
+      "text": `Finally measure your Waist.`
+    }
+    uppersleevelength = false;
+    upperwaist = true;
+  }else if (received_message.text && upperwaist == true) {
+    userEnteredInfo.waist = received_message.text;    
+    let response1 = {"text" : "which type of yinphone? "};
+    let response2 = {
+        "attachment":{
+            "type":"image", 
+            "payload":{
+              "url":"https://i.imgur.com/nWjNZpT.jpg", 
+              "is_reusable":true
             }
-      };
-      let response3 = {"text" : "Yin ci/Yinphone/Back zip.",
-                        "quick_replies":[
-                                        {
-                                          "content_type":"text",
-                                          "title":"Yin ci",
-                                          "payload":"yc"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Yinphone",
-                                          "payload":"yp"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Back zip",
-                                          "payload":"bz"
-                                        }]
-                      };
-      callSend(sender_psid, response1).then(()=>{
-        return callSend(sender_psid, response2).then(()=>{
-          return callSend(sender_psid, response3);
-        });
+          }
+    };
+    let response3 = {"text" : "Yin ci/Yinphone/Back zip.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Yin ci",
+                                        "payload":"yc"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Yinphone",
+                                        "payload":"yp"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Back zip",
+                                        "payload":"bz"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
       });
-      upperwaist = false;
-      upperyptype = true;
-    }else if (received_message.text && upperyptype == true) { 
-      userEnteredInfo.yinphonetype = received_message.text;   
-      let response1 = {"text": `How much sleeve length you want?`};
-      let response2 = {"text" : "Short sleeve/Long sleeve.",
-                        "quick_replies":[
-                                        {
-                                          "content_type":"text",
-                                          "title":"Short sleeve",
-                                          "payload":"SSL"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Long sleeve",
-                                          "payload":"LSL"
-                                        }]
-                      };
-      callSend(sender_psid, response1).then(()=>{
-        return callSend(sender_psid, response2);
+    });
+    upperwaist = false;
+    upperyptype = true;
+  }else if (received_message.text && upperyptype == true) { 
+    userEnteredInfo.yinphonetype = received_message.text;   
+    let response1 = {"text": `How much sleeve length you want?`};
+    let response2 = {"text" : "Short sleeve/Long sleeve.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Short sleeve",
+                                        "payload":"SSL"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Long sleeve",
+                                        "payload":"LSL"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+    upperyptype = false;
+    uppersltype = true;
+  }else if (received_message.text && uppersltype == true) { 
+    userEnteredInfo.sleevetype = received_message.text;
+    let response1 = {"text": "Khar to (end exactly with the waist),"};
+    let response2 = {"text" : "Khar tin (ends at the hips) or"};
+    let response3 = {"text" : "khar shay (ends below the hips)",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Khar To",
+                                        "payload":"kto"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Khar Tin",
+                                        "payload":"ktin"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Khar Shay",
+                                        "payload":"kshay"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
       });
-      upperyptype = false;
-      uppersltype = true;
-    }else if (received_message.text && uppersltype == true) { 
-      userEnteredInfo.sleevetype = received_message.text;
-      let response1 = {"text": "Khar to (end exactly with the waist),"};
-      let response2 = {"text" : "Khar tin (ends at the hips) or"};
-      let response3 = {"text" : "khar shay (ends below the hips)",
-                        "quick_replies":[
-                                        {
-                                          "content_type":"text",
-                                          "title":"Khar To",
-                                          "payload":"kto"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Khar Tin",
-                                          "payload":"ktin"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Khar Shay",
-                                          "payload":"kshay"
-                                        }]
-                      };
-      callSend(sender_psid, response1).then(()=>{
-        return callSend(sender_psid, response2).then(()=>{
-          return callSend(sender_psid, response3);
-        });
+    });
+    uppersltype = false;
+    upperkhar = true;
+  }else if (received_message.text && upperkhar == true) { 
+    userEnteredInfo.khar = received_message.text;  
+    askforeventYP(sender_psid);
+    upperkhar = false;
+  }else if (received_message.text && userInfo.chest == true) {   
+    userEnteredInfo.chest =  received_message.text;
+    response = {
+      "text": `Now Upper arm.`
+    }
+    userInfo.chest = false;
+    userInfo.upperArm = true;
+  }else if (received_message.text && userInfo.upperArm == true) { 
+    userEnteredInfo.upperArm = received_message.text; 
+    response = {
+      "text": `Let's measure Sleeve length.`
+    }
+    userInfo.upperArm = false;
+    userInfo.sleevelength = true;
+  }else if (received_message.text && userInfo.sleevelength == true) { 
+    userEnteredInfo.sleevelength = received_message.text;   
+    response = {
+      "text": `And measure your Waist.`
+    }
+    userInfo.sleevelength = false;
+    userInfo.waist = true;
+  }else if (received_message.text && userInfo.waist == true) {
+    userEnteredInfo.waist = received_message.text;    
+    response = {
+      "text": `Now your Hips..`
+    }
+    userInfo.waist = false;
+    userInfo.hips = true;
+  }else if (received_message.text && userInfo.hips == true) { 
+    userEnteredInfo.hips = received_message.text;   
+    response = {
+      "text": `Measure how long htamein you want to sew.`
+    }
+    userInfo.hips = false;
+    userInfo.htameinlong = true;
+  }else if (received_message.text && userInfo.htameinlong == true) {   
+    userEnteredInfo.htameinlong = received_message.text; 
+    let response1 = {"text" : "which type of htamein? "};
+    let response2 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Cheik",
+                                        "payload":"c"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Hpi",
+                                        "payload":"hpi"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Simple",
+                                        "payload":"s"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
       });
-      uppersltype = false;
-      upperkhar = true;
-    }else if (received_message.text && upperkhar == true) { 
-      userEnteredInfo.khar = received_message.text;  
-      askforeventYP(sender_psid);
-      upperkhar = false;
-    }else if (received_message.text && userInfo.chest == true) {   
-      userEnteredInfo.chest =  received_message.text;
-      response = {
-        "text": `Now Upper arm.`
-      }
-      userInfo.chest = false;
-      userInfo.upperArm = true;
-    }else if (received_message.text && userInfo.upperArm == true) { 
-      userEnteredInfo.upperArm = received_message.text; 
-      response = {
-        "text": `Let's measure Sleeve length.`
-      }
-      userInfo.upperArm = false;
-      userInfo.sleevelength = true;
-    }else if (received_message.text && userInfo.sleevelength == true) { 
-      userEnteredInfo.sleevelength = received_message.text;   
-      response = {
-        "text": `And measure your Waist.`
-      }
-      userInfo.sleevelength = false;
-      userInfo.waist = true;
-    }else if (received_message.text && userInfo.waist == true) {
-      userEnteredInfo.waist = received_message.text;    
-      response = {
-        "text": `Now your Hips..`
-      }
-      userInfo.waist = false;
-      userInfo.hips = true;
-    }else if (received_message.text && userInfo.hips == true) { 
-      userEnteredInfo.hips = received_message.text;   
-      response = {
-        "text": `Measure how long htamein you want to sew.`
-      }
-      userInfo.hips = false;
-      userInfo.htameinlong = true;
-    }else if (received_message.text && userInfo.htameinlong == true) {   
-      userEnteredInfo.htameinlong = received_message.text; 
-      let response1 = {"text" : "which type of htamein? "};
-      let response2 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein.",
-                        "quick_replies":[
-                                        {
-                                          "content_type":"text",
-                                          "title":"Cheik",
-                                          "payload":"c"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Hpi",
-                                          "payload":"hpi"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Simple",
-                                          "payload":"s"
-                                        }]
-                      };
-      callSend(sender_psid, response1).then(()=>{
-        return callSend(sender_psid, response2).then(()=>{
-          return callSend(sender_psid, response3);
-        });
-      });
-      userInfo.htameinlong = false;
-      userInfo.htameintype = true;
-    }else if (received_message.text && userInfo.htameintype == true) { 
-      userEnteredInfo.htameintype = received_message.text;   
-      let response1 = {"text": `which way you want to fold?`};
-      let response2 = {"text" : "Left fold/Right fold.",
-                        "quick_replies":[
-                                        {
-                                          "content_type":"text",
-                                          "title":"Left fold",
-                                          "payload":"lf"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Right fold",
-                                          "payload":"rf"
-                                        }]
-                      };
-      callSend(sender_psid, response1).then(()=>{
-        return callSend(sender_psid, response2);
-      });
-      userInfo.htameintype = false;
-      userInfo.htameinfold = true;
-    }else if (received_message.text && userInfo.htameinfold == true) { 
-      userEnteredInfo.htameinfold = received_message.text;
-      let response1 = {"text": `Would you like to cover ankle or not?`};
-      let response2 = {"text" : "Upper ankle/cover ankle.",
-                        "quick_replies":[
-                                        {
-                                          "content_type":"text",
-                                          "title":"Upper Ankle",
-                                          "payload":"ua"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Cover Ankle",
-                                          "payload":"ca"
-                                        }]
-                      };
-      callSend(sender_psid, response1).then(()=>{
-        return callSend(sender_psid, response2);
-      });
-      userInfo.htameinfold = false;
-      userInfo.ankle = true;
-    }else if (received_message.text && userInfo.ankle == true) { 
-      userEnteredInfo.ankle = received_message.text;
-      let response1 = {"text" : "which type of yinphone? "};
-      let response2 = {
-          "attachment":{
-              "type":"image", 
-              "payload":{
-                "url":"https://i.imgur.com/nWjNZpT.jpg", 
-                "is_reusable":true
-              }
+    });
+    userInfo.htameinlong = false;
+    userInfo.htameintype = true;
+  }else if (received_message.text && userInfo.htameintype == true) { 
+    userEnteredInfo.htameintype = received_message.text;   
+    let response1 = {"text": `which way you want to fold?`};
+    let response2 = {"text" : "Left fold/Right fold.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Left fold",
+                                        "payload":"lf"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Right fold",
+                                        "payload":"rf"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+    userInfo.htameintype = false;
+    userInfo.htameinfold = true;
+  }else if (received_message.text && userInfo.htameinfold == true) { 
+    userEnteredInfo.htameinfold = received_message.text;
+    let response1 = {"text": `Would you like to cover ankle or not?`};
+    let response2 = {"text" : "Upper ankle/cover ankle.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Upper Ankle",
+                                        "payload":"ua"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Cover Ankle",
+                                        "payload":"ca"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+    userInfo.htameinfold = false;
+    userInfo.ankle = true;
+  }else if (received_message.text && userInfo.ankle == true) { 
+    userEnteredInfo.ankle = received_message.text;
+    let response1 = {"text" : "which type of yinphone? "};
+    let response2 = {
+        "attachment":{
+            "type":"image", 
+            "payload":{
+              "url":"https://i.imgur.com/nWjNZpT.jpg", 
+              "is_reusable":true
             }
-      };
-      let response3 = {"text" : "Yin ci/Yinphone/Back zip.",
-                        "quick_replies":[
-                                        {
-                                          "content_type":"text",
-                                          "title":"Yin ci",
-                                          "payload":"yc"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Yinphone",
-                                          "payload":"yp"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Back zip",
-                                          "payload":"bz"
-                                        }]
-                      };
-      callSend(sender_psid, response1).then(()=>{
-        return callSend(sender_psid, response2).then(()=>{
-          return callSend(sender_psid, response3);
-        });
+          }
+    };
+    let response3 = {"text" : "Yin ci/Yinphone/Back zip.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Yin ci",
+                                        "payload":"yc"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Yinphone",
+                                        "payload":"yp"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Back zip",
+                                        "payload":"bz"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
       });
-      userInfo.ankle = false;
-      userInfo.yinphonetype = true;
-    }else if (received_message.text && userInfo.yinphonetype == true) { 
-      userEnteredInfo.yinphonetype = received_message.text;   
-      let response1 = {"text": `How much sleeve length you want?`};
-      let response2 = {"text" : "Short sleeve/Long sleeve.",
-                        "quick_replies":[
-                                        {
-                                          "content_type":"text",
-                                          "title":"Short sleeve",
-                                          "payload":"SSL"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Long sleeve",
-                                          "payload":"LSL"
-                                        }]
-                      };
-      callSend(sender_psid, response1).then(()=>{
-        return callSend(sender_psid, response2);
+    });
+    userInfo.ankle = false;
+    userInfo.yinphonetype = true;
+  }else if (received_message.text && userInfo.yinphonetype == true) { 
+    userEnteredInfo.yinphonetype = received_message.text;   
+    let response1 = {"text": `How much sleeve length you want?`};
+    let response2 = {"text" : "Short sleeve/Long sleeve.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Short sleeve",
+                                        "payload":"SSL"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Long sleeve",
+                                        "payload":"LSL"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+    userInfo.yinphonetype = false;
+    userInfo.sleevetype = true;
+  }else if (received_message.text && userInfo.sleevetype == true) { 
+    userEnteredInfo.sleevetype = received_message.text;
+    let response1 = {"text": "Khar to (end exactly with the waist),"};
+    let response2 = {"text" : "Khar tin (ends at the hips) or"};
+    let response3 = {"text" : "khar shay (ends below the hips)",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Khar To",
+                                        "payload":"kto"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Khar Tin",
+                                        "payload":"ktin"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Khar Shay",
+                                        "payload":"kshay"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
       });
-      userInfo.yinphonetype = false;
-      userInfo.sleevetype = true;
-    }else if (received_message.text && userInfo.sleevetype == true) { 
-      userEnteredInfo.sleevetype = received_message.text;
-      let response1 = {"text": "Khar to (end exactly with the waist),"};
-      let response2 = {"text" : "Khar tin (ends at the hips) or"};
-      let response3 = {"text" : "khar shay (ends below the hips)",
-                        "quick_replies":[
-                                        {
-                                          "content_type":"text",
-                                          "title":"Khar To",
-                                          "payload":"kto"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Khar Tin",
-                                          "payload":"ktin"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Khar Shay",
-                                          "payload":"kshay"
-                                        }]
-                      };
-      callSend(sender_psid, response1).then(()=>{
-        return callSend(sender_psid, response2).then(()=>{
-          return callSend(sender_psid, response3);
-        });
+    });
+    userInfo.sleevetype = false;
+    userInfo.khar = true;
+  }else if (received_message.text && userInfo.khar == true) { 
+    userEnteredInfo.khar = received_message.text;  
+    showBOTHallrecord(sender_psid);
+    userInfo.khar = false;
+  }else if (received_message.text && lowerwaist == true) {
+    userEnteredInfo.waist = received_message.text;    
+    response = {
+      "text": `Now your Hips.`
+    }
+    lowerwaist = false;
+    lowerhips = true;
+  }else if (received_message.text && lowerhips == true) { 
+    userEnteredInfo.hips = received_message.text;   
+    response = {
+      "text": `Measure how long htamein you want to sew.`
+    }
+    lowerhips = false;
+    lowerhmlong = true;
+  }else if (received_message.text && lowerhmlong == true) {   
+    userEnteredInfo.htameinlong = received_message.text; 
+    let response1 = {"text" : "which type of htamein? "};
+    let response2 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Cheik",
+                                        "payload":"c"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Hpi",
+                                        "payload":"hpi"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Simple",
+                                        "payload":"s"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
       });
-      userInfo.sleevetype = false;
-      userInfo.khar = true;
-    }else if (received_message.text && userInfo.khar == true) { 
-      userEnteredInfo.khar = received_message.text;  
-      showBOTHallrecord(sender_psid);
-      userInfo.khar = false;
-    }else if (received_message.text && lowerwaist == true) {
-      userEnteredInfo.waist = received_message.text;    
-      response = {
-        "text": `Now your Hips.`
-      }
-      lowerwaist = false;
-      lowerhips = true;
-    }else if (received_message.text && lowerhips == true) { 
-      userEnteredInfo.hips = received_message.text;   
-      response = {
-        "text": `Measure how long htamein you want to sew.`
-      }
-      lowerhips = false;
-      lowerhmlong = true;
-    }else if (received_message.text && lowerhmlong == true) {   
-      userEnteredInfo.htameinlong = received_message.text; 
-      let response1 = {"text" : "which type of htamein? "};
-      let response2 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein.",
-                        "quick_replies":[
-                                        {
-                                          "content_type":"text",
-                                          "title":"Cheik",
-                                          "payload":"c"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Hpi",
-                                          "payload":"hpi"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Simple",
-                                          "payload":"s"
-                                        }]
-                      };
+    });
+    lowerhmlong = false;
+    lowerhmtype = true;
+  }else if (received_message.text && lowerhmtype == true) { 
+    userEnteredInfo.htameintype = received_message.text;   
+    let response1 = {"text": `which way you want to fold?`};
+    let response2 = {"text" : "Left fold/Right fold.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Left fold",
+                                        "payload":"lf"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Right fold",
+                                        "payload":"rf"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+    lowerhmtype = false;
+    lowerhmfold = true;
+  }else if (received_message.text && lowerhmfold == true) { 
+    userEnteredInfo.htameinfold = received_message.text;
+    let response1 = {"text": `Would you like to cover ankle or not?`};
+    let response2 = {"text" : "Upper ankle/cover ankle.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Upper Ankle",
+                                        "payload":"ua"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Cover Ankle",
+                                        "payload":"ca"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+    lowerhmfold = false;
+    lowerankle = true;
+  }else if (received_message.text && lowerankle == true) { 
+    userEnteredInfo.ankle = received_message.text;
+    askforeventHM(sender_psid);
+   lowerankle = false;
+  }else if (received_message.text && userInfo.price == true) { 
+    userEnteredInfo.price = received_message.text;   
+    response = {"attachment":{
+                            "type":"template",
+                            "payload":{
+                              "template_type":"button",
+                              "text":"It would take about a month to sew. And you must to pay a third of the price. Is it okay?",
+                              "buttons":[
+                                {
+                                  "type": "postback",
+                                  "title": "Yes",
+                                  "payload": "yesorder",
+                                },{
+                                  "type": "postback",
+                                  "title": "Sorry",
+                                  "payload": "leaving",
+                                }
+                              ]
+                            }
+                          } 
+                    }
+    userInfo.price = false;
+  }else if (received_message.text && userInfo.phoneNo == true) { 
+    userEnteredInfo.phoneNo = received_message.text;   
+    givebankACC(sender_psid);
+    userInfo.phoneNo = false;
+  }
+/************attachment**************/
+  else if (received_message.attachments && sharepicAttachment == true) {
+    console.log('meta data',received_message);
+    sharepicAttachment == false;
+    let attachment_url1 = received_message.attachments[0].payload.url;
+    userSendAttachment.sharepicAttachment = attachment_url1;
+    let response1 = {
+                    "attachment":{
+                          "type":"image", 
+                          "payload":{
+                            "url":attachment_url1, 
+                            "is_reusable":true
+                          }
+                        }
+                    };
+    let response2 = {"text": "Is this picture you want to share? By the way it's look good on you. :)",
+                    "quick_replies":[{
+                                        "content_type":"text",
+                                        "title":"Yes! share it.",
+                                        "payload":"shareYes"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"No..",
+                                        "payload":"shareNo"
+                                      }]
+                    };
       callSend(sender_psid, response1).then(()=>{
-        return callSend(sender_psid, response2).then(()=>{
-          return callSend(sender_psid, response3);
-        });
-      });
-      lowerhmlong = false;
-      lowerhmtype = true;
-    }else if (received_message.text && lowerhmtype == true) { 
-      userEnteredInfo.htameintype = received_message.text;   
-      let response1 = {"text": `which way you want to fold?`};
-      let response2 = {"text" : "Left fold/Right fold.",
-                        "quick_replies":[
-                                        {
-                                          "content_type":"text",
-                                          "title":"Left fold",
-                                          "payload":"lf"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Right fold",
-                                          "payload":"rf"
-                                        }]
-                      };
-      callSend(sender_psid, response1).then(()=>{
-        return callSend(sender_psid, response2);
-      });
-      lowerhmtype = false;
-      lowerhmfold = true;
-    }else if (received_message.text && lowerhmfold == true) { 
-      userEnteredInfo.htameinfold = received_message.text;
-      let response1 = {"text": `Would you like to cover ankle or not?`};
-      let response2 = {"text" : "Upper ankle/cover ankle.",
-                        "quick_replies":[
-                                        {
-                                          "content_type":"text",
-                                          "title":"Upper Ankle",
-                                          "payload":"ua"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Cover Ankle",
-                                          "payload":"ca"
-                                        }]
-                      };
-      callSend(sender_psid, response1).then(()=>{
-        return callSend(sender_psid, response2);
-      });
-      lowerhmfold = false;
-      lowerankle = true;
-    }else if (received_message.text && lowerankle == true) { 
-      userEnteredInfo.ankle = received_message.text;
-      askforeventHM(sender_psid);
-     lowerankle = false;
-    }else if (received_message.text && userInfo.price == true) { 
-      userEnteredInfo.price = received_message.text;   
-      response = {"attachment":{
-                              "type":"template",
-                              "payload":{
-                                "template_type":"button",
-                                "text":"It would take about a month to sew. And you must to pay a third of the price. Is it okay?",
-                                "buttons":[
+          return callSend(sender_psid, response2);
+        });   
+  }else if (received_message.text == "No..") {    
+    leaving (sender_psid);
+  }else if (received_message.text == "Yes! share it." || received_message.text == "No.") {    
+   response = {"text": "write a caption to share with the picture."}
+   userInfo.cuscaption = true;
+   sharepicAttachment = false;
+  }else if (received_message.text && userInfo.cuscaption == true) {  
+   userEnteredInfo.cuscaption = received_message.text;  
+    response = {"text": "Are you sure? :)",
+                    "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Yes!",
+                                        "payload":"captionYes"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"No.",
+                                        "payload":"captionNo"
+                                      }]
+    };
+   userInfo.cuscaption = false;
+  }else if (received_message.text == "Yes!") {    
+    saveData_SP (sender_psid);
+    response = {
+      "attachment":{
+                    "type":"template",
+                    "payload":{
+                      "template_type":"button",
+                      "text":"💗 🤗.Thank you.🤗 💗",
+                      "buttons":[
                                   {
-                                    "type": "postback",
-                                    "title": "Yes",
-                                    "payload": "yesorder",
-                                  },{
-                                    "type": "postback",
-                                    "title": "Sorry",
-                                    "payload": "leaving",
-                                  }
+                                    "type": "web_url",
+                                    "title": "Pictures of others",
+                                    "url": "https://shwesu.herokuapp.com/webview/"+sender_psid,
+                                    "webview_height_ratio": "tall",
+                                    "messenger_extensions": true,          
+                                  }                        
                                 ]
                               }
-                            } 
-                      }
-      userInfo.price = false;
-    }else if (received_message.text && userInfo.phoneNo == true) { 
-      userEnteredInfo.phoneNo = received_message.text;   
-      givebankACC(sender_psid);
-      userInfo.phoneNo = false;
-    }
-  /************attachment**************/
-    else if (received_message.attachments && sharepicAttachment == true) {
-      console.log('meta data',received_message);
-      sharepicAttachment == false;
-      let attachment_url1 = received_message.attachments[0].payload.url;
-      userSendAttachment.sharepicAttachment = attachment_url1;
-      let response1 = {
-                      "attachment":{
-                            "type":"image", 
-                            "payload":{
-                              "url":attachment_url1, 
-                              "is_reusable":true
-                            }
+                    }
+                }
+  }else if (received_message.attachments && designAttachment == true) {
+    console.log('meta data',received_message);
+    designAttachment == false;
+    let attachment_url = received_message.attachments[0].payload.url;
+    userSendAttachment.designAttachment = attachment_url;
+    let response1 = {
+                    "attachment":{
+                          "type":"image", 
+                          "payload":{
+                            "url":attachment_url, 
+                            "is_reusable":true
                           }
-                      };
-      let response2 = {"text": "Is this picture you want to share? By the way it's look good on you. :)",
-                      "quick_replies":[{
-                                          "content_type":"text",
-                                          "title":"Yes! share it.",
-                                          "payload":"shareYes"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"No..",
-                                          "payload":"shareNo"
-                                        }]
-                      };
-        callSend(sender_psid, response1).then(()=>{
-            return callSend(sender_psid, response2);
-          });   
-    }else if (received_message.text == "No..") {    
-      leaving (sender_psid);
-    }else if (received_message.text == "Yes! share it." || received_message.text == "No.") {    
-     response = {"text": "write a caption to share with the picture."}
-     userInfo.cuscaption = true;
-     sharepicAttachment = false;
-    }else if (received_message.text && userInfo.cuscaption == true) {  
-     userEnteredInfo.cuscaption = received_message.text;  
-      response = {"text": "Are you sure? :)",
-                      "quick_replies":[
-                                        {
-                                          "content_type":"text",
-                                          "title":"Yes!",
-                                          "payload":"captionYes"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"No.",
-                                          "payload":"captionNo"
-                                        }]
-      };
-     userInfo.cuscaption = false;
-    }else if (received_message.text == "Yes!") {    
-      saveData_SP (sender_psid);
-      response = {
-        "attachment":{
+                        }
+                    };
+    let response2 = {"text": "Is this the design you want to sew and look alike?",
+                    "quick_replies":[{
+                                        "content_type":"text",
+                                        "title":"Yes.",
+                                        "payload":"designYes"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"No!",
+                                        "payload":"designNo"
+                                      }]
+                    };
+      callSend(sender_psid, response1).then(()=>{
+          return callSend(sender_psid, response2);
+        });   
+  }else if (received_message.text == "No!") {    
+    response = {"text" : "Please send me again"}
+    designAttachment == true;
+  }else if (received_message.text == "Yes." && wedding == true) {    
+    wedding_event(sender_psid);
+    wedding = false;
+    designAttachment = false;
+  }else if (received_message.text == "Yes." && occasion == true) {    
+    occasion_event(sender_psid);
+    occasion = false;
+    designAttachment = false;
+  }else if (received_message.text == "Yes." && convo == true) {    
+    convocation_event(sender_psid);
+    convo = false;
+    designAttachment = false;
+  }else if (received_message.text == "Yes." && casual == true) {    
+    casual_event(sender_psid);
+    casual = false;
+    designAttachment = false;
+  }else if (received_message.text == "Yes.") {    
+    showYPrecord(sender_psid);
+    designAttachment = false;
+  }else if (received_message.attachments && paidAttachment == true) {
+    console.log('meta data',received_message);
+    paidAttachment == false;
+    let attachment_url = received_message.attachments[0].payload.url;
+    userpaidAttachment.paidAttachment = attachment_url;
+    let response1 = {
+                    "attachment":{
+                          "type":"image", 
+                          "payload":{
+                            "url":attachment_url, 
+                            "is_reusable":true
+                          }
+                        }
+                    };
+    let response2 = {"text": "Is this the right screenshot?",
+                    "quick_replies":[{
+                                        "content_type":"text",
+                                        "title":"Yes",
+                                        "payload":"paidYes"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Opps..No!",
+                                        "payload":"paidNo"
+                                      }]
+                    };
+      callSend(sender_psid, response1).then(()=>{
+          return callSend(sender_psid, response2);
+        });   
+  }else if (received_message.text == "Opps..No!") {    
+    response = {"text" : "Please send me again"}
+    paidAttachment == true;
+  }else if (received_message.text == "Yes" && bothSave == true) {    
+    saveData_both(sender_psid);
+    response = {"attachment":{
                       "type":"template",
                       "payload":{
                         "template_type":"button",
                         "text":"💗 🤗.Thank you.🤗 💗",
                         "buttons":[
-                                    {
-                                      "type": "web_url",
-                                      "title": "Pictures of others",
-                                      "url": "https://shwesu.herokuapp.com/webview/"+sender_psid,
-                                      "webview_height_ratio": "tall",
-                                      "messenger_extensions": true,          
-                                    }                        
-                                  ]
-                                }
+                          {
+                            "type":"web_url",
+                            "url":"https://www.messenger.com",
+                            "title":"View order",
+                          }                        
+                        ]
                       }
+                    }
                   }
-    }else if (received_message.attachments && designAttachment == true) {
-      console.log('meta data',received_message);
-      designAttachment == false;
-      let attachment_url = received_message.attachments[0].payload.url;
-      userSendAttachment.designAttachment = attachment_url;
-      let response1 = {
-                      "attachment":{
-                            "type":"image", 
-                            "payload":{
-                              "url":attachment_url, 
-                              "is_reusable":true
-                            }
-                          }
-                      };
-      let response2 = {"text": "Is this the design you want to sew and look alike?",
-                      "quick_replies":[{
-                                          "content_type":"text",
-                                          "title":"Yes.",
-                                          "payload":"designYes"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"No!",
-                                          "payload":"designNo"
-                                        }]
-                      };
-        callSend(sender_psid, response1).then(()=>{
-            return callSend(sender_psid, response2);
-          });   
-    }else if (received_message.text == "No!") {    
-      response = {"text" : "Please send me again"}
-      designAttachment == true;
-    }else if (received_message.text == "Yes." && wedding == true) {    
-      wedding_event(sender_psid);
-      wedding = false;
-      designAttachment = false;
-    }else if (received_message.text == "Yes." && occasion == true) {    
-      occasion_event(sender_psid);
-      occasion = false;
-      designAttachment = false;
-    }else if (received_message.text == "Yes." && convo == true) {    
-      convocation_event(sender_psid);
-      convo = false;
-      designAttachment = false;
-    }else if (received_message.text == "Yes." && casual == true) {    
-      casual_event(sender_psid);
-      casual = false;
-      designAttachment = false;
-    }else if (received_message.text == "Yes.") {    
-      showYPrecord(sender_psid);
-      designAttachment = false;
-    }else if (received_message.attachments && paidAttachment == true) {
-      console.log('meta data',received_message);
-      paidAttachment == false;
-      let attachment_url = received_message.attachments[0].payload.url;
-      userpaidAttachment.paidAttachment = attachment_url;
-      let response1 = {
-                      "attachment":{
-                            "type":"image", 
-                            "payload":{
-                              "url":attachment_url, 
-                              "is_reusable":true
-                            }
-                          }
-                      };
-      let response2 = {"text": "Is this the right screenshot?",
-                      "quick_replies":[{
-                                          "content_type":"text",
-                                          "title":"Yes",
-                                          "payload":"paidYes"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Opps..No!",
-                                          "payload":"paidNo"
-                                        }]
-                      };
-        callSend(sender_psid, response1).then(()=>{
-            return callSend(sender_psid, response2);
-          });   
-    }else if (received_message.text == "Opps..No!") {    
-      response = {"text" : "Please send me again"}
-      paidAttachment == true;
-    }else if (received_message.text == "Yes" && bothSave == true) {    
-      saveData_both(sender_psid);
-      response = {"attachment":{
-                        "type":"template",
-                        "payload":{
-                          "template_type":"button",
-                          "text":"💗 🤗.Thank you.🤗 💗",
-                          "buttons":[
-                            {
-                              "type":"web_url",
-                              "url":"https://www.messenger.com",
-                              "title":"View order",
-                            }                        
-                          ]
-                        }
-                      }
-                    }
-      paidAttachment = false;
-      bothSave = false;
-    }else if (received_message.text == "Yes" && ypSave == true) {    
-     saveData_YP(sender_psid);
-      response = {"attachment":{
-                        "type":"template",
-                        "payload":{
-                          "template_type":"button",
-                          "text":"💗 🤗.Thank you.🤗 💗",
-                          "buttons":[
-                            {
-                              "type":"web_url",
-                              "url":"https://www.messenger.com",
-                              "title":"View order",
-                            }                        
-                          ]
-                        }
-                      }
-                    }
-      paidAttachment = false;
-      ypSave = false
-    }else if (received_message.text == "Yes" && hmSave == true) {    
-     saveData_HM(sender_psid);
-      response = {"attachment":{
-                        "type":"template",
-                        "payload":{
-                          "template_type":"button",
-                          "text":"💗 🤗.Thank you.🤗 💗",
-                          "buttons":[
-                            {
-                              "type":"web_url",
-                              "url":"https://www.messenger.com",
-                              "title":"View order",
-                            }                        
-                          ]
-                        }
-                      }
-                    }
-      paidAttachment = false;
-      hmSave = false;
-    }
-  /***************changing******************/
-    else if (received_message.text == "Chest" || received_message.text == "chest") {
-     response = { "text" : "Send me chest update measurement. :)"}
-     changing.chest = true;
-    }else if (received_message.text && changing.chest == true) {   
-      userEnteredInfo.chest =  received_message.text;
-      response = {
-        "text": `Are you sure? If not click on key word to measure again.`,
-        "quick_replies":[
-                          {
-                          "content_type":"text",
-                          "title":"Sure",
-                          "payload":"change_sure"
-                          },{
-                          "content_type":"text",
-                          "title":"Chest",
-                          "payload":"change_measurement"
-                          }]
-      }
-      changing.chest = false;
-    }else if (received_message.text == "Arm" || received_message.text == "arm") {
-     response = { "text" : "Send me upper arm update measurement. :)"}
-     changing.upperArm = true;
-    }else if (received_message.text && changing.upperArm == true) {   
-      userEnteredInfo.upperArm =  received_message.text;
-      response = {
-        "text": `Are you sure? If not click on key word to measure again.`,
-        "quick_replies":[
-                          {
-                          "content_type":"text",
-                          "title":"Sure",
-                          "payload":"change_sure"
-                          },{
-                          "content_type":"text",
-                          "title":"Arm",
-                          "payload":"change_measurement"
-                          }]
-      }
-      changing.upperArm = false;
-    }else if (received_message.text == "Sleeve" || received_message.text == "sleeve") {
-     response = { "text" : "Send me update sleevelength measurement. :)"}
-     changing.sleevelength = true;
-    }else if (received_message.text && changing.sleevelength == true) {   
-      userEnteredInfo.sleevelength =  received_message.text;
-      response = {
-        "text": `Are you sure? If not click on key word to measure again.`,
-        "quick_replies":[
-                          {
-                          "content_type":"text",
-                          "title":"Sure",
-                          "payload":"change_sure"
-                          },{
-                          "content_type":"text",
-                          "title":"Sleeve",
-                          "payload":"change_measurement"
-                          }]
-      }
-      changing.sleevelength = false;
-    }else if (received_message.text == "waist" || received_message.text == "Waist") {
-     response = { "text" : "Send me update waist measurement. :)"}
-     changing.waist = true;
-    }else if (received_message.text && changing.waist == true) {   
-      userEnteredInfo.waist =  received_message.text;
-      response = {
-        "text": `Are you sure? If not click on key word to measure again.`,
-        "quick_replies":[
-                          {
-                          "content_type":"text",
-                          "title":"Sure",
-                          "payload":"change_sure"
-                          },{
-                          "content_type":"text",
-                          "title":"Waist",
-                          "payload":"change_measurement"
-                          }]
-      }
-      changing.waist = false;
-    }else if (received_message.text == "hips" || received_message.text == "Hips") {
-     response = { "text" : "Send me update hips measurement. :)"}
-     changing.hips = true;
-    }else if (received_message.text && changing.hips == true) {   
-      userEnteredInfo.hips =  received_message.text;
-      response = {
-        "text": `Are you sure? If not click on key word to measure again.`,
-        "quick_replies":[
-                          {
-                          "content_type":"text",
-                          "title":"Sure",
-                          "payload":"change_sure"
-                          },{
-                          "content_type":"text",
-                          "title":"Hips",
-                          "payload":"change_measurement"
-                          }]
-      }
-      changing.hips = false;
-    }else if (received_message.text == "hmlong" || received_message.text == "Hmlong") {
-     response = { "text" : "Send me update Htamein long measurement. :)"}
-     changing.htameinlong = true;
-    }else if (received_message.text && changing.htameinlong == true) {   
-      userEnteredInfo.htameinlong =  received_message.text;
-      response = {
-        "text": `Are you sure? If not click on key word to measure again.`,
-        "quick_replies":[
-                          {
-                          "content_type":"text",
-                          "title":"Sure",
-                          "payload":"change_sure"
-                          },{
-                          "content_type":"text",
-                          "title":"Hmlong",
-                          "payload":"change_measurement"
-                          }]
-      }
-      changing.htameinlong = false;
-    }else if (received_message.text == "hmtype" || received_message.text == "Hmtype") {
-     let response1 = {"text" : "which type of htamein? "};
-      let response2 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein.",
-                        "quick_replies":[
-                                        {
-                                          "content_type":"text",
-                                          "title":"Cheik",
-                                          "payload":"c"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Hpi",
-                                          "payload":"hpi"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Simple",
-                                          "payload":"s"
-                                        }]
-                      };
-      callSend(sender_psid, response1).then(()=>{
-        return callSend(sender_psid, response2);
-      });
-     changing.htameintype = true;
-    }else if (received_message.text && changing.htameintype == true) {   
-      userEnteredInfo.htameintype =  received_message.text;
-      response = {
-        "text": `Are you sure? If not click on key word to measure again.`,
-        "quick_replies":[
-                          {
-                          "content_type":"text",
-                          "title":"Sure",
-                          "payload":"change_sure"
-                          },{
-                          "content_type":"text",
-                          "title":"Hmtype",
-                          "payload":"change_measurement"
-                          }]
-      }
-      changing.htameintype = false;
-    }else if (received_message.text == "hmfold" || received_message.text == "Hmfold") {
-     let response1 = {"text": `which way you want to fold?`};
-      let response2 = {"text" : "Left fold/Right fold.",
-                        "quick_replies":[
-                                        {
-                                          "content_type":"text",
-                                          "title":"Left fold",
-                                          "payload":"lf"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Right fold",
-                                          "payload":"rf"
-                                        }]
-                      };
-      callSend(sender_psid, response1).then(()=>{
-        return callSend(sender_psid, response2);
-      });
-     changing.fold = true;
-    }else if (received_message.text && changing.fold == true) {   
-      userEnteredInfo.fold =  received_message.text;
-      response = {
-        "text": `Are you sure? If not click on key word to measure again.`,
-        "quick_replies":[
-                          {
-                          "content_type":"text",
-                          "title":"Sure",
-                          "payload":"change_sure"
-                          },{
-                          "content_type":"text",
-                          "title":"Hmfold",
-                          "payload":"change_measurement"
-                          }]
-      }
-      changing.fold = false;
-    }else if (received_message.text == "Ankle" || received_message.text == "ankle") {
-      let response1 = {"text": `Would you like to cover ankle or not?`};
-      let response2 = {"text" : "Upper ankle/cover ankle.",
-                        "quick_replies":[
-                                        {
-                                          "content_type":"text",
-                                          "title":"Upper Ankle",
-                                          "payload":"ua"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Cover Ankle",
-                                          "payload":"ca"
-                                        }]
-                      };
-      callSend(sender_psid, response1).then(()=>{
-        return callSend(sender_psid, response2);
-      });
-     changing.ankle = true;
-    }else if (received_message.text && changing.ankle == true) {   
-      userEnteredInfo.ankle =  received_message.text;
-      response = {
-        "text": `Are you sure? If not click on key word to measure again.`,
-        "quick_replies":[
-                          {
-                          "content_type":"text",
-                          "title":"Sure",
-                          "payload":"change_sure"
-                          },{
-                          "content_type":"text",
-                          "title":"Ankle",
-                          "payload":"change_measurement"
-                          }]
-      }
-      changing.ankle = false;
-    }else if (received_message.text == "yptype" || received_message.text == "Yptype") {
-      let response1 = {"text" : "which type of yinphone? "};
-      let response2 = {
-                        "attachment":{
-                            "type":"image", 
-                            "payload":{
-                              "url":"https://i.imgur.com/nWjNZpT.jpg", 
-                              "is_reusable":true
-                            }
-                          }
-                    };
-      let response3 = {"text" : "Yin ci/Yinphone/Back zip.",
-                        "quick_replies":[
-                                        {
-                                          "content_type":"text",
-                                          "title":"Yin ci",
-                                          "payload":"yc"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Yinphone",
-                                          "payload":"yp"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Back zip",
-                                          "payload":"bz"
-                                        }]
-                      };
-      callSend(sender_psid, response1).then(()=>{
-        return callSend(sender_psid, response2).then(()=>{
-          return callSend(sender_psid, response3);
-        });
-      });
-     changing.yinphonetype = true;
-    }else if (received_message.text && changing.yinphonetype == true) {   
-      userEnteredInfo.yinphonetype =  received_message.text;
-      response = {
-        "text": `Are you sure? If not click on key word to measure again.`,
-        "quick_replies":[
-                          {
-                          "content_type":"text",
-                          "title":"Sure",
-                          "payload":"change_sure"
-                          },{
-                          "content_type":"text",
-                          "title":"Yptype",
-                          "payload":"change_measurement"
-                          }]
-      }
-      changing.yinphonetype = false;
-    }else if (received_message.text == "sleevetype" || received_message.text == "Sleevetype") {
-      let response1 = {"text": `How much sleeve length you want?`};
-      let response2 = {"text" : "Short sleeve/Long sleeve.",
-                        "quick_replies":[
-                                        {
-                                          "content_type":"text",
-                                          "title":"Short sleeve",
-                                          "payload":"SSL"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Long sleeve",
-                                          "payload":"LSL"
-                                        }]
-                      };
-      callSend(sender_psid, response1).then(()=>{
-        return callSend(sender_psid, response2);
-      });
-     changing.sleevetype = true;
-    }else if (received_message.text && changing.sleevetype == true) {   
-      userEnteredInfo.yinphonetype =  received_message.text;
-      response = {
-        "text": `Are you sure? If not click on key word to measure again.`,
-        "quick_replies":[
-                          {
-                          "content_type":"text",
-                          "title":"Sure",
-                          "payload":"change_sure"
-                          },{
-                          "content_type":"text",
-                          "title":"Sleevetype",
-                          "payload":"change_measurement"
-                          }]
-      }
-      changing.Sleevetype = false;
-    }else if (received_message.text == "khar" || received_message.text == "Khar") {
-      let response1 = {"text": "Khar to (end exactly with the waist),"};
-      let response2 = {"text" : "Khar tin (ends at the hips) or"};
-      let response3 = {"text" : "khar shay (ends below the hips)",
-                        "quick_replies":[
-                                        {
-                                          "content_type":"text",
-                                          "title":"Khar To",
-                                          "payload":"kto"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Khar Tin",
-                                          "payload":"ktin"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Khar Shay",
-                                          "payload":"kshay"
-                                        }]
-                      };
-      callSend(sender_psid, response1).then(()=>{
-        return callSend(sender_psid, response2).then(()=>{
-          return callSend(sender_psid, response3);
-        });
-      });
-     changing.khar = true;
-    }else if (received_message.text && changing.khar == true) {   
-      userEnteredInfo.khar =  received_message.text;
-      response = {
-        "text": `Are you sure? If not click on key word to measure again.`,
-        "quick_replies":[
-                          {
-                          "content_type":"text",
-                          "title":"Sure",
-                          "payload":"change_sure"
-                          },{
-                          "content_type":"text",
-                          "title":"Khar",
-                          "payload":"change_measurement"
-                          }]
-      }
-      changing.khar = false;
-    }else if (received_message.text == "Sure") {    
-      let response1 = {"text": "Ok... is there anything you want to change then type the key word that you want to change. :) "};
-      let response2 = {"text" : " If there is nothing to change write 'Done' to view update record. :)"}
-      callSend(sender_psid, response1).then(()=>{
-        return callSend(sender_psid, response2);
-      });
-    }else if (received_message.text == "done" || received_message.text == "Done" && htameinRC == true) {
-      showHMrecord (sender_psid);
-      htameinRC = false;
-    }else if (received_message.text == "done" || received_message.text == "Done" && yinphoneRC == true) {
-      showYPrecord (sender_psid);
-      yinphoneRC = false;
-    }else if (received_message.text == "done" || received_message.text == "Done" && bothallRC == true) {
-      showBOTHallrecord (sender_psid);
-      bothallRC = false;
-    }
-  /*****************Admin*******************/
-    else if (received_message.text == "Admin" || received_message.text == "admin") {   
-      response = {"text" : "Enter password"}
-    }else if (received_message.text == "***shwesu***") {   
-      response = {
-        "attachment":{
+    paidAttachment = false;
+    bothSave = false;
+  }else if (received_message.text == "Yes" && ypSave == true) {    
+   saveData_YP(sender_psid);
+    response = {"attachment":{
                       "type":"template",
                       "payload":{
                         "template_type":"button",
-                        "text":"Hello.. Dear Mo Mo. How would you like to improve your bot.",
+                        "text":"💗 🤗.Thank you.🤗 💗",
                         "buttons":[
-                                    {
-                                      "type": "postback",
-                                      "title": "Add admin chocies",
-                                      "payload": "add_ADchocies",        
-                                    },
-                                    {
-                                      "type": "postback",
-                                      "title": "View orders",
-                                      "payload": "ad_vieworder",        
-                                    }                        
-                                  ]
-                                }
+                          {
+                            "type":"web_url",
+                            "url":"https://www.messenger.com",
+                            "title":"View order",
+                          }                        
+                        ]
                       }
+                    }
                   }
-    }else if (received_message.text == "Wedding") {   
-      response = {"text" : "Send your chocies."}
-      weddingAttach = true;
-    }else if (received_message.text == "Occasion") {   
-      response = {"text" : "Send your chocies."}
-      occasionAttach = true;
-    }else if (received_message.text == "Convocation") {   
-      response = {"text" : "Send your chocies."}
-      convoAttach = true;
-    }else if (received_message.text == "Casual") {   
-      response = {"text" : "Send your chocies."}
-      casualAttach = true;
-    }else if (received_message.text == "Yinphone") {   
-      response = {"text" : "Send your chocies."}
-      yinphoneAttach = true;
-    }else if (received_message.attachments && weddingAttach == true) {
-      console.log('meta data',received_message);
-      weddingAttach == false;
-      let attachment_url1 = received_message.attachments[0].payload.url;
-      adminSendAttachment.weddingAttach = attachment_url1;
-      let response1 = {
-                      "attachment":{
-                            "type":"image", 
-                            "payload":{
-                              "url":attachment_url1, 
-                              "is_reusable":true
-                            }
-                          }
-                      };
-      let response2 = {"text": "You want to add this design to wedding admin chocies?",
-                      "quick_replies":[{
-                                          "content_type":"text",
-                                          "title":"Ofcourse",
-                                          "payload":"og"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Opps not that.",
-                                          "payload":"opnt"
-                                        }]
-                      };
-        callSend(sender_psid, response1).then(()=>{
-            return callSend(sender_psid, response2);
-          });   
-    }else if (received_message.attachments && occasionAttach == true) {
-      console.log('meta data',received_message);
-      occasionAttach == false;
-      let attachment_url1 = received_message.attachments[0].payload.url;
-      adminSendAttachment.occasionAttach = attachment_url1;
-      let response1 = {
-                      "attachment":{
-                            "type":"image", 
-                            "payload":{
-                              "url":attachment_url1, 
-                              "is_reusable":true
-                            }
-                          }
-                      };
-      let response2 = {"text": "You want to add this design to occasion admin chocies?",
-                      "quick_replies":[{
-                                          "content_type":"text",
-                                          "title":"Ofcourse",
-                                          "payload":"og"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Opps not that.",
-                                          "payload":"opnt"
-                                        }]
-                      };
-        callSend(sender_psid, response1).then(()=>{
-            return callSend(sender_psid, response2);
-          });   
-    }else if (received_message.attachments && convoAttach == true) {
-      console.log('meta data',received_message);
-      let attachment_url1 = received_message.attachments[0].payload.url;
-      adminSendAttachment.convoAttach = attachment_url1;
-      let response1 = {
-                      "attachment":{
-                            "type":"image", 
-                            "payload":{
-                              "url":attachment_url1, 
-                              "is_reusable":true
-                            }
-                          }
-                      };
-      let response2 = {"text": "You want to add this design to convocation admin chocies?",
-                      "quick_replies":[{
-                                          "content_type":"text",
-                                          "title":"Ofcourse",
-                                          "payload":"og"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Opps not that.",
-                                          "payload":"opnt"
-                                        }]
-                      };
-        callSend(sender_psid, response1).then(()=>{
-            return callSend(sender_psid, response2);
-          });   
-    }else if (received_message.attachments && casualAttach == true) {
-      console.log('meta data',received_message);
-      let attachment_url1 = received_message.attachments[0].payload.url;
-      adminSendAttachment.casualAttach = attachment_url1;
-      let response1 = {
-                      "attachment":{
-                            "type":"image", 
-                            "payload":{
-                              "url":attachment_url1, 
-                              "is_reusable":true
-                            }
-                          }
-                      };
-      let response2 = {"text": "You want to add this design to casual admin chocies?",
-                      "quick_replies":[{
-                                          "content_type":"text",
-                                          "title":"Ofcourse",
-                                          "payload":"og"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Opps not that.",
-                                          "payload":"opnt"
-                                        }]
-                      };
-        callSend(sender_psid, response1).then(()=>{
-            return callSend(sender_psid, response2);
-          });   
-    }else if (received_message.attachments && yinphoneAttach == true) {
-      console.log('meta data',received_message);
-      let attachment_url1 = received_message.attachments[0].payload.url;
-      adminSendAttachment.yinphoneAttach = attachment_url1;
-      let response1 = {
-                      "attachment":{
-                            "type":"image", 
-                            "payload":{
-                              "url":attachment_url1, 
-                              "is_reusable":true
-                            }
-                          }
-                      };
-      let response2 = {"text": "You want to add this design to yinphone admin chocies?",
-                      "quick_replies":[{
-                                          "content_type":"text",
-                                          "title":"Ofcourse",
-                                          "payload":"og"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Opps not that.",
-                                          "payload":"opnt"
-                                        }]
-                      };
-        callSend(sender_psid, response1).then(()=>{
-            return callSend(sender_psid, response2);
-          });   
-    }else if (received_message.text == "Ofcourse" && weddingAttach == true) {    
-     response = {"text": "If you wanna add more keep send your chocies.",
-                      "quick_replies":[{
-                                          "content_type":"text",
-                                          "title":"Finish",
-                                          "payload":"f"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Change Category",
-                                          "payload":"cc"
-                                        }]
+    paidAttachment = false;
+    ypSave = false
+  }else if (received_message.text == "Yes" && hmSave == true) {    
+   saveData_HM(sender_psid);
+    response = {"attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"💗 🤗.Thank you.🤗 💗",
+                        "buttons":[
+                          {
+                            "type":"web_url",
+                            "url":"https://www.messenger.com",
+                            "title":"View order",
+                          }                        
+                        ]
+                      }
+                    }
                   }
-      let adc = {url: adminSendAttachment.weddingAttach}
-      db.collection('wedding').doc().set(adc);
-    }else if (received_message.text == "Ofcourse" && occasionAttach == true) {    
-     response = {"text": "If you wanna add more keep send your chocies.",
-                      "quick_replies":[{
-                                          "content_type":"text",
-                                          "title":"Finish",
-                                          "payload":"f"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Change Category",
-                                          "payload":"cc"
-                                        }]
-                  }
-      let adc = {url: adminSendAttachment.occasionAttach}
-      db.collection('occasion').doc().set(adc);
-    }else if (received_message.text == "Ofcourse" && convoAttach == true) {    
-     response = {"text": "If you wanna add more keep send your chocies.",
-                      "quick_replies":[{
-                                          "content_type":"text",
-                                          "title":"Finish",
-                                          "payload":"f"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Change Category",
-                                          "payload":"cc"
-                                        }]
-                  }
-      let adc = {url: adminSendAttachment.convoAttach}
-      db.collection('convocation').doc().set(adc);
-    }else if (received_message.text == "Ofcourse" && casualAttach == true) {    
-     response = {"text": "If you wanna add more keep send your chocies.",
-                      "quick_replies":[{
-                                          "content_type":"text",
-                                          "title":"Finish",
-                                          "payload":"f"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Change Category",
-                                          "payload":"cc"
-                                        }]
-                  }
-      let adc = {url: adminSendAttachment.casualAttach}
-      db.collection('casual').doc().set(adc);
-    }else if (received_message.text == "Ofcourse" && yinphoneAttach == true) {    
-     response = {"text": "If you wanna add more keep send your chocies.",
-                      "quick_replies":[{
-                                          "content_type":"text",
-                                          "title":"Finish",
-                                          "payload":"f"
-                                        },{
-                                          "content_type":"text",
-                                          "title":"Change Category",
-                                          "payload":"cc"
-                                        }]
-                  }
-      let adc = {url: adminSendAttachment.yinphoneAttach}
-      db.collection('yinphone').doc().set(adc);
-    }else if (received_message.text == "Opps not that.") {    
-      response = {"text": "Ok send again!"}
-    }else if (received_message.text == "Change Category") {    
-      add_ADchocies(sender_psid);    
-      weddingAttach = false;
-      occasionAttach = false;
-      convoAttach = false;
-      casualAttach = false;
-      yinphoneAttach = false;
-    }else if (received_message.text == "Finish") {    
-      response = {"text": "Done"}
-      weddingAttach = false;
-      occasionAttach = false;
-      convoAttach = false;
-      casualAttach = false;
-      yinphoneAttach = false;
+    paidAttachment = false;
+    hmSave = false;
+  }
+/***************changing******************/
+  else if (received_message.text == "Chest" || received_message.text == "chest") {
+   response = { "text" : "Send me chest update measurement. :)"}
+   changing.chest = true;
+  }else if (received_message.text && changing.chest == true) {   
+    userEnteredInfo.chest =  received_message.text;
+    response = {
+      "text": `Are you sure? If not click on key word to measure again.`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"Chest",
+                        "payload":"change_measurement"
+                        }]
     }
+    changing.chest = false;
+  }else if (received_message.text == "Arm" || received_message.text == "arm") {
+   response = { "text" : "Send me upper arm update measurement. :)"}
+   changing.upperArm = true;
+  }else if (received_message.text && changing.upperArm == true) {   
+    userEnteredInfo.upperArm =  received_message.text;
+    response = {
+      "text": `Are you sure? If not click on key word to measure again.`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"Arm",
+                        "payload":"change_measurement"
+                        }]
+    }
+    changing.upperArm = false;
+  }else if (received_message.text == "Sleeve" || received_message.text == "sleeve") {
+   response = { "text" : "Send me update sleevelength measurement. :)"}
+   changing.sleevelength = true;
+  }else if (received_message.text && changing.sleevelength == true) {   
+    userEnteredInfo.sleevelength =  received_message.text;
+    response = {
+      "text": `Are you sure? If not click on key word to measure again.`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"Sleeve",
+                        "payload":"change_measurement"
+                        }]
+    }
+    changing.sleevelength = false;
+  }else if (received_message.text == "waist" || received_message.text == "Waist") {
+   response = { "text" : "Send me update waist measurement. :)"}
+   changing.waist = true;
+  }else if (received_message.text && changing.waist == true) {   
+    userEnteredInfo.waist =  received_message.text;
+    response = {
+      "text": `Are you sure? If not click on key word to measure again.`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"Waist",
+                        "payload":"change_measurement"
+                        }]
+    }
+    changing.waist = false;
+  }else if (received_message.text == "hips" || received_message.text == "Hips") {
+   response = { "text" : "Send me update hips measurement. :)"}
+   changing.hips = true;
+  }else if (received_message.text && changing.hips == true) {   
+    userEnteredInfo.hips =  received_message.text;
+    response = {
+      "text": `Are you sure? If not click on key word to measure again.`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"Hips",
+                        "payload":"change_measurement"
+                        }]
+    }
+    changing.hips = false;
+  }else if (received_message.text == "hmlong" || received_message.text == "Hmlong") {
+   response = { "text" : "Send me update Htamein long measurement. :)"}
+   changing.htameinlong = true;
+  }else if (received_message.text && changing.htameinlong == true) {   
+    userEnteredInfo.htameinlong =  received_message.text;
+    response = {
+      "text": `Are you sure? If not click on key word to measure again.`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"Hmlong",
+                        "payload":"change_measurement"
+                        }]
+    }
+    changing.htameinlong = false;
+  }else if (received_message.text == "hmtype" || received_message.text == "Hmtype") {
+   let response1 = {"text" : "which type of htamein? "};
+    let response2 = {"text" : "Cheik htamein/Hpi skirt/Simple htamein.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Cheik",
+                                        "payload":"c"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Hpi",
+                                        "payload":"hpi"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Simple",
+                                        "payload":"s"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+   changing.htameintype = true;
+  }else if (received_message.text && changing.htameintype == true) {   
+    userEnteredInfo.htameintype =  received_message.text;
+    response = {
+      "text": `Are you sure? If not click on key word to measure again.`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"Hmtype",
+                        "payload":"change_measurement"
+                        }]
+    }
+    changing.htameintype = false;
+  }else if (received_message.text == "hmfold" || received_message.text == "Hmfold") {
+   let response1 = {"text": `which way you want to fold?`};
+    let response2 = {"text" : "Left fold/Right fold.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Left fold",
+                                        "payload":"lf"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Right fold",
+                                        "payload":"rf"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+   changing.fold = true;
+  }else if (received_message.text && changing.fold == true) {   
+    userEnteredInfo.fold =  received_message.text;
+    response = {
+      "text": `Are you sure? If not click on key word to measure again.`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"Hmfold",
+                        "payload":"change_measurement"
+                        }]
+    }
+    changing.fold = false;
+  }else if (received_message.text == "Ankle" || received_message.text == "ankle") {
+    let response1 = {"text": `Would you like to cover ankle or not?`};
+    let response2 = {"text" : "Upper ankle/cover ankle.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Upper Ankle",
+                                        "payload":"ua"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Cover Ankle",
+                                        "payload":"ca"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+   changing.ankle = true;
+  }else if (received_message.text && changing.ankle == true) {   
+    userEnteredInfo.ankle =  received_message.text;
+    response = {
+      "text": `Are you sure? If not click on key word to measure again.`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"Ankle",
+                        "payload":"change_measurement"
+                        }]
+    }
+    changing.ankle = false;
+  }else if (received_message.text == "yptype" || received_message.text == "Yptype") {
+    let response1 = {"text" : "which type of yinphone? "};
+    let response2 = {
+                      "attachment":{
+                          "type":"image", 
+                          "payload":{
+                            "url":"https://i.imgur.com/nWjNZpT.jpg", 
+                            "is_reusable":true
+                          }
+                        }
+                  };
+    let response3 = {"text" : "Yin ci/Yinphone/Back zip.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Yin ci",
+                                        "payload":"yc"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Yinphone",
+                                        "payload":"yp"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Back zip",
+                                        "payload":"bz"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
+    });
+   changing.yinphonetype = true;
+  }else if (received_message.text && changing.yinphonetype == true) {   
+    userEnteredInfo.yinphonetype =  received_message.text;
+    response = {
+      "text": `Are you sure? If not click on key word to measure again.`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"Yptype",
+                        "payload":"change_measurement"
+                        }]
+    }
+    changing.yinphonetype = false;
+  }else if (received_message.text == "sleevetype" || received_message.text == "Sleevetype") {
+    let response1 = {"text": `How much sleeve length you want?`};
+    let response2 = {"text" : "Short sleeve/Long sleeve.",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Short sleeve",
+                                        "payload":"SSL"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Long sleeve",
+                                        "payload":"LSL"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+   changing.sleevetype = true;
+  }else if (received_message.text && changing.sleevetype == true) {   
+    userEnteredInfo.yinphonetype =  received_message.text;
+    response = {
+      "text": `Are you sure? If not click on key word to measure again.`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"Sleevetype",
+                        "payload":"change_measurement"
+                        }]
+    }
+    changing.Sleevetype = false;
+  }else if (received_message.text == "khar" || received_message.text == "Khar") {
+    let response1 = {"text": "Khar to (end exactly with the waist),"};
+    let response2 = {"text" : "Khar tin (ends at the hips) or"};
+    let response3 = {"text" : "khar shay (ends below the hips)",
+                      "quick_replies":[
+                                      {
+                                        "content_type":"text",
+                                        "title":"Khar To",
+                                        "payload":"kto"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Khar Tin",
+                                        "payload":"ktin"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Khar Shay",
+                                        "payload":"kshay"
+                                      }]
+                    };
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2).then(()=>{
+        return callSend(sender_psid, response3);
+      });
+    });
+   changing.khar = true;
+  }else if (received_message.text && changing.khar == true) {   
+    userEnteredInfo.khar =  received_message.text;
+    response = {
+      "text": `Are you sure? If not click on key word to measure again.`,
+      "quick_replies":[
+                        {
+                        "content_type":"text",
+                        "title":"Sure",
+                        "payload":"change_sure"
+                        },{
+                        "content_type":"text",
+                        "title":"Khar",
+                        "payload":"change_measurement"
+                        }]
+    }
+    changing.khar = false;
+  }else if (received_message.text == "Sure") {    
+    let response1 = {"text": "Ok... is there anything you want to change then type the key word that you want to change. :) "};
+    let response2 = {"text" : " If there is nothing to change write 'Done' to view update record. :)"}
+    callSend(sender_psid, response1).then(()=>{
+      return callSend(sender_psid, response2);
+    });
+  }else if (received_message.text == "done" || received_message.text == "Done" && htameinRC == true) {
+    showHMrecord (sender_psid);
+    htameinRC = false;
+  }else if (received_message.text == "done" || received_message.text == "Done" && yinphoneRC == true) {
+    showYPrecord (sender_psid);
+    yinphoneRC = false;
+  }else if (received_message.text == "done" || received_message.text == "Done" && bothallRC == true) {
+    showBOTHallrecord (sender_psid);
+    bothallRC = false;
+  }
+/*****************Admin*******************/
+  else if (received_message.text == "Admin" || received_message.text == "admin") {   
+    response = {"text" : "Enter password"}
+  }else if (received_message.text == "***shwesu***") {   
+    response = {
+      "attachment":{
+                    "type":"template",
+                    "payload":{
+                      "template_type":"button",
+                      "text":"Hello.. Dear Mo Mo. How would you like to improve your bot.",
+                      "buttons":[
+                                  {
+                                    "type": "postback",
+                                    "title": "Add admin chocies",
+                                    "payload": "add_ADchocies",        
+                                  },
+                                  {
+                                    "type": "postback",
+                                    "title": "View orders",
+                                    "payload": "ad_vieworder",        
+                                  }                        
+                                ]
+                              }
+                    }
+                }
+  }else if (received_message.text == "Wedding") {   
+    response = {"text" : "Send your chocies."}
+    weddingAttach = true;
+  }else if (received_message.text == "Occasion") {   
+    response = {"text" : "Send your chocies."}
+    occasionAttach = true;
+  }else if (received_message.text == "Convocation") {   
+    response = {"text" : "Send your chocies."}
+    convoAttach = true;
+  }else if (received_message.text == "Casual") {   
+    response = {"text" : "Send your chocies."}
+    casualAttach = true;
+  }else if (received_message.text == "Yinphone") {   
+    response = {"text" : "Send your chocies."}
+    yinphoneAttach = true;
+  }else if (received_message.attachments && weddingAttach == true) {
+    console.log('meta data',received_message);
+    weddingAttach == false;
+    let attachment_url1 = received_message.attachments[0].payload.url;
+    adminSendAttachment.weddingAttach = attachment_url1;
+    let response1 = {
+                    "attachment":{
+                          "type":"image", 
+                          "payload":{
+                            "url":attachment_url1, 
+                            "is_reusable":true
+                          }
+                        }
+                    };
+    let response2 = {"text": "You want to add this design to wedding admin chocies?",
+                    "quick_replies":[{
+                                        "content_type":"text",
+                                        "title":"Ofcourse",
+                                        "payload":"og"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Opps not that.",
+                                        "payload":"opnt"
+                                      }]
+                    };
+      callSend(sender_psid, response1).then(()=>{
+          return callSend(sender_psid, response2);
+        });   
+  }else if (received_message.attachments && occasionAttach == true) {
+    console.log('meta data',received_message);
+    occasionAttach == false;
+    let attachment_url1 = received_message.attachments[0].payload.url;
+    adminSendAttachment.occasionAttach = attachment_url1;
+    let response1 = {
+                    "attachment":{
+                          "type":"image", 
+                          "payload":{
+                            "url":attachment_url1, 
+                            "is_reusable":true
+                          }
+                        }
+                    };
+    let response2 = {"text": "You want to add this design to occasion admin chocies?",
+                    "quick_replies":[{
+                                        "content_type":"text",
+                                        "title":"Ofcourse",
+                                        "payload":"og"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Opps not that.",
+                                        "payload":"opnt"
+                                      }]
+                    };
+      callSend(sender_psid, response1).then(()=>{
+          return callSend(sender_psid, response2);
+        });   
+  }else if (received_message.attachments && convoAttach == true) {
+    console.log('meta data',received_message);
+    let attachment_url1 = received_message.attachments[0].payload.url;
+    adminSendAttachment.convoAttach = attachment_url1;
+    let response1 = {
+                    "attachment":{
+                          "type":"image", 
+                          "payload":{
+                            "url":attachment_url1, 
+                            "is_reusable":true
+                          }
+                        }
+                    };
+    let response2 = {"text": "You want to add this design to convocation admin chocies?",
+                    "quick_replies":[{
+                                        "content_type":"text",
+                                        "title":"Ofcourse",
+                                        "payload":"og"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Opps not that.",
+                                        "payload":"opnt"
+                                      }]
+                    };
+      callSend(sender_psid, response1).then(()=>{
+          return callSend(sender_psid, response2);
+        });   
+  }else if (received_message.attachments && casualAttach == true) {
+    console.log('meta data',received_message);
+    let attachment_url1 = received_message.attachments[0].payload.url;
+    adminSendAttachment.casualAttach = attachment_url1;
+    let response1 = {
+                    "attachment":{
+                          "type":"image", 
+                          "payload":{
+                            "url":attachment_url1, 
+                            "is_reusable":true
+                          }
+                        }
+                    };
+    let response2 = {"text": "You want to add this design to casual admin chocies?",
+                    "quick_replies":[{
+                                        "content_type":"text",
+                                        "title":"Ofcourse",
+                                        "payload":"og"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Opps not that.",
+                                        "payload":"opnt"
+                                      }]
+                    };
+      callSend(sender_psid, response1).then(()=>{
+          return callSend(sender_psid, response2);
+        });   
+  }else if (received_message.attachments && yinphoneAttach == true) {
+    console.log('meta data',received_message);
+    let attachment_url1 = received_message.attachments[0].payload.url;
+    adminSendAttachment.yinphoneAttach = attachment_url1;
+    let response1 = {
+                    "attachment":{
+                          "type":"image", 
+                          "payload":{
+                            "url":attachment_url1, 
+                            "is_reusable":true
+                          }
+                        }
+                    };
+    let response2 = {"text": "You want to add this design to yinphone admin chocies?",
+                    "quick_replies":[{
+                                        "content_type":"text",
+                                        "title":"Ofcourse",
+                                        "payload":"og"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Opps not that.",
+                                        "payload":"opnt"
+                                      }]
+                    };
+      callSend(sender_psid, response1).then(()=>{
+          return callSend(sender_psid, response2);
+        });   
+  }else if (received_message.text == "Ofcourse" && weddingAttach == true) {    
+   response = {"text": "If you wanna add more keep send your chocies.",
+                    "quick_replies":[{
+                                        "content_type":"text",
+                                        "title":"Finish",
+                                        "payload":"f"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Change Category",
+                                        "payload":"cc"
+                                      }]
+                }
+    let adc = {url: adminSendAttachment.weddingAttach}
+    db.collection('wedding').doc().set(adc);
+  }else if (received_message.text == "Ofcourse" && occasionAttach == true) {    
+   response = {"text": "If you wanna add more keep send your chocies.",
+                    "quick_replies":[{
+                                        "content_type":"text",
+                                        "title":"Finish",
+                                        "payload":"f"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Change Category",
+                                        "payload":"cc"
+                                      }]
+                }
+    let adc = {url: adminSendAttachment.occasionAttach}
+    db.collection('occasion').doc().set(adc);
+  }else if (received_message.text == "Ofcourse" && convoAttach == true) {    
+   response = {"text": "If you wanna add more keep send your chocies.",
+                    "quick_replies":[{
+                                        "content_type":"text",
+                                        "title":"Finish",
+                                        "payload":"f"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Change Category",
+                                        "payload":"cc"
+                                      }]
+                }
+    let adc = {url: adminSendAttachment.convoAttach}
+    db.collection('convocation').doc().set(adc);
+  }else if (received_message.text == "Ofcourse" && casualAttach == true) {    
+   response = {"text": "If you wanna add more keep send your chocies.",
+                    "quick_replies":[{
+                                        "content_type":"text",
+                                        "title":"Finish",
+                                        "payload":"f"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Change Category",
+                                        "payload":"cc"
+                                      }]
+                }
+    let adc = {url: adminSendAttachment.casualAttach}
+    db.collection('casual').doc().set(adc);
+  }else if (received_message.text == "Ofcourse" && yinphoneAttach == true) {    
+   response = {"text": "If you wanna add more keep send your chocies.",
+                    "quick_replies":[{
+                                        "content_type":"text",
+                                        "title":"Finish",
+                                        "payload":"f"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Change Category",
+                                        "payload":"cc"
+                                      }]
+                }
+    let adc = {url: adminSendAttachment.yinphoneAttach}
+    db.collection('yinphone').doc().set(adc);
+  }else if (received_message.text == "Opps not that.") {    
+    response = {"text": "Ok send again!"}
+  }else if (received_message.text == "Change Category") {    
+    add_ADchocies(sender_psid);    
+    weddingAttach = false;
+    occasionAttach = false;
+    convoAttach = false;
+    casualAttach = false;
+    yinphoneAttach = false;
+  }else if (received_message.text == "Finish") {    
+    response = {"text": "Done"}
+    weddingAttach = false;
+    occasionAttach = false;
+    convoAttach = false;
+    casualAttach = false;
+    yinphoneAttach = false;
+  }
 
-    else if (received_message.text == "Done") {    
-      response = {"text": adminSendAttachment.weddingAttach}
-    }
-   callSendAPI(sender_psid, response); 
+  else if (received_message.text == "Done") {    
+    response = {"text": adminSendAttachment.weddingAttach}
+  }
+ callSendAPI(sender_psid, response); 
 }
 
 const handlePostback = (sender_psid, received_postback) => {
@@ -2140,7 +2142,7 @@ const chooesClothPart = (sender_psid) => {
 }
 
 const yinphoneMeasuring = (sender_psid) => {
-  let response1 = {"text":"OK..Let's get your upper body measurement. Here are ways to measure your body. Please measure in centimeters. Hopefully that will be useful. :)"};    
+  let response1 = {"text":"OK..Let's get your upper body measurement. Here are ways to measure your body. Hopefully that will be useful. :)"};    
      let response2 = {
       "attachment":{
             "type":"image", 
@@ -2160,7 +2162,7 @@ const yinphoneMeasuring = (sender_psid) => {
 }
 
 const htameinMeasuring = (sender_psid) => {
-  let response1 = {"text":"OK..Let's get your lower body measurement. Here are ways to measure your body. Please measure in centimeters. Hopefully that will be useful. :)"};    
+  let response1 = {"text":"OK..Let's get your lower body measurement. Here are ways to measure your body. Hopefully that will be useful. :)"};    
      let response2 = {
       "attachment":{
             "type":"image", 
@@ -2180,7 +2182,7 @@ const htameinMeasuring = (sender_psid) => {
 }
 
 const wholeMeasuring = (sender_psid) => {
-  let response1 = {"text":"OK..Let's get your body measurement. Here are ways to measure your body. Please measure in centimeters. Hopefully that will be useful. :)"};    
+  let response1 = {"text":"OK..Let's get your body measurement. Here are ways to measure your body. Hopefully that will be useful. :)"};    
      let response2 = {
       "attachment":{
             "type":"image", 
@@ -2898,7 +2900,7 @@ const orderComfirmHM = (sender_psid) => {
                         "buttons":[
                           {
                             "type": "postback",
-                            "title": "Yes",
+                            "title": "Order Comfirm",
                             "payload": "order_comfirm_HM",
                           },
                           {
@@ -3000,7 +3002,7 @@ const orderComfirmYP = (sender_psid) => {
                         "buttons":[
                           {
                             "type": "postback",
-                            "title": "Yes",
+                            "title": "Order Comfirm",
                             "payload": "order_comfirm_YP",
                           },
                           {
