@@ -1072,12 +1072,12 @@ function handleMessage(sender_psid, received_message) {
                       "type":"template",
                       "payload":{
                         "template_type":"button",
-                        "text":"💗 🤗.Thank you.🤗 💗",
+                        "text":"💗 🤗.Thank you.🤗 💗 Map to get in when you accidently get near the shop.",
                         "buttons":[
                           {
                             "type":"web_url",
-                            "url":"https://www.messenger.com",
-                            "title":"View order",
+                            "url":"https://goo.gl/maps/rXWbW23t5qBMhUnQ9",
+                            "title":"View map",
                           }                        
                         ]
                       }
@@ -1091,12 +1091,12 @@ function handleMessage(sender_psid, received_message) {
                       "type":"template",
                       "payload":{
                         "template_type":"button",
-                        "text":"💗 🤗.Thank you.🤗 💗",
+                        "text":"💗 🤗.Thank you.🤗 💗 Map to get in when you accidently get near the shop.",
                         "buttons":[
                           {
                             "type":"web_url",
-                            "url":"https://www.messenger.com",
-                            "title":"View order",
+                            "url":"https://goo.gl/maps/rXWbW23t5qBMhUnQ9",
+                            "title":"View map",
                           }                        
                         ]
                       }
@@ -1110,12 +1110,12 @@ function handleMessage(sender_psid, received_message) {
                       "type":"template",
                       "payload":{
                         "template_type":"button",
-                        "text":"💗 🤗.Thank you.🤗 💗",
+                        "text":"💗 🤗.Thank you.🤗 💗 Map to get in when you accidently get near the shop.",
                         "buttons":[
                           {
                             "type":"web_url",
-                            "url":"https://www.messenger.com",
-                            "title":"View order",
+                            "url":"https://goo.gl/maps/rXWbW23t5qBMhUnQ9",
+                            "title":"View map",
                           }                        
                         ]
                       }
