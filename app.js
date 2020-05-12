@@ -1379,8 +1379,8 @@ function handleMessage(sender_psid, received_message) {
   }else if (received_message.text == "Ofcourse") {    
    response = {"text": "write a caption to share with the picture."}
    weddingAttach = false;
-   let adc = {url: adminSendAttachment.weddingAttach}
-   db.collection('wedding').doc().set(adc);
+  // let adc = {url: adminSendAttachment.weddingAttach}
+ //  db.collection('wedding').doc().set(adc);
   }
 
   else if (received_message.text == "Done") {    
