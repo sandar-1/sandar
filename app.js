@@ -156,54 +156,6 @@ app.get('/wedding/:sender_id/',function(req,res){
     });    
 });
 
-app.post('/imagepick',function(req,res){
-      
-  const sender_id = req.body.sender_id;
-  const doc_id = req.body.doc_id;
-
-  console.log('DOC ID:', doc_id); 
-
-  db.collection('wedding').doc(doc_id).get()
-  .then(doc => {
-    if (!doc.exists) {
-      console.log('No such document!');
-    } else {
-      const image_url = doc.data().url;
-
-      console.log('IMG URL:', image_url);
-
-      let response = {
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "generic",
-          "elements": [{
-            "title": "Is this the image you like?",
-            "image_url":image_url,                       
-            "buttons": [
-                {
-                  "type": "postback",
-                  "title": "Yes!",
-                  "payload": "yes",
-                },
-                {
-                  "type": "postback",
-                  "title": "No!",
-                  "payload": "no",
-                }
-              ],
-          }]
-        }
-      }
-    }
-  callSendAPI(sender_psid, response);
-    }
-  })
-  .catch(err => {
-    console.log('Error getting document', err);
-  }); 
-});
-
 app.get('/yinphone/:sender_id/',function(req,res){
     const sender_id = req.params.sender_id;
 
@@ -215,6 +167,17 @@ app.get('/yinphone/:sender_id/',function(req,res){
             let img = {};
             img.earlyAPdate = doc.data().earlyAPdate;
             img.earlyAPprice = doc.data().earlyAPprice;
+            img.Inshop = doc.data().Inshop;
+            img.Chest = doc.data().Chest;
+            img.upperArm = doc.data().upperArm;
+            img.sleevelength = doc.data().sleevelength;
+            img.Waist = doc.data().Waist;
+            img.Yinphone_type = doc.data().Yinphone_type;
+            img.sleevetype = doc.data().sleevetype;
+            img.khar = doc.data().khar;
+            img.Design = doc.data().Design;
+            img.Price = doc.data().Price;
+            img.PhoneNo = doc.data().PhoneNo;
 
             data.push(img);                      
 
