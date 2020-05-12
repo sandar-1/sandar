@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Customer sharing</title>
+    <title>Yinphone orders</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
  </head>
 
@@ -47,7 +47,7 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 </style>
-  
+
   <table>
   <% for(var i=0; i < data.length; i++) { %>
      <tr>
@@ -59,23 +59,25 @@ tr:nth-child(even) {
        <th>Cloth design</th>
        <th>Estimate price</th>
        <th>Phone number</th>
+       <th>Voucher</th>
      </tr>
      <tr>
-       <td><%= data[i].earlyAPdate %></td>
-       <td><%= data[i].earlyAPprice %></td>
-       <td><%= data[i].Inshop %></td>
-       <td><%= data[i].Chest %><br>
-            <%= data[i].upperArm %><br>
-            <%= data[i].sleevelength %><br>
-            <%= data[i].Waist %><br>
+       <td> <%= data[i].earlyAPdate %></td>
+       <td> <%= data[i].earlyAPprice %></td>
+       <td> <%= data[i].Inshop %></td>
+       <td width="150">Chest = <%= data[i].Chest %><br>
+           Upper arm = <%= data[i].upperArm %><br>
+           Sleevelength = <%= data[i].sleevelength %><br>
+           Waist = <%= data[i].Waist %><br>
        </td>
-       <td><%= data[i].Yinphone_type %><br>
+       <td width="150"><%= data[i].Yinphone_type %><br>
             <%= data[i].sleevetype %><br>
             <%= data[i].khar %>
        </td>
        <td><img src = "<%= data[i].Design %>" width="90"></td>
        <td><%= data[i].Price %></td>
        <td><%= data[i].PhoneNo %></td>
+       <td><img src = "<%= data[i].paid %>" width="90"></td>
      </tr>
   <% } %>
   </table>

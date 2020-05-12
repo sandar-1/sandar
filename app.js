@@ -178,6 +178,7 @@ app.get('/yinphone/:sender_id/',function(req,res){
             img.Design = doc.data().Design;
             img.Price = doc.data().Price;
             img.PhoneNo = doc.data().PhoneNo;
+            img.paid = doc.data().paid;
 
             data.push(img);                      
 
@@ -2946,6 +2947,7 @@ const saveData_HM = (sender_psid) => {
     Inshop : userEnteredInfo.inShop,
     earlyAPdate : userEnteredInfo.appointmentdate,
     earlyAPprice : userEnteredInfo.earlyAPprice,
+    paid : userpaidAttachment.paidAttachment,
   }
   db.collection('Htamein_order').add(hm_info);
 }
@@ -2961,6 +2963,7 @@ const saveData_YP = (sender_psid) => {
     sleevetype : userEnteredInfo.sleevetype,
     khar : userEnteredInfo.khar,
     Design : userSendAttachment. designAttachment,
+    paid : userpaidAttachment.paidAttachment,
     Price : userEnteredInfo.price,
     PhoneNo : userEnteredInfo.phoneNo,
     Inshop : userEnteredInfo.inShop,
