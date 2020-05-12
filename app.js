@@ -1374,7 +1374,35 @@ function handleMessage(sender_psid, received_message) {
       callSend(sender_psid, response1).then(()=>{
           return callSend(sender_psid, response2);
         });   
-  }else if (received_message.text == "Ofcourse") {    
+  }else if (received_message.attachments && occasionAttach == true) {
+    console.log('meta data',received_message);
+    occasionAttach == false;
+    let attachment_url1 = received_message.attachments[0].payload.url;
+    adminSendAttachment.occasionAttach = attachment_url1;
+    let response1 = {
+                    "attachment":{
+                          "type":"image", 
+                          "payload":{
+                            "url":attachment_url1, 
+                            "is_reusable":true
+                          }
+                        }
+                    };
+    let response2 = {"text": "You want to add this design to wedding admin chocies?",
+                    "quick_replies":[{
+                                        "content_type":"text",
+                                        "title":"Ofcourse",
+                                        "payload":"og"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Opps not that.",
+                                        "payload":"opnt"
+                                      }]
+                    };
+      callSend(sender_psid, response1).then(()=>{
+          return callSend(sender_psid, response2);
+        });   
+  }else if (received_message.text == "Ofcourse" weddingAttach == true) {    
    response = {"text": "If you wanna add more keep send your chocies.",
                     "quick_replies":[{
                                         "content_type":"text",
@@ -1385,10 +1413,23 @@ function handleMessage(sender_psid, received_message) {
                                         "title":"Change Category",
                                         "payload":"cc"
                                       }]
-  }
-   weddingAttach = true;
+                }
   let adc = {url: adminSendAttachment.weddingAttach}
   db.collection('wedding').doc().set(adc);
+  }else if (received_message.text == "Ofcourse" occasionAttach == true) {    
+   response = {"text": "If you wanna add more keep send your chocies.",
+                    "quick_replies":[{
+                                        "content_type":"text",
+                                        "title":"Finish",
+                                        "payload":"f"
+                                      },{
+                                        "content_type":"text",
+                                        "title":"Change Category",
+                                        "payload":"cc"
+                                      }]
+                }
+  let adc = {url: adminSendAttachment.occasionAttach}
+  db.collection('occasion').doc().set(adc);
   }else if (received_message.text == "Opps not that.") {    
     response = {"text": "Ok send again!"}
   }else if (received_message.text == "Change Category") {    
