@@ -51,6 +51,7 @@ tr:nth-child(even) {
   <table>
   <% for(var i=0; i < data.length; i++) { %>
      <tr>
+        <th>order name</th>
        <th>Earlyapointment date</th>
        <th>Earlyapointment price</th>
        <th>Inshop or Not</th>
@@ -62,6 +63,7 @@ tr:nth-child(even) {
        <th>Voucher</th>
      </tr>
      <tr>
+       <td> <%= data[i].name %></td>
        <td> <%= data[i].earlyAPdate %></td>
        <td> <%= data[i].earlyAPprice %></td>
        <td> <%= data[i].Inshop %></td>

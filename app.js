@@ -265,6 +265,7 @@ app.get('/yinphone/:sender_id/',function(req,res){
     .then(  function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
             let img = {};
+            img.name = doc.data().name;
             img.earlyAPdate = doc.data().earlyAPdate;
             img.earlyAPprice = doc.data().earlyAPprice;
             img.Inshop = doc.data().Inshop;
@@ -303,6 +304,7 @@ app.get('/htamein/:sender_id/',function(req,res){
     .then(  function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
             let img = {};
+            img.name = doc.data().name;
             img.earlyAPdate = doc.data().earlyAPdate;
             img.earlyAPprice = doc.data().earlyAPprice;
             img.Inshop = doc.data().Inshop;
@@ -339,6 +341,7 @@ app.get('/both/:sender_id/',function(req,res){
     .then(  function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
             let img = {};
+            img.name = doc.data().name;
             img.earlyAPdate = doc.data().earlyAPdate;
             img.earlyAPprice = doc.data().earlyAPprice;
             img.Inshop = doc.data().Inshop;
@@ -392,6 +395,7 @@ app.get('/both/:sender_id/',function(req,res){
     earlyAPprice :false,
     phoneNo : false,
     inshop : false,
+    name : false,
   };
 
   let changing = {
@@ -879,8 +883,13 @@ function handleMessage(sender_psid, received_message) {
     userInfo.price = false;
   }else if (received_message.text && userInfo.phoneNo == true) { 
     userEnteredInfo.phoneNo = received_message.text;   
-    givebankACC(sender_psid);
+    response = {"text" : "What a name for recording an order? It can be your name."};
     userInfo.phoneNo = false;
+    userInfo.name = true;
+  }else if (received_message.text && userInfo.name == true) { 
+    userEnteredInfo.name = received_message.text;   
+    givebankACC(sender_psid);
+    userInfo.name = false;
   }
 /************attachment**************/
   else if (received_message.attachments && sharepicAttachment == true) {
@@ -3207,6 +3216,7 @@ const saveData_SP = (sender_psid) => {
 const saveData_HM = (sender_psid) => {
   const hm_info = {
     id : sender_psid,
+    name : userEnteredInfo.name,
     Waist : userEnteredInfo.waist,
     Hips : userEnteredInfo.hips,
     Htamein_long : userEnteredInfo.htameinlong,
@@ -3226,6 +3236,7 @@ const saveData_HM = (sender_psid) => {
 const saveData_YP = (sender_psid) => {
   const yp_info = {
     id : sender_psid,
+    name : userEnteredInfo.name,
     Chest : userEnteredInfo.chest,
     upperArm : userEnteredInfo.upperArm,
     sleevelength : userEnteredInfo.sleevelength,
@@ -3247,6 +3258,7 @@ const saveData_YP = (sender_psid) => {
 const saveData_both = (sender_psid) => {
   const both_info = {
     id : sender_psid,
+    name : userEnteredInfo.name,
     Chest : userEnteredInfo.chest,
     upperArm : userEnteredInfo.upperArm,
     sleevelength : userEnteredInfo.sleevelength,
