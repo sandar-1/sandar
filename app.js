@@ -1905,9 +1905,32 @@ const handlePostback = (sender_psid, received_postback) => {
       case "ad_vieworder":
         ad_vieworder(sender_psid);
         break;
+      case "map":
+        map(sender_psid);
+        break;
       default:
         defaultReply(sender_psid);
     }
+}
+
+const map = (sender_psid) => {
+  let response;
+  response = {"attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"Map to get in when you accidently get near the shop.",
+                        "buttons":[
+                          {
+                            "type":"web_url",
+                            "url":"https://goo.gl/maps/rXWbW23t5qBMhUnQ9",
+                            "title":"View map",
+                          }                        
+                        ]
+                      }
+                    }
+                  }
+  callSendAPI(sender_psid, response);
 }
 
 const ad_vieworder = (sender_psid) => {
@@ -3435,6 +3458,11 @@ function setupPersistentMenu(res){
                               "title":"Picture of others",
                               "type":"postback",
                               "payload":"POO"
+                            },
+                            {
+                              "title":"Map",
+                              "type":"postback",
+                              "payload":"map"
                             },
                             {
                               "title":"Leaving",
