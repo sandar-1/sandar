@@ -99,10 +99,11 @@ app.get('/webhook', (req, res) => {
   }
 });
 
-app.set('view engine', 'ejs');
-app.set('views', __dirname+'/views');
+/*webviews*/
+  app.set('view engine', 'ejs');
+  app.set('views', __dirname+'/views');
 
-app.get('/webview/:sender_id/',function(req,res){
+  app.get('/webview/:sender_id/',function(req,res){
       const sender_id = req.params.sender_id;
 
       let data = [];
@@ -126,9 +127,9 @@ app.get('/webview/:sender_id/',function(req,res){
       .catch(function(error) {
           console.log("Error getting documents: ", error);
       });    
-});
+  });
 
-app.get('/wedding/:sender_id/',function(req,res){
+  app.get('/wedding/:sender_id/',function(req,res){
       const sender_id = req.params.sender_id;
 
       let data = [];
@@ -151,9 +152,9 @@ app.get('/wedding/:sender_id/',function(req,res){
       .catch(function(error) {
           console.log("Error getting documents: ", error);
       });    
-});
+  });
 
-app.get('/occasion/:sender_id/',function(req,res){
+  app.get('/occasion/:sender_id/',function(req,res){
       const sender_id = req.params.sender_id;
 
       let data = [];
@@ -176,9 +177,9 @@ app.get('/occasion/:sender_id/',function(req,res){
       .catch(function(error) {
           console.log("Error getting documents: ", error);
       });    
-});
+  });
 
-app.get('/convo/:sender_id/',function(req,res){
+  app.get('/convo/:sender_id/',function(req,res){
       const sender_id = req.params.sender_id;
 
       let data = [];
@@ -201,9 +202,9 @@ app.get('/convo/:sender_id/',function(req,res){
       .catch(function(error) {
           console.log("Error getting documents: ", error);
       });    
-});
+  });
 
-app.get('/casual/:sender_id/',function(req,res){
+  app.get('/casual/:sender_id/',function(req,res){
       const sender_id = req.params.sender_id;
 
       let data = [];
@@ -226,9 +227,9 @@ app.get('/casual/:sender_id/',function(req,res){
       .catch(function(error) {
           console.log("Error getting documents: ", error);
       });    
-});
+  });
 
-app.get('/YP/:sender_id/',function(req,res){
+  app.get('/YP/:sender_id/',function(req,res){
       const sender_id = req.params.sender_id;
 
       let data = [];
@@ -251,9 +252,9 @@ app.get('/YP/:sender_id/',function(req,res){
       .catch(function(error) {
           console.log("Error getting documents: ", error);
       });    
-});
+  });
 
-app.get('/yinphone/:sender_id/',function(req,res){
+  app.get('/yinphone/:sender_id/',function(req,res){
       const sender_id = req.params.sender_id;
 
       let data = [];
@@ -289,9 +290,9 @@ app.get('/yinphone/:sender_id/',function(req,res){
       .catch(function(error) {
           console.log("Error getting documents: ", error);
       });    
-});
+  });
 
-app.get('/htamein/:sender_id/',function(req,res){
+  app.get('/htamein/:sender_id/',function(req,res){
       const sender_id = req.params.sender_id;
 
       let data = [];
@@ -325,9 +326,9 @@ app.get('/htamein/:sender_id/',function(req,res){
       .catch(function(error) {
           console.log("Error getting documents: ", error);
       });    
-});
+  });
 
-app.get('/both/:sender_id/',function(req,res){
+  app.get('/both/:sender_id/',function(req,res){
       const sender_id = req.params.sender_id;
 
       let data = [];
@@ -368,8 +369,8 @@ app.get('/both/:sender_id/',function(req,res){
       .catch(function(error) {
           console.log("Error getting documents: ", error);
       });    
-});
-
+  });
+/**********************/
   let userInfo = {
     chest:false,
     upperArm:false,
@@ -446,8 +447,8 @@ app.get('/both/:sender_id/',function(req,res){
   let userSendAttachment = [];
   let userpaidAttachment = [];
   let adminSendAttachment =[];
-
-const handleMessage = (sender_psid, received_message) => {
+/**********************/
+function handleMessage(sender_psid, received_message) {
   let response;
   /***********measuring**********/
     if (received_message.text && userInfo.appointmentdate == true) {   
@@ -1937,7 +1938,7 @@ const add_ADchocies = (sender_psid) => {
   callSendAPI(sender_psid, response);
 }
 
-const greeting = (sender_psid) => {  
+async function greeting (sender_psid){  
   let user = await getUserProfile(sender_psid);
   let response1 = {"text": "Mingalaba..🙋‍♀ Warmly welcome to Shwe Hsu.🙆‍♀"};
   let response2 = {
@@ -3366,16 +3367,16 @@ function setupGetStartedButton(res){
 } 
 
 function setupPersistentMenu(res){
-  var messageData = { 
-     "persistent_menu":[
-                       {
-                        "locale":"default",
-                        "composer_input_disabled":false,
+        var messageData = { 
+            "persistent_menu":[
+                {
+                  "locale":"default",
+                  "composer_input_disabled":false,
+                  "call_to_actions":[
+                      {
+                        "title":"Reslected!?",
+                        "type":"nested",
                         "call_to_actions":[
-                            {
-                              "title":"Reslected!?",
-                              "type":"nested",
-                              "call_to_actions":[
                             {
                               "title":"I want to sew",
                               "type":"postback",
@@ -3426,27 +3427,28 @@ function setupPersistentMenu(res){
 } 
 
 function removePersistentMenu(res){
-  var messageData = {
-                      "fields": [
-                      "persistent_menu" ,
-                      "get_started"                 
-                                ]               
-                    };
+        var messageData = {
+                "fields": [
+                   "persistent_menu" ,
+                   "get_started"                 
+                ]               
+        };
         // Start the request
-  request({
+        request({
             url: 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token='+ PAGE_ACCESS_TOKEN,
             method: 'DELETE',
             headers: {'Content-Type': 'application/json'},
             form: messageData
-          },
-    function (error, response, body) {
-      if (!error && response.statusCode == 200) {
-          // Print out the response body
-          res.send(body);
-    } else { 
-     // TODO: Handle errors
-          res.send(body);
-           }
+        },
+        function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                // Print out the response body
+                res.send(body);
+
+            } else { 
+                // TODO: Handle errors
+                res.send(body);
+            }
         });
 } 
 
