@@ -288,7 +288,6 @@ let ypSave = false;
 let hmSave = false;
 let bothSave = false;
 
-let addminAttach = false;
 let weddingAttach = false;
 let occasionAttach = false;
 let convoAttach = false;
@@ -1325,7 +1324,7 @@ function handleMessage(sender_psid, received_message) {
                                   {
                                     "type": "postback",
                                     "title": "View orders",
-                                    "payload": "add_ADchocies",        
+                                    "payload": "ad_vieworder",        
                                   }                        
                                 ]
                               }
@@ -1719,11 +1718,43 @@ const handlePostback = (sender_psid, received_postback) => {
         break;
       case "add_ADchocies":
         add_ADchocies(sender_psid);
-        bothSave = true;
+        break;
+      case "ad_vieworder":
+        ad_vieworder(sender_psid);
         break;
       default:
         defaultReply(sender_psid);
     }
+}
+
+const ad_vieworder = (sender_psid) => {
+  let response;
+  response = {"attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"Is your piece of fabric in our shop? or delivery?",
+                        "buttons":[
+                          {
+                            "type":"postback",
+                            "payload":"inShop",
+                            "title":"Yinphone order"
+                          },
+                          {
+                            "type":"postback",
+                            "payload":"willDeliver",
+                            "title":"Htamein order"
+                          },
+                          {
+                            "type":"postback",
+                            "payload":"willDeliver",
+                            "title":"Whole choth order"
+                          }
+                        ]
+                      }
+                    } 
+  }
+  callSendAPI(sender_psid, response);
 }
 
 const add_ADchocies = (sender_psid) => {
@@ -2916,6 +2947,11 @@ const leaving = (sender_psid) => {
   designAttachment = false;
   sharepicAttachment = false;
   paidAttachment = false;
+  weddingAttach = false;
+  occasionAttach = false;
+  convoAttach = false;
+  casualAttach = false;
+  yinphoneAttach = false;
 }
 
 const saveData_SP = (sender_psid) => {
@@ -2997,7 +3033,7 @@ const picofOther = (sender_psid) => {
                       "type":"template",
                       "payload":{
                         "template_type":"button",
-                        "text":"Please select below to start again.",
+                        "text":"🕵‍♀",
                         "buttons":[
                                   {
                                     "type": "web_url",
