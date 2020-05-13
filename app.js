@@ -1723,7 +1723,22 @@ function handleMessage(sender_psid, received_message) {
     let adc = {url: adminSendAttachment.yinphoneAttach}
     db.collection('yinphone').doc().set(adc);
   }else if (received_message.text == "Opps not that.") {    
-    response = {"text": "Ok send again!"}
+    response = {
+      "attachment":{
+                    "type":"template",
+                    "payload":{
+                      "template_type":"button",
+                      "text":"Ok! sent it again",
+                      "buttons":[
+                                  {
+                                    "type": "postback",
+                                    "title": "No! I want to leave",
+                                    "payload": "cancel_order",        
+                                  }                      
+                                ]
+                              }
+                    }
+                }
   }else if (received_message.text == "Change Category") {    
     add_ADchocies(sender_psid);    
     weddingAttach = false;
