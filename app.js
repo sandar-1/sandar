@@ -870,25 +870,7 @@ function handleMessage(sender_psid, received_message) {
    lowerankle = false;
   }else if (received_message.text && userInfo.price == true) { 
     userEnteredInfo.price = received_message.text;   
-    response = {"attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"button",
-                              "text":"It would take about a month to sew. And you must to pay a third of the price. Is it okay?",
-                              "buttons":[
-                                {
-                                  "type": "postback",
-                                  "title": "Yes",
-                                  "payload": "yesorder",
-                                },{
-                                  "type": "postback",
-                                  "title": "Sorry",
-                                  "payload": "leaving",
-                                }
-                              ]
-                            }
-                          } 
-                    }
+    wholeMeasuring(sender_psid);
     userInfo.price = false;
   }else if (received_message.text && userInfo.phoneNo == true) { 
     userEnteredInfo.phoneNo = received_message.text;   
@@ -1827,7 +1809,11 @@ const handlePostback = (sender_psid, received_postback) => {
         bothallRecord_no(sender_psid);
         break;
       case "bothRecord_right":
-        askforevent(sender_psid);
+        orderComfirmBoth(sender_psid);
+        break;
+      case "order_comfirm_Both":
+        yesorder(sender_psid);
+        bothSave = true;
         break;
       case "WEDDING":
         asking_cus_design_weddig(sender_psid);
@@ -1899,10 +1885,6 @@ const handlePostback = (sender_psid, received_postback) => {
         break;
       case "choose_casual":
         casual_price(sender_psid);
-        break;
-      case "yesorder":
-        yesorder(sender_psid);
-        bothSave = true;
         break;
       case "add_ADchocies":
         add_ADchocies(sender_psid);
@@ -3170,6 +3152,31 @@ const orderComfirmYP = (sender_psid) => {
                             "type": "postback",
                             "title": "Yes",
                             "payload": "order_comfirm_YP",
+                          },
+                          {
+                            "type": "postback",
+                            "title": "cancel.",
+                            "payload": "cancel_order",
+                          }
+                        ]
+                      }
+                    } 
+  }
+  callSendAPI(sender_psid, response);
+}
+
+const orderComfirmBoth = (sender_psid) => {
+ let response;
+  response = {"attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"It would take about a month to sew. And you must to pay a third of the price. Is it okay?",
+                        "buttons":[
+                          {
+                            "type": "postback",
+                            "title": "Yes",
+                            "payload": "order_comfirm_Both",
                           },
                           {
                             "type": "postback",
