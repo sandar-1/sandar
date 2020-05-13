@@ -1732,7 +1732,32 @@ function handleMessage(sender_psid, received_message) {
     casualAttach = false;
     yinphoneAttach = false;
   }else if (received_message.text == "Finish") {    
-    response = {"text": "Done"}
+    response = {
+      "attachment":{
+                    "type":"template",
+                    "payload":{
+                      "template_type":"button",
+                      "text":"Hello.. Dear Mo Mo. What else would you like to change?",
+                      "buttons":[
+                                  {
+                                    "type": "postback",
+                                    "title": "Add admin chocies",
+                                    "payload": "add_ADchocies",        
+                                  },
+                                  {
+                                    "type": "postback",
+                                    "title": "View orders",
+                                    "payload": "ad_vieworder",        
+                                  },
+                                  {
+                                    "type": "postback",
+                                    "title": "nothing",
+                                    "payload": "leaving",        
+                                  }                      
+                                ]
+                              }
+                    }
+                }
     weddingAttach = false;
     occasionAttach = false;
     convoAttach = false;
