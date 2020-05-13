@@ -590,7 +590,7 @@ function handleMessage(sender_psid, received_message) {
     upperkhar = true;
   }else if (received_message.text && upperkhar == true) { 
     userEnteredInfo.khar = received_message.text;  
-    askforeventYP(sender_psid);
+    showYPrecord(sender_psid);
     upperkhar = false;
   }else if (received_message.text && userInfo.chest == true) {   
     userEnteredInfo.chest =  received_message.text;
@@ -1036,7 +1036,7 @@ function handleMessage(sender_psid, received_message) {
     casual = false;
     designAttachment = false;
   }else if (received_message.text == "Yes.") {    
-    showYPrecord(sender_psid);
+    yinphoneMeasuring(sender_psid);
     designAttachment = false;
   }else if (received_message.attachments && paidAttachment == true) {
     console.log('meta data',received_message);
@@ -1813,7 +1813,7 @@ const handlePostback = (sender_psid, received_postback) => {
         askforeventYP(sender_psid);
         break;
       case "htamein":
-        htameinMeasuring(sender_psid);
+        askforeventHM(sender_psid);
         break;
       case "both_part":
         wholeMeasuring(sender_psid);
@@ -2460,6 +2460,23 @@ const askforeventHM = (sender_psid) => {
                 "type":"postback",
                 "title":"Casual.",
                 "payload":"CASUAL_HM"
+              }              
+            ]      
+          },
+          {
+            "title":"Not interested?",
+            "image_url":"https://i.imgur.com/FRRwxCk.jpg",
+            "subtitle":"You can leave.",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.imgur.com/FRRwxCk.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"I want to leave",
+                "payload":"leaving"
               }              
             ]      
           }
