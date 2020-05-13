@@ -2345,7 +2345,7 @@ const askforeventYP = (sender_psid) => {
         "template_type":"generic",
         "elements":[
            {
-            "title":"Occasion?",
+            "title":"For ceremony?",
             "image_url":"https://i.imgur.com/X5Xfu2Y.jpg",
             "subtitle":"💃 the price is around 10000",
             "default_action": {
@@ -2362,7 +2362,7 @@ const askforeventYP = (sender_psid) => {
             ]      
           },
           {
-            "title":"Casual?",
+            "title":"Simple style?",
             "image_url":"https://i.imgur.com/vt8aPXr.jpg",
             "subtitle":"🤷 The price is around 5000 ",
             "default_action": {
@@ -2417,7 +2417,7 @@ const askforeventHM = (sender_psid) => {
         "template_type":"generic",
         "elements":[
            {
-            "title":"Occasion?",
+            "title":"For ceremony?",
             "image_url":"https://i.imgur.com/X5Xfu2Y.jpg",
             "subtitle":"💃 the price is around 10000",
             "default_action": {
@@ -2434,7 +2434,7 @@ const askforeventHM = (sender_psid) => {
             ]      
           },
           {
-            "title":"Casual?",
+            "title":"Simple style?",
             "image_url":"https://i.imgur.com/vt8aPXr.jpg",
             "subtitle":"🤷 the price is around 5000",
             "default_action": {
