@@ -478,6 +478,11 @@ function handleMessage(sender_psid, received_message) {
                             "type":"postback",
                             "payload":"ap_priceNo",
                             "title":"No, thanks."
+                          },
+                          {
+                            "type":"postback",
+                            "payload":"leaving",
+                            "title":"I want to leave."
                           }
                         ]
                       }
@@ -861,7 +866,7 @@ function handleMessage(sender_psid, received_message) {
     lowerankle = true;
   }else if (received_message.text && lowerankle == true) { 
     userEnteredInfo.ankle = received_message.text;
-    askforeventHM(sender_psid);
+    showHMrecord(sender_psid);
    lowerankle = false;
   }else if (received_message.text && userInfo.price == true) { 
     userEnteredInfo.price = received_message.text;   
@@ -1851,12 +1856,12 @@ const handlePostback = (sender_psid, received_postback) => {
           console.log ('priceSave');};
         break;
       case "OCCASION_HM":
-        showHMrecord(sender_psid);
+        htameinMeasuring(sender_psid);
         if (htameinprice == true) { userEnteredInfo.price = 10000;
           console.log ('priceSave');};
         break;
       case "CASUAL_HM":
-        showHMrecord(sender_psid);
+        htameinMeasuring(sender_psid);
         if (htameinprice == true) { userEnteredInfo.price = 5000;
           console.log ('priceSave');};
         break;
