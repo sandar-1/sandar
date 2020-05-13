@@ -1810,7 +1810,7 @@ const handlePostback = (sender_psid, received_postback) => {
         chooesClothPart(sender_psid);
         break;
       case "yinphone":
-        yinphoneMeasuring(sender_psid);
+        askforeventYP(sender_psid);
         break;
       case "htamein":
         htameinMeasuring(sender_psid);
@@ -2388,6 +2388,23 @@ const askforeventYP = (sender_psid) => {
                 "type":"postback",
                 "title":"Casual.",
                 "payload":"CASUAL_YP"
+              }              
+            ]      
+          },
+          {
+            "title":"Not interested?",
+            "image_url":"https://i.imgur.com/FRRwxCk.jpg",
+            "subtitle":"You can leave.",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://i.imgur.com/FRRwxCk.jpg",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+             {
+                "type":"postback",
+                "title":"I want to leave",
+                "payload":"leaving"
               }              
             ]      
           }
