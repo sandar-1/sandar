@@ -2356,7 +2356,7 @@ const askforeventYP = (sender_psid) => {
             "buttons":[
              {
                 "type":"postback",
-                "title":"Occasion.",
+                "title":"Ceremony.",
                 "payload":"OCCASION_YP"
               }              
             ]      
@@ -2373,7 +2373,7 @@ const askforeventYP = (sender_psid) => {
             "buttons":[
              {
                 "type":"postback",
-                "title":"Casual.",
+                "title":"Simple style",
                 "payload":"CASUAL_YP"
               }              
             ]      
@@ -2428,7 +2428,7 @@ const askforeventHM = (sender_psid) => {
             "buttons":[
              {
                 "type":"postback",
-                "title":"Occasion.",
+                "title":"Ceremony.",
                 "payload":"OCCASION_HM"
               }              
             ]      
@@ -2445,7 +2445,7 @@ const askforeventHM = (sender_psid) => {
             "buttons":[
              {
                 "type":"postback",
-                "title":"Casual.",
+                "title":"Simple style",
                 "payload":"CASUAL_HM"
               }              
             ]      
