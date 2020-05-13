@@ -2689,6 +2689,23 @@ const wedding_event = (sender_psid) => {
                                   "payload":"choose_wedding"
                                 }              
                               ]      
+                            },
+                            {
+                              "title":"Not interested?",
+                              "image_url":"https://i.imgur.com/FRRwxCk.jpg",
+                              "subtitle":"You can leave.",
+                              "default_action": {
+                                "type": "web_url",
+                                "url": "https://i.imgur.com/FRRwxCk.jpg",
+                                "webview_height_ratio": "tall",
+                              },
+                              "buttons":[
+                               {
+                                  "type":"postback",
+                                  "title":"I want to leave",
+                                  "payload":"leaving"
+                                }              
+                              ]      
                             }
                           ]
                         }
@@ -2756,6 +2773,23 @@ const occasion_event = (sender_psid) => {
                                   "type":"postback",
                                   "title":"I choose 15000 Ks.",
                                   "payload":"choose_occasion"
+                                }              
+                              ]      
+                            },
+                            {
+                              "title":"Not interested?",
+                              "image_url":"https://i.imgur.com/FRRwxCk.jpg",
+                              "subtitle":"You can leave.",
+                              "default_action": {
+                                "type": "web_url",
+                                "url": "https://i.imgur.com/FRRwxCk.jpg",
+                                "webview_height_ratio": "tall",
+                              },
+                              "buttons":[
+                               {
+                                  "type":"postback",
+                                  "title":"I want to leave",
+                                  "payload":"leaving"
                                 }              
                               ]      
                             }
@@ -2827,6 +2861,23 @@ const convocation_event = (sender_psid) => {
                                   "payload":"choose_convocation"
                                 }              
                               ]      
+                            },
+                            {
+                              "title":"Not interested?",
+                              "image_url":"https://i.imgur.com/FRRwxCk.jpg",
+                              "subtitle":"You can leave.",
+                              "default_action": {
+                                "type": "web_url",
+                                "url": "https://i.imgur.com/FRRwxCk.jpg",
+                                "webview_height_ratio": "tall",
+                              },
+                              "buttons":[
+                               {
+                                  "type":"postback",
+                                  "title":"I want to leave",
+                                  "payload":"leaving"
+                                }              
+                              ]      
                             }
                           ]
                         }
@@ -2894,6 +2945,23 @@ const casual_event = (sender_psid) => {
                                   "type":"postback",
                                   "title":"I choose 8000 Ks.",
                                   "payload":"choose_casual"
+                                }              
+                              ]      
+                            },
+                            {
+                              "title":"Not interested?",
+                              "image_url":"https://i.imgur.com/FRRwxCk.jpg",
+                              "subtitle":"You can leave.",
+                              "default_action": {
+                                "type": "web_url",
+                                "url": "https://i.imgur.com/FRRwxCk.jpg",
+                                "webview_height_ratio": "tall",
+                              },
+                              "buttons":[
+                               {
+                                  "type":"postback",
+                                  "title":"I want to leave",
+                                  "payload":"leaving"
                                 }              
                               ]      
                             }
