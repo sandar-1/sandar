@@ -1821,7 +1821,7 @@ const handlePostback = (sender_psid, received_postback) => {
         askforeventHM(sender_psid);
         break;
       case "both_part":
-        wholeMeasuring(sender_psid);
+        askforevent(sender_psid);
         break;
       case "bothallRecord_no":
         bothallRecord_no(sender_psid);
