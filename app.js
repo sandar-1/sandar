@@ -3285,7 +3285,7 @@ const bothallRecord_no = (sender_psid) => {
 }
 
 const givebankACC = (sender_psid) => {   
-   let response1 = {"text" : "You can transfer money from this... the estimated price is " +userEnteredInfo.price+ "and the early appointmentdate price is "+userEnteredInfo.earlyAPprice+"." };
+   let response1 = {"text" : "The estimated price is " +userEnteredInfo.price+ " and the early appointmentdate price is "+userEnteredInfo.earlyAPprice+" You can transfer money from this...." };
     let response2 = {"text" : "Cb bank acc : 1623 1237 5464 423"};
      let response3 = {"text" : "Transfer to this ph no 0912345678 via Wavemoney."};
       let response4 = {"text" : "And send the screenshot of the transferred money message to comfirm"};
