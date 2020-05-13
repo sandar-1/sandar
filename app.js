@@ -1752,7 +1752,7 @@ function handleMessage(sender_psid, received_message) {
                                   {
                                     "type": "postback",
                                     "title": "nothing",
-                                    "payload": "leaving",        
+                                    "payload": "cancel_order",        
                                   }                      
                                 ]
                               }
@@ -3313,7 +3313,21 @@ const givebankACC = (sender_psid) => {
    let response1 = {"text" : "The estimated price is " +userEnteredInfo.price+ " and the early appointmentdate price is "+userEnteredInfo.earlyAPprice+" You can transfer money from this...." };
     let response2 = {"text" : "Cb bank acc : 1623 1237 5464 423"};
      let response3 = {"text" : "Transfer to this ph no 0912345678 via Wavemoney."};
-      let response4 = {"text" : "And send the screenshot of the transferred money message to comfirm"};
+      let response4 = { "attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"And send the screenshot of the transferred money message to comfirm",
+                        "buttons":[
+                          {
+                            "type": "postback",
+                            "title": "Cancel order.",
+                            "payload": "cancel_order",
+                          }
+                        ]
+                      }
+                    } 
+        };
      callSend(sender_psid, response1).then(()=>{
       return callSend(sender_psid, response2).then(()=>{
         return callSend(sender_psid, response3).then(()=>{
