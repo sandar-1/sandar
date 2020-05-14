@@ -975,6 +975,7 @@ function handleMessage(sender_psid, received_message) {
                               }
                     }
                 }
+                sharepicAttachment = false;
   }else if (received_message.attachments && designAttachment == true) {
     console.log('meta data',received_message);
     designAttachment == false;
