@@ -3113,15 +3113,6 @@ const showYPrecord = (sender_psid) => {
   let response6 = {"text" : "Sleeve type  : " + userEnteredInfo.sleevetype};
   let response7 = {"text" : "Khar         : " + userEnteredInfo.khar};
   let response8 = {
-                    "attachment":{
-                            "type":"image", 
-                            "payload":{
-                              "url":userSendAttachment.designAttachment, 
-                              "is_reusable":true
-                            }
-                          }
-                  };
-  let response9 = {
       "attachment": {
                   "type": "template",
                   "payload": {
@@ -3151,9 +3142,7 @@ const showYPrecord = (sender_psid) => {
             return callSend(sender_psid, response5).then(()=>{
               return callSend(sender_psid, response6).then(()=>{
                 return callSend(sender_psid, response7).then(()=>{
-                  return callSend(sender_psid, response8).then(()=>{
-                    return callSend(sender_psid, response9);
-                  });
+                  return callSend(sender_psid, response8);
                 });
               });
             });
